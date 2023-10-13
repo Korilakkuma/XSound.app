@@ -82,6 +82,8 @@
     "xsound": "^3.4.4"
   },
   "devDependencies": {
+    "@markuplint/jsx-parser": "^4.7.5",
+    "@markuplint/react-spec": "^4.5.5",
     "@storybook/addon-actions": "^7.4.6",
     "@storybook/addon-essentials": "^7.4.6",
     "@storybook/addon-links": "^7.4.6",

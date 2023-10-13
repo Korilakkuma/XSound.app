@@ -1,0 +1,89 @@
+{
+  "parser": "@typescript-eslint/parser",
+  "plugins": [
+    "import",
+    "@typescript-eslint/eslint-plugin"
+  ],
+  "env": {
+    "node": true,
+    "es6": true,
+    "browser": true
+  },
+  "extends": [
+    "eslint:recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:import/recommended",
+    "plugin:import/typescript",
+    "plugin:jest/recommended",
+    "plugin:jsx-a11y/recommended",
+    "plugin:react-hooks/recommended",
+    "plugin:react/recommended",
+    "prettier"
+  ],
+  "ignorePatterns": ["*.snap"],
+  "rules": {
+    "default-param-last": 0,
+    "indent": [2, 2, {
+      "SwitchCase": 1,
+      "ignoredNodes": ["TemplateLiteral"]
+    }],
+    "jsx-a11y/no-onchange": 0,
+    "key-spacing": 0,
+    "no-case-declarations": 0,
+    "no-console": 1,
+    "no-constant-condition": 0,
+    "no-else-return": 2,
+    "no-multi-spaces": 0,
+    "no-unneeded-ternary": 0,
+    "no-unused-vars": [0, {"vars": "all", "args": "after-used"}],
+    "no-use-before-define": 0,
+    "no-var": 1,
+    "prefer-promise-reject-errors": 0,
+    "quote-props": 0,
+    "quotes": [2, "single"],
+    "radix": 1,
+    "react-hooks/exhaustive-deps": 2,
+    "react/prop-types": 0,
+    "react/react-in-jsx-scope": 0,
+    "react/self-closing-comp": 2,
+    "semi": [2, "always"],
+    "space-before-function-paren": 0,
+    "template-curly-spacing": 0,
+    "@typescript-eslint/ban-ts-comment": 1,
+    "@typescript-eslint/consistent-type-imports": 2,
+    "@typescript-eslint/explicit-member-accessibility": 0,
+    "@typescript-eslint/no-empty-function": 0,
+    "@typescript-eslint/no-unused-vars": [2, { "argsIgnorePattern": "^_" }],
+    "@typescript-eslint/no-use-before-define": 2
+  },
+  "overrides": [
+    {
+      "files": ["src/**/*.{ts,tsx}"],
+      "rules": {
+        "import/order": [2, {
+          "alphabetize": {
+            "order": "asc"
+          },
+          "groups": [
+            "builtin",
+            "external",
+            "parent",
+            "sibling",
+            "index",
+            "object",
+            "type"
+          ],
+          "newlines-between": "always"
+        }]
+      }
+    }
+  ],
+  "settings": {
+    "import/resolver": {
+      "typescript": {}
+    },
+    "react": {
+      "version": "detect"
+    }
+  }
+}
