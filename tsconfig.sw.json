@@ -1,0 +1,14 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "outDir": "./",
+    "target": "esnext"
+  },
+  "files": [
+    "src/service-worker.ts"
+  ],
+  "include": [
+  ],
+  "exclude": [
+  ]
+}
