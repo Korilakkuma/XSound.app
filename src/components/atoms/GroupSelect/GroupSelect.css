@@ -1,0 +1,40 @@
+.GroupSelect > select {
+  display: block;
+  width: 95%;
+  padding: 8px;
+  margin: 0 auto;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 13px;
+  color: var(--white);
+  text-transform: uppercase;
+  appearance: none;
+  cursor: pointer;
+  background-image: linear-gradient(to bottom, var(--gray), var(--black));
+  border: 1px solid rgb(255 255 255 / 5%);
+  border-radius: 0;
+  box-shadow:
+    0 0 0 2px var(--black) inset,
+    0 -1px 1px 2px rgb(0 0 0 / 50%);
+}
+
+.GroupSelect > select:focus {
+  background-image: linear-gradient(to bottom, var(--assort-color), var(--base-color));
+  outline: none;
+}
+
+.GroupSelect > select > optgroup > option {
+  /* for Edge and Windows */
+  color: var(--black-light);
+}
+
+.GroupSelect > label {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: none;
+}

@@ -1,0 +1,25 @@
+.SelectableModal__buttons {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 24px;
+}
+
+.SelectableModal__buttons > button {
+  /* HACK */
+  width: 160px;
+  height: 32px;
+  font-size: var(--base-font-size);
+  color: var(--white);
+  background-color: var(--assort-color);
+  transition: background-color 0.6s ease;
+}
+
+.SelectableModal__buttons > button:hover {
+  background-color: var(--base-color);
+}
+
+.SelectableModal__buttons > button:last-child {
+  margin-left: 12px;
+}

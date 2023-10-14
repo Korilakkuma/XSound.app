@@ -1,0 +1,18 @@
+.EnvelopeGeneratorFieldset {
+  padding: 12px 0;
+}
+
+.EnvelopeGeneratorFieldset > fieldset {
+  border: none;
+}
+
+.EnvelopeGeneratorFieldset > fieldset > legend {
+  display: block;
+  width: var(--fieldset-width);
+  margin: 0 auto 4px;
+  font-family: Neuton, serif;
+  font-size: 22px;
+  font-weight: lighter;
+  color: var(--assort-color);
+  text-transform: uppercase;
+}
