@@ -1,0 +1,67 @@
+.ProgressBar__wrapper {
+  position: relative;
+  z-index: 1;
+  width: 204px;
+  height: 12px;
+  margin: 0 auto;
+  background-color: var(--base-color);
+  background-image: linear-gradient(to bottom, var(--base-color), var(--assort-color));
+}
+
+.ProgressBar__mask {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 3;
+  width: 204px;
+  height: 6px;
+  background-color: rgb(255 255 255 / 15%);
+  background-image: linear-gradient(to bottom, rgb(255 255 255 / 20%), var(--transparent));
+}
+
+.ProgressBar__bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  width: 100%;
+  height: 12px;
+  background-color: var(--base-color);
+  border: none;
+}
+
+.ProgressBar__bar::-webkit-progress-bar {
+  background-color: var(--base-color);
+}
+
+.ProgressBar__bar::-webkit-progress-value {
+  background-color: var(--assort-color);
+}
+
+.ProgressBar__bar::-moz-progress-bar {
+  background-color: var(--assort-color);
+}
+
+.ProgressBar__bar.-auto {
+  width: 0;
+  background-color: var(--assort-color);
+  animation: auto-progress-animation 3s ease-in-out infinite normal 0s;
+}
+
+@keyframes auto-progress-animation {
+  0% {
+    width: 0;
+  }
+
+  100% {
+    width: 100%;
+  }
+}
+
+.ProgressBar__label {
+  margin-bottom: 12px;
+  font-family: Alike, serif;
+  font-size: var(--base-font-size);
+  color: var(--assort-color);
+  text-align: center;
+}

@@ -1,0 +1,7 @@
+.Flexbox {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  justify-content: flex-start;
+  background-color: rgb(255 255 255 / 5%);
+}

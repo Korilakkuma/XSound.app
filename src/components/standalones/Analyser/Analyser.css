@@ -1,0 +1,44 @@
+.Analyser {
+  padding: 0 48px;
+  background-color: rgb(255 255 255 / 5%);
+}
+
+.Analyser[aria-hidden="true"] {
+  display: none;
+}
+
+.Analyser[aria-hidden="false"] {
+  display: block;
+}
+
+.Analyser__viewer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.Analyser__controllers {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-end;
+  margin-top: 24px;
+}
+
+.Analyser.-active {
+  padding: 24px 48px;
+}
+
+.Analyser__viewer,
+.Analyser__controllers {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height ease 0.6s;
+}
+
+.Analyser.-active .Analyser__viewer,
+.Analyser.-active .Analyser__controllers {
+  max-height: 100vh;
+  max-height: 100dvh;
+}

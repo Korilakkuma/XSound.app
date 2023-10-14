@@ -1,0 +1,15 @@
+:root {
+  --base-font-size: 16px;
+  --base-color: #c0c;
+  --assort-color: #d0d;
+  --white: #fff;
+  --gray-lightest: #fafafa;
+  --gray-lighter: #ccc;
+  --gray-light: #999;
+  --gray: #666;
+  --gray-deep: #333;
+  --black-light: #212121;
+  --black: #000;
+  --transparent: rgb(0 0 0 / 0%);
+  --fieldset-width: 98%;
+}

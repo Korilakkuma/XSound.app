@@ -1,0 +1,27 @@
+.AudioFieldset {
+  padding: 12px 0;
+}
+
+.AudioFieldset > fieldset {
+  border: none;
+}
+
+.AudioFieldset > fieldset > legend {
+  display: block;
+  width: var(--fieldset-width);
+  margin: 0 auto 12px;
+  font-family: Neuton, serif;
+  font-size: 22px;
+  font-weight: lighter;
+  color: var(--assort-color);
+  text-transform: uppercase;
+}
+
+.AudioFieldset__selectAudio {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  width: var(--fieldset-width);
+  margin: 0 auto;
+}

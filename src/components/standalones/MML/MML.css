@@ -1,0 +1,171 @@
+.MML {
+  padding: 0 48px;
+  background-color: rgb(255 255 255 / 5%);
+}
+
+.MML[aria-hidden="true"] {
+  display: none;
+}
+
+.MML[aria-hidden="false"] {
+  display: block;
+}
+
+.MML__editor {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.MML__editor > dl {
+  width: 100%;
+}
+
+.MML__editor > dl:last-child {
+  margin-left: 12px;
+}
+
+.MML__editor > dl > dt {
+  margin-bottom: 8px;
+  font-size: 12px;
+  color: var(--white);
+  text-transform: uppercase;
+}
+
+.MML__editor > dl > dd[contentEditable] {
+  height: 8rem;
+  padding: var(--base-font-size);
+  overflow: auto;
+  font-size: var(--base-font-size);
+  color: var(--white);
+  background-color: var(--black);
+  outline: var(--assort-color);
+  transition: background-color ease 0.6s;
+}
+
+.MML__editor > dl > dd[contentEditable]:focus {
+  background-color: var(--assort-color);
+}
+
+.MML__editor > dl > dd[contentEditable][aria-disabled="true"] {
+  color: rgb(255 255 255 / 60%);
+  opacity: 1;
+}
+
+.MML__editor > dl > dd[contentEditable].-highlight > span:last-of-type {
+  color: var(--white);
+}
+
+.MML__error {
+  margin-left: 8px;
+  color: var(--assort-color);
+  text-transform: none;
+}
+
+.MML__controllers {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-end;
+  margin-top: 24px;
+}
+
+.MML__controller {
+  display: block;
+  width: 63px;
+  height: 40px;
+
+  /* CSS Sprite */
+  background-image: url("/assets/images/buttons-mml.png");
+  background-repeat: no-repeat;
+  background-position: 0 top;
+
+  /* for Retina Display */
+  background-size: 238px 120px;
+}
+
+.MML__controller.-paused {
+  background-position: 0 bottom;
+}
+
+.MML__controller:not(:disabled).-paused:hover {
+  background-position: 0 center;
+}
+
+.MML__controller:not(:disabled):active {
+  background-position: 0 bottom;
+}
+
+.MML__rewinder {
+  display: block;
+  width: 56px;
+  height: 40px;
+
+  /* CSS Sprite */
+  background-image: url("/assets/images/buttons-mml.png");
+  background-repeat: no-repeat;
+  background-position: -63px bottom;
+
+  /* for Retina Display */
+  background-size: 238px 120px;
+}
+
+.MML__rewinder:hover {
+  background-position: -63px top;
+}
+
+.MML__rewinder:active {
+  background-position: -63px center;
+}
+
+.MML__download {
+  display: block;
+  width: 63px;
+  height: 40px;
+  overflow: hidden;
+  text-indent: 100%;
+  white-space: nowrap;
+
+  /* CSS Sprite */
+  background-image: url("/assets/images/buttons-mml.png");
+  background-repeat: no-repeat;
+  background-position: -175px bottom;
+
+  /* for Retina Display */
+  background-size: 238px 120px;
+}
+
+.MML__download:hover {
+  background-position: -175px top;
+}
+
+.MML__download:active {
+  background-position: -175px center;
+}
+
+/* HACK */
+.MML__controllers > .Select > select {
+  padding-left: 12px;
+  margin: 0 0 0 12px;
+  font-size: 9px;
+  text-align: center;
+  text-transform: none;
+}
+
+.MML.-active {
+  padding: 24px 48px;
+}
+
+.MML__editor,
+.MML__controllers {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height ease 0.6s;
+}
+
+.MML.-active .MML__editor,
+.MML.-active .MML__controllers {
+  max-height: 100vh;
+  max-height: 100dvh;
+}

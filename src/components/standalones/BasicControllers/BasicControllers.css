@@ -1,0 +1,8 @@
+.BasicControllers {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: 24px 0;
+  background-color: rgb(255 255 255 / 5%);
+}

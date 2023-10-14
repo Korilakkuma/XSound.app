@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en" prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# article: http://ogp.me/ns/article#">
+  <head>
+    <meta charset="UTF-8" />
+    <title>XSound.app</title>
+    <meta name="application-name" content="XSound.app" />
+    <meta name="description" content="Web Music Application by XSound" />
+    <meta name="keywords" content="XSound.app, XSound, Web Music, Web Audio API, Web MIDI API" />
+    <meta name="author" content="Korilakkuma (Tomohiro IKEDA)" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="theme-color" content="#800080" />
+    <meta property="og:title" content="XSound.app" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://xsound.app" />
+    <meta property="og:image" content="https://xsound.app/assets/images/icon.png" />
+    <meta property="og:description" content="Web Music Application by XSound" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="@x11music" />
+    <link rel="canonical" href="https://xsound.app" />
+    <link rel="icon" href="https://xsound.app/assets/images/icon.png" type="image/png" />
+    <link rel="manifest" href="manifest.json" />
+    <link rel="apple-touch-icon" href="https://xsound.app/assets/images/icon.png" />
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Alike" type="text/css" media="all" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Neuton" type="text/css" media="all" />
+    <link rel="stylesheet" href="assets/app.css" type="text/css" media="all" />
+    <script type="application/ld+json">
+      {
+        "@context": "http://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "XSound",
+        "image": "https://xsound.app/assets/images/icon.png",
+        "url": "https://xsound.app",
+        "author": {
+          "@type": "Person",
+          "name": "Korilakkuma (Tomohiro IKEDA)"
+        },
+        "applicationCategory": "web music application"
+      }
+    </script>
+  </head>
+  <body>
+    <noscript><div>Please enable JavaScript in your browser.</div></noscript>
+    <h1>XSound.app</h1>
+    <div id="app" class="Application"></div>
+    <script defer src="register.js"></script>
+    <script defer src="assets/vendor.js"></script>
+    <script defer src="assets/app.js"></script>
+  </body>
+</html>
