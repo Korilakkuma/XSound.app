@@ -1210,7 +1210,9 @@ export const App: React.FC = () => {
     setIsShowModalForDecoding(false);
   }, []);
 
-  const onClickSetupCallback = useCallback(() => {
+  const onClickSetupCallback = useCallback(async () => {
+    await X.promise();
+
     const clonedX = X.clone();
 
     // Not used
