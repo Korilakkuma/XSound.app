@@ -30,10 +30,6 @@ export const Piano: React.FC<Props> = ({ loadedApp, currentSoundSource }) => {
         | React.KeyboardEvent<HTMLButtonElement>
         | React.FocusEvent<HTMLButtonElement>
     ) => {
-      if (event.currentTarget.classList.contains('skip')) {
-        return; // skip
-      }
-
       if ('code' in event.nativeEvent && event.nativeEvent.code === 'Enter') {
         return;
       }
@@ -123,10 +119,6 @@ export const Piano: React.FC<Props> = ({ loadedApp, currentSoundSource }) => {
         | React.KeyboardEvent<HTMLButtonElement>
         | React.FocusEvent<HTMLButtonElement>
     ) => {
-      if (event.currentTarget.classList.contains('skip')) {
-        return; // skip
-      }
-
       if ('code' in event.nativeEvent && event.nativeEvent.code === 'Enter') {
         return;
       }
@@ -420,17 +412,17 @@ export const Piano: React.FC<Props> = ({ loadedApp, currentSoundSource }) => {
     <div className='Piano'>
       <ul className='Piano__whites'>
         {whites.map((pitch: string) => {
-          const index = indexMap[pitch];
-          const hasMelody = downMelodyIndexes.includes(index) && !upMelodyIndexes.includes(index);
-          const hasBass = downBassIndexes.includes(index) && !upBassIndexes.includes(index);
+          const pianoIndex = indexMap[pitch];
+          const hasMelody = downMelodyIndexes.includes(pianoIndex) && !upMelodyIndexes.includes(pianoIndex);
+          const hasBass = downBassIndexes.includes(pianoIndex) && !upBassIndexes.includes(pianoIndex);
           const isAutoActive = hasMelody || hasBass;
-          const isActive = isAutoActive || activeMIDIIndexes.includes(index);
+          const isActive = isAutoActive || activeMIDIIndexes.includes(pianoIndex);
 
           return (
-            <li key={pitch} className={`Piano__keyboard${downKeyboards[index] || isActive ? ' -active' : ''}`}>
+            <li key={pitch} className={`Piano__keyboard${downKeyboards[pianoIndex] || isActive ? ' -active' : ''}`}>
               <button
                 type='button'
-                aria-pressed={downKeyboards[index] || isAutoActive}
+                aria-pressed={downKeyboards[pianoIndex] || isAutoActive}
                 data-pitch={pitch}
                 data-index={indexMap[pitch]}
                 onMouseDown={startSoundCallback}
@@ -452,22 +444,25 @@ export const Piano: React.FC<Props> = ({ loadedApp, currentSoundSource }) => {
         })}
       </ul>
       <ul className='Piano__blacks'>
-        {blacks.map((pitch: string) => {
-          if (pitch.includes('skip')) {
-            return <li key={pitch} className='Piano__keyboard -skip' aria-label='skip' />;
+        {blacks.map((pitch: string, index: number) => {
+          switch (index % 7) {
+            case 1:
+            case 4: {
+              return <li key={pitch} className='Piano__keyboard -skip' aria-label='skip' />;
+            }
           }
 
-          const index = indexMap[pitch];
-          const hasMelody = downMelodyIndexes.includes(index) && !upMelodyIndexes.includes(index);
-          const hasBass = downBassIndexes.includes(index) && !upBassIndexes.includes(index);
+          const pianoIndex = indexMap[pitch];
+          const hasMelody = downMelodyIndexes.includes(pianoIndex) && !upMelodyIndexes.includes(pianoIndex);
+          const hasBass = downBassIndexes.includes(pianoIndex) && !upBassIndexes.includes(pianoIndex);
           const isAutoActive = hasMelody || hasBass;
-          const isActive = isAutoActive || activeMIDIIndexes.includes(index);
+          const isActive = isAutoActive || activeMIDIIndexes.includes(pianoIndex);
 
           return (
-            <li key={pitch} className={`Piano__keyboard${downKeyboards[index] || isActive ? ' -active' : ''}`}>
+            <li key={pitch} className={`Piano__keyboard${downKeyboards[pianoIndex] || isActive ? ' -active' : ''}`}>
               <button
                 type='button'
-                aria-pressed={downKeyboards[index] || isAutoActive}
+                aria-pressed={downKeyboards[pianoIndex] || isAutoActive}
                 data-pitch={pitch}
                 data-index={indexMap[pitch]}
                 onMouseDown={startSoundCallback}
