@@ -23,12 +23,10 @@ const SpinnerContainer: React.FC<{
   const props = { ...args, value, onChange };
 
   return (
-    <React.Fragment>
-      <label htmlFor={props.id} style={{ marginRight: '12px' }}>
-        Spinner
-      </label>
+    <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr' }}>
+      <label htmlFor={props.id}>Spinner</label>
       <Spinner {...props} />
-    </React.Fragment>
+    </div>
   );
 };
 

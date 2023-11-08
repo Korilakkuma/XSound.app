@@ -12,18 +12,13 @@
 }
 
 .MML__editor {
-  display: flex;
-  flex-direction: row;
-  align-items: flex-start;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
 }
 
 .MML__editor > dl {
   width: 100%;
-}
-
-.MML__editor > dl:last-child {
-  margin-left: 12px;
 }
 
 .MML__editor > dl > dt {
@@ -44,7 +39,8 @@
   transition: background-color ease 0.6s;
 }
 
-.MML__editor > dl > dd[contentEditable]:focus {
+.MML__editor > dl > dd[contentEditable]:focus,
+.MML__editor.-drag > dl > dd[contentEditable] {
   background-color: var(--assort-color);
 }
 
@@ -144,10 +140,16 @@
   background-position: -175px center;
 }
 
+.MML__controllers > div {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  margin-left: 8px;
+}
+
 /* HACK */
-.MML__controllers > .Select > select {
+.MML__controllers > div > .Select > select {
   padding-left: 12px;
-  margin: 0 0 0 12px;
   font-size: 9px;
   text-align: center;
   text-transform: none;

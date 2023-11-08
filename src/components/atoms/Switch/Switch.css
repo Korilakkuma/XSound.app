@@ -1,9 +1,8 @@
 .Switch > label {
-  display: flex;
-  flex-direction: row;
+  display: grid;
+  grid-template-columns: 1fr 58px;
+  gap: 12px;
   align-items: center;
-  justify-content: space-between;
-  padding: 0 4px;
   cursor: pointer;
 }
 
@@ -17,8 +16,6 @@
   display: inline-block;
   width: 58px;
   height: 34px;
-  margin-left: 12px;
-  vertical-align: -12px;
   cursor: pointer;
 
   /* CSS Sprite */
