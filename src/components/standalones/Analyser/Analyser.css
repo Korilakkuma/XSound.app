@@ -12,8 +12,8 @@
 }
 
 .Analyser__viewer {
-  display: flex;
-  flex-direction: row;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
   align-items: center;
   justify-content: space-between;
 }
@@ -21,6 +21,7 @@
 .Analyser__controllers {
   display: flex;
   flex-direction: row;
+  gap: 12px;
   align-items: flex-start;
   justify-content: flex-end;
   margin-top: 24px;

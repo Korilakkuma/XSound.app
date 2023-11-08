@@ -3,12 +3,15 @@
 }
 
 .RecorderFieldset > fieldset {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
   border: none;
 }
 
 .RecorderFieldset > fieldset > legend {
   display: block;
-  width: var(--fieldset-width);
+  width: 100%;
   margin: 0 auto 8px;
   font-family: Neuton, serif;
   font-size: 22px;

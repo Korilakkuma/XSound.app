@@ -588,34 +588,34 @@ export const MML: React.FC<Props> = ({ loadedApp, currentSoundSource }) => {
         >
           Download
         </a>
-        <Spacer space={8} direction='left' />
-        <Switch label='Highlight' checked={highlight} labelAsText={true} tabIndex={active ? 0 : -1} onChange={onChangeHightlightCallback} />
-        <Spacer space={8} direction='right' />
-        <FileUploader
-          accept='application/json'
-          disabled={!paused}
-          placeholder='MML JSON file'
-          filename={filename}
-          drag={drag}
-          drop={drop}
-          tabIndex={active ? 0 : -1}
-          onChange={onChangeFileCallback}
-          onDragEnter={onDragEnterCallback}
-          onDragOver={onDragOverCallback}
-          onDragLeave={onDragLeaveCallback}
-          onDrop={onDropCallback}
-        />
-        {process.env.NODE_ENV !== 'production' ? (
-          <Select
-            label='Select Sample MML'
-            values={values}
-            texts={texts}
+        <div>
+          <Switch label='Highlight' checked={highlight} labelAsText={true} tabIndex={active ? 0 : -1} onChange={onChangeHightlightCallback} />
+          <FileUploader
+            accept='application/json'
             disabled={!paused}
-            width='200px'
+            placeholder='MML JSON file'
+            filename={filename}
+            drag={false}
+            drop={drop}
             tabIndex={active ? 0 : -1}
-            onChange={onChangeSampleMMLCallback}
+            onChange={onChangeFileCallback}
+            onDragEnter={onDragEnterCallback}
+            onDragOver={onDragOverCallback}
+            onDragLeave={onDragLeaveCallback}
+            onDrop={onDropCallback}
           />
-        ) : null}
+          {process.env.NODE_ENV !== 'production' ? (
+            <Select
+              label='Select Sample MML'
+              values={values}
+              texts={texts}
+              disabled={!paused}
+              width='200px'
+              tabIndex={active ? 0 : -1}
+              onChange={onChangeSampleMMLCallback}
+            />
+          ) : null}
+        </div>
       </div>
       <Modal isShow={isShowModalForFileUploadError} title='Error' hasOverlay={true} asAlert={true} onClose={onCloseModalCallback}>
         {errorMessage}

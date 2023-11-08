@@ -29,8 +29,8 @@
   top: 73px;
   left: 30px;
   z-index: 2;
-  display: flex;
-  flex-direction: row;
+  display: grid;
+  grid-template-columns: repeat(52, 23px);
   background-color: var(--white);
 }
 
@@ -59,10 +59,11 @@
 .Piano__blacks {
   position: absolute;
   top: 73px;
-  left: 35px;
+  left: 47px;
   z-index: 3;
-  display: flex;
-  flex-direction: row;
+  display: grid;
+  grid-template-columns: repeat(50, 11px);
+  grid-column-gap: 12px;
   height: 95px; /* Enable to click keyboard */
 }
 
@@ -70,7 +71,6 @@
   box-sizing: border-box;
   width: 11px;
   height: 95px;
-  margin-left: 12px;
   cursor: pointer;
   background-color: var(--black);
 
