@@ -2,7 +2,6 @@ import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { X } from 'xsound';
 
-import { Spacer } from '/src/components/atoms/Spacer';
 import { Switch } from '/src/components/atoms/Switch';
 import { ParameterController } from '/src/components/helpers/ParameterController';
 import { TimeOverviewer } from '/src/components/helpers/TimeOverviewer';
@@ -154,7 +153,6 @@ export const Analyser: React.FC<Props> = (props: Props) => {
       </div>
       <div className='Analyser__controllers'>
         <Switch label='Audio Sprite' checked={analyser} labelAsText={true} tabIndex={active ? 0 : -1} onChange={onChangeModeCallback} />
-        <Spacer direction='right' space={12} />
         <ParameterController
           label='Interval'
           autoupdate={false}
@@ -166,7 +164,6 @@ export const Analyser: React.FC<Props> = (props: Props) => {
           tabIndex={active ? 0 : -1}
           onChange={onChangeIntervalCallback}
         />
-        <Spacer direction='right' space={12} />
         <ParameterController
           label='Smoothing'
           autoupdate={false}

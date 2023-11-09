@@ -1,7 +1,6 @@
 import React, { useCallback, useState } from 'react';
 import { X } from 'xsound';
 
-import { Spacer } from '/src/components/atoms/Spacer';
 import { Switch } from '/src/components/atoms/Switch';
 import { ParameterController } from '/src/components/helpers/ParameterController';
 
@@ -75,13 +74,9 @@ export const WahFieldset: React.FC = () => {
           <Switch label='Wah' checked={wah} labelAsText={false} onChange={onChangeStateCallback} />
         </legend>
         <ParameterController label='Cutoff' autoupdate={false} defaultValue={350} min={350} max={8000} step={1} onChange={onChangeCutoffCallback} />
-        <Spacer space={8} />
         <ParameterController label='Depth' autoupdate={false} defaultValue={0} min={0} max={0.9} step={0.01} onChange={onChangeDepthCallback} />
-        <Spacer space={8} />
         <ParameterController label='Rate' autoupdate={false} defaultValue={0} min={0} max={10} step={0.05} onChange={onChangeRateCallback} />
-        <Spacer space={8} />
         <ParameterController label='Resonance' autoupdate={false} defaultValue={1} min={1} max={20} step={1} onChange={onChangeResonanceCallback} />
-        <Spacer space={8} />
       </fieldset>
     </div>
   );

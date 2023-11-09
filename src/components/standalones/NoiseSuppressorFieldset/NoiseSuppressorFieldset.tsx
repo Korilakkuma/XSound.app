@@ -1,7 +1,6 @@
 import React, { useCallback, useState } from 'react';
 import { X } from 'xsound';
 
-import { Spacer } from '/src/components/atoms/Spacer';
 import { Switch } from '/src/components/atoms/Switch';
 import { ParameterController } from '/src/components/helpers/ParameterController';
 
@@ -45,7 +44,6 @@ export const NoiseSuppressorFieldset: React.FC = () => {
           <Switch label='Noise Sup.' checked={noisesuppressor} labelAsText={false} onChange={onChangeStateCallback} />
         </legend>
         <ParameterController label='Threshold' autoupdate={false} defaultValue={0} min={0} max={1} step={0.005} onChange={onChangeThresholdCallback} />
-        <Spacer space={8} />
       </fieldset>
     </div>
   );

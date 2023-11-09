@@ -1,7 +1,6 @@
 import React, { useCallback, useState } from 'react';
 import { X } from 'xsound';
 
-import { Spacer } from '/src/components/atoms/Spacer';
 import { Switch } from '/src/components/atoms/Switch';
 import { ParameterController } from '/src/components/helpers/ParameterController';
 
@@ -85,15 +84,10 @@ export const ChorusFieldset: React.FC = () => {
           <Switch label='Chorus' checked={chorus} labelAsText={false} onChange={onChangeStateCallback} />
         </legend>
         <ParameterController label='Time' autoupdate={false} defaultValue={0} min={0} max={50} step={1} onChange={onChangeTimeCallback} />
-        <Spacer space={8} />
         <ParameterController label='Depth' autoupdate={false} defaultValue={0} min={0} max={1} step={0.01} onChange={onChangeDepthCallback} />
-        <Spacer space={8} />
         <ParameterController label='Rate' autoupdate={false} defaultValue={0} min={0} max={1} step={0.01} onChange={onChangeRateCallback} />
-        <Spacer space={8} />
         <ParameterController label='Mix' autoupdate={false} defaultValue={0} min={0} max={1} step={0.05} onChange={onChangeMixCallback} />
-        <Spacer space={8} />
         <ParameterController label='Tone' autoupdate={false} defaultValue={4000} min={20} max={8000} step={1} onChange={onChangeToneCallabck} />
-        <Spacer space={8} />
       </fieldset>
     </div>
   );

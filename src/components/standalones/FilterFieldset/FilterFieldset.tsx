@@ -2,7 +2,6 @@ import React, { useCallback, useState } from 'react';
 import { X } from 'xsound';
 
 import { Select } from '/src/components/atoms/Select';
-import { Spacer } from '/src/components/atoms/Spacer';
 import { Switch } from '/src/components/atoms/Switch';
 import { ParameterController } from '/src/components/helpers/ParameterController';
 
@@ -135,21 +134,13 @@ export const FilterFieldset: React.FC = () => {
           disabled={false}
           onChange={onChangeTypeCallback}
         />
-        <Spacer space={8} />
         <ParameterController label='Frequency' autoupdate={false} defaultValue={8000} min={20} max={22050} step={1} onChange={onChangeFrequencyCallback} />
-        <Spacer space={8} />
         <ParameterController label='Quality' autoupdate={false} defaultValue={1} min={1} max={20} step={1} onChange={onChangeQualityCallback} />
-        <Spacer space={8} />
         <ParameterController label='Gain' autoupdate={false} defaultValue={0} min={-18} max={18} step={1} onChange={onChangeGainCallback} />
-        <Spacer space={8} />
         <ParameterController label='Attack' autoupdate={false} defaultValue={0.01} min={0} max={1} step={0.01} onChange={onChangeAttackCallback} />
-        <Spacer space={8} />
         <ParameterController label='Decay' autoupdate={false} defaultValue={0.3} min={0} max={1} step={0.01} onChange={onChangeDecayCallback} />
-        <Spacer space={8} />
         <ParameterController label='Sustain' autoupdate={false} defaultValue={0.5} min={0} max={1} step={0.01} onChange={onChangeSustainCallback} />
-        <Spacer space={8} />
         <ParameterController label='Release' autoupdate={false} defaultValue={1} min={0} max={1} step={0.01} onChange={onChangeReleaseCallback} />
-        <Spacer space={8} />
       </fieldset>
     </div>
   );

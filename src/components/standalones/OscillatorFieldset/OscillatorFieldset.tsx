@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { X } from 'xsound';
 
 import { changeOscillatorStates } from '/src/slices';
-import { Spacer } from '/src/components/atoms/Spacer';
 import { Switch } from '/src/components/atoms/Switch';
 import { OscillatorSelector } from '/src/components/helpers/OscillatorSelector';
 import { ParameterController } from '/src/components/helpers/ParameterController';
@@ -143,13 +142,9 @@ export const OscillatorFieldset: React.FC<Props> = ({ oscillatorNumber, label, r
         <legend>
           <Switch label={label} checked={states[oscillatorNumber]} labelAsText={false} onChange={onChangeStateCallback} />
         </legend>
-        <Spacer space={2} />
         <OscillatorSelector radioName={radioName} type={type} onChange={onChangeTypeCallback} onChangeRadio={onChangeRadioCallback} />
-        <Spacer space={16} />
         <ParameterController label='Volume' autoupdate={false} defaultValue={1} min={0} max={1} step={0.05} onChange={onChangeVolumeCallback} />
-        <Spacer space={8} />
         <ParameterController label='Octave' autoupdate={false} defaultValue={0} min={-4} max={4} step={1} onChange={onChangeOctaveCallback} />
-        <Spacer space={8} />
         <ParameterController label='Fine' autoupdate={false} defaultValue={0} min={-1200} max={1200} step={1} onChange={onChangeFineCallback} />
       </fieldset>
     </div>

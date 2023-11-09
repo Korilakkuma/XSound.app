@@ -9,7 +9,6 @@ import { FileUploader } from '/src/components/atoms/FileUploader';
 import { Modal } from '/src/components/atoms/Modal';
 import { ProgressBar } from '/src/components/atoms/ProgressBar';
 import { Select } from '/src/components/atoms/Select';
-import { Spacer } from '/src/components/atoms/Spacer';
 import { Switch } from '/src/components/atoms/Switch';
 import { SelectableModal } from '/src/components/helpers/SelectableModal';
 

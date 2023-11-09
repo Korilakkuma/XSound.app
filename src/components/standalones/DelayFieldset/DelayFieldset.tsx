@@ -1,7 +1,6 @@
 import React, { useCallback, useState } from 'react';
 import { X } from 'xsound';
 
-import { Spacer } from '/src/components/atoms/Spacer';
 import { Switch } from '/src/components/atoms/Switch';
 import { ParameterController } from '/src/components/helpers/ParameterController';
 
@@ -85,15 +84,10 @@ export const DelayFieldset: React.FC = () => {
           <Switch label='Delay' checked={delay} labelAsText={false} onChange={onChangeStateCallback} />
         </legend>
         <ParameterController label='Time' autoupdate={false} defaultValue={0} min={0} max={1000} step={1} onChange={onChangeTimeCallback} />
-        <Spacer space={8} />
         <ParameterController label='Dry' autoupdate={false} defaultValue={1} min={0} max={1} step={0.05} onChange={onChangeDryCallback} />
-        <Spacer space={8} />
         <ParameterController label='Wet' autoupdate={false} defaultValue={0} min={0} max={1} step={0.05} onChange={onChangeWetCallback} />
-        <Spacer space={8} />
         <ParameterController label='Tone' autoupdate={false} defaultValue={4000} min={20} max={8000} step={1} onChange={onChangeToneCallback} />
-        <Spacer space={8} />
         <ParameterController label='Feedback' autoupdate={false} defaultValue={0} min={0} max={0.95} step={0.05} onChange={onChangeFeedbackCallback} />
-        <Spacer space={8} />
       </fieldset>
     </div>
   );

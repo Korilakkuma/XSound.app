@@ -9,7 +9,6 @@ import { createFilename, getStorage } from '/src/utils';
 import type { CustomizedParameters } from '/src/types';
 
 import { Select } from '/src/components/atoms/Select';
-import { Spacer } from '/src/components/atoms/Spacer';
 import { ParameterController } from '/src/components/helpers/ParameterController';
 import { SelectableModal } from '/src/components/helpers/SelectableModal';
 
@@ -302,7 +301,6 @@ export const RecorderFieldset: React.FC<Props> = (props: Props) => {
           </a>
           <button type='button' disabled={running} aria-label='Clear Track' className='RecorderFieldset__clear' onClick={onClickClearButtonCallback} />
         </div>
-        <Spacer space={24} />
         <Select
           label='Select Track'
           values={['0', '1', '2', '3']}
@@ -310,9 +308,7 @@ export const RecorderFieldset: React.FC<Props> = (props: Props) => {
           disabled={running}
           onChange={onChangeTrackCallback}
         />
-        <Spacer space={24} />
         <ParameterController label='Left Channel' autoupdate={false} defaultValue={1} min={0} max={1} step={0.05} onChange={onChangeLeftChannelGainCallback} />
-        <Spacer space={8} />
         <ParameterController
           label='Right Channel'
           autoupdate={false}

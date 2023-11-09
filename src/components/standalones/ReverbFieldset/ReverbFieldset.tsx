@@ -2,7 +2,6 @@ import React, { useCallback, useState } from 'react';
 import { X } from 'xsound';
 
 import { GroupSelect } from '/src/components/atoms/GroupSelect';
-import { Spacer } from '/src/components/atoms/Spacer';
 import { Switch } from '/src/components/atoms/Switch';
 import { ParameterController } from '/src/components/helpers/ParameterController';
 
@@ -108,13 +107,9 @@ export const ReverbFieldset: React.FC<Props> = (props: Props) => {
           <Switch label='Reverb' checked={reverb} labelAsText={false} onChange={onChangeStateCallback} />
         </legend>
         <GroupSelect label='Select Reverb' groups={groups} values={values} texts={texts} onChange={onChangeTypeCallback} />
-        <Spacer space={8} />
         <ParameterController label='Dry' autoupdate={false} defaultValue={1} min={0} max={1} step={0.05} onChange={onChangeDryCallback} />
-        <Spacer space={8} />
         <ParameterController label='Wet' autoupdate={false} defaultValue={0} min={0} max={1} step={0.05} onChange={onChangeWetCallback} />
-        <Spacer space={8} />
         <ParameterController label='Tone' autoupdate={false} defaultValue={4000} min={20} max={8000} step={1} onChange={onChangeToneCallback} />
-        <Spacer space={8} />
         <aside>
           <a href='http://legacy.spa.aalto.fi/projects/poririrs/' target='_blank' rel='noopener noreferrer'>
             This website enables to get RIR (Room Impulse Response) files !
