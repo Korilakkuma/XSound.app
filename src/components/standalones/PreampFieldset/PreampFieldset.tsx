@@ -1,7 +1,6 @@
 import React, { useCallback, useState } from 'react';
 import { X } from 'xsound';
 
-import { Spacer } from '/src/components/atoms/Spacer';
 import { Switch } from '/src/components/atoms/Switch';
 import { ParameterController } from '/src/components/helpers/ParameterController';
 
@@ -151,17 +150,11 @@ export const PreampFieldset: React.FC = () => {
           <Switch label='Preamp' checked={preamp} labelAsText={false} onChange={onChangeStateCallback} />
         </legend>
         <ParameterController label='Level' autoupdate={false} defaultValue={0} min={0} max={1} step={0.05} onChange={onChangeLevelCallback} />
-        <Spacer space={8} />
         <ParameterController label='Gain' autoupdate={false} defaultValue={0.5} min={0} max={1} step={0.05} onChange={onChangeGainCallback} />
-        <Spacer space={8} />
         <ParameterController label='Lead Gain' autoupdate={false} defaultValue={0.5} min={0} max={1} step={0.05} onChange={onChangeLeadGainCallback} />
-        <Spacer space={8} />
         <ParameterController label='Bass' autoupdate={false} defaultValue={0} min={-18} max={18} step={1} onChange={onChangeBassCallback} />
-        <Spacer space={8} />
         <ParameterController label='Middle' autoupdate={false} defaultValue={0} min={-18} max={18} step={1} onChange={onChangeMiddleCallback} />
-        <Spacer space={8} />
         <ParameterController label='Treble' autoupdate={false} defaultValue={0} min={-18} max={18} step={1} onChange={onChangeTrebleCallback} />
-        <Spacer space={8} />
         <ParameterController
           label='Middle Frequency'
           autoupdate={false}
@@ -171,7 +164,6 @@ export const PreampFieldset: React.FC = () => {
           step={1}
           onChange={onChangeMiddleFrequencyCallback}
         />
-        <Spacer space={8} />
         <Switch label='cabinet' checked={cabinet} labelAsText={true} onChange={onChangeCabinetCallback} />
       </fieldset>
     </div>

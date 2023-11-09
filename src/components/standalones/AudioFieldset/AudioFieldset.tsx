@@ -6,7 +6,6 @@ import { Button } from '/src/components/atoms/Button';
 import { FileUploader } from '/src/components/atoms/FileUploader';
 import { Modal } from '/src/components/atoms/Modal';
 import { ProgressBar } from '/src/components/atoms/ProgressBar';
-import { Spacer } from '/src/components/atoms/Spacer';
 import { ParameterController } from '/src/components/helpers/ParameterController';
 
 import type { FileEvent, FileReaderErrorText } from 'xsound';
@@ -243,7 +242,6 @@ export const AudioFieldset: React.FC<Props> = (props: Props) => {
             onClick={onClickCallback}
           />
         </div>
-        <Spacer space={20} />
         <ParameterController
           label={`${currentTimeText} / ${durationText}`}
           autoupdate={true}
@@ -253,13 +251,11 @@ export const AudioFieldset: React.FC<Props> = (props: Props) => {
           step={1}
           onChange={onChangeCurrentTimeCallback}
         />
-        <Spacer space={8} />
         {usePlaybackRate ? (
           <ParameterController label='Playback Rate' autoupdate={false} defaultValue={1} min={0.05} max={2} step={0.025} onChange={onChangePlaybackRate} />
         ) : (
           <ParameterController label='Pitch Shifter' autoupdate={false} defaultValue={1} min={0.05} max={4} step={0.025} onChange={onChangePitchCallback} />
         )}
-        <Spacer space={8} />
         <ParameterController label='Vocal Canceler' autoupdate={false} defaultValue={0} min={0} max={1} step={0.05} onChange={onChangeDepthCallback} />
       </fieldset>
       <Modal isShow={isShowModalForFileUploadError} title='Error' hasOverlay={true} asAlert={true} onClose={onCloseModalCallback}>

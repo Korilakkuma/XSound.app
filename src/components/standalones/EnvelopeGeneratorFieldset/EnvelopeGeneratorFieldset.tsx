@@ -1,7 +1,6 @@
 import React, { useCallback } from 'react';
 import { X } from 'xsound';
 
-import { Spacer } from '/src/components/atoms/Spacer';
 import { ParameterController } from '/src/components/helpers/ParameterController';
 
 export const EnvelopeGeneratorFieldset: React.FC = () => {
@@ -46,13 +45,9 @@ export const EnvelopeGeneratorFieldset: React.FC = () => {
       <fieldset>
         <legend>Envelope Generator</legend>
         <ParameterController label='Attack' autoupdate={false} defaultValue={0.01} min={0} max={1} step={0.01} onChange={onChangeAttackCallback} />
-        <Spacer space={8} />
         <ParameterController label='Decay' autoupdate={false} defaultValue={0.3} min={0} max={1} step={0.01} onChange={onChangeDecayCallback} />
-        <Spacer space={8} />
         <ParameterController label='Sustain' autoupdate={false} defaultValue={0.5} min={0} max={1} step={0.01} onChange={onChangeSustainCallback} />
-        <Spacer space={8} />
         <ParameterController label='Release' autoupdate={false} defaultValue={1} min={0} max={1} step={0.01} onChange={onChangeReleaseCallback} />
-        <Spacer space={8} />
       </fieldset>
     </div>
   );
