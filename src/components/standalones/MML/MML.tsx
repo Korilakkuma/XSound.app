@@ -351,6 +351,7 @@ export const MML: React.FC<Props> = ({ loadedApp, currentSoundSource }) => {
 
   const onDragOverCallback = useCallback((event: React.DragEvent<HTMLDivElement>) => {
     event.preventDefault();
+    setDrag(true);
   }, []);
 
   const onDragLeaveCallback = useCallback((event: React.DragEvent<HTMLDivElement>) => {
@@ -531,7 +532,13 @@ export const MML: React.FC<Props> = ({ loadedApp, currentSoundSource }) => {
 
   return (
     <div id='mml-fieldset' aria-hidden={!active} className={`MML${active ? ' -active' : ''}`}>
-      <div className='MML__editor'>
+      <div
+        className={`MML__editor${drag ? ' -drag' : ''}`}
+        onDragEnter={onDragEnterCallback}
+        onDragOver={onDragOverCallback}
+        onDragLeave={onDragLeaveCallback}
+        onDrop={onDropCallback}
+      >
         <dl>
           <dt>
             Melody
