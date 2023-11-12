@@ -89,6 +89,7 @@ export const AudioFieldset: React.FC<Props> = (props: Props) => {
 
   const onDragOverCallback = useCallback((event: React.DragEvent<HTMLDivElement>) => {
     event.preventDefault();
+    setDrag(true);
   }, []);
 
   const onDragLeaveCallback = useCallback((event: React.DragEvent<HTMLDivElement>) => {
@@ -215,7 +216,13 @@ export const AudioFieldset: React.FC<Props> = (props: Props) => {
   }, [props.loadedApp, loaded, decodeCallback, updateCallback, endedCallback, errorCallback]);
 
   return (
-    <div className='AudioFieldset'>
+    <div
+      className={`AudioFieldset${drag ? ' -drag' : ''}`}
+      onDragEnter={onDragEnterCallback}
+      onDragOver={onDragOverCallback}
+      onDragLeave={onDragLeaveCallback}
+      onDrop={onDropCallback}
+    >
       <fieldset>
         <legend>Audio</legend>
         <div className='AudioFieldset__selectAudio'>
