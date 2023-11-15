@@ -605,10 +605,6 @@ export const MML: React.FC<Props> = ({ loadedApp, currentSoundSource }) => {
             drop={drop}
             tabIndex={active ? 0 : -1}
             onChange={onChangeFileCallback}
-            onDragEnter={onDragEnterCallback}
-            onDragOver={onDragOverCallback}
-            onDragLeave={onDragLeaveCallback}
-            onDrop={onDropCallback}
           />
           {process.env.NODE_ENV !== 'production' ? (
             <Select

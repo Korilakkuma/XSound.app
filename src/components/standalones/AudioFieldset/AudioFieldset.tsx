@@ -234,10 +234,6 @@ export const AudioFieldset: React.FC<Props> = (props: Props) => {
             drag={drag}
             drop={drop}
             onChange={onChangeFileCallback}
-            onDragEnter={onDragEnterCallback}
-            onDragOver={onDragOverCallback}
-            onDragLeave={onDragLeaveCallback}
-            onDrop={onDropCallback}
           />
           <Button
             active={!paused}

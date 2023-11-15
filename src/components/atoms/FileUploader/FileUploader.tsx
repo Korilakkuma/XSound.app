@@ -9,10 +9,10 @@ export type Props = {
   drop: boolean;
   tabIndex?: number | undefined;
   onChange(event: React.ChangeEvent<HTMLInputElement>): void;
-  onDragEnter(event: React.DragEvent<HTMLDivElement>): void;
-  onDragOver(event: React.DragEvent<HTMLDivElement>): void;
-  onDragLeave(event: React.DragEvent<HTMLDivElement>): void;
-  onDrop(event: React.DragEvent<HTMLDivElement>): void;
+  onDragEnter?(event: React.DragEvent<HTMLDivElement>): void;
+  onDragOver?(event: React.DragEvent<HTMLDivElement>): void;
+  onDragLeave?(event: React.DragEvent<HTMLDivElement>): void;
+  onDrop?(event: React.DragEvent<HTMLDivElement>): void;
 };
 
 export const FileUploader: React.FC<Props> = (props: Props) => {
