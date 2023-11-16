@@ -1,3 +1,7 @@
+.Switch {
+  display: block;
+}
+
 .Switch > label {
   display: grid;
   grid-template-columns: 1fr 58px;

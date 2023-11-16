@@ -33,7 +33,7 @@ export const Switch: React.FC<Props> = (props: Props) => {
   }, []);
 
   return (
-    <div
+    <span
       role='switch'
       aria-checked={checked}
       tabIndex={tabIndex}
@@ -49,6 +49,6 @@ export const Switch: React.FC<Props> = (props: Props) => {
         {label}
         <span role='presentation' />
       </label>
-    </div>
+    </span>
   );
 };
