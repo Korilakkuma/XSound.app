@@ -5,6 +5,7 @@
 @import url("./styles/base.css");
 @import url("./components/atoms/Button/Button.css");
 @import url("./components/atoms/Canvas/Canvas.css");
+@import url("./components/atoms/Fieldset//Fieldset.css");
 @import url("./components/atoms/FileUploader/FileUploader.css");
 @import url("./components/atoms/Flexbox/Flexbox.css");
 @import url("./components/atoms/GroupSelect/GroupSelect.css");
