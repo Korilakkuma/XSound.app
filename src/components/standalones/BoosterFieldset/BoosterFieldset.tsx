@@ -1,6 +1,8 @@
 import React, { useCallback, useState } from 'react';
 import { X } from 'xsound';
 
+import { Fieldset } from '/src/components/atoms/Fieldset';
+import { Legend } from '/src/components/atoms/Legend';
 import { Select } from '/src/components/atoms/Select';
 import { Switch } from '/src/components/atoms/Switch';
 import { ParameterController } from '/src/components/helpers/ParameterController';
@@ -113,14 +115,14 @@ export const BoosterFieldset: React.FC = () => {
 
   return (
     <div className='BoosterFieldset'>
-      <fieldset>
-        <legend>
+      <Fieldset>
+        <Legend>
           <Switch label='OD/DS' checked={booster} labelAsText={false} onChange={onChangeStateCallback} />
-        </legend>
+        </Legend>
         <Select label='Select OD/DS' values={['overdrive', 'fuzz']} texts={['overdrive', 'fuzz']} disabled={false} onChange={onChangeTypeCallback} />
         <ParameterController label='Drive' autoupdate={false} defaultValue={0} min={0} max={1} step={0.05} onChange={onChangeDriveCallback} />
         <ParameterController label='Level' autoupdate={false} defaultValue={0} min={0} max={1} step={0.05} onChange={onChangeLevelCallback} />
-      </fieldset>
+      </Fieldset>
     </div>
   );
 };

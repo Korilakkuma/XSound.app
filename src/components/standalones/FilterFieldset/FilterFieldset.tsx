@@ -1,6 +1,8 @@
 import React, { useCallback, useState } from 'react';
 import { X } from 'xsound';
 
+import { Fieldset } from '/src/components/atoms/Fieldset';
+import { Legend } from '/src/components/atoms/Legend';
 import { Select } from '/src/components/atoms/Select';
 import { Switch } from '/src/components/atoms/Switch';
 import { ParameterController } from '/src/components/helpers/ParameterController';
@@ -123,10 +125,10 @@ export const FilterFieldset: React.FC = () => {
 
   return (
     <div className='FilterFieldset'>
-      <fieldset>
-        <legend>
+      <Fieldset>
+        <Legend>
           <Switch label='Filter' checked={filter} labelAsText={false} onChange={onChangeStateCallback} />
-        </legend>
+        </Legend>
         <Select
           label='Select Filter'
           values={['lowpass', 'highpass', 'bandpass', 'lowshelf', 'highshelf', 'peaking', 'notch', 'allpass']}
@@ -141,7 +143,7 @@ export const FilterFieldset: React.FC = () => {
         <ParameterController label='Decay' autoupdate={false} defaultValue={0.3} min={0} max={1} step={0.01} onChange={onChangeDecayCallback} />
         <ParameterController label='Sustain' autoupdate={false} defaultValue={0.5} min={0} max={1} step={0.01} onChange={onChangeSustainCallback} />
         <ParameterController label='Release' autoupdate={false} defaultValue={1} min={0} max={1} step={0.01} onChange={onChangeReleaseCallback} />
-      </fieldset>
+      </Fieldset>
     </div>
   );
 };

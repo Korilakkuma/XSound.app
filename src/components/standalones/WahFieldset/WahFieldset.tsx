@@ -1,6 +1,8 @@
 import React, { useCallback, useState } from 'react';
 import { X } from 'xsound';
 
+import { Fieldset } from '/src/components/atoms/Fieldset';
+import { Legend } from '/src/components/atoms/Legend';
 import { Switch } from '/src/components/atoms/Switch';
 import { ParameterController } from '/src/components/helpers/ParameterController';
 
@@ -69,15 +71,15 @@ export const WahFieldset: React.FC = () => {
 
   return (
     <div className='WahFieldset'>
-      <fieldset>
-        <legend>
+      <Fieldset>
+        <Legend>
           <Switch label='Wah' checked={wah} labelAsText={false} onChange={onChangeStateCallback} />
-        </legend>
+        </Legend>
         <ParameterController label='Cutoff' autoupdate={false} defaultValue={350} min={350} max={8000} step={1} onChange={onChangeCutoffCallback} />
         <ParameterController label='Depth' autoupdate={false} defaultValue={0} min={0} max={0.9} step={0.01} onChange={onChangeDepthCallback} />
         <ParameterController label='Rate' autoupdate={false} defaultValue={0} min={0} max={10} step={0.05} onChange={onChangeRateCallback} />
         <ParameterController label='Resonance' autoupdate={false} defaultValue={1} min={1} max={20} step={1} onChange={onChangeResonanceCallback} />
-      </fieldset>
+      </Fieldset>
     </div>
   );
 };

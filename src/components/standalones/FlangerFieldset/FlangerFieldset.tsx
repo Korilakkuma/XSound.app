@@ -1,6 +1,8 @@
 import React, { useCallback, useState } from 'react';
 import { X } from 'xsound';
 
+import { Fieldset } from '/src/components/atoms/Fieldset';
+import { Legend } from '/src/components/atoms/Legend';
 import { Switch } from '/src/components/atoms/Switch';
 import { ParameterController } from '/src/components/helpers/ParameterController';
 
@@ -89,17 +91,17 @@ export const FlangerFieldset: React.FC = () => {
 
   return (
     <div className='FlangerFieldset'>
-      <fieldset>
-        <legend>
+      <Fieldset>
+        <Legend>
           <Switch label='Flanger' checked={flanger} labelAsText={false} onChange={onChangeStateCallback} />
-        </legend>
+        </Legend>
         <ParameterController label='Time' autoupdate={false} defaultValue={0} min={0} max={10} step={0.05} onChange={onChangeTimeCallback} />
         <ParameterController label='Depth' autoupdate={false} defaultValue={0} min={0} max={1} step={0.01} onChange={onChangeDepthCallback} />
         <ParameterController label='Rate' autoupdate={false} defaultValue={0} min={0} max={10} step={0.05} onChange={onChangeRateCallback} />
         <ParameterController label='Mix' autoupdate={false} defaultValue={0} min={0} max={1} step={0.05} onChange={onChangeMixCallback} />
         <ParameterController label='Tone' autoupdate={false} defaultValue={4000} min={20} max={8000} step={1} onChange={onChangeToneCallback} />
         <ParameterController label='Feedback' autoupdate={false} defaultValue={0} min={0} max={0.95} step={0.05} onChange={onChangeFeedbackCallback} />
-      </fieldset>
+      </Fieldset>
     </div>
   );
 };

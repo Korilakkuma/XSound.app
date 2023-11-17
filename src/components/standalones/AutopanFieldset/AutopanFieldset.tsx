@@ -1,6 +1,8 @@
 import React, { useCallback, useState } from 'react';
 import { X } from 'xsound';
 
+import { Fieldset } from '/src/components/atoms/Fieldset';
+import { Legend } from '/src/components/atoms/Legend';
 import { Switch } from '/src/components/atoms/Switch';
 import { ParameterController } from '/src/components/helpers/ParameterController/ParameterController';
 
@@ -49,13 +51,13 @@ export const AutopanFieldset: React.FC = () => {
 
   return (
     <div className='AutopanFieldset'>
-      <fieldset>
-        <legend>
+      <Fieldset>
+        <Legend>
           <Switch label='Autopan' checked={autopan} labelAsText={false} onChange={onChangeStateCallback} />
-        </legend>
+        </Legend>
         <ParameterController label='Depth' autoupdate={false} defaultValue={0} min={0} max={1} step={0.05} onChange={onChangeDepthCallback} />
         <ParameterController label='Rate' autoupdate={false} defaultValue={0} min={0} max={1} step={0.05} onChange={onChangeRateCallback} />
-      </fieldset>
+      </Fieldset>
     </div>
   );
 };

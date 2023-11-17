@@ -1,6 +1,8 @@
 import React, { useCallback, useState } from 'react';
 import { X } from 'xsound';
 
+import { Fieldset } from '/src/components/atoms/Fieldset';
+import { Legend } from '/src/components/atoms/Legend';
 import { Switch } from '/src/components/atoms/Switch';
 import { ParameterController } from '/src/components/helpers/ParameterController';
 
@@ -39,12 +41,12 @@ export const NoiseSuppressorFieldset: React.FC = () => {
 
   return (
     <div className='NoiseSuppressorFieldset'>
-      <fieldset>
-        <legend>
+      <Fieldset>
+        <Legend>
           <Switch label='Noise Sup.' checked={noisesuppressor} labelAsText={false} onChange={onChangeStateCallback} />
-        </legend>
+        </Legend>
         <ParameterController label='Threshold' autoupdate={false} defaultValue={0} min={0} max={1} step={0.005} onChange={onChangeThresholdCallback} />
-      </fieldset>
+      </Fieldset>
     </div>
   );
 };

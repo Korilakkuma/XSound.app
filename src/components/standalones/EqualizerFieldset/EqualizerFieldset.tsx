@@ -1,6 +1,8 @@
 import React, { useCallback, useState } from 'react';
 import { X } from 'xsound';
 
+import { Fieldset } from '/src/components/atoms/Fieldset';
+import { Legend } from '/src/components/atoms/Legend';
 import { Switch } from '/src/components/atoms/Switch';
 import { ParameterController } from '/src/components/helpers/ParameterController';
 
@@ -69,15 +71,15 @@ export const EqualizerFieldset: React.FC = () => {
 
   return (
     <div className='EqualizerFieldset'>
-      <fieldset>
-        <legend>
+      <Fieldset>
+        <Legend>
           <Switch label='Equalizer' checked={equalizer} labelAsText={false} onChange={onChangeStateCallback} />
-        </legend>
+        </Legend>
         <ParameterController label='Bass' autoupdate={false} defaultValue={0} min={-18} max={18} step={1} onChange={onChangeBassCallback} />
         <ParameterController label='Middle' autoupdate={false} defaultValue={0} min={-18} max={18} step={1} onChange={onChangeMiddleCallback} />
         <ParameterController label='Treble' autoupdate={false} defaultValue={0} min={-18} max={18} step={1} onChange={onChangeTrebleCallback} />
         <ParameterController label='Presence' autoupdate={false} defaultValue={0} min={-18} max={18} step={1} onChange={onChangePresenceCallback} />
-      </fieldset>
+      </Fieldset>
     </div>
   );
 };
