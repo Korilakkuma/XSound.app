@@ -1,6 +1,8 @@
 import React, { useCallback } from 'react';
 import { X } from 'xsound';
 
+import { Fieldset } from '/src/components/atoms/Fieldset';
+import { Legend } from '/src/components/atoms/Legend';
 import { ParameterController } from '/src/components/helpers/ParameterController';
 
 export const EnvelopeGeneratorFieldset: React.FC = () => {
@@ -42,13 +44,13 @@ export const EnvelopeGeneratorFieldset: React.FC = () => {
 
   return (
     <div className='EnvelopeGeneratorFieldset'>
-      <fieldset>
-        <legend>Envelope Generator</legend>
+      <Fieldset>
+        <Legend>Envelope Generator</Legend>
         <ParameterController label='Attack' autoupdate={false} defaultValue={0.01} min={0} max={1} step={0.01} onChange={onChangeAttackCallback} />
         <ParameterController label='Decay' autoupdate={false} defaultValue={0.3} min={0} max={1} step={0.01} onChange={onChangeDecayCallback} />
         <ParameterController label='Sustain' autoupdate={false} defaultValue={0.5} min={0} max={1} step={0.01} onChange={onChangeSustainCallback} />
         <ParameterController label='Release' autoupdate={false} defaultValue={1} min={0} max={1} step={0.01} onChange={onChangeReleaseCallback} />
-      </fieldset>
+      </Fieldset>
     </div>
   );
 };

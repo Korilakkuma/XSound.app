@@ -8,6 +8,8 @@ import { createFilename, getStorage } from '/src/utils';
 
 import type { CustomizedParameters } from '/src/types';
 
+import { Fieldset } from '/src/components/atoms/Fieldset';
+import { Legend } from '/src/components/atoms/Legend';
 import { Select } from '/src/components/atoms/Select';
 import { ParameterController } from '/src/components/helpers/ParameterController';
 import { SelectableModal } from '/src/components/helpers/SelectableModal';
@@ -273,8 +275,8 @@ export const RecorderFieldset: React.FC<Props> = (props: Props) => {
 
   return (
     <div className='RecorderFieldset'>
-      <fieldset>
-        <legend>Recorder</legend>
+      <Fieldset>
+        <Legend>Recorder</Legend>
         <div className='RecorderFieldset__buttons'>
           <button
             type='button'
@@ -318,7 +320,7 @@ export const RecorderFieldset: React.FC<Props> = (props: Props) => {
           step={0.05}
           onChange={onChangeRightChannelGainCallback}
         />
-      </fieldset>
+      </Fieldset>
       <SelectableModal
         hasOverlay={true}
         isShow={isShowModal}

@@ -1,6 +1,8 @@
 import React, { useCallback, useState } from 'react';
 import { X } from 'xsound';
 
+import { Fieldset } from '/src/components/atoms/Fieldset';
+import { Legend } from '/src/components/atoms/Legend';
 import { Select } from '/src/components/atoms/Select';
 import { Switch } from '/src/components/atoms/Switch';
 import { ParameterController } from '/src/components/helpers/ParameterController';
@@ -101,10 +103,10 @@ export const PhaserFieldset: React.FC = () => {
 
   return (
     <div className='PhaserFieldset'>
-      <fieldset>
-        <legend>
+      <Fieldset>
+        <Legend>
           <Switch label='Phaser' checked={phaser} labelAsText={false} onChange={onChangeStateCallback} />
-        </legend>
+        </Legend>
         <Select
           label='Select Phaser Stages'
           values={['0', '2', '4', '8', '12', '24']}
@@ -118,7 +120,7 @@ export const PhaserFieldset: React.FC = () => {
         <ParameterController label='Rate' autoupdate={false} defaultValue={0} min={0} max={5} step={0.05} onChange={onChangeRateCallback} />
         <ParameterController label='Resonance' autoupdate={false} defaultValue={1} min={1} max={20} step={1} onChange={onChangeResonanceCallback} />
         <ParameterController label='Mix' autoupdate={false} defaultValue={0} min={0} max={1} step={0.05} onChange={onChangeMixCallback} />
-      </fieldset>
+      </Fieldset>
     </div>
   );
 };

@@ -1,6 +1,8 @@
 import React, { useCallback, useState } from 'react';
 import { X } from 'xsound';
 
+import { Fieldset } from '/src/components/atoms/Fieldset';
+import { Legend } from '/src/components/atoms/Legend';
 import { GroupSelect } from '/src/components/atoms/GroupSelect';
 import { Switch } from '/src/components/atoms/Switch';
 import { ParameterController } from '/src/components/helpers/ParameterController';
@@ -102,10 +104,10 @@ export const ReverbFieldset: React.FC<Props> = (props: Props) => {
 
   return (
     <div className='ReverbFieldset'>
-      <fieldset>
-        <legend>
+      <Fieldset>
+        <Legend>
           <Switch label='Reverb' checked={reverb} labelAsText={false} onChange={onChangeStateCallback} />
-        </legend>
+        </Legend>
         <GroupSelect label='Select Reverb' groups={groups} values={values} texts={texts} onChange={onChangeTypeCallback} />
         <ParameterController label='Dry' autoupdate={false} defaultValue={1} min={0} max={1} step={0.05} onChange={onChangeDryCallback} />
         <ParameterController label='Wet' autoupdate={false} defaultValue={0} min={0} max={1} step={0.05} onChange={onChangeWetCallback} />
@@ -115,7 +117,7 @@ export const ReverbFieldset: React.FC<Props> = (props: Props) => {
             This website enables to get RIR (Room Impulse Response) files !
           </a>
         </aside>
-      </fieldset>
+      </Fieldset>
     </div>
   );
 };

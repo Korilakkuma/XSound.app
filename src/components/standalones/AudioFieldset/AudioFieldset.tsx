@@ -2,6 +2,8 @@ import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { X } from 'xsound';
 
 import { formatAudioTime, getStorage } from '/src/utils';
+import { Fieldset } from '/src/components/atoms/Fieldset';
+import { Legend } from '/src/components/atoms/Legend';
 import { Button } from '/src/components/atoms/Button';
 import { FileUploader } from '/src/components/atoms/FileUploader';
 import { Modal } from '/src/components/atoms/Modal';
@@ -223,8 +225,8 @@ export const AudioFieldset: React.FC<Props> = (props: Props) => {
       onDragLeave={onDragLeaveCallback}
       onDrop={onDropCallback}
     >
-      <fieldset>
-        <legend>Audio</legend>
+      <Fieldset>
+        <Legend>Audio</Legend>
         <div className='AudioFieldset__selectAudio'>
           <FileUploader
             accept='audio/*, audio/mpeg, audio/ogg'
@@ -260,7 +262,7 @@ export const AudioFieldset: React.FC<Props> = (props: Props) => {
           <ParameterController label='Pitch Shifter' autoupdate={false} defaultValue={1} min={0.05} max={4} step={0.025} onChange={onChangePitchCallback} />
         )}
         <ParameterController label='Vocal Canceler' autoupdate={false} defaultValue={0} min={0} max={1} step={0.05} onChange={onChangeDepthCallback} />
-      </fieldset>
+      </Fieldset>
       <Modal isShow={isShowModalForFileUploadError} title='Error' hasOverlay={true} asAlert={true} onClose={onCloseModalCallback}>
         {errorMessage}
       </Modal>

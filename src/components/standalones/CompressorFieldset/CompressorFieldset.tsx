@@ -1,6 +1,8 @@
 import React, { useCallback, useState } from 'react';
 import { X } from 'xsound';
 
+import { Fieldset } from '/src/components/atoms/Fieldset';
+import { Legend } from '/src/components/atoms/Legend';
 import { Switch } from '/src/components/atoms/Switch';
 import { ParameterController } from '/src/components/helpers/ParameterController';
 
@@ -79,16 +81,16 @@ export const CompressorFieldset: React.FC = () => {
 
   return (
     <div className='CompressorFieldset'>
-      <fieldset>
-        <legend>
+      <Fieldset>
+        <Legend>
           <Switch label='Compressor' checked={compressor} labelAsText={false} onChange={onChangeStateCallback} />
-        </legend>
+        </Legend>
         <ParameterController label='Threshold' autoupdate={false} defaultValue={-24} min={-100} max={0} step={1} onChange={onChangeThresholdCallback} />
         <ParameterController label='Knee' autoupdate={false} defaultValue={30} min={0} max={40} step={1} onChange={onChangeKneeCallback} />
         <ParameterController label='Ratio' autoupdate={false} defaultValue={12} min={1} max={20} step={1} onChange={onChangeRatioCallback} />
         <ParameterController label='Attack' autoupdate={false} defaultValue={0.003} min={0} max={1} step={0.001} onChange={onChangeAttackCallback} />
         <ParameterController label='Release' autoupdate={false} defaultValue={0.25} min={0.01} max={1} step={0.01} onChange={onChangeReleaseCallback} />
-      </fieldset>
+      </Fieldset>
     </div>
   );
 };
