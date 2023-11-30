@@ -90,7 +90,13 @@ export const Header: React.FC<Props> = ({ loadedApp, progress, rate, onClickSetu
             <img src='/assets/images/logo-v09.png' alt='' width='200' height='100' />
           </h1>
           <div id={describeId} className='Header__intro'>
-            <span className='Header__moveLeft'>XSound.app is Web Music Application by XSound (Web Audio API Library).</span>
+            <span className='Header__moveLeft'>
+              XSound.app is Web Music Application by
+              <a href='https://xsound.jp' target='_blank' rel='noopener noreferrer'>
+                XSound (Web Audio API Library)
+              </a>
+              .
+            </span>
             <span className='Header__moveRight'>Synthesizer, Effects, Visualization, Multi-Track Recording, Visual Audio Sprite ...</span>
             <span className='Header__moveLeft'>Moreover, enable to use external devices such as Audio Interfaces, MIDI.</span>
           </div>
