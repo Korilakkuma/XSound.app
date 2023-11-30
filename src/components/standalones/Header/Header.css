@@ -39,6 +39,10 @@
   transform: rotate(45deg);
 }
 
+.Header__intro > span > a {
+  margin: 0 4px;
+}
+
 .Header__forkMeOnGitHub > a:hover {
   color: #d1d1d1;
   text-decoration: none;
