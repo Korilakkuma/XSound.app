@@ -1,4 +1,7 @@
 .TimeOverviewer > dt {
+  display: flex;
+  gap: 8px;
+  align-items: center;
   font-size: 12px;
   color: var(--white);
   text-transform: uppercase;
@@ -14,13 +17,16 @@
     0 -1px 1px 5px rgb(0 0 0 / 50%);
 }
 
+.TimeOverviewer > dt > label {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
 .TimeOverviewer__channelSelector {
   display: inline-block;
   width: 50px;
   height: 22px;
-  margin-right: 4px;
-  margin-bottom: 2px;
-  vertical-align: middle;
 
   /* CSS Sprite */
   background-image: url("/assets/images/flip-switch-channel.png");
