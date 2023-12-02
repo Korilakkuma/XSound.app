@@ -132,7 +132,9 @@ export const TimeOverviewer: React.FC<Props> = (props: Props) => {
             tabIndex={active ? 0 : -1}
             onClick={onClickChannelCallback}
           />
-          Time Overview [{showTimeOverview}]
+          <span>Time Overview</span>
+          <span>{showTimeOverview}</span>
+          <span>channel</span>
         </label>
         {showDragTime ? <span className='Analyser__dragTime'>{dragTime}</span> : null}
       </dt>
