@@ -5,5 +5,6 @@ export type Props = {
 };
 
 export const Legend: React.FC<Props> = (props: Props) => {
-  return <legend className='Legend'>{props.children}</legend>;
+  // Use `div` instead of `legend` because cannot click if Safari
+  return <div className='Legend'>{props.children}</div>;
 };
