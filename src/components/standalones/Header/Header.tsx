@@ -64,16 +64,7 @@ export const Header: React.FC<Props> = ({ loadedApp, progress, rate, onClickSetu
   const describeId = useMemo(() => `header-describe-${id}`, [id]);
 
   return (
-    <header
-      ref={headerRef}
-      role='dialog'
-      hidden={loaded}
-      aria-modal={!loaded}
-      aria-labelledby={labelId}
-      aria-describedby={describeId}
-      className={`Header${progress ? ' -progress' : ' -fadeIn'}`}
-      onAnimationEnd={onAnimationEndCallback}
-    >
+    <header ref={headerRef} hidden={loaded} className={`Header${progress ? ' -progress' : ' -fadeIn'}`} onAnimationEnd={onAnimationEndCallback}>
       <div hidden={progress}>
         <div className='Header__forkMeOnGitHub'>
           <a href='https://github.com/Korilakkuma/XSound.app' target='_blank' rel='noopener noreferrer'>
