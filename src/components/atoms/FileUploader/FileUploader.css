@@ -17,9 +17,9 @@
     0 0 1px 3px rgb(0 0 0 / 30%); /* outer (for emboss) */
 }
 
-.FileUploader > button:focus,
-.FileUploader > button:active,
-.FileUploader.-drag > button {
+.FileUploader > button:not(:disabled):focus,
+.FileUploader > button:not(:disabled):active,
+.FileUploader.-drag > button:not(:disabled) {
   background-color: var(--assort-color);
   background-image: linear-gradient(to bottom, var(--base-color), var(--assort-color));
   border: 2px solid rgb(255 255 255 / 5%);
