@@ -83,3 +83,16 @@ export const Secondary = {
     }
   }
 };
+
+export const Tertiary = {
+  ...Template,
+  args: {
+    accept: 'audio/*',
+    disabled: true,
+    placeholder: 'MP3, Ogg, WAV ... etc',
+    filename: 'Default filename',
+    onChange: (event: React.ChangeEvent<HTMLInputElement>) => {
+      alert(event.type);
+    }
+  }
+};
