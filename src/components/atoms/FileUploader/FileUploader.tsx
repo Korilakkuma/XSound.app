@@ -9,10 +9,10 @@ export type Props = {
   drop: boolean;
   tabIndex?: number | undefined;
   onChange(event: React.ChangeEvent<HTMLInputElement>): void;
-  onDragEnter?(event: React.DragEvent<HTMLDivElement>): void;
-  onDragOver?(event: React.DragEvent<HTMLDivElement>): void;
-  onDragLeave?(event: React.DragEvent<HTMLDivElement>): void;
-  onDrop?(event: React.DragEvent<HTMLDivElement>): void;
+  onDragEnter?(event: React.DragEvent<HTMLLabelElement>): void;
+  onDragOver?(event: React.DragEvent<HTMLLabelElement>): void;
+  onDragLeave?(event: React.DragEvent<HTMLLabelElement>): void;
+  onDrop?(event: React.DragEvent<HTMLLabelElement>): void;
 };
 
 export const FileUploader: React.FC<Props> = (props: Props) => {
@@ -34,7 +34,7 @@ export const FileUploader: React.FC<Props> = (props: Props) => {
   }, []);
 
   return (
-    <div
+    <label
       className={`FileUploader${drag ? ' -drag' : ''}${drop ? ' -drop' : ''}`}
       onDragEnter={onDragEnter}
       onDragOver={onDragOver}
@@ -45,6 +45,6 @@ export const FileUploader: React.FC<Props> = (props: Props) => {
         {filename ? filename : placeholder}
       </button>
       <input type='file' ref={fileUploaderRef} id={id} accept={accept} disabled={disabled} tabIndex={-1} onChange={onChange} />
-    </div>
+    </label>
   );
 };
