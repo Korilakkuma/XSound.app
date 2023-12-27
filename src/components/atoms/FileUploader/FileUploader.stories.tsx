@@ -18,7 +18,7 @@ const FileUploaderContainer: React.FC<{
   const [drag, setDrag] = useState<boolean>(false);
   const [drop, setDrop] = useState<boolean>(false);
 
-  const onDragEnter = useCallback((event: React.DragEvent<HTMLDivElement>) => {
+  const onDragEnter = useCallback((event: React.DragEvent<HTMLLabelElement>) => {
     event.preventDefault();
 
     document.body.style.backgroundColor = '#333';
@@ -26,13 +26,13 @@ const FileUploaderContainer: React.FC<{
     setDrag(true);
   }, []);
 
-  const onDragOver = useCallback((event: React.DragEvent<HTMLDivElement>) => {
+  const onDragOver = useCallback((event: React.DragEvent<HTMLLabelElement>) => {
     event.preventDefault();
 
     document.body.style.backgroundColor = '#999';
   }, []);
 
-  const onDragLeave = useCallback((event: React.DragEvent<HTMLDivElement>) => {
+  const onDragLeave = useCallback((event: React.DragEvent<HTMLLabelElement>) => {
     event.preventDefault();
 
     document.body.style.backgroundColor = '#000';
@@ -40,7 +40,7 @@ const FileUploaderContainer: React.FC<{
     setDrag(false);
   }, []);
 
-  const onDrop = useCallback((event: React.DragEvent<HTMLDivElement>) => {
+  const onDrop = useCallback((event: React.DragEvent<HTMLLabelElement>) => {
     event.preventDefault();
 
     alert(event.type);

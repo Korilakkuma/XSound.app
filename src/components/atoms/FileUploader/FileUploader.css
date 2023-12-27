@@ -1,3 +1,7 @@
+.FileUploader {
+  display: block;
+}
+
 .FileUploader > button,
 .FileUploader.-drop > button {
   box-sizing: border-box;
