@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React from 'react';
 
 import { FileUploader } from '/src/components/atoms/FileUploader';
 
@@ -15,43 +15,7 @@ const FileUploaderContainer: React.FC<{
   filename: string;
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }> = (args) => {
-  const [drag, setDrag] = useState<boolean>(false);
-  const [drop, setDrop] = useState<boolean>(false);
-
-  const onDragEnter = useCallback((event: React.DragEvent<HTMLLabelElement>) => {
-    event.preventDefault();
-
-    document.body.style.backgroundColor = '#333';
-
-    setDrag(true);
-  }, []);
-
-  const onDragOver = useCallback((event: React.DragEvent<HTMLLabelElement>) => {
-    event.preventDefault();
-
-    document.body.style.backgroundColor = '#999';
-  }, []);
-
-  const onDragLeave = useCallback((event: React.DragEvent<HTMLLabelElement>) => {
-    event.preventDefault();
-
-    document.body.style.backgroundColor = '#000';
-
-    setDrag(false);
-  }, []);
-
-  const onDrop = useCallback((event: React.DragEvent<HTMLLabelElement>) => {
-    event.preventDefault();
-
-    alert(event.type);
-
-    setDrag(false);
-    setDrop(true);
-  }, []);
-
-  const props = { ...args, drag, drop, onDragEnter, onDragOver, onDragLeave, onDrop };
-
-  return <FileUploader {...props} />;
+  return <FileUploader {...args} />;
 };
 
 const Template: StoryObj<typeof FileUploader> = {

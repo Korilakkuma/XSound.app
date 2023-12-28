@@ -5,18 +5,14 @@ export type Props = {
   disabled: boolean;
   placeholder: string;
   filename: string;
-  drag: boolean;
-  drop: boolean;
+  drag?: boolean | undefined;
+  drop?: boolean | undefined;
   tabIndex?: number | undefined;
   onChange(event: React.ChangeEvent<HTMLInputElement>): void;
-  onDragEnter?(event: React.DragEvent<HTMLLabelElement>): void;
-  onDragOver?(event: React.DragEvent<HTMLLabelElement>): void;
-  onDragLeave?(event: React.DragEvent<HTMLLabelElement>): void;
-  onDrop?(event: React.DragEvent<HTMLLabelElement>): void;
 };
 
 export const FileUploader: React.FC<Props> = (props: Props) => {
-  const { accept, disabled, placeholder, filename, drag, drop, tabIndex, onChange, onDragEnter, onDragOver, onDragLeave, onDrop } = props;
+  const { accept, disabled, placeholder, filename, drag = false, drop = false, tabIndex, onChange } = props;
 
   const fileUploaderRef = useRef<HTMLInputElement>(null);
 
@@ -34,13 +30,7 @@ export const FileUploader: React.FC<Props> = (props: Props) => {
   }, []);
 
   return (
-    <label
-      className={`FileUploader${drag ? ' -drag' : ''}${drop ? ' -drop' : ''}`}
-      onDragEnter={onDragEnter}
-      onDragOver={onDragOver}
-      onDragLeave={onDragLeave}
-      onDrop={onDrop}
-    >
+    <label className={`FileUploader${drag ? ' -drag' : ''}${drop ? ' -drop' : ''}`}>
       <button type='button' aria-controls={id} disabled={disabled} tabIndex={tabIndex} onClick={onClickCallback}>
         {filename ? filename : placeholder}
       </button>

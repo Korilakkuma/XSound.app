@@ -37,7 +37,6 @@ export const MML: React.FC<Props> = ({ loadedApp, currentSoundSource }) => {
   const [dataURL, setDataURL] = useState<string>('');
   const [filename, setFilename] = useState<string>('');
   const [drag, setDrag] = useState<boolean>(false);
-  const [drop, setDrop] = useState<boolean>(false);
   const [showProgress, setShowProgress] = useState<boolean>(false);
   const [loadedByte, setLoadedByte] = useState<number>(0);
   const [rate, setRate] = useState<number>(0);
@@ -405,7 +404,6 @@ export const MML: React.FC<Props> = ({ loadedApp, currentSoundSource }) => {
       }
 
       setDrag(false);
-      setDrop(true);
     },
     [melody, bass, readyMMLCallback]
   );
@@ -601,8 +599,6 @@ export const MML: React.FC<Props> = ({ loadedApp, currentSoundSource }) => {
             disabled={!paused}
             placeholder='MML JSON file'
             filename={filename}
-            drag={false}
-            drop={drop}
             tabIndex={active ? 0 : -1}
             onChange={onChangeFileCallback}
           />

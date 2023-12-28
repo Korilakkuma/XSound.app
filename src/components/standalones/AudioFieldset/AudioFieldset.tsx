@@ -23,7 +23,6 @@ export const AudioFieldset: React.FC<Props> = (props: Props) => {
   const [currentTime, setCurrentTime] = useState<number>(0);
   const [duration, setDuration] = useState<number>(0);
   const [drag, setDrag] = useState<boolean>(false);
-  const [drop, setDrop] = useState<boolean>(false);
   const [showProgress, setShowProgress] = useState<boolean>(false);
   const [loadedByte, setLoadedByte] = useState<number>(0);
   const [rate, setRate] = useState<number>(0);
@@ -130,7 +129,6 @@ export const AudioFieldset: React.FC<Props> = (props: Props) => {
       }
 
       setDrag(false);
-      setDrop(true);
     },
     [startDecodeCallback]
   );
@@ -234,7 +232,6 @@ export const AudioFieldset: React.FC<Props> = (props: Props) => {
             placeholder='Audio File (wav, ogg, mp3 ... etc)'
             filename={filename}
             drag={drag}
-            drop={drop}
             onChange={onChangeFileCallback}
           />
           <Button
