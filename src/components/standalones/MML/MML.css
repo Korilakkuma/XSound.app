@@ -134,6 +134,7 @@
 
 .MML__download:hover {
   background-position: -175px top;
+  opacity: 1; /* Override base style */
 }
 
 .MML__download:active {

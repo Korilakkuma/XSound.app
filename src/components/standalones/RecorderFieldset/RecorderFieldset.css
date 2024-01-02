@@ -78,6 +78,7 @@
 
 .RecorderFieldset__download:not([aria-disabled="true"]):hover {
   background-position: -119px top;
+  opacity: 1; /* Override base style */
 }
 
 .RecorderFieldset__download:not([aria-disabled="true"]):active {
