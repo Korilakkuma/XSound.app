@@ -7,6 +7,7 @@
   grid-template-columns: 1fr 58px;
   gap: 12px;
   align-items: center;
+  white-space: nowrap;
   cursor: pointer;
 }
 
