@@ -304,24 +304,14 @@ export const BasicControllers: React.FC<Props> = ({ currentSoundSource }) => {
 
   return (
     <div className='BasicControllers'>
-      <ParameterController
-        label='Master Volume'
-        autoupdate={false}
-        defaultValue={1}
-        min={0}
-        max={1}
-        step={0.05}
-        width='20%'
-        onChange={onChangeMasterVolumeCallback}
-      />
-      <ParameterController label='Glide' autoupdate={false} defaultValue={0} min={0} max={1} step={0.05} width='20%' onChange={onChangeGlideCallback} />
-      <ParameterController label='Transpose' autoupdate={false} defaultValue={0} min={-6} max={6} step={1} width='20%' onChange={onChangeTransposeCallback} />
+      <ParameterController label='Master Volume' autoupdate={false} defaultValue={1} min={0} max={1} step={0.05} onChange={onChangeMasterVolumeCallback} />
+      <ParameterController label='Glide' autoupdate={false} defaultValue={0} min={0} max={1} step={0.05} onChange={onChangeGlideCallback} />
+      <ParameterController label='Transpose' autoupdate={false} defaultValue={0} min={-6} max={6} step={1} onChange={onChangeTransposeCallback} />
       <Select
         label='Select Sound Source'
         values={['oscillator', 'piano', 'guitar', 'electric-guitar', 'orgel', 'whitenoise', 'pinknoise', 'browniannoise', 'stream', 'midi']}
         texts={['oscillator', 'piano', 'A. guitar', 'E. guitar', 'orgel (music box)', 'white noise', 'pink noise', 'brownian noise', 'microphone', 'MIDI']}
         disabled={false}
-        width='20%'
         onChange={onChangeSoundSourceCallback}
       />
       <Switch label='Analyser' checked={analyserState} labelAsText={true} controls='analyser-fieldset' onChange={onChangeAnalyserStateCallback} />

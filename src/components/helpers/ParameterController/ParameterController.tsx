@@ -10,13 +10,12 @@ export type Props = {
   max: number;
   step: number;
   defaultValue: number;
-  width?: string | undefined;
   tabIndex?: number | undefined;
   onChange(event: React.SyntheticEvent): void;
 };
 
 export const ParameterController: React.FC<Props> = (props: Props) => {
-  const { label, autoupdate, min, max, step, defaultValue, width, tabIndex, onChange } = props;
+  const { label, autoupdate, min, max, step, defaultValue, tabIndex, onChange } = props;
 
   const [value, setValue] = useState<number>(defaultValue);
 
@@ -37,7 +36,7 @@ export const ParameterController: React.FC<Props> = (props: Props) => {
   }, [autoupdate, defaultValue]);
 
   return (
-    <dl className='ParameterController' style={width ? { width } : { width: 'auto' }}>
+    <dl className='ParameterController'>
       <dt>
         <label htmlFor={id}>{label}</label>
         <Spinner id={id} value={value} min={min} max={max} step={step} tabIndex={tabIndex} onChange={onChangeCallback} />
