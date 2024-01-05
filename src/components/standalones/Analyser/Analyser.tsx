@@ -160,7 +160,6 @@ export const Analyser: React.FC<Props> = (props: Props) => {
           min={0}
           max={1000}
           step={10}
-          width='20%'
           tabIndex={active ? 0 : -1}
           onChange={onChangeIntervalCallback}
         />
@@ -171,7 +170,6 @@ export const Analyser: React.FC<Props> = (props: Props) => {
           min={0}
           max={1}
           step={0.05}
-          width='20%'
           tabIndex={active ? 0 : -1}
           onChange={onChangeSmoothingCallback}
         />
