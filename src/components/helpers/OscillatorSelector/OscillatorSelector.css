@@ -18,10 +18,6 @@
   background-size: 238px 120px;
 }
 
-.OscillatorSelector > label:focus:not(:focus-visible) {
-  outline: none;
-}
-
 .OscillatorSelector > label > input[type="radio"] {
   position: absolute;
   width: 1px;
