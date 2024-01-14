@@ -8,11 +8,15 @@ register.js
 sw.js
 vendor.js*
 
-assets/mmls/
 coverage/
 node_modules/
+storybook-static/
+
+assets/mmls/endless-rain.json
+assets/mmls/forever-love.json
+assets/mmls/seifuku-no-mannequin.json
+assets/mmls/tears.json
 src/assets/mmls/endless-rain.json
 src/assets/mmls/forever-love.json
 src/assets/mmls/seifuku-no-mannequin.json
 src/assets/mmls/tears.json
-storybook-static/
