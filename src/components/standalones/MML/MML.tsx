@@ -451,17 +451,16 @@ export const MML: React.FC<Props> = ({ loadedApp, currentSoundSource }) => {
       errorCallback: errorCallbackForBass
     });
 
-    if (process.env.NODE_ENV === 'production') {
-      setLoaded(true);
-      return;
+    const mmls = ['/assets/mmls/sample.json'];
+
+    if (process.env.NODE_ENV !== 'production') {
+      mmls.push('/assets/mmls/endless-rain.json');
+      mmls.push('/assets/mmls/forever-love.json');
+      mmls.push('/assets/mmls/tears.json');
+      mmls.push('/assets/mmls/seifuku-no-mannequin.json');
     }
 
-    Promise.all([
-      fetch('/assets/mmls/endless-rain.json'),
-      fetch('/assets/mmls/forever-love.json'),
-      fetch('/assets/mmls/tears.json'),
-      fetch('/assets/mmls/seifuku-no-mannequin.json')
-    ])
+    Promise.all(mmls.map((mmls) => fetch(mmls)))
       .then((responses: Response[]) => {
         return responses.map((response: Response) => response.json());
       })
@@ -475,25 +474,26 @@ export const MML: React.FC<Props> = ({ loadedApp, currentSoundSource }) => {
 
               switch (title) {
                 case 'ENDLESS RAIN':
-                  index = 1;
-                  break;
-                case 'Forever Love':
                   index = 2;
                   break;
-                case 'Tears':
+                case 'Forever Love':
                   index = 3;
                   break;
-                case '制服のマネキン':
+                case 'Tears':
                   index = 4;
                   break;
+                case '制服のマネキン':
+                  index = 5;
+                  break;
                 default:
+                  index = 1;
                   break;
               }
 
               values[index] = JSON.stringify({ melody, bass });
               texts[index] = `${title} | ${artist}`;
 
-              if (values.length === 5 && texts.length === 5) {
+              if (values.length === mmls.length + 1 && texts.length === mmls.length + 1) {
                 setValues(values);
                 setTexts(texts);
               }
