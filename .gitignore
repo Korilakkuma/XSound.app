@@ -3,7 +3,9 @@
 *.log
 
 __snapshots__/
-assets/mmls/
 coverage/
 node_modules/
 src/assets/mmls/
+
+assets/mmls/*.json
+!assets/mmls/sample.json
