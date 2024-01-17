@@ -5,18 +5,17 @@ export type Props = {
   values: { [group: string]: string[] };
   texts: { [group: string]: string[] };
   groups: string[];
-  width?: string | undefined;
   defaultValue?: string | undefined;
   onChange(event: React.ChangeEvent<HTMLSelectElement>): void;
 };
 
 export const GroupSelect: React.FC<Props> = (props: Props) => {
-  const { label, values, texts, groups, width, defaultValue, onChange } = props;
+  const { label, values, texts, groups, defaultValue, onChange } = props;
 
   const id = useId();
 
   return (
-    <div className='GroupSelect' style={width ? { width } : undefined}>
+    <div className='GroupSelect'>
       <label htmlFor={id}>{label}</label>
       <select id={id} defaultValue={defaultValue} onChange={onChange}>
         {groups.map((group: string, key: number) => {

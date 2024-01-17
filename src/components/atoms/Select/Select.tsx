@@ -5,19 +5,18 @@ export type Props = {
   values: string[];
   texts: string[];
   disabled: boolean;
-  width?: string | undefined;
   defaultValue?: string | undefined;
   tabIndex?: number | undefined;
   onChange(event: React.ChangeEvent<HTMLSelectElement>): void;
 };
 
 export const Select: React.FC<Props> = (props: Props) => {
-  const { label, values, texts, disabled, width, defaultValue, tabIndex, onChange } = props;
+  const { label, values, texts, disabled, defaultValue, tabIndex, onChange } = props;
 
   const id = useId();
 
   return (
-    <div className='Select' style={width ? { width } : undefined}>
+    <div className='Select'>
       <label htmlFor={id}>{label}</label>
       <select id={id} disabled={disabled} defaultValue={defaultValue} tabIndex={tabIndex} onChange={onChange}>
         {values.map((value: string, index: number) => {
