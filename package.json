@@ -75,7 +75,7 @@
     "README.md"
   ],
   "dependencies": {
-    "@reduxjs/toolkit": "^2.0.1",
+    "@reduxjs/toolkit": "^2.1.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-redux": "^9.1.0",
@@ -95,9 +95,9 @@
     "@types/react-dom": "^18.2.18",
     "@types/react-redux": "^7.1.33",
     "@types/react-test-renderer": "^18.0.7",
-    "@typescript-eslint/eslint-plugin": "^6.19.0",
-    "@typescript-eslint/parser": "^6.19.0",
-    "chromatic": "^10.3.1",
+    "@typescript-eslint/eslint-plugin": "^6.19.1",
+    "@typescript-eslint/parser": "^6.19.1",
+    "chromatic": "^10.6.1",
     "cross-env": "^7.0.3",
     "css-loader": "^6.9.1",
     "css-minimizer-webpack-plugin": "^6.0.0",
@@ -134,7 +134,7 @@
     "ts-loader": "^9.5.1",
     "typescript": "^5.3.3",
     "url-loader": "^4.1.1",
-    "webpack": "^5.89.0",
+    "webpack": "^5.90.0",
     "webpack-cli": "^5.1.4",
     "webpack-dev-server": "^4.15.1"
   }
