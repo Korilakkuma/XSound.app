@@ -36,7 +36,6 @@ import type { OneshotSetting, OneshotSettings, PreampParams } from 'xsound';
 
 export const App: React.FC = () => {
   const [loadedApp, setLoadedApp] = useState<boolean>(false);
-  const [progress, setProgress] = useState<boolean>(false);
   const [rate, setRate] = useState<number>(0);
   const [errorMessage, setErrorMessage] = useState<string>('');
   const [isShowModalForAjax, setIsShowModalForAjax] = useState<boolean>(false);
@@ -1460,7 +1459,6 @@ export const App: React.FC = () => {
 
                     if (rirs.length === rirDescriptors.length) {
                       setRate(100);
-                      setProgress(false);
                       setLoadedApp(true);
                     } else {
                       X('mixer').module('reverb').preset({ rirs });
@@ -1472,7 +1470,6 @@ export const App: React.FC = () => {
                       clonedX('oscillator').module('reverb').preset({ rirs });
 
                       setRate(rate);
-                      setProgress(true);
                     }
                   },
                   () => {
@@ -1507,7 +1504,7 @@ export const App: React.FC = () => {
 
   return (
     <React.Fragment>
-      <Header loadedApp={loadedApp} progress={progress} rate={rate} onClickSetupCallback={onClickSetupCallback} />
+      <Header rate={rate} onClickSetupCallback={onClickSetupCallback} />
       <main>
         <Flexbox>
           <VerticalBox numberOfDivisions={5}>

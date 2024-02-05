@@ -4,20 +4,26 @@ import { FOCUSABLE_ELEMENTS } from '/src/config';
 import { ProgressBar } from '/src/components/atoms/ProgressBar/ProgressBar';
 
 export type Props = {
-  loadedApp: boolean;
-  progress: boolean;
   rate: number;
   onClickSetupCallback: (event: React.MouseEvent<HTMLButtonElement>) => void;
 };
 
-export const Header: React.FC<Props> = ({ loadedApp, progress, rate, onClickSetupCallback }) => {
+export const Header: React.FC<Props> = ({ rate, onClickSetupCallback }) => {
   const headerRef = useRef<HTMLElement>(null);
 
   const [animationEnded, setAnimationEnded] = useState<boolean>(false);
 
+  const id = useId();
+  const labelId = useMemo(() => `header-label-${id}`, [id]);
+  const describeId = useMemo(() => `header-describe-${id}`, [id]);
+
+  const starting = useMemo(() => {
+    return rate > 0;
+  }, [rate]);
+
   const loaded = useMemo(() => {
-    return loadedApp && rate >= 100;
-  }, [loadedApp, rate]);
+    return rate >= 100;
+  }, [rate]);
 
   const onAnimationEndCallback = useCallback(() => {
     setAnimationEnded(true);
@@ -59,13 +65,9 @@ export const Header: React.FC<Props> = ({ loadedApp, progress, rate, onClickSetu
     }
   }, [animationEnded, loaded]);
 
-  const id = useId();
-  const labelId = useMemo(() => `header-label-${id}`, [id]);
-  const describeId = useMemo(() => `header-describe-${id}`, [id]);
-
   return (
-    <header ref={headerRef} hidden={loaded} className={`Header${progress ? ' -progress' : ' -fadeIn'}`} onAnimationEnd={onAnimationEndCallback}>
-      <div hidden={progress}>
+    <header ref={headerRef} hidden={loaded} className={`Header${loaded ? ' -fadeIn' : ' -progress'}`} onAnimationEnd={onAnimationEndCallback}>
+      <div hidden={starting}>
         <div className='Header__forkMeOnGitHub'>
           <a href='https://github.com/Korilakkuma/XSound.app' target='_blank' rel='noopener noreferrer'>
             Fork me on GitHub
@@ -98,7 +100,7 @@ export const Header: React.FC<Props> = ({ loadedApp, progress, rate, onClickSetu
           </nav>
         </div>
       </div>
-      {progress ? <ProgressBar label={`Now Loading ... (${rate} %)`} rate={rate} /> : null}
+      {starting ? <ProgressBar label={`Now Loading ... (${rate} %)`} rate={rate} /> : null}
     </header>
   );
 };
