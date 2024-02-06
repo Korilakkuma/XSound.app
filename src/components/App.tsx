@@ -35,13 +35,16 @@ import type { RIRDescriptor } from '/src/types';
 import type { OneshotSetting, OneshotSettings, PreampParams } from 'xsound';
 
 export const App: React.FC = () => {
-  const [loadedApp, setLoadedApp] = useState<boolean>(false);
   const [rate, setRate] = useState<number>(0);
   const [errorMessage, setErrorMessage] = useState<string>('');
   const [isShowModalForAjax, setIsShowModalForAjax] = useState<boolean>(false);
   const [isShowModalForDecoding, setIsShowModalForDecoding] = useState<boolean>(false);
 
   const currentSoundSource = useSelector((state: RootState) => state.currentSoundSource);
+
+  const loadedApp = useMemo(() => {
+    return rate >= 100;
+  }, [rate]);
 
   const oneshots = useMemo(
     () => [
@@ -1459,7 +1462,6 @@ export const App: React.FC = () => {
 
                     if (rirs.length === rirDescriptors.length) {
                       setRate(100);
-                      setLoadedApp(true);
                     } else {
                       X('mixer').module('reverb').preset({ rirs });
                       X('oneshot').module('reverb').preset({ rirs });
