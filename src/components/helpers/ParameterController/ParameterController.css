@@ -1,6 +1,8 @@
 .ParameterController {
   width: 100%;
   max-width: 300px;
+  padding: 0;
+  margin: 0;
 }
 
 .ParameterController > dt {
@@ -8,6 +10,7 @@
   grid-template-columns: 2fr 1fr;
   align-items: center;
   padding: 0 4px;
+  margin: 0;
 }
 
 .ParameterController > dt > label {
@@ -17,5 +20,6 @@
 }
 
 .ParameterController > dd {
-  margin-top: 4px;
+  padding: 0;
+  margin: 4px 0 0;
 }
