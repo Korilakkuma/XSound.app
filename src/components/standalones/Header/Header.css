@@ -229,10 +229,13 @@
   display: block;
   width: 136px;
   height: 50px;
+  padding: 0;
   margin: 0 auto;
   overflow: hidden;
   text-indent: 136px;
   white-space: nowrap;
+  cursor: pointer;
+  background-color: none;
 
   /* CSS Sprite */
   background-image: url("/assets/images/button-start-application.png");
@@ -241,6 +244,7 @@
 
   /* for Retina Display */
   background-size: 136px 150px;
+  border: none;
 }
 
 .Header__startButton > button:hover {

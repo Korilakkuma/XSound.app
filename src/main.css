@@ -1,6 +1,5 @@
 @charset "UTF-8";
 
-@import url("./styles/sanitize.css");
 @import url("./styles/vars.css");
 @import url("./styles/base.css");
 @import url("./components/atoms/Button/Button.css");

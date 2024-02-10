@@ -1,5 +1,6 @@
 .Spinner {
-  display: inline-block;
+  box-sizing: border-box;
+  display: block;
   width: 100%;
   padding: 4px 0 4px 8px;
   font-size: 13px;

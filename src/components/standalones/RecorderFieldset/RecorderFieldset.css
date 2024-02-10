@@ -14,6 +14,9 @@
 .RecorderFieldset__controller {
   width: 63px;
   height: 40px;
+  padding: 0;
+  cursor: pointer;
+  background: none;
 
   /* CSS Sprite */
   background-image: url("/assets/images/buttons-record.png");
@@ -22,6 +25,7 @@
 
   /* for Retina Display */
   background-size: 238px 120px;
+  border: none;
 }
 
 .RecorderFieldset__controller:hover {
@@ -36,6 +40,9 @@
 .RecorderFieldset__creator {
   width: 56px;
   height: 40px;
+  padding: 0;
+  cursor: pointer;
+  background: none;
 
   /* CSS Sprite */
   background-image: url("/assets/images/buttons-record.png");
@@ -44,6 +51,12 @@
 
   /* for Retina Display */
   background-size: 238px 120px;
+  border: none;
+}
+
+.RecorderFieldset__creator:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
 }
 
 .RecorderFieldset__creator:not(:disabled):hover {
@@ -56,7 +69,7 @@
 }
 
 .RecorderFieldset__download {
-  display: inline-block;
+  display: block;
   width: 56px;
   height: 40px;
   overflow: hidden;
@@ -74,11 +87,12 @@
 
 .RecorderFieldset__download[aria-disabled="true"] {
   cursor: not-allowed;
+  opacity: 0.6;
 }
 
 .RecorderFieldset__download:not([aria-disabled="true"]):hover {
   background-position: -119px top;
-  opacity: 1; /* Override base style */
+  opacity: 1;
 }
 
 .RecorderFieldset__download:not([aria-disabled="true"]):active {
@@ -88,6 +102,9 @@
 .RecorderFieldset__clear {
   width: 63px;
   height: 40px;
+  padding: 0;
+  cursor: pointer;
+  background: none;
 
   /* CSS Sprite */
   background-image: url("/assets/images/buttons-record.png");
@@ -96,6 +113,7 @@
 
   /* for Retina Display */
   background-size: 238px 120px;
+  border: none;
 }
 
 .RecorderFieldset__clear:not(:disabled):hover {
