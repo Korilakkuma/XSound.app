@@ -12,7 +12,7 @@
 }
 
 .Header.-progress {
-  color: var(--assort-color);
+  color: var(--base-light);
   background-color: rgb(0 0 0 / 80%);
 }
 
@@ -175,7 +175,7 @@
   margin: 12px auto 24px;
   font-family: Alike, serif;
   font-size: 18px;
-  color: var(--assort-color);
+  color: var(--base-light);
   text-align: left !important;
   text-shadow: -1px -1px 1px var(--black);
 }

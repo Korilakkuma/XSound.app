@@ -24,8 +24,8 @@
 .FileUploader > button:not(:disabled):focus,
 .FileUploader > button:not(:disabled):active,
 .FileUploader.-drag > button:not(:disabled) {
-  background-color: var(--assort-color);
-  background-image: linear-gradient(to bottom, var(--base-color), var(--assort-color));
+  background-color: var(--base-light);
+  background-image: linear-gradient(to bottom, var(--base-color), var(--base-light));
   border: 2px solid rgb(255 255 255 / 5%);
 }
 
