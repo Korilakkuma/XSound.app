@@ -73,7 +73,7 @@
   text-align: center;
   cursor: pointer;
   background: none;
-  background-color: var(--assort-color);
+  background-color: var(--base-light);
   border: none;
   border-radius: 12px;
   transition: background-color 0.6s ease;
@@ -89,11 +89,11 @@
   font-size: 18px;
   font-weight: normal;
   color: var(--white);
-  background-color: var(--assort-color);
+  background-color: var(--base-light);
 }
 
 .Modal__contents {
   margin: 24px;
-  color: var(--assort-color);
+  color: var(--base-light);
   text-align: center;
 }

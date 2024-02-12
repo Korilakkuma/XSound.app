@@ -19,7 +19,7 @@
 }
 
 .GroupSelect > select:focus {
-  background-image: linear-gradient(to bottom, var(--assort-color), var(--base-color));
+  background-image: linear-gradient(to bottom, var(--base-light), var(--base-color));
   outline: none;
 }
 

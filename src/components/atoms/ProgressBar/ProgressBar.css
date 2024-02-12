@@ -5,7 +5,7 @@
   height: 12px;
   margin: 0 auto;
   background-color: var(--base-color);
-  background-image: linear-gradient(to bottom, var(--base-color), var(--assort-color));
+  background-image: linear-gradient(to bottom, var(--base-color), var(--base-light));
 }
 
 .ProgressBar__mask {
@@ -35,16 +35,16 @@
 }
 
 .ProgressBar__bar::-webkit-progress-value {
-  background-color: var(--assort-color);
+  background-color: var(--base-light);
 }
 
 .ProgressBar__bar::-moz-progress-bar {
-  background-color: var(--assort-color);
+  background-color: var(--base-light);
 }
 
 .ProgressBar__bar.-auto {
   width: 0;
-  background-color: var(--assort-color);
+  background-color: var(--base-light);
   animation: auto-progress-animation 3s ease-in-out infinite normal 0s;
 }
 
@@ -62,6 +62,6 @@
   margin-bottom: 12px;
   font-family: Alike, serif;
   font-size: var(--base-font-size);
-  color: var(--assort-color);
+  color: var(--base-light);
   text-align: center;
 }
