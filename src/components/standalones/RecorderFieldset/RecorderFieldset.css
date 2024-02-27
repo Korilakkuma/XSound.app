@@ -56,7 +56,7 @@
 
 .RecorderFieldset__creator:disabled {
   cursor: not-allowed;
-  opacity: 0.6;
+  opacity: var(--opcity);
 }
 
 .RecorderFieldset__creator:not(:disabled):hover {
@@ -87,7 +87,7 @@
 
 .RecorderFieldset__download[aria-disabled="true"] {
   cursor: not-allowed;
-  opacity: 0.6;
+  opacity: var(--opcity);
 }
 
 .RecorderFieldset__download:not([aria-disabled="true"]):hover {
