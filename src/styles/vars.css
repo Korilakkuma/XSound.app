@@ -10,5 +10,6 @@
   --gray-deep: #333;
   --black-light: #212121;
   --black: #000;
+  --opacity: 0.6;
   --transparent: rgb(0 0 0 / 0%);
 }
