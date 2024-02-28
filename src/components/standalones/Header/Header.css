@@ -17,7 +17,7 @@
 }
 
 .Header.-fadeOut {
-  animation: fade-out-header-animation 1.5s ease 1 normal 0s forwards;
+  animation: fade-out-header-animation 1.5s var(--easing) 1 normal 0s forwards;
 }
 
 .Header__forkMeOnGitHub > a {
