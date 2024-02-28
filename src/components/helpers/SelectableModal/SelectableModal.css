@@ -17,7 +17,7 @@
   background: none;
   background-color: var(--base-light);
   border: none;
-  transition: background-color 0.6s ease;
+  transition: background-color var(--duration) var(--easing);
 }
 
 .SelectableModal__buttons > button:hover {
