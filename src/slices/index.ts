@@ -32,7 +32,19 @@ const slice = createSlice({
   initialState,
   reducers: {
     activateMIDIKeyboards: (state: State, action: PayloadAction<number[]>) => {
-      state.activeMIDIKeyboardIndexes = action.payload;
+      state.activeMIDIKeyboardIndexes = [
+        ...state.activeMIDIKeyboardIndexes,
+        ...action.payload.filter((keyboardIndex: number) => !state.activeMIDIKeyboardIndexes.includes(keyboardIndex))
+      ];
+    },
+    deactivateMIDIKeyboards: (state: State, action: PayloadAction<number>) => {
+      const activeMIDIKeyboardIndexes = state.activeMIDIKeyboardIndexes.slice(0);
+
+      const index = activeMIDIKeyboardIndexes.indexOf(action.payload);
+
+      activeMIDIKeyboardIndexes.splice(index, 1);
+
+      state.activeMIDIKeyboardIndexes = [...activeMIDIKeyboardIndexes];
     },
     changeAnalyserState: (state: State, action: PayloadAction<boolean>) => {
       state.analyserState = action.payload;
@@ -63,6 +75,7 @@ const slice = createSlice({
 
 export const {
   activateMIDIKeyboards,
+  deactivateMIDIKeyboards,
   changeAnalyserState,
   changeCurrentSoundSource,
   changeMMLState,

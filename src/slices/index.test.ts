@@ -2,6 +2,7 @@ import {
   reducer,
   initialState,
   activateMIDIKeyboards,
+  deactivateMIDIKeyboards,
   changeAnalyserState,
   changeCurrentSoundSource,
   changeMMLState,
@@ -18,6 +19,13 @@ describe('activeMIDIKeyboardsReducer', () => {
     const state = reducer(initialState, action);
 
     expect(state.activeMIDIKeyboardIndexes).toStrictEqual([39, 43, 46]);
+  });
+
+  test('should return array that excepts for the designated number as MIDI keyboard index', () => {
+    const action = deactivateMIDIKeyboards(43);
+    const state = reducer(reducer(initialState, activateMIDIKeyboards([39, 43, 46])), action);
+
+    expect(state.activeMIDIKeyboardIndexes).toStrictEqual([39, 46]);
   });
 });
 

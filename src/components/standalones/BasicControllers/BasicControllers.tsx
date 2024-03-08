@@ -1,14 +1,15 @@
 import React, { useCallback, useMemo, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { X } from 'xsound';
 
 import { NUMBER_OF_ONESHOTS } from '/src/config';
-import { activateMIDIKeyboards, changeAnalyserState, changeCurrentSoundSource, changeMMLState } from '/src/slices';
+import { activateMIDIKeyboards, deactivateMIDIKeyboards, changeAnalyserState, changeCurrentSoundSource, changeMMLState } from '/src/slices';
 import { Modal } from '/src/components/atoms/Modal';
 import { Select } from '/src/components/atoms/Select';
 import { Switch } from '/src/components/atoms/Switch';
 import { ParameterController } from '/src/components/helpers/ParameterController';
 
+import type { RootState } from '/src/store';
 import type { SoundSource } from '/src/types';
 
 export type Props = {
@@ -27,7 +28,7 @@ export const BasicControllers: React.FC<Props> = ({ currentSoundSource }) => {
 
   const dispatch = useDispatch();
 
-  const indexes: number[] = useMemo(() => [], []);
+  const activeMIDIKeyboardIndexes = useSelector((state: RootState) => state.activeMIDIKeyboardIndexes);
 
   const midiSource = useMemo(() => {
     switch (currentSoundSource) {
@@ -77,9 +78,9 @@ export const BasicControllers: React.FC<Props> = ({ currentSoundSource }) => {
       const volume = velocity / MAX_VELOCITY;
 
       /** @see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Errors/Non_configurable_array_element */
-      const newIndexes = [...indexes];
+      const newActiveIndexes = [...activeMIDIKeyboardIndexes];
 
-      newIndexes.push(targetIndex);
+      newActiveIndexes.push(targetIndex);
 
       if (midiSource === 'noise') {
         X('noise').start();
@@ -96,8 +97,8 @@ export const BasicControllers: React.FC<Props> = ({ currentSoundSource }) => {
           window.clonedXSound('oscillator').get(i).param({ volume });
         }
 
-        X('oscillator').ready(0, 0).start(X.toFrequencies(newIndexes));
-        window.clonedXSound('oscillator').ready(0, 0).start(X.toFrequencies(newIndexes));
+        X('oscillator').ready(0, 0).start(X.toFrequencies(newActiveIndexes));
+        window.clonedXSound('oscillator').ready(0, 0).start(X.toFrequencies(newActiveIndexes));
 
         X('mixer').start([X('oscillator'), window.clonedXSound('oscillator')], [volume, volume]);
 
@@ -106,14 +107,14 @@ export const BasicControllers: React.FC<Props> = ({ currentSoundSource }) => {
         X('oneshot')
           .reset(targetIndex, 'volume', volume)
           .ready(0, 0)
-          .start(newIndexes.map((index: number) => index + offset));
+          .start(newActiveIndexes.map((index: number) => index + offset));
 
         X('oneshot').module('recorder').start();
       }
 
-      dispatch(activateMIDIKeyboards(newIndexes));
+      dispatch(activateMIDIKeyboards(newActiveIndexes));
     },
-    [dispatch, midiSource, indexes, offset]
+    [dispatch, midiSource, activeMIDIKeyboardIndexes, offset]
   );
 
   const noteOff = useCallback(
@@ -128,13 +129,13 @@ export const BasicControllers: React.FC<Props> = ({ currentSoundSource }) => {
 
       const targetIndex = noteNumber - MIN_NOTE_NUMBER;
 
-      const index = indexes.indexOf(targetIndex);
-
       /** @see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Errors/Non_configurable_array_element */
-      const newIndexes = [...indexes];
+      const newActiveIndexes = [...activeMIDIKeyboardIndexes];
+
+      const index = newActiveIndexes.indexOf(targetIndex);
 
       if (index !== -1) {
-        newIndexes.splice(index, 1);
+        newActiveIndexes.splice(index, 1);
       }
 
       if (midiSource === 'noise') {
@@ -153,13 +154,13 @@ export const BasicControllers: React.FC<Props> = ({ currentSoundSource }) => {
         }
       } else {
         X('oneshot')
-          .stop(newIndexes.map((index: number) => index + offset))
+          .stop(newActiveIndexes.map((index: number) => index + offset))
           .reset(targetIndex, 'volume', 1);
       }
 
-      dispatch(activateMIDIKeyboards(newIndexes));
+      dispatch(deactivateMIDIKeyboards(targetIndex));
     },
-    [dispatch, midiSource, indexes, offset]
+    [dispatch, midiSource, activeMIDIKeyboardIndexes, offset]
   );
 
   const successCallback = useCallback(
