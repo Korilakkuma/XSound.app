@@ -166,8 +166,11 @@ export const BasicControllers: React.FC<Props> = ({ currentSoundSource }) => {
   const successCallback = useCallback(
     (midiAccess: MIDIAccess, inputs: MIDIInput[], outputs: MIDIOutput[]) => {
       if (inputs[0]) {
-        // @ts-expect-error Type check error occurs, but complaint to Web MIDI API specification
         inputs[0].onmidimessage = (event: MIDIMessageEvent) => {
+          if (event.data === null) {
+            return;
+          }
+
           switch (event.data[0] & 0xf0) {
             case 0x90:
               noteOn(event.data[1], event.data[2]);
