@@ -1,4 +1,3 @@
-/// <reference lib="esnext" />
 /// <reference lib="webworker" />
 
 // eslint-disable-next-line
