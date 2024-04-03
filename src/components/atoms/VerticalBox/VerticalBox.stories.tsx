@@ -19,8 +19,5 @@ const Template: StoryObj<typeof VerticalBox> = {
 };
 
 export const Primary = {
-  ...Template,
-  args: {
-    numberOfDivisions: 5
-  }
+  ...Template
 };
