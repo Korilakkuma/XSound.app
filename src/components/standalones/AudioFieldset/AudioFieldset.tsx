@@ -173,6 +173,10 @@ export const AudioFieldset: React.FC<Props> = (props: Props) => {
   }, []);
 
   const decodeCallback = useCallback((buffer: AudioBuffer) => {
+    X('audio').stop();
+
+    setPaused(true);
+    setCurrentTime(0);
     setDuration(buffer.duration);
     setIsShowModalForDecoding(false);
   }, []);
