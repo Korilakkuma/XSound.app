@@ -4,7 +4,7 @@
 
 .AudioFieldset__selectAudio {
   display: grid;
-  grid-template-columns: 3fr 1fr;
+  grid-template-columns: repeat(2, auto);
   gap: 8px;
   align-items: center;
 }
