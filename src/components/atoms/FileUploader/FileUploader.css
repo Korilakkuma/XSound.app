@@ -5,7 +5,7 @@
 .FileUploader > button,
 .FileUploader.-drop > button {
   box-sizing: border-box;
-  width: 200px;
+  width: 224px;
   height: 28px;
   padding: 4px;
   overflow: hidden;
