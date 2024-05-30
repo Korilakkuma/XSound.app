@@ -41,6 +41,11 @@ export const AudioFieldset: React.FC<Props> = (props: Props) => {
   }, [storage]);
 
   const startDecodeCallback = useCallback(() => {
+    X('audio').stop();
+    X('audio').param({ currentTime: 0 });
+
+    setPaused(true);
+    setCurrentTime(0);
     setShowProgress(true);
     setLoadedByte(0);
     setRate(0);
@@ -173,10 +178,8 @@ export const AudioFieldset: React.FC<Props> = (props: Props) => {
   }, []);
 
   const decodeCallback = useCallback((buffer: AudioBuffer) => {
-    X('audio').stop();
+    X('audio').param({ duration: buffer.duration });
 
-    setPaused(true);
-    setCurrentTime(0);
     setDuration(buffer.duration);
     setIsShowModalForDecoding(false);
   }, []);
