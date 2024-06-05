@@ -37,7 +37,7 @@ export const AudioFieldset: React.FC<Props> = (props: Props) => {
   }, []);
 
   const usePlaybackRate = useMemo(() => {
-    return storage.audio?.playbackRate === true;
+    return storage.audio?.playbackRate;
   }, [storage]);
 
   const startDecodeCallback = useCallback(() => {
