@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import { X } from 'xsound';
 
 import { AJAX_TIMEOUT, BASE_URL, NUMBER_OF_CHANNELS, NUMBER_OF_ONESHOTS, NUMBER_OF_TRACKS } from '/src/config';
-import { Flexbox } from '/src/components/atoms/Flexbox';
+import { Grid } from '/src/components/atoms/Grid';
 import { Modal } from '/src/components/atoms/Modal';
 import { VerticalBox } from '/src/components/atoms/VerticalBox';
 import { Analyser } from '/src/components/standalones/Analyser';
@@ -1508,7 +1508,7 @@ export const App: React.FC = () => {
     <React.Fragment>
       <Header rate={rate} onClickSetupCallback={onClickSetupCallback} />
       <main>
-        <Flexbox>
+        <Grid numberOfItems={5}>
           <VerticalBox>
             <OscillatorFieldset oscillatorNumber={0} label='Oscillator - 1' radioName='oscillator-type-0' />
           </VerticalBox>
@@ -1524,12 +1524,12 @@ export const App: React.FC = () => {
           <VerticalBox>
             <AudioFieldset loadedApp={loadedApp} />
           </VerticalBox>
-        </Flexbox>
+        </Grid>
         <Analyser loadedApp={loadedApp} />
         <MML loadedApp={loadedApp} currentSoundSource={currentSoundSource} />
         <BasicControllers currentSoundSource={currentSoundSource} />
         <Piano loadedApp={loadedApp} currentSoundSource={currentSoundSource} />
-        <Flexbox>
+        <Grid numberOfItems={6}>
           <VerticalBox>
             <CompressorFieldset />
             <WahFieldset />
@@ -1555,7 +1555,7 @@ export const App: React.FC = () => {
             <DelayFieldset />
             <ReverbFieldset rirDescriptors={rirDescriptors} />
           </VerticalBox>
-        </Flexbox>
+        </Grid>
       </main>
       <Footer />
       <Modal isShow={isShowModalForAjax} title='Error' hasOverlay={true} asAlert={true} onClose={onCloseModalForAjaxCallback}>
