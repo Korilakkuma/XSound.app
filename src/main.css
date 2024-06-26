@@ -7,6 +7,7 @@
 @import url("./components/atoms/Fieldset//Fieldset.css");
 @import url("./components/atoms/FileUploader/FileUploader.css");
 @import url("./components/atoms/Flexbox/Flexbox.css");
+@import url("./components/atoms/Grid/Grid.css");
 @import url("./components/atoms/GroupSelect/GroupSelect.css");
 @import url("./components/atoms/Legend/Legend.css");
 @import url("./components/atoms/Modal/Modal.css");
