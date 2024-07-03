@@ -1,15 +1,14 @@
 // @ts-check
 
-const eslint   = require('@eslint/js');
-const tseslint = require('typescript-eslint');
-const importPlugin = require('eslint-plugin-import');
-const jestPlugin = require('eslint-plugin-jest');
-const a11yPlugin = require('eslint-plugin-jsx-a11y');
-const nPlugin = require('eslint-plugin-n');
-const reactPlugin = require('eslint-plugin-react');
-const reactHooksPlugin = require('eslint-plugin-react-hooks');
+import eslint from '@eslint/js';
+import tseslint from 'typescript-eslint';
+import jestPlugin from 'eslint-plugin-jest';
+import a11yPlugin from 'eslint-plugin-jsx-a11y';
+import nPlugin from 'eslint-plugin-n';
+import reactPlugin from 'eslint-plugin-react';
+import reactHooksPlugin from 'eslint-plugin-react-hooks';
 
-module.exports = tseslint.config(
+export default tseslint.config(
   eslint.configs.recommended,
   ...tseslint.configs.recommended,
   {
@@ -17,7 +16,6 @@ module.exports = tseslint.config(
     ignores: ['*.snap'],
     plugins: {
       '@typescript-lint': tseslint.plugin,
-      'import': importPlugin,
       'jest': jestPlugin,
       'a11y': a11yPlugin,
       'n': nPlugin,

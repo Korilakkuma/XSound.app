@@ -1,9 +1,8 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
-const MiniCSSExtractPlugin = require('mini-css-extract-plugin');
-const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
-const TerserPlugin = require('terser-webpack-plugin');
-const path = require('path');
-/* eslint-enable @typescript-eslint/no-var-requires */
+import MiniCSSExtractPlugin from 'mini-css-extract-plugin';
+import CssMinimizerPlugin from 'css-minimizer-webpack-plugin';
+import TerserPlugin from 'terser-webpack-plugin';
+import path from 'path';
+import config from './config.json' assert { type: 'json' };
 
 const dirname = path.resolve('.');
 
@@ -16,7 +15,7 @@ const terserPlugin = new TerserPlugin({
   }
 });
 
-module.exports = [
+export default [
   {
     mode: 'development',
     entry: {
@@ -62,7 +61,7 @@ module.exports = [
       })
     ],
     optimization: {
-      minimize: process.env.NODE_ENV === 'production',
+      minimize: config.env.NODE_ENV === 'production',
       minimizer: [terserPlugin, new CssMinimizerPlugin()],
       splitChunks: {
         chunks: 'all',
@@ -108,7 +107,7 @@ module.exports = [
       extensions: ['.js', '.ts']
     },
     optimization: {
-      minimize: process.env.NODE_ENV === 'production',
+      minimize: config.env.NODE_ENV === 'production',
       minimizer: [terserPlugin],
       usedExports: true
     }
