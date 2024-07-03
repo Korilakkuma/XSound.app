@@ -1,30 +1,59 @@
 // @ts-check
 
 import eslint from '@eslint/js';
+import { FlatCompat } from '@eslint/eslintrc';
 import tseslint from 'typescript-eslint';
-import jestPlugin from 'eslint-plugin-jest';
 import a11yPlugin from 'eslint-plugin-jsx-a11y';
-import nPlugin from 'eslint-plugin-n';
-import reactPlugin from 'eslint-plugin-react';
+import reactRecommendedPlugin from 'eslint-plugin-react/configs/recommended.js';
+import reactJSXRuntimePlugin from 'eslint-plugin-react/configs/jsx-runtime.js';
 import reactHooksPlugin from 'eslint-plugin-react-hooks';
+import globals from 'globals';
+
+const compat = new FlatCompat();
 
 export default tseslint.config(
   eslint.configs.recommended,
   ...tseslint.configs.recommended,
   {
     files: ['src/**/*.{ts,tsx}', 'test/**/*.ts', 'mock/**/*.ts', '.storybook/**/*.ts'],
+    ...reactRecommendedPlugin,
+    ...reactJSXRuntimePlugin,
     ignores: ['*.snap'],
     plugins: {
-      '@typescript-lint': tseslint.plugin,
-      'jest': jestPlugin,
-      'a11y': a11yPlugin,
-      'n': nPlugin,
-      'react': reactPlugin,
+      'jsx-a11y': a11yPlugin,
       'react-hooks': reactHooksPlugin
     },
     languageOptions: {
-      'parser': tseslint.parser
+      'ecmaVersion': 'latest',
+      'sourceType': 'module',
+      'parser': tseslint.parser,
+      'parserOptions': {
+        'ecmaFeatures': {
+          'jsx': true
+        }
+      },
+      'globals': {
+        ...globals.browser,
+        ...globals.es2024,
+        ...globals.node,
+        ...globals.jest
+      },
+      ...reactRecommendedPlugin.languageOptions,
+      ...reactJSXRuntimePlugin.languageOptions
     },
+    settings: {
+      'react': {
+        'version': 'detect'
+      },
+      'import/resolver': {
+        'typescript': {}
+      }
+    },
+    extends: [
+      ...tseslint.configs.recommended,
+      ...compat.config(a11yPlugin.configs.recommended),
+      ...compat.config(reactHooksPlugin.configs.recommended)
+    ],
     rules: {
       'default-param-last': 'off',
       'indent': ['error', 2, {
@@ -52,14 +81,6 @@ export default tseslint.config(
       '@typescript-eslint/no-empty-function': 'off',
       '@typescript-eslint/no-unused-vars': ['error', { 'argsIgnorePattern': '^_' }],
       '@typescript-eslint/no-use-before-define': 'error',
-    },
-    settings: {
-      'import/resolver': {
-        'typescript': {}
-      },
-      'react': {
-        'version': "detect"
-      }
     }
   }
 );
