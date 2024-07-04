@@ -1,4 +1,4 @@
-import React from 'react';
+import type React from 'react';
 
 import { FileUploader } from '/src/components/atoms/FileUploader';
 

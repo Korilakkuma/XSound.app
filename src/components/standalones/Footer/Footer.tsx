@@ -1,4 +1,5 @@
-import React, { useMemo } from 'react';
+import type React from 'react';
+import { useMemo } from 'react';
 
 export const Footer: React.FC = () => {
   const year = useMemo(() => {

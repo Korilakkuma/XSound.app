@@ -1,4 +1,5 @@
-import React, { useMemo, useCallback } from 'react';
+import type React from 'react';
+import { useMemo, useCallback } from 'react';
 
 import { Canvas } from '/src/components/atoms/Canvas';
 import { SVG } from '/src/components/atoms/SVG';

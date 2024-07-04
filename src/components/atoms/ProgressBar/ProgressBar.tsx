@@ -1,4 +1,5 @@
-import React, { useId, useMemo } from 'react';
+import type React from 'react';
+import { useId, useMemo } from 'react';
 
 export type Props = {
   label?: string | undefined;

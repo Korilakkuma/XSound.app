@@ -1,4 +1,5 @@
-import React, { useCallback, useEffect, useState, useId, useMemo, useRef } from 'react';
+import type React from 'react';
+import { useCallback, useEffect, useState, useId, useMemo, useRef } from 'react';
 
 import { FOCUSABLE_ELEMENTS } from '/src/config';
 import { ProgressBar } from '/src/components/atoms/ProgressBar/ProgressBar';

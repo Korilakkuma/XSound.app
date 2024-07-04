@@ -1,4 +1,5 @@
-import React, { useCallback, useEffect, useId, useMemo } from 'react';
+import type React from 'react';
+import { useCallback, useEffect, useId, useMemo } from 'react';
 import { createPortal } from 'react-dom';
 
 import { FOCUSABLE_ELEMENTS } from '/src/config';

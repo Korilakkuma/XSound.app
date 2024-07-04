@@ -1,4 +1,5 @@
-import React, { useCallback } from 'react';
+import type React from 'react';
+import { useCallback } from 'react';
 import { X } from 'xsound';
 
 import { Fieldset } from '/src/components/atoms/Fieldset';

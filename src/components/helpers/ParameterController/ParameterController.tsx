@@ -1,4 +1,5 @@
-import React, { useCallback, useEffect, useId, useState } from 'react';
+import type React from 'react';
+import { useCallback, useEffect, useId, useState } from 'react';
 
 import { Slider } from '/src/components/atoms/Slider';
 import { Spinner } from '/src/components/atoms/Spinner';
