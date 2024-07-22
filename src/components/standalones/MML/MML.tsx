@@ -138,8 +138,8 @@ export const MML: React.FC<Props> = ({ loadedApp, currentSoundSource }) => {
 
     const currentMelody = X('mml').getMML(0)?.replace(CLEAR_HIGHLIGHT_REGEXP, '$1') ?? '';
     const currentBass = X('mml').getMML(1)
-      ? X('mml').getMML(1)?.replace(CLEAR_HIGHLIGHT_REGEXP, '$1') ?? ''
-      : window.clonedXSound('mml').getMML(0)?.replace(CLEAR_HIGHLIGHT_REGEXP, '$1') ?? '';
+      ? (X('mml').getMML(1)?.replace(CLEAR_HIGHLIGHT_REGEXP, '$1') ?? '')
+      : (window.clonedXSound('mml').getMML(0)?.replace(CLEAR_HIGHLIGHT_REGEXP, '$1') ?? '');
 
     readyMMLCallback(currentMelody, currentBass);
 
