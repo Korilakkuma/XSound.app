@@ -34,7 +34,7 @@ You can use the following features.
 
 ```bash
 $ git clone git@github.com:Korilakkuma/XSound.app.git
-$ cd XSound
+$ cd XSound.app
 $ npm install
 $ npm run dev
 $ open http://localhost:8080/
