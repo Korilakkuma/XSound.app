@@ -48,7 +48,7 @@ $ npm test
 
 ### Storybook
 
-```
+```bash
 $ npm run storybook
 ```
 
