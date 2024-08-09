@@ -21,6 +21,11 @@
     0 0 1px 3px rgb(0 0 0 / 30%); /* outer (for emboss) */
 }
 
+.FileUploader > button[type="button"]:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
 .FileUploader > button:not(:disabled):focus,
 .FileUploader > button:not(:disabled):active,
 .FileUploader.-drag > button:not(:disabled) {
