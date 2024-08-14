@@ -13,8 +13,9 @@ export const Footer: React.FC = () => {
       <p>Copyright (c) 2012 - {year}</p>
       <p>
         <a href='https://github.com/Korilakkuma' target='_blank' rel='noopener noreferrer'>
-          Tomohiro IKEDA
+          Korilakkuma
         </a>
+        <span>(Tomohiro IKEDA)</span>
       </p>
       <p>
         <a href='https://maoudamashii.jokersounds.com/' target='_blank' rel='noopener noreferrer' lang='ja'>
