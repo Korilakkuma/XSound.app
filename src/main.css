@@ -17,6 +17,7 @@
 @import url("./components/atoms/Slider/Slider.css");
 @import url("./components/atoms/Spinner/Spinner.css");
 @import url("./components/atoms/Switch/Switch.css");
+@import url("./components/atoms/TextLink/TextLink.css");
 @import url("./components/helpers/OscillatorSelector/OscillatorSelector.css");
 @import url("./components/helpers/ParameterController/ParameterController.css");
 @import url("./components/helpers/SelectableModal/SelectableModal.css");

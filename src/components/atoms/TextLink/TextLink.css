@@ -1,0 +1,9 @@
+.TextLink {
+  color: var(--base-light);
+  text-decoration: none;
+  transition: opacity var(--duration) var(--easing);
+}
+
+.TextLink:hover {
+  opacity: var(--opacity);
+}
