@@ -3,6 +3,7 @@ import { useCallback, useEffect, useState, useId, useMemo, useRef } from 'react'
 
 import { FOCUSABLE_ELEMENTS } from '/src/config';
 import { ProgressBar } from '/src/components/atoms/ProgressBar/ProgressBar';
+import { TextLink } from '/src/components/atoms/TextLink';
 
 export type Props = {
   rate: number;
@@ -85,11 +86,7 @@ export const Header: React.FC<Props> = ({ rate, onClickSetupCallback }) => {
           </h1>
           <div id={describeId} className='Header__intro'>
             <span className='Header__moveLeft'>
-              XSound.app is Web Music Application by
-              <a href='https://xsound.jp' target='_blank' rel='noopener noreferrer'>
-                XSound (Web Audio API Library)
-              </a>
-              .
+              XSound.app is Web Music Application by <TextLink href='https://xsound.jp' text='XSound (Web Audio API Library)' external={true} lang='en' />.
             </span>
             <span className='Header__moveRight'>Synthesizer, Effects, Visualization, Multi-Track Recording, Visual Audio Sprite ...</span>
             <span className='Header__moveLeft'>Moreover, enable to use external devices such as Audio Interfaces, MIDI.</span>

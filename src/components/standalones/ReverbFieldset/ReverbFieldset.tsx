@@ -6,6 +6,7 @@ import { Fieldset } from '/src/components/atoms/Fieldset';
 import { Legend } from '/src/components/atoms/Legend';
 import { GroupSelect } from '/src/components/atoms/GroupSelect';
 import { Switch } from '/src/components/atoms/Switch';
+import { TextLink } from '/src/components/atoms/TextLink';
 import { ParameterController } from '/src/components/helpers/ParameterController';
 
 import type { RIRDescriptor } from '/src/types';
@@ -114,9 +115,12 @@ export const ReverbFieldset: React.FC<Props> = (props: Props) => {
         <ParameterController label='Wet' autoupdate={false} defaultValue={0} min={0} max={1} step={0.05} onChange={onChangeWetCallback} />
         <ParameterController label='Tone' autoupdate={false} defaultValue={4000} min={20} max={8000} step={1} onChange={onChangeToneCallback} />
         <aside>
-          <a href='http://legacy.spa.aalto.fi/projects/poririrs/' target='_blank' rel='noopener noreferrer'>
-            This website enables to get RIR (Room Impulse Response) files !
-          </a>
+          <TextLink
+            href='http://legacy.spa.aalto.fi/projects/poririrs/'
+            text='This website enables to get RIR (Room Impulse Response) files !'
+            external={true}
+            lang='en'
+          />
         </aside>
       </Fieldset>
     </div>
