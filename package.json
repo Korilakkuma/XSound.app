@@ -21,7 +21,7 @@
     "type:main": "tsc --noEmit",
     "type:sw": "tsc --noEmit --project tsconfig.sw.json",
     "type": "run-p type:main type:sw",
-    "build": "npm run clean && webpack --progress --mode production",
+    "build": "npm run clean && NODE_ENV=production webpack --progress --mode production",
     "dev": "webpack-dev-server --progress",
     "test": "jest",
     "test:coverage": "jest --coverage",

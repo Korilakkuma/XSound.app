@@ -2,7 +2,6 @@ import MiniCSSExtractPlugin from 'mini-css-extract-plugin';
 import CssMinimizerPlugin from 'css-minimizer-webpack-plugin';
 import TerserPlugin from 'terser-webpack-plugin';
 import path from 'path';
-import config from './config.json' assert { type: 'json' };
 
 const dirname = path.resolve('.');
 
@@ -61,7 +60,8 @@ export default [
       })
     ],
     optimization: {
-      minimize: config.env.NODE_ENV === 'production',
+      // eslint-disable-next-line no-undef
+      minimize: process.env.NODE_ENV === 'production',
       minimizer: [terserPlugin, new CssMinimizerPlugin()],
       splitChunks: {
         chunks: 'all',
@@ -107,7 +107,8 @@ export default [
       extensions: ['.js', '.ts']
     },
     optimization: {
-      minimize: config.env.NODE_ENV === 'production',
+      // eslint-disable-next-line no-undef
+      minimize: process.env.NODE_ENV === 'production',
       minimizer: [terserPlugin],
       usedExports: true
     }
