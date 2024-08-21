@@ -235,7 +235,7 @@
   text-indent: 136px;
   white-space: nowrap;
   cursor: pointer;
-  background-color: none;
+  background-color: transparent;
 
   /* CSS Sprite */
   background-image: url("/assets/images/button-start-application.png");
