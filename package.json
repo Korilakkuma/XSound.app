@@ -10,7 +10,7 @@
     "clean": "rm -f register.js sw.js ./assets/app.* ./assets/vendor.*",
     "lint:eslint": "eslint 'src/**/*.{ts,tsx}' 'mock/**/*.ts' '.storybook/*.ts' jest.config.mjs webpack.config.mjs",
     "lint:stylelint": "stylelint 'src/**/*.css'",
-    "lint:markuplint": "markuplint index.html",
+    "lint:markuplint": "markuplint index.html 'src/**/*.tsx'",
     "lint": "run-p lint:eslint lint:stylelint lint:markuplint",
     "fix:eslint:": "eslint --fix 'src/**/*.{ts,tsx}' 'mock/**/*.ts' '.storybook/*.ts' jest.config.mjs webpack.config.mjs",
     "fix:stylelint": "stylelint --fix 'src/**/*.css' && prettier --write 'src/**/*.css'",
