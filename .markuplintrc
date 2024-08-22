@@ -18,6 +18,16 @@
           }
         }
       }
+    },
+    {
+      "selector": "button[type='button']",
+      "rules": {
+        "invalid-attr": {
+          "options": {
+            "allowAttrs": ["onTouchStart", "onTouchMove", "onTouchEnd"]
+          }
+        }
+      }
     }
   ]
 }
