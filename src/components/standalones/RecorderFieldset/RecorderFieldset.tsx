@@ -45,6 +45,10 @@ export const RecorderFieldset: React.FC<Props> = (props: Props) => {
     return storage.recorder?.type || 'objectURL';
   }, [storage]);
 
+  const disabledDownload = useMemo(() => {
+    return running || objectURL === '';
+  }, [running, objectURL]);
+
   const onClickRecordButtonCallback = useCallback(() => {
     if (
       X('mixer').module('recorder').get() !== -1 ||
@@ -292,16 +296,15 @@ export const RecorderFieldset: React.FC<Props> = (props: Props) => {
             className={`RecorderFieldset__creator${creating ? ' -active' : ''}`}
             onClick={onClickCreateButtonCallback}
           />
-          <a
-            href={objectURL}
-            download={objectURL ? createFilename('record-', 'wav') : null}
-            aria-disabled={running || objectURL === ''}
-            tabIndex={objectURL ? 0 : -1}
-            className='RecorderFieldset__download'
-            onClick={onClickDownloadButtonCallback}
-          >
-            Download
-          </a>
+          {disabledDownload ? (
+            <button type='button' disabled={true} className='RecorderFieldset__download'>
+              There is not recorded WAVE file
+            </button>
+          ) : (
+            <a href={objectURL} download={createFilename('record-', 'wav')} className='RecorderFieldset__download' onClick={onClickDownloadButtonCallback}>
+              Download
+            </a>
+          )}
           <button type='button' disabled={running} aria-label='Clear Track' className='RecorderFieldset__clear' onClick={onClickClearButtonCallback} />
         </div>
         <Select

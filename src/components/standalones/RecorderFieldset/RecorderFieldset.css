@@ -85,17 +85,32 @@
   background-size: 238px 120px;
 }
 
-.RecorderFieldset__download[aria-disabled="true"] {
+button[type="button"].RecorderFieldset__download {
+  padding: 0;
+  cursor: pointer;
+  background: none;
+
+  /* CSS Sprite */
+  background-image: url("/assets/images/buttons-record.png");
+  background-repeat: no-repeat;
+  background-position: -119px bottom;
+
+  /* for Retina Display */
+  background-size: 238px 120px;
+  border: none;
+}
+
+button[type="button"].RecorderFieldset__download:disabled {
   cursor: not-allowed;
   opacity: var(--opacity);
 }
 
-.RecorderFieldset__download:not([aria-disabled="true"]):hover {
+a.RecorderFieldset__download:hover {
   background-position: -119px top;
   opacity: 1;
 }
 
-.RecorderFieldset__download:not([aria-disabled="true"]):active {
+a.RecorderFieldset__downloadactive {
   background-position: -119px center;
 }
 
