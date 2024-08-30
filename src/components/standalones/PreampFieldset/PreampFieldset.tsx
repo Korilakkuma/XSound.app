@@ -124,16 +124,6 @@ export const PreampFieldset: React.FC = () => {
     X('noise').module('preamp').param({ post: { treble } });
   }, []);
 
-  const onChangeMiddleFrequencyCallback = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
-    const frequency = event.currentTarget.valueAsNumber;
-
-    X('mixer').module('preamp').param({ post: { frequency } });
-    X('oneshot').module('preamp').param({ post: { frequency } });
-    X('audio').module('preamp').param({ post: { frequency } });
-    X('stream').module('preamp').param({ post: { frequency } });
-    X('noise').module('preamp').param({ post: { frequency } });
-  }, []);
-
   const onChangeCabinetCallback = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
     const state = event.currentTarget.checked;
 
@@ -158,15 +148,6 @@ export const PreampFieldset: React.FC = () => {
         <ParameterController label='Bass' autoupdate={false} defaultValue={0} min={-18} max={18} step={1} onChange={onChangeBassCallback} />
         <ParameterController label='Middle' autoupdate={false} defaultValue={0} min={-18} max={18} step={1} onChange={onChangeMiddleCallback} />
         <ParameterController label='Treble' autoupdate={false} defaultValue={0} min={-18} max={18} step={1} onChange={onChangeTrebleCallback} />
-        <ParameterController
-          label='Middle Frequency'
-          autoupdate={false}
-          defaultValue={500}
-          min={20}
-          max={8000}
-          step={1}
-          onChange={onChangeMiddleFrequencyCallback}
-        />
         <Switch label='cabinet' checked={cabinet} labelAsText={true} onChange={onChangeCabinetCallback} />
       </Fieldset>
     </div>
