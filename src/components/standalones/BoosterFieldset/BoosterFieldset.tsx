@@ -73,12 +73,45 @@ export const BoosterFieldset: React.FC = () => {
     const type = event.currentTarget.value;
 
     switch (type) {
-      case 'overdrive':
-      case 'fuzz':
+      case 'overdrive': {
+        X('mixer').module('overdrive').activate();
+        X('oneshot').module('overdrive').activate();
+        X('audio').module('overdrive').activate();
+        X('stream').module('overdrive').activate();
+        X('noise').module('overdrive').activate();
+
+        X('mixer').module('fuzz').deactivate();
+        X('oneshot').module('fuzz').deactivate();
+        X('audio').module('fuzz').deactivate();
+        X('stream').module('fuzz').deactivate();
+        X('noise').module('fuzz').deactivate();
+
         setBoosterType(type);
+
         break;
-      default:
+      }
+
+      case 'fuzz': {
+        X('mixer').module('fuzz').activate();
+        X('oneshot').module('fuzz').activate();
+        X('audio').module('fuzz').activate();
+        X('stream').module('fuzz').activate();
+        X('noise').module('fuzz').activate();
+
+        X('mixer').module('overdrive').deactivate();
+        X('oneshot').module('overdrive').deactivate();
+        X('audio').module('overdrive').deactivate();
+        X('stream').module('overdrive').deactivate();
+        X('noise').module('overdrive').deactivate();
+
+        setBoosterType(type);
+
         break;
+      }
+
+      default: {
+        break;
+      }
     }
   }, []);
 
