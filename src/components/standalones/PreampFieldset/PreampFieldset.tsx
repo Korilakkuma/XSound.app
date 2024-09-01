@@ -9,7 +9,6 @@ import { ParameterController } from '/src/components/helpers/ParameterController
 
 export const PreampFieldset: React.FC = () => {
   const [preamp, setPreamp] = useState<boolean>(false);
-  const [cabinet, setCabinet] = useState<boolean>(false);
 
   const onChangeStateCallback = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
     const checked = event.currentTarget.checked;
@@ -20,48 +19,15 @@ export const PreampFieldset: React.FC = () => {
       X('audio').module('preamp').activate();
       X('stream').module('preamp').activate();
       X('noise').module('preamp').activate();
-
-      X('mixer')
-        .module('preamp')
-        .param({ cabinet: { state: true } });
-      X('oneshot')
-        .module('preamp')
-        .param({ cabinet: { state: true } });
-      X('audio')
-        .module('preamp')
-        .param({ cabinet: { state: true } });
-      X('stream')
-        .module('preamp')
-        .param({ cabinet: { state: true } });
-      X('noise')
-        .module('preamp')
-        .param({ cabinet: { state: true } });
     } else {
       X('mixer').module('preamp').deactivate();
       X('oneshot').module('preamp').deactivate();
       X('audio').module('preamp').deactivate();
       X('stream').module('preamp').deactivate();
       X('noise').module('preamp').deactivate();
-
-      X('mixer')
-        .module('preamp')
-        .param({ cabinet: { state: false } });
-      X('oneshot')
-        .module('preamp')
-        .param({ cabinet: { state: false } });
-      X('audio')
-        .module('preamp')
-        .param({ cabinet: { state: false } });
-      X('stream')
-        .module('preamp')
-        .param({ cabinet: { state: false } });
-      X('noise')
-        .module('preamp')
-        .param({ cabinet: { state: false } });
     }
 
     setPreamp(checked);
-    setCabinet(checked);
   }, []);
 
   const onChangeLevelCallback = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
@@ -124,18 +90,6 @@ export const PreampFieldset: React.FC = () => {
     X('noise').module('preamp').param({ post: { treble } });
   }, []);
 
-  const onChangeCabinetCallback = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
-    const state = event.currentTarget.checked;
-
-    X('mixer').module('preamp').param({ cabinet: { state } });
-    X('oneshot').module('preamp').param({ post: { state } });
-    X('audio').module('preamp').param({ post: { state } });
-    X('stream').module('preamp').param({ post: { state } });
-    X('noise').module('preamp').param({ post: { state } });
-
-    setCabinet(state);
-  }, []);
-
   return (
     <div className='PreampFieldset'>
       <Fieldset>
@@ -148,7 +102,6 @@ export const PreampFieldset: React.FC = () => {
         <ParameterController label='Bass' autoupdate={false} defaultValue={0} min={-18} max={18} step={1} onChange={onChangeBassCallback} />
         <ParameterController label='Middle' autoupdate={false} defaultValue={0} min={-18} max={18} step={1} onChange={onChangeMiddleCallback} />
         <ParameterController label='Treble' autoupdate={false} defaultValue={0} min={-18} max={18} step={1} onChange={onChangeTrebleCallback} />
-        <Switch label='cabinet' checked={cabinet} labelAsText={true} onChange={onChangeCabinetCallback} />
       </Fieldset>
     </div>
   );
