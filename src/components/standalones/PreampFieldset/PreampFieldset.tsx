@@ -33,61 +33,71 @@ export const PreampFieldset: React.FC = () => {
   const onChangeLevelCallback = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
     const level = event.currentTarget.valueAsNumber;
 
-    X('mixer').module('preamp').param({ level });
-    X('oneshot').module('preamp').param({ level });
-    X('audio').module('preamp').param({ level });
-    X('stream').module('preamp').param({ level });
-    X('noise').module('preamp').param({ level });
+    X('mixer').module('preamp').param({ preamp: { level } });
+    X('oneshot').module('preamp').param({ preamp: { level } });
+    X('audio').module('preamp').param({ preamp: { level } });
+    X('stream').module('preamp').param({ preamp: { level } });
+    X('noise').module('preamp').param({ preamp: { level } });
   }, []);
 
   const onChangeGainCallback = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
     const gain = event.currentTarget.valueAsNumber;
 
-    X('mixer').module('preamp').param({ pre: { gain } });
-    X('oneshot').module('preamp').param({ pre: { gain } });
-    X('audio').module('preamp').param({ pre: { gain } });
-    X('stream').module('preamp').param({ pre: { gain } });
-    X('noise').module('preamp').param({ pre: { gain } });
+    const param = { preamp: { pre: { gain } } };
+
+    X('mixer').module('preamp').param(param);
+    X('oneshot').module('preamp').param(param);
+    X('audio').module('preamp').param(param);
+    X('stream').module('preamp').param(param);
+    X('noise').module('preamp').param(param);
   }, []);
 
   const onChangeLeadGainCallback = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
     const lead = event.currentTarget.valueAsNumber;
 
-    X('mixer').module('preamp').param({ pre: { lead } });
-    X('oneshot').module('preamp').param({ pre: { lead } });
-    X('audio').module('preamp').param({ pre: { lead } });
-    X('stream').module('preamp').param({ pre: { lead } });
-    X('noise').module('preamp').param({ pre: { lead } });
+    const param = { preamp: { pre: { lead } } };
+
+    X('mixer').module('preamp').param(param);
+    X('oneshot').module('preamp').param(param);
+    X('audio').module('preamp').param(param);
+    X('stream').module('preamp').param(param);
+    X('noise').module('preamp').param(param);
   }, []);
 
   const onChangeBassCallback = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
     const bass = event.currentTarget.valueAsNumber;
 
-    X('mixer').module('preamp').param({ post: { bass } });
-    X('oneshot').module('preamp').param({ post: { bass } });
-    X('audio').module('preamp').param({ post: { bass } });
-    X('stream').module('preamp').param({ post: { bass } });
-    X('noise').module('preamp').param({ post: { bass } });
+    const param = { preamp: { post: { bass } } };
+
+    X('mixer').module('preamp').param(param);
+    X('oneshot').module('preamp').param(param);
+    X('audio').module('preamp').param(param);
+    X('stream').module('preamp').param(param);
+    X('noise').module('preamp').param(param);
   }, []);
 
   const onChangeMiddleCallback = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
     const middle = event.currentTarget.valueAsNumber;
 
-    X('mixer').module('preamp').param({ post: { middle } });
-    X('oneshot').module('preamp').param({ post: { middle } });
-    X('audio').module('preamp').param({ post: { middle } });
-    X('stream').module('preamp').param({ post: { middle } });
-    X('noise').module('preamp').param({ post: { middle } });
+    const param = { preamp: { post: { middle } } };
+
+    X('mixer').module('preamp').param(param);
+    X('oneshot').module('preamp').param(param);
+    X('audio').module('preamp').param(param);
+    X('stream').module('preamp').param(param);
+    X('noise').module('preamp').param(param);
   }, []);
 
   const onChangeTrebleCallback = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
     const treble = event.currentTarget.valueAsNumber;
 
-    X('mixer').module('preamp').param({ post: { treble } });
-    X('oneshot').module('preamp').param({ post: { treble } });
-    X('audio').module('preamp').param({ post: { treble } });
-    X('stream').module('preamp').param({ post: { treble } });
-    X('noise').module('preamp').param({ post: { treble } });
+    const param = { preamp: { post: { treble } } };
+
+    X('mixer').module('preamp').param(param);
+    X('oneshot').module('preamp').param(param);
+    X('audio').module('preamp').param(param);
+    X('stream').module('preamp').param(param);
+    X('noise').module('preamp').param(param);
   }, []);
 
   return (

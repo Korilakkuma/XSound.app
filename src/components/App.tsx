@@ -1366,10 +1366,14 @@ export const App: React.FC = () => {
     };
 
     const preampParams: PreampParams = {
-      samples: 2048,
-      pre: { state: true, gain: 0.5, lead: 0.5 },
-      post: { state: true },
-      cabinet: { state: true }
+      type: 'marshall',
+      preamp: {
+        state: true,
+        samples: 8192,
+        pre: { state: true, gain: 0.5, lead: 0.5 },
+        post: { state: true },
+        cabinet: { state: true }
+      }
     };
 
     X('stream').setup(constraints);
