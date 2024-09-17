@@ -1,3 +1,12 @@
 .PreampFieldset {
   padding: 12px 0;
 }
+
+/* HACK: */
+.PreampFieldset .Select > select {
+  text-transform: none;
+}
+
+.PreampFieldset .Select > select > option {
+  text-transform: none;
+}

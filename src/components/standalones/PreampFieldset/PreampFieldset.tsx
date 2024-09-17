@@ -1,14 +1,18 @@
 import type React from 'react';
+import type { PreampType, PreampParams } from 'xsound';
+
 import { useCallback, useState } from 'react';
 import { X } from 'xsound';
 
 import { Fieldset } from '/src/components/atoms/Fieldset';
 import { Legend } from '/src/components/atoms/Legend';
 import { Switch } from '/src/components/atoms/Switch';
+import { Select } from '/src/components/atoms/Select';
 import { ParameterController } from '/src/components/helpers/ParameterController';
 
 export const PreampFieldset: React.FC = () => {
   const [preamp, setPreamp] = useState<boolean>(false);
+  const [preampType, setPreampType] = useState<PreampType>('marshall');
 
   const onChangeStateCallback = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
     const checked = event.currentTarget.checked;
@@ -30,15 +34,141 @@ export const PreampFieldset: React.FC = () => {
     setPreamp(checked);
   }, []);
 
-  const onChangeLevelCallback = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
-    const level = event.currentTarget.valueAsNumber;
+  const onChangePreamplifier = useCallback(
+    (event: React.ChangeEvent<HTMLSelectElement>) => {
+      const type = event.currentTarget.value;
 
-    X('mixer').module('preamp').param({ preamp: { level } });
-    X('oneshot').module('preamp').param({ preamp: { level } });
-    X('audio').module('preamp').param({ preamp: { level } });
-    X('stream').module('preamp').param({ preamp: { level } });
-    X('noise').module('preamp').param({ preamp: { level } });
-  }, []);
+      switch (type) {
+        case 'marshall': {
+          const param: PreampParams = {
+            state: preamp,
+            type: 'marshall',
+            preamp: {
+              state: true,
+              level: 0,
+              samples: 8192,
+              pre: { state: true, gain: 0.5, lead: 0.5 },
+              post: { state: true },
+              cabinet: { state: true }
+            }
+          };
+
+          X('mixer').module('preamp').param(param);
+          X('oneshot').module('preamp').param(param);
+          X('audio').module('preamp').param(param);
+          X('stream').module('preamp').param(param);
+          X('noise').module('preamp').param(param);
+
+          setPreampType(type);
+          break;
+        }
+
+        case 'mesa': {
+          const param: PreampParams = {
+            state: preamp,
+            type: 'mesa',
+            preamp: {
+              state: true,
+              pre: {
+                state: true,
+                gain: 0.5,
+                level: 0,
+                bass: 0,
+                middle: 0,
+                treble: 0,
+                samples: 8192
+              },
+              post: {
+                state: true,
+                fc100: 0,
+                fc360: 0,
+                fc720: 0,
+                fc1600: 0,
+                fc4800: 0
+              },
+              cabinet: { state: true }
+            }
+          };
+
+          X('mixer').module('preamp').param(param);
+          X('oneshot').module('preamp').param(param);
+          X('audio').module('preamp').param(param);
+          X('stream').module('preamp').param(param);
+          X('noise').module('preamp').param(param);
+
+          setPreampType(type);
+          break;
+        }
+
+        case 'fender': {
+          const param: PreampParams = {
+            state: preamp,
+            type: 'fender',
+            preamp: {
+              state: true,
+              pre: {
+                state: true,
+                gain: 0.5,
+                level: 0,
+                bass: 0,
+                middle: 0,
+                treble: 0,
+                samples: 8192
+              },
+              post: {
+                state: true,
+                inch: 12,
+                tilt: true
+              },
+              cabinet: { state: true }
+            }
+          };
+
+          X('mixer').module('preamp').param(param);
+          X('oneshot').module('preamp').param(param);
+          X('audio').module('preamp').param(param);
+          X('stream').module('preamp').param(param);
+          X('noise').module('preamp').param(param);
+
+          setPreampType(type);
+          break;
+        }
+      }
+    },
+    [preamp]
+  );
+
+  const onChangeLevelCallback = useCallback(
+    (event: React.ChangeEvent<HTMLInputElement>) => {
+      const level = event.currentTarget.valueAsNumber;
+
+      switch (preampType) {
+        case 'marshall': {
+          const param = { preamp: { level } };
+
+          X('mixer').module('preamp').param(param);
+          X('oneshot').module('preamp').param(param);
+          X('audio').module('preamp').param(param);
+          X('stream').module('preamp').param(param);
+          X('noise').module('preamp').param(param);
+          break;
+        }
+
+        case 'mesa':
+        case 'fender': {
+          const param = { preamp: { pre: { level } } };
+
+          X('mixer').module('preamp').param(param);
+          X('oneshot').module('preamp').param(param);
+          X('audio').module('preamp').param(param);
+          X('stream').module('preamp').param(param);
+          X('noise').module('preamp').param(param);
+          break;
+        }
+      }
+    },
+    [preampType]
+  );
 
   const onChangeGainCallback = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
     const gain = event.currentTarget.valueAsNumber;
@@ -64,41 +194,223 @@ export const PreampFieldset: React.FC = () => {
     X('noise').module('preamp').param(param);
   }, []);
 
-  const onChangeBassCallback = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
-    const bass = event.currentTarget.valueAsNumber;
+  const onChangeBassCallback = useCallback(
+    (event: React.ChangeEvent<HTMLInputElement>) => {
+      const bass = event.currentTarget.valueAsNumber;
 
-    const param = { preamp: { post: { bass } } };
+      switch (preampType) {
+        case 'marshall': {
+          const param = { preamp: { post: { bass } } };
 
-    X('mixer').module('preamp').param(param);
-    X('oneshot').module('preamp').param(param);
-    X('audio').module('preamp').param(param);
-    X('stream').module('preamp').param(param);
-    X('noise').module('preamp').param(param);
-  }, []);
+          X('mixer').module('preamp').param(param);
+          X('oneshot').module('preamp').param(param);
+          X('audio').module('preamp').param(param);
+          X('stream').module('preamp').param(param);
+          X('noise').module('preamp').param(param);
+          break;
+        }
 
-  const onChangeMiddleCallback = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
-    const middle = event.currentTarget.valueAsNumber;
+        case 'mesa':
+        case 'fender': {
+          const param = { preamp: { pre: { bass } } };
 
-    const param = { preamp: { post: { middle } } };
+          X('mixer').module('preamp').param(param);
+          X('oneshot').module('preamp').param(param);
+          X('audio').module('preamp').param(param);
+          X('stream').module('preamp').param(param);
+          X('noise').module('preamp').param(param);
+          break;
+        }
+      }
+    },
+    [preampType]
+  );
 
-    X('mixer').module('preamp').param(param);
-    X('oneshot').module('preamp').param(param);
-    X('audio').module('preamp').param(param);
-    X('stream').module('preamp').param(param);
-    X('noise').module('preamp').param(param);
-  }, []);
+  const onChangeMiddleCallback = useCallback(
+    (event: React.ChangeEvent<HTMLInputElement>) => {
+      const middle = event.currentTarget.valueAsNumber;
 
-  const onChangeTrebleCallback = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
-    const treble = event.currentTarget.valueAsNumber;
+      switch (preampType) {
+        case 'marshall': {
+          const param = { preamp: { post: { middle } } };
 
-    const param = { preamp: { post: { treble } } };
+          X('mixer').module('preamp').param(param);
+          X('oneshot').module('preamp').param(param);
+          X('audio').module('preamp').param(param);
+          X('stream').module('preamp').param(param);
+          X('noise').module('preamp').param(param);
+          break;
+        }
 
-    X('mixer').module('preamp').param(param);
-    X('oneshot').module('preamp').param(param);
-    X('audio').module('preamp').param(param);
-    X('stream').module('preamp').param(param);
-    X('noise').module('preamp').param(param);
-  }, []);
+        case 'mesa':
+        case 'fender': {
+          const param = { preamp: { pre: { middle } } };
+
+          X('mixer').module('preamp').param(param);
+          X('oneshot').module('preamp').param(param);
+          X('audio').module('preamp').param(param);
+          X('stream').module('preamp').param(param);
+          X('noise').module('preamp').param(param);
+          break;
+        }
+      }
+    },
+    [preampType]
+  );
+
+  const onChangeTrebleCallback = useCallback(
+    (event: React.ChangeEvent<HTMLInputElement>) => {
+      const treble = event.currentTarget.valueAsNumber;
+
+      switch (preampType) {
+        case 'marshall': {
+          const param = { preamp: { post: { treble } } };
+
+          X('mixer').module('preamp').param(param);
+          X('oneshot').module('preamp').param(param);
+          X('audio').module('preamp').param(param);
+          X('stream').module('preamp').param(param);
+          X('noise').module('preamp').param(param);
+          break;
+        }
+
+        case 'mesa':
+        case 'fender': {
+          const param = { preamp: { pre: { treble } } };
+
+          X('mixer').module('preamp').param(param);
+          X('oneshot').module('preamp').param(param);
+          X('audio').module('preamp').param(param);
+          X('stream').module('preamp').param(param);
+          X('noise').module('preamp').param(param);
+          break;
+        }
+      }
+    },
+    [preampType]
+  );
+
+  const onChange100HzCallback = useCallback(
+    (event: React.ChangeEvent<HTMLInputElement>) => {
+      if (preampType !== 'mesa') {
+        return;
+      }
+
+      const gain = event.currentTarget.valueAsNumber;
+
+      const param = { preamp: { post: { fc100: gain } } };
+
+      X('mixer').module('preamp').param(param);
+      X('oneshot').module('preamp').param(param);
+      X('audio').module('preamp').param(param);
+      X('stream').module('preamp').param(param);
+      X('noise').module('preamp').param(param);
+    },
+    [preampType]
+  );
+
+  const onChange360HzCallback = useCallback(
+    (event: React.ChangeEvent<HTMLInputElement>) => {
+      if (preampType !== 'mesa') {
+        return;
+      }
+
+      const gain = event.currentTarget.valueAsNumber;
+
+      const param = { preamp: { post: { fc360: gain } } };
+
+      X('mixer').module('preamp').param(param);
+      X('oneshot').module('preamp').param(param);
+      X('audio').module('preamp').param(param);
+      X('stream').module('preamp').param(param);
+      X('noise').module('preamp').param(param);
+    },
+    [preampType]
+  );
+
+  const onChange720HzCallback = useCallback(
+    (event: React.ChangeEvent<HTMLInputElement>) => {
+      if (preampType !== 'mesa') {
+        return;
+      }
+
+      const gain = event.currentTarget.valueAsNumber;
+
+      const param = { preamp: { post: { fc720: gain } } };
+
+      X('mixer').module('preamp').param(param);
+      X('oneshot').module('preamp').param(param);
+      X('audio').module('preamp').param(param);
+      X('stream').module('preamp').param(param);
+      X('noise').module('preamp').param(param);
+    },
+    [preampType]
+  );
+
+  const onChange1600HzCallback = useCallback(
+    (event: React.ChangeEvent<HTMLInputElement>) => {
+      if (preampType !== 'mesa') {
+        return;
+      }
+
+      const gain = event.currentTarget.valueAsNumber;
+
+      const param = { preamp: { post: { fc1600: gain } } };
+
+      X('mixer').module('preamp').param(param);
+      X('oneshot').module('preamp').param(param);
+      X('audio').module('preamp').param(param);
+      X('stream').module('preamp').param(param);
+      X('noise').module('preamp').param(param);
+    },
+    [preampType]
+  );
+
+  const onChange4800HzCallback = useCallback(
+    (event: React.ChangeEvent<HTMLInputElement>) => {
+      if (preampType !== 'mesa') {
+        return;
+      }
+
+      const gain = event.currentTarget.valueAsNumber;
+
+      const param = { preamp: { post: { fc4800: gain } } };
+
+      X('mixer').module('preamp').param(param);
+      X('oneshot').module('preamp').param(param);
+      X('audio').module('preamp').param(param);
+      X('stream').module('preamp').param(param);
+      X('noise').module('preamp').param(param);
+    },
+    [preampType]
+  );
+
+  const onChangeSpeakerSize = useCallback(
+    (event: React.ChangeEvent<HTMLSelectElement>) => {
+      if (preampType !== 'fender') {
+        return;
+      }
+
+      const inch = Number(event.currentTarget.value);
+
+      switch (inch) {
+        case -1:
+        case 10:
+        case 12:
+        case 15: {
+          const param = { preamp: { post: { inch } } };
+
+          X('mixer').module('preamp').param(param);
+          X('oneshot').module('preamp').param(param);
+          X('audio').module('preamp').param(param);
+          X('stream').module('preamp').param(param);
+          X('noise').module('preamp').param(param);
+          break;
+        }
+      }
+    },
+    [preampType]
+  );
 
   return (
     <div className='PreampFieldset'>
@@ -106,12 +418,40 @@ export const PreampFieldset: React.FC = () => {
         <Legend>
           <Switch label='Preamp' checked={preamp} labelAsText={false} onChange={onChangeStateCallback} />
         </Legend>
+        <Select
+          label='Select Preamplifier'
+          values={['marshall', 'mesa', 'fender']}
+          texts={['Marshall', 'Mesa/Boogie', 'Fender']}
+          disabled={false}
+          onChange={onChangePreamplifier}
+        />
         <ParameterController label='Level' autoupdate={false} defaultValue={0} min={0} max={1} step={0.05} onChange={onChangeLevelCallback} />
         <ParameterController label='Gain' autoupdate={false} defaultValue={0.5} min={0} max={1} step={0.05} onChange={onChangeGainCallback} />
-        <ParameterController label='Lead Gain' autoupdate={false} defaultValue={0.5} min={0} max={1} step={0.05} onChange={onChangeLeadGainCallback} />
+        {preampType === 'marshall' ? (
+          <ParameterController label='Lead Gain' autoupdate={false} defaultValue={0.5} min={0} max={1} step={0.05} onChange={onChangeLeadGainCallback} />
+        ) : null}
         <ParameterController label='Bass' autoupdate={false} defaultValue={0} min={-18} max={18} step={1} onChange={onChangeBassCallback} />
         <ParameterController label='Middle' autoupdate={false} defaultValue={0} min={-18} max={18} step={1} onChange={onChangeMiddleCallback} />
         <ParameterController label='Treble' autoupdate={false} defaultValue={0} min={-18} max={18} step={1} onChange={onChangeTrebleCallback} />
+        {preampType === 'mesa' ? (
+          <>
+            <ParameterController label='100 Hz' autoupdate={false} defaultValue={0} min={-18} max={18} step={1} onChange={onChange100HzCallback} />
+            <ParameterController label='360 Hz' autoupdate={false} defaultValue={0} min={-18} max={18} step={1} onChange={onChange360HzCallback} />
+            <ParameterController label='720 Hz' autoupdate={false} defaultValue={0} min={-18} max={18} step={1} onChange={onChange720HzCallback} />
+            <ParameterController label='1600 Hz' autoupdate={false} defaultValue={0} min={-18} max={18} step={1} onChange={onChange1600HzCallback} />
+            <ParameterController label='4800 Hz' autoupdate={false} defaultValue={0} min={-18} max={18} step={1} onChange={onChange4800HzCallback} />
+          </>
+        ) : null}
+        {preampType === 'fender' ? (
+          <Select
+            label='Select Speaker size'
+            values={['-1', '10', '12', '15']}
+            texts={['Not used', '10 inch', '12 inch', '15 inch']}
+            defaultValue='12'
+            disabled={false}
+            onChange={onChangeSpeakerSize}
+          />
+        ) : null}
       </Fieldset>
     </div>
   );
