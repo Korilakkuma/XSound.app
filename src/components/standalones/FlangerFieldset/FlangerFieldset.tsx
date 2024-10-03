@@ -60,14 +60,24 @@ export const FlangerFieldset: React.FC = () => {
     X('noise').module('flanger').param({ rate });
   }, []);
 
-  const onChangeMixCallback = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
-    const mix = event.currentTarget.valueAsNumber;
+  const onChangeDryCallback = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
+    const dry = event.currentTarget.valueAsNumber;
 
-    X('mixer').module('flanger').param({ mix });
-    X('oneshot').module('flanger').param({ mix });
-    X('audio').module('flanger').param({ mix });
-    X('stream').module('flanger').param({ mix });
-    X('noise').module('flanger').param({ mix });
+    X('mixer').module('flanger').param({ dry });
+    X('oneshot').module('flanger').param({ dry });
+    X('audio').module('flanger').param({ dry });
+    X('stream').module('flanger').param({ dry });
+    X('noise').module('flanger').param({ dry });
+  }, []);
+
+  const onChangeWetCallback = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
+    const wet = event.currentTarget.valueAsNumber;
+
+    X('mixer').module('flanger').param({ wet });
+    X('oneshot').module('flanger').param({ wet });
+    X('audio').module('flanger').param({ wet });
+    X('stream').module('flanger').param({ wet });
+    X('noise').module('flanger').param({ wet });
   }, []);
 
   const onChangeToneCallback = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
@@ -99,7 +109,8 @@ export const FlangerFieldset: React.FC = () => {
         <ParameterController label='Time' autoupdate={false} defaultValue={0} min={0} max={10} step={0.05} onChange={onChangeTimeCallback} />
         <ParameterController label='Depth' autoupdate={false} defaultValue={0} min={0} max={1} step={0.01} onChange={onChangeDepthCallback} />
         <ParameterController label='Rate' autoupdate={false} defaultValue={0} min={0} max={10} step={0.05} onChange={onChangeRateCallback} />
-        <ParameterController label='Mix' autoupdate={false} defaultValue={0} min={0} max={1} step={0.05} onChange={onChangeMixCallback} />
+        <ParameterController label='Dry' autoupdate={false} defaultValue={1} min={0} max={1} step={0.05} onChange={onChangeDryCallback} />
+        <ParameterController label='Wet' autoupdate={false} defaultValue={0} min={0} max={1} step={0.05} onChange={onChangeWetCallback} />
         <ParameterController label='Tone' autoupdate={false} defaultValue={4000} min={20} max={8000} step={1} onChange={onChangeToneCallback} />
         <ParameterController label='Feedback' autoupdate={false} defaultValue={0} min={0} max={0.95} step={0.05} onChange={onChangeFeedbackCallback} />
       </Fieldset>
