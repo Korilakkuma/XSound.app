@@ -92,14 +92,24 @@ export const PhaserFieldset: React.FC = () => {
     X('noise').module('phaser').param({ resonance });
   }, []);
 
-  const onChangeMixCallback = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
-    const mix = event.currentTarget.valueAsNumber;
+  const onChangeDryCallback = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
+    const dry = event.currentTarget.valueAsNumber;
 
-    X('mixer').module('phaser').param({ mix });
-    X('oneshot').module('phaser').param({ mix });
-    X('audio').module('phaser').param({ mix });
-    X('stream').module('phaser').param({ mix });
-    X('noise').module('phaser').param({ mix });
+    X('mixer').module('phaser').param({ dry });
+    X('oneshot').module('phaser').param({ dry });
+    X('audio').module('phaser').param({ dry });
+    X('stream').module('phaser').param({ dry });
+    X('noise').module('phaser').param({ dry });
+  }, []);
+
+  const onChangeWetCallback = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
+    const wet = event.currentTarget.valueAsNumber;
+
+    X('mixer').module('phaser').param({ wet });
+    X('oneshot').module('phaser').param({ wet });
+    X('audio').module('phaser').param({ wet });
+    X('stream').module('phaser').param({ wet });
+    X('noise').module('phaser').param({ wet });
   }, []);
 
   return (
@@ -120,7 +130,8 @@ export const PhaserFieldset: React.FC = () => {
         <ParameterController label='Depth' autoupdate={false} defaultValue={0} min={0} max={0.9} step={0.05} onChange={onChangeDepthCallback} />
         <ParameterController label='Rate' autoupdate={false} defaultValue={0} min={0} max={5} step={0.05} onChange={onChangeRateCallback} />
         <ParameterController label='Resonance' autoupdate={false} defaultValue={1} min={1} max={20} step={1} onChange={onChangeResonanceCallback} />
-        <ParameterController label='Mix' autoupdate={false} defaultValue={0} min={0} max={1} step={0.05} onChange={onChangeMixCallback} />
+        <ParameterController label='Dry' autoupdate={false} defaultValue={1} min={0} max={1} step={0.05} onChange={onChangeDryCallback} />
+        <ParameterController label='Wet' autoupdate={false} defaultValue={0} min={0} max={1} step={0.05} onChange={onChangeWetCallback} />
       </Fieldset>
     </div>
   );
