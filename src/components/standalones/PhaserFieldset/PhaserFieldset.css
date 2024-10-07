@@ -1,3 +1,8 @@
 .PhaserFieldset {
-  padding: 12px 0;
+  padding: 0;
+}
+
+/* HACK: */
+.PhaserFieldset .Select > select {
+  margin: 12px auto;
 }
