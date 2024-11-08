@@ -1,7 +1,7 @@
 import MiniCSSExtractPlugin from 'mini-css-extract-plugin';
 import CssMinimizerPlugin from 'css-minimizer-webpack-plugin';
 import TerserPlugin from 'terser-webpack-plugin';
-import path from 'path';
+import path from 'node:path';
 
 const dirname = path.resolve('.');
 
