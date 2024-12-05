@@ -1385,6 +1385,7 @@ export const App: React.FC = () => {
     X('mixer').module('reverb').param({ tone: 4000 });
     X('mixer').module('filter').param({ frequency: 8000 });
     X('mixer').module('noisesuppressor').deactivate();
+    X('mixer').module('ringmodulator').param({ depth: 1 });
 
     X('oneshot').module('preamp').param(preampParams);
     X('oneshot').module('chorus').param({ tone: 4000 });
@@ -1392,6 +1393,7 @@ export const App: React.FC = () => {
     X('oneshot').module('delay').param({ tone: 4000 });
     X('oneshot').module('reverb').param({ tone: 4000 });
     X('oneshot').module('filter').param({ frequency: 8000 });
+    X('oneshot').module('ringmodulator').param({ depth: 1 });
 
     X('audio').module('preamp').param(preampParams);
     X('audio').module('chorus').param({ tone: 4000 });
@@ -1400,6 +1402,7 @@ export const App: React.FC = () => {
     X('audio').module('reverb').param({ tone: 4000 });
     X('audio').module('filter').param({ frequency: 8000 });
     X('audio').module('noisesuppressor').deactivate();
+    X('audio').module('ringmodulator').param({ depth: 1 });
 
     X('stream').module('preamp').param(preampParams);
     X('stream').module('chorus').param({ tone: 4000 });
@@ -1408,6 +1411,7 @@ export const App: React.FC = () => {
     X('stream').module('reverb').param({ tone: 4000 });
     X('stream').module('filter').param({ frequency: 8000 });
     X('stream').module('noisesuppressor').deactivate();
+    X('stream').module('ringmodulator').param({ depth: 1 });
 
     X('noise').module('preamp').param(preampParams);
     X('noise').module('chorus').param({ tone: 4000 });
@@ -1416,6 +1420,7 @@ export const App: React.FC = () => {
     X('noise').module('reverb').param({ tone: 4000 });
     X('noise').module('filter').param({ frequency: 8000 });
     X('noise').module('noisesuppressor').deactivate();
+    X('noise').module('ringmodulator').param({ depth: 1 });
 
     X('oscillator').module('preamp').param(preampParams);
     X('oscillator').module('chorus').param({ tone: 4000 });
@@ -1424,6 +1429,7 @@ export const App: React.FC = () => {
     X('oscillator').module('reverb').param({ tone: 4000 });
     X('oscillator').module('filter').param({ frequency: 8000 });
     X('oscillator').module('noisesuppressor').deactivate();
+    X('oscillator').module('ringmodulator').param({ depth: 1 });
 
     clonedX('oscillator').module('preamp').param(preampParams);
     clonedX('oscillator').module('chorus').param({ tone: 4000 });
@@ -1432,6 +1438,7 @@ export const App: React.FC = () => {
     clonedX('oscillator').module('reverb').param({ tone: 4000 });
     clonedX('oscillator').module('filter').param({ frequency: 8000 });
     clonedX('oscillator').module('noisesuppressor').deactivate();
+    clonedX('oscillator').module('ringmodulator').param({ depth: 1 });
 
     for (let i = 0, len = X('oscillator').length(); i < len; i++) {
       X('oscillator').get(i).param({ type: 'sawtooth' });

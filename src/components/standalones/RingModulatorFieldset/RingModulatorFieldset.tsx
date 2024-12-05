@@ -56,7 +56,7 @@ export const RingModulatorFieldset: React.FC = () => {
         <Legend>
           <Switch label='Ring MOD.' checked={ringmodulator} labelAsText={false} onChange={onChangeStateCallback} />
         </Legend>
-        <ParameterController label='Depth' autoupdate={false} defaultValue={0} min={0} max={1} step={0.05} onChange={onChangeDepthCallback} />
+        <ParameterController label='Depth' autoupdate={false} defaultValue={1} min={0} max={1} step={0.05} onChange={onChangeDepthCallback} />
         <ParameterController label='Rate' autoupdate={false} defaultValue={0} min={0} max={4000} step={100} onChange={onChangeRateCallback} />
       </Fieldset>
     </div>
