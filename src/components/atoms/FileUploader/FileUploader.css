@@ -13,6 +13,7 @@
   color: var(--white);
   text-overflow: ellipsis;
   white-space: nowrap;
+  cursor: pointer;
   background-color: var(--black);
   background-image: linear-gradient(to bottom, var(--gray), var(--black));
   border: 2px solid rgb(255 255 255 / 5%);
