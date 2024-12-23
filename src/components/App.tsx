@@ -1403,6 +1403,7 @@ export const App: React.FC = () => {
     X('audio').module('filter').param({ frequency: 8000 });
     X('audio').module('noisesuppressor').deactivate();
     X('audio').module('ringmodulator').param({ depth: 1 });
+    X('audio').module('vocalcanceler').param({ algorithm: 'spectrum' });
 
     X('stream').module('preamp').param(preampParams);
     X('stream').module('chorus').param({ tone: 4000 });
