@@ -23,6 +23,7 @@ export type CustomizedParameters = {
   audio?: {
     playbackRate: boolean;
   };
+  constraints?: MediaStreamConstraints;
 };
 
 export type RIRDescriptor = {
