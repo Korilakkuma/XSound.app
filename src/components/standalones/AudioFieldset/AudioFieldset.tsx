@@ -1,4 +1,6 @@
 import type React from 'react';
+import type { FileEvent, FileReaderErrorText, VocalCancelerParams } from 'xsound';
+
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { X } from 'xsound';
 
@@ -10,8 +12,6 @@ import { FileUploader } from '/src/components/atoms/FileUploader';
 import { Modal } from '/src/components/atoms/Modal';
 import { ProgressBar } from '/src/components/atoms/ProgressBar';
 import { ParameterController } from '/src/components/helpers/ParameterController';
-
-import type { FileEvent, FileReaderErrorText } from 'xsound';
 
 export type Props = {
   loadedApp: boolean;
@@ -39,6 +39,10 @@ export const AudioFieldset: React.FC<Props> = (props: Props) => {
 
   const usePlaybackRate = useMemo(() => {
     return storage.audio?.playbackRate;
+  }, [storage]);
+
+  const vocalCancelerParams: VocalCancelerParams = useMemo(() => {
+    return storage.audio?.vocalcanceler ?? { algorithm: 'spectrum' };
   }, [storage]);
 
   const startDecodeCallback = useCallback(() => {
@@ -220,8 +224,12 @@ export const AudioFieldset: React.FC<Props> = (props: Props) => {
       errorCallback
     });
 
+    if (vocalCancelerParams) {
+      X('audio').module('vocalcanceler').param(vocalCancelerParams);
+    }
+
     setLoaded(true);
-  }, [props.loadedApp, loaded, decodeCallback, updateCallback, endedCallback, errorCallback]);
+  }, [props.loadedApp, loaded, vocalCancelerParams, decodeCallback, updateCallback, endedCallback, errorCallback]);
 
   return (
     <div

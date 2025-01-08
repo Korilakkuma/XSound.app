@@ -1,4 +1,4 @@
-import type { X, RecordType, QuantizationBit, WaveExportType } from 'xsound';
+import type { X, RecordType, QuantizationBit, WaveExportType, VocalCancelerAlgorithm } from 'xsound';
 
 declare global {
   interface Window {
@@ -22,6 +22,12 @@ export type CustomizedParameters = {
   };
   audio?: {
     playbackRate: boolean;
+    vocalcanceler?: {
+      algorithm: VocalCancelerAlgorithm;
+      minFrequency?: number;
+      maxFrequency?: number;
+      threshold?: number;
+    };
   };
   constraints?: MediaStreamConstraints;
 };
