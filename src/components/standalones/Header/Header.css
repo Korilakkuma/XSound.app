@@ -35,8 +35,8 @@
   text-decoration: none;
   background-color: #222;
   box-shadow: 4px 4px 10px rgb(0 0 0 / 80%);
-  transition: 0.6s;
   transform: rotate(45deg);
+  transition: 0.6s;
 }
 
 .Header__intro > span > a {

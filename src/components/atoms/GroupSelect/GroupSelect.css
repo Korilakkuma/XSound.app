@@ -19,8 +19,8 @@
 }
 
 .GroupSelect > select:focus {
-  background-image: linear-gradient(to bottom, var(--base-light), var(--base-color));
   outline: none;
+  background-image: linear-gradient(to bottom, var(--base-light), var(--base-color));
 }
 
 .GroupSelect > select > optgroup > option {
@@ -35,7 +35,7 @@
   padding: 0;
   margin: -1px;
   overflow: hidden;
-  clip: rect(0, 0, 0, 0);
   white-space: nowrap;
   border: none;
+  clip: rect(0, 0, 0, 0);
 }

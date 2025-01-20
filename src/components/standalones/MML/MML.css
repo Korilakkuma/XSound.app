@@ -38,8 +38,8 @@
   overflow: auto;
   font-size: var(--base-font-size);
   color: var(--white);
-  background-color: var(--black);
   outline: var(--base-light);
+  background-color: var(--black);
   transition: background-color var(--duration) var(--easing);
 }
 

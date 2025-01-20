@@ -7,10 +7,10 @@
   color: var(--white);
   cursor: pointer;
   user-select: none;
+  outline: none;
   background-color: var(--black);
   background-image: linear-gradient(to bottom, var(--gray-deep), var(--black));
   border: 2px solid rgb(255 255 255 / 5%);
-  outline: none;
   box-shadow:
     5px 5px 3px rgb(0 0 0 / 80%) inset,
     3px -3px 3px rgb(0 0 0 / 50%) inset,

@@ -112,8 +112,8 @@
 }
 
 .Piano__blacks > .Piano__keyboard.-skip {
-  height: 1px;
   visibility: hidden;
+  height: 1px;
   background: none !important;
   background-color: var(--transparent) !important;
 }

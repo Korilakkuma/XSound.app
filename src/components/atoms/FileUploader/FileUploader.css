@@ -9,9 +9,9 @@
   height: 28px;
   padding: 4px;
   overflow: hidden;
+  text-overflow: ellipsis;
   font-size: 9px;
   color: var(--white);
-  text-overflow: ellipsis;
   white-space: nowrap;
   cursor: pointer;
   background-color: var(--black);
@@ -42,7 +42,7 @@
   padding: 0;
   margin: -1px;
   overflow: hidden;
-  clip: rect(0, 0, 0, 0);
   white-space: nowrap;
   border: none;
+  clip: rect(0, 0, 0, 0);
 }
