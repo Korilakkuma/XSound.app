@@ -3,6 +3,8 @@
 import eslint from '@eslint/js';
 import { FlatCompat } from '@eslint/eslintrc';
 import tseslint from 'typescript-eslint';
+import tseslintPlugin from '@typescript-eslint/eslint-plugin';
+import importPlugin from 'eslint-plugin-import';
 import a11yPlugin from 'eslint-plugin-jsx-a11y';
 import reactRecommendedPlugin from 'eslint-plugin-react/configs/recommended.js';
 import reactJSXRuntimePlugin from 'eslint-plugin-react/configs/jsx-runtime.js';
@@ -20,6 +22,8 @@ export default tseslint.config(
     ...reactJSXRuntimePlugin,
     ignores: ['*.snap'],
     plugins: {
+      '@typscript-eslint': tseslintPlugin,
+      'import': importPlugin,
       'jsx-a11y': a11yPlugin,
       'react-hooks': reactHooksPlugin
     },
