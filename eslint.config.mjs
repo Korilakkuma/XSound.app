@@ -10,6 +10,7 @@ import reactRecommendedPlugin from 'eslint-plugin-react/configs/recommended.js';
 import reactJSXRuntimePlugin from 'eslint-plugin-react/configs/jsx-runtime.js';
 import reactHooksPlugin from 'eslint-plugin-react-hooks';
 import jestDomPlugin from 'eslint-plugin-jest-dom';
+import storybookPlugin from 'eslint-plugin-storybook';
 import globals from 'globals';
 
 const compat = new FlatCompat();
@@ -28,6 +29,7 @@ export default tseslint.config(
       'jsx-a11y': a11yPlugin,
       'react-hooks': reactHooksPlugin,
       'jest-dom': jestDomPlugin,
+      'storybook': storybookPlugin,
     },
     languageOptions: {
       'ecmaVersion': 'latest',
