@@ -9,6 +9,7 @@ import a11yPlugin from 'eslint-plugin-jsx-a11y';
 import reactRecommendedPlugin from 'eslint-plugin-react/configs/recommended.js';
 import reactJSXRuntimePlugin from 'eslint-plugin-react/configs/jsx-runtime.js';
 import reactHooksPlugin from 'eslint-plugin-react-hooks';
+import jestDomPlugin from 'eslint-plugin-jest-dom';
 import globals from 'globals';
 
 const compat = new FlatCompat();
@@ -25,7 +26,8 @@ export default tseslint.config(
       '@typscript-eslint': tseslintPlugin,
       'import': importPlugin,
       'jsx-a11y': a11yPlugin,
-      'react-hooks': reactHooksPlugin
+      'react-hooks': reactHooksPlugin,
+      'jest-dom': jestDomPlugin,
     },
     languageOptions: {
       'ecmaVersion': 'latest',
