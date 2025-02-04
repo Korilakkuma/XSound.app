@@ -11,6 +11,7 @@ import reactJSXRuntimePlugin from 'eslint-plugin-react/configs/jsx-runtime.js';
 import reactHooksPlugin from 'eslint-plugin-react-hooks';
 import jestDomPlugin from 'eslint-plugin-jest-dom';
 import storybookPlugin from 'eslint-plugin-storybook';
+import prettierPlugin from 'eslint-plugin-prettier';
 import globals from 'globals';
 
 const compat = new FlatCompat();
@@ -30,6 +31,7 @@ export default tseslint.config(
       'react-hooks': reactHooksPlugin,
       'jest-dom': jestDomPlugin,
       'storybook': storybookPlugin,
+      'prettier': prettierPlugin
     },
     languageOptions: {
       'ecmaVersion': 'latest',
