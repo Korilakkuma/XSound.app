@@ -80,7 +80,7 @@
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-redux": "^9.2.0",
-    "xsound": "^4.0.7"
+    "xsound": "^4.0.8"
   },
   "devDependencies": {
     "@markuplint/jsx-parser": "^4.7.16",
