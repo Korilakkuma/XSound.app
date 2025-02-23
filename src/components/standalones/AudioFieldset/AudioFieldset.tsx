@@ -169,6 +169,10 @@ export const AudioFieldset: React.FC<Props> = (props: Props) => {
     X('stream').module('pitchshifter').param({ pitch: event.currentTarget.valueAsNumber });
   }, []);
 
+  const onChangeSpeedCallback = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
+    X('audio').param({ speed: event.currentTarget.valueAsNumber });
+  }, []);
+
   const onChangePlaybackRate = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
     X('audio').param({ playbackRate: event.currentTarget.valueAsNumber });
   }, []);
@@ -272,7 +276,10 @@ export const AudioFieldset: React.FC<Props> = (props: Props) => {
         {usePlaybackRate ? (
           <ParameterController label='Playback Rate' autoupdate={false} defaultValue={1} min={0.05} max={2} step={0.025} onChange={onChangePlaybackRate} />
         ) : (
-          <ParameterController label='Pitch Shifter' autoupdate={false} defaultValue={1} min={0.05} max={4} step={0.025} onChange={onChangePitchCallback} />
+          <>
+            <ParameterController label='Pitch Shifter' autoupdate={false} defaultValue={1} min={0.05} max={4} step={0.025} onChange={onChangePitchCallback} />
+            <ParameterController label='Speed' autoupdate={false} defaultValue={1} min={0.5} max={2} step={0.05} onChange={onChangeSpeedCallback} />
+          </>
         )}
         <ParameterController label='Vocal Canceler' autoupdate={false} defaultValue={0} min={0} max={1} step={0.05} onChange={onChangeDepthCallback} />
       </Fieldset>
