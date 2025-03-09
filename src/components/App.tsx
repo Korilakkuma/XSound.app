@@ -1245,6 +1245,7 @@ export const App: React.FC = () => {
       X('oneshot').module('phaser'),
       X('oneshot').module('chorus'),
       X('oneshot').module('flanger'),
+      X('oneshot').module('stereo'),
       X('oneshot').module('delay'),
       X('oneshot').module('reverb')
     ]);
@@ -1263,6 +1264,7 @@ export const App: React.FC = () => {
       X('mixer').module('phaser'),
       X('mixer').module('chorus'),
       X('mixer').module('flanger'),
+      X('mixer').module('stereo'),
       X('mixer').module('delay'),
       X('mixer').module('reverb')
     ]);
@@ -1281,6 +1283,7 @@ export const App: React.FC = () => {
       X('audio').module('phaser'),
       X('audio').module('chorus'),
       X('audio').module('flanger'),
+      X('audio').module('stereo'),
       X('audio').module('delay'),
       X('audio').module('reverb'),
       X('audio').module('vocalcanceler')
