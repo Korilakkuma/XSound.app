@@ -9,6 +9,7 @@ import { Modal } from '/src/components/atoms/Modal';
 import { VerticalBox } from '/src/components/atoms/VerticalBox';
 import { Analyser } from '/src/components/standalones/Analyser';
 import { AudioFieldset } from '/src/components/standalones/AudioFieldset';
+import { AutopanFieldset } from '/src/components/standalones/AutopanFieldset';
 import { BasicControllers } from '/src/components/standalones/BasicControllers';
 import { BoosterFieldset } from '/src/components/standalones/BoosterFieldset';
 import { ChorusFieldset } from '/src/components/standalones/ChorusFieldset';
@@ -1247,7 +1248,8 @@ export const App: React.FC = () => {
       X('oneshot').module('flanger'),
       X('oneshot').module('stereo'),
       X('oneshot').module('delay'),
-      X('oneshot').module('reverb')
+      X('oneshot').module('reverb'),
+      X('oneshot').module('autopanner')
     ]);
 
     X('mixer').edit([
@@ -1266,7 +1268,8 @@ export const App: React.FC = () => {
       X('mixer').module('flanger'),
       X('mixer').module('stereo'),
       X('mixer').module('delay'),
-      X('mixer').module('reverb')
+      X('mixer').module('reverb'),
+      X('mixer').module('autopanner')
     ]);
 
     X('audio').edit([
@@ -1286,7 +1289,8 @@ export const App: React.FC = () => {
       X('audio').module('stereo'),
       X('audio').module('delay'),
       X('audio').module('reverb'),
-      X('audio').module('vocalcanceler')
+      X('audio').module('vocalcanceler'),
+      X('audio').module('autopanner')
     ]);
 
     X('stream').edit([
@@ -1323,7 +1327,8 @@ export const App: React.FC = () => {
       X('noise').module('chorus'),
       X('noise').module('flanger'),
       X('noise').module('delay'),
-      X('noise').module('reverb')
+      X('noise').module('reverb'),
+      X('noise').module('autopanner')
     ]);
 
     X('oscillator').edit([
@@ -1580,6 +1585,7 @@ export const App: React.FC = () => {
           <VerticalBox>
             <DelayFieldset />
             <ReverbFieldset rirDescriptors={rirDescriptors} />
+            <AutopanFieldset />
           </VerticalBox>
         </Grid>
       </main>
