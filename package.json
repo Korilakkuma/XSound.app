@@ -97,7 +97,6 @@
     "@types/react-dom": "^19.0.4",
     "@types/react-redux": "^7.1.34",
     "@types/react-test-renderer": "^19.0.0",
-    "chromatic": "^11.27.0",
     "css-loader": "^7.1.2",
     "css-minimizer-webpack-plugin": "^7.0.2",
     "dotenv-webpack": "^8.1.0",
