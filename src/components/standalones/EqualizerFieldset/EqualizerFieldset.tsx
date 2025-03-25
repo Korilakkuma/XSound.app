@@ -60,6 +60,7 @@ export const EqualizerFieldset: React.FC = () => {
     X('noise').module('equalizer').param({ treble });
   }, []);
 
+  /*
   const onChangePresenceCallback = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
     const presence = event.currentTarget.valueAsNumber;
 
@@ -69,6 +70,7 @@ export const EqualizerFieldset: React.FC = () => {
     X('stream').module('equalizer').param({ presence });
     X('noise').module('equalizer').param({ presence });
   }, []);
+  */
 
   return (
     <div className='EqualizerFieldset'>
@@ -79,7 +81,7 @@ export const EqualizerFieldset: React.FC = () => {
         <ParameterController label='Bass' autoupdate={false} defaultValue={0} min={-18} max={18} step={1} onChange={onChangeBassCallback} />
         <ParameterController label='Middle' autoupdate={false} defaultValue={0} min={-18} max={18} step={1} onChange={onChangeMiddleCallback} />
         <ParameterController label='Treble' autoupdate={false} defaultValue={0} min={-18} max={18} step={1} onChange={onChangeTrebleCallback} />
-        <ParameterController label='Presence' autoupdate={false} defaultValue={0} min={-18} max={18} step={1} onChange={onChangePresenceCallback} />
+        {/* <ParameterController label='Presence' autoupdate={false} defaultValue={0} min={-18} max={18} step={1} onChange={onChangePresenceCallback} /> */}
       </Fieldset>
     </div>
   );

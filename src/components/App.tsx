@@ -16,6 +16,7 @@ import { ChorusFieldset } from '/src/components/standalones/ChorusFieldset';
 import { CompressorFieldset } from '/src/components/standalones/CompressorFieldset';
 import { DelayFieldset } from '/src/components/standalones/DelayFieldset';
 import { EnvelopeGeneratorFieldset } from '/src/components/standalones/EnvelopeGeneratorFieldset';
+import { EqualizerFieldset } from '/src/components/standalones/EqualizerFieldset';
 import { FilterFieldset } from '/src/components/standalones/FilterFieldset';
 import { FlangerFieldset } from '/src/components/standalones/FlangerFieldset';
 import { Footer } from '/src/components/standalones/Footer';
@@ -1239,8 +1240,8 @@ export const App: React.FC = () => {
       X('oneshot').module('overdrive'),
       X('oneshot').module('fuzz'),
       X('oneshot').module('preamp'),
-      X('oneshot').module('equalizer'),
       X('oneshot').module('filter'),
+      X('oneshot').module('equalizer'),
       X('oneshot').module('tremolo'),
       X('oneshot').module('ringmodulator'),
       X('oneshot').module('phaser'),
@@ -1258,8 +1259,8 @@ export const App: React.FC = () => {
       X('mixer').module('overdrive'),
       X('mixer').module('fuzz'),
       X('mixer').module('preamp'),
-      X('mixer').module('equalizer'),
       X('mixer').module('filter'),
+      X('mixer').module('equalizer'),
       X('mixer').module('noisesuppressor'),
       X('mixer').module('tremolo'),
       X('mixer').module('ringmodulator'),
@@ -1280,6 +1281,7 @@ export const App: React.FC = () => {
       X('audio').module('fuzz'),
       X('audio').module('preamp'),
       X('audio').module('filter'),
+      X('audio').module('equalizer'),
       X('audio').module('noisesuppressor'),
       X('audio').module('tremolo'),
       X('audio').module('ringmodulator'),
@@ -1300,8 +1302,8 @@ export const App: React.FC = () => {
       X('stream').module('overdrive'),
       X('stream').module('fuzz'),
       X('stream').module('preamp'),
-      X('stream').module('equalizer'),
       X('stream').module('filter'),
+      X('stream').module('equalizer'),
       X('stream').module('noisesuppressor'),
       X('stream').module('tremolo'),
       X('stream').module('ringmodulator'),
@@ -1318,8 +1320,8 @@ export const App: React.FC = () => {
       X('noise').module('overdrive'),
       X('noise').module('fuzz'),
       X('noise').module('preamp'),
-      X('noise').module('equalizer'),
       X('noise').module('filter'),
+      X('noise').module('equalizer'),
       X('noise').module('noisesuppressor'),
       X('noise').module('tremolo'),
       X('noise').module('ringmodulator'),
@@ -1337,8 +1339,8 @@ export const App: React.FC = () => {
       X('oscillator').module('overdrive'),
       X('oscillator').module('fuzz'),
       X('oscillator').module('preamp'),
-      X('oscillator').module('equalizer'),
       X('oscillator').module('filter'),
+      X('oscillator').module('equalizer'),
       X('oscillator').module('noisesuppressor'),
       X('oscillator').module('tremolo'),
       X('oscillator').module('ringmodulator'),
@@ -1355,8 +1357,8 @@ export const App: React.FC = () => {
       X('oscillator').module('overdrive'),
       X('oscillator').module('fuzz'),
       X('oscillator').module('preamp'),
-      X('oscillator').module('equalizer'),
       X('oscillator').module('filter'),
+      X('oscillator').module('equalizer'),
       X('oscillator').module('noisesuppressor'),
       X('oscillator').module('tremolo'),
       X('oscillator').module('ringmodulator'),
@@ -1571,6 +1573,7 @@ export const App: React.FC = () => {
           </VerticalBox>
           <VerticalBox>
             <FilterFieldset />
+            <EqualizerFieldset />
             <NoiseSuppressorFieldset />
           </VerticalBox>
           <VerticalBox>
