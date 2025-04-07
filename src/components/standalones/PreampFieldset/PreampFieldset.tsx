@@ -63,10 +63,10 @@ export const PreampFieldset: React.FC = () => {
           break;
         }
 
-        case 'mesa': {
+        case 'mesa/boogie': {
           const param: PreampParams = {
             state: preamp,
-            type: 'mesa',
+            type: 'mesa/boogie',
             preamp: {
               state: true,
               pre: {
@@ -154,7 +154,7 @@ export const PreampFieldset: React.FC = () => {
           break;
         }
 
-        case 'mesa':
+        case 'mesa/boogie':
         case 'fender': {
           const param = { preamp: { pre: { level } } };
 
@@ -210,7 +210,7 @@ export const PreampFieldset: React.FC = () => {
           break;
         }
 
-        case 'mesa':
+        case 'mesa/boogie':
         case 'fender': {
           const param = { preamp: { pre: { bass } } };
 
@@ -242,7 +242,7 @@ export const PreampFieldset: React.FC = () => {
           break;
         }
 
-        case 'mesa':
+        case 'mesa/boogie':
         case 'fender': {
           const param = { preamp: { pre: { middle } } };
 
@@ -274,7 +274,7 @@ export const PreampFieldset: React.FC = () => {
           break;
         }
 
-        case 'mesa':
+        case 'mesa/boogie':
         case 'fender': {
           const param = { preamp: { pre: { treble } } };
 
@@ -292,7 +292,7 @@ export const PreampFieldset: React.FC = () => {
 
   const onChange100HzCallback = useCallback(
     (event: React.ChangeEvent<HTMLInputElement>) => {
-      if (preampType !== 'mesa') {
+      if (preampType !== 'mesa/boogie') {
         return;
       }
 
@@ -311,7 +311,7 @@ export const PreampFieldset: React.FC = () => {
 
   const onChange360HzCallback = useCallback(
     (event: React.ChangeEvent<HTMLInputElement>) => {
-      if (preampType !== 'mesa') {
+      if (preampType !== 'mesa/boogie') {
         return;
       }
 
@@ -330,7 +330,7 @@ export const PreampFieldset: React.FC = () => {
 
   const onChange720HzCallback = useCallback(
     (event: React.ChangeEvent<HTMLInputElement>) => {
-      if (preampType !== 'mesa') {
+      if (preampType !== 'mesa/boogie') {
         return;
       }
 
@@ -349,7 +349,7 @@ export const PreampFieldset: React.FC = () => {
 
   const onChange1600HzCallback = useCallback(
     (event: React.ChangeEvent<HTMLInputElement>) => {
-      if (preampType !== 'mesa') {
+      if (preampType !== 'mesa/boogie') {
         return;
       }
 
@@ -368,7 +368,7 @@ export const PreampFieldset: React.FC = () => {
 
   const onChange4800HzCallback = useCallback(
     (event: React.ChangeEvent<HTMLInputElement>) => {
-      if (preampType !== 'mesa') {
+      if (preampType !== 'mesa/boogie') {
         return;
       }
 
@@ -420,7 +420,7 @@ export const PreampFieldset: React.FC = () => {
         </Legend>
         <Select
           label='Select Preamplifier'
-          values={['marshall', 'mesa', 'fender']}
+          values={['marshall', 'mesa/boogie', 'fender']}
           texts={['Marshall', 'Mesa/Boogie', 'Fender']}
           disabled={false}
           onChange={onChangePreamplifier}
@@ -433,7 +433,7 @@ export const PreampFieldset: React.FC = () => {
         <ParameterController label='Bass' autoupdate={false} defaultValue={0} min={-18} max={18} step={1} onChange={onChangeBassCallback} />
         <ParameterController label='Middle' autoupdate={false} defaultValue={0} min={-18} max={18} step={1} onChange={onChangeMiddleCallback} />
         <ParameterController label='Treble' autoupdate={false} defaultValue={0} min={-18} max={18} step={1} onChange={onChangeTrebleCallback} />
-        {preampType === 'mesa' ? (
+        {preampType === 'mesa/boogie' ? (
           <>
             <ParameterController label='100 Hz' autoupdate={false} defaultValue={0} min={-18} max={18} step={1} onChange={onChange100HzCallback} />
             <ParameterController label='360 Hz' autoupdate={false} defaultValue={0} min={-18} max={18} step={1} onChange={onChange360HzCallback} />
