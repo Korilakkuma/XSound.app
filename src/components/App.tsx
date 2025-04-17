@@ -30,6 +30,7 @@ import { PreampFieldset } from '/src/components/standalones/PreampFieldset';
 import { RecorderFieldset } from '/src/components/standalones/RecorderFieldset';
 import { ReverbFieldset } from '/src/components/standalones/ReverbFieldset';
 import { RingModulatorFieldset } from '/src/components/standalones/RingModulatorFieldset';
+import { SoundSourceFieldset } from '/src/components/standalones/SoundSourceFieldset';
 import { TremoloFieldset } from '/src/components/standalones/TremoloFieldset';
 import { WahFieldset } from '/src/components/standalones/WahFieldset';
 
@@ -1560,7 +1561,8 @@ export const App: React.FC = () => {
         </Grid>
         <Analyser loadedApp={loadedApp} />
         <MML loadedApp={loadedApp} currentSoundSource={currentSoundSource} />
-        <BasicControllers currentSoundSource={currentSoundSource} />
+        <SoundSourceFieldset currentSoundSource={currentSoundSource} />
+        <BasicControllers />
         <Piano loadedApp={loadedApp} currentSoundSource={currentSoundSource} />
         <Grid numberOfItems={6}>
           <VerticalBox>
