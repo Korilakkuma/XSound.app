@@ -3,7 +3,8 @@ import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { X } from 'xsound';
 
-import { NUMBER_OF_ONESHOTS } from '/src/config';
+import { NUMBER_OF_ONESHOTS, CONSTRAINTS } from '/src/config';
+import { getStorage } from '/src/utils';
 import { activateMIDIKeyboards, deactivateMIDIKeyboards, changeCurrentSoundSource } from '/src/slices';
 import { Modal } from '/src/components/atoms/Modal';
 import { Select } from '/src/components/atoms/Select';
@@ -31,6 +32,14 @@ export const SoundSourceFieldset: React.FC<Props> = ({ currentSoundSource }) => 
   const dispatch = useDispatch();
 
   const activeMIDIKeyboardIndexes = useSelector((state: RootState) => state.activeMIDIKeyboardIndexes);
+
+  const storage = useMemo(() => {
+    return getStorage();
+  }, []);
+
+  const overrideConstraints: MediaStreamConstraints = useMemo(() => {
+    return storage.constraints ?? {};
+  }, [storage]);
 
   const midiSource = useMemo(() => {
     switch (currentSoundSource) {
@@ -232,8 +241,9 @@ export const SoundSourceFieldset: React.FC<Props> = ({ currentSoundSource }) => 
       X('stream').clear();
 
       switch (source) {
-        case 'stream':
+        case 'stream': {
           X('stream')
+            .setup({ ...CONSTRAINTS, ...overrideConstraints })
             .ready()
             .then(() => {
               X('stream').start();
@@ -244,7 +254,9 @@ export const SoundSourceFieldset: React.FC<Props> = ({ currentSoundSource }) => 
             });
 
           break;
-        case 'midi':
+        }
+
+        case 'midi': {
           X('midi').setup({
             options: {
               sysex: true
@@ -259,14 +271,44 @@ export const SoundSourceFieldset: React.FC<Props> = ({ currentSoundSource }) => 
           });
 
           break;
-        default:
+        }
+
+        default: {
           break;
+        }
       }
     },
-    [dispatch, successCallback]
+    [dispatch, successCallback, overrideConstraints]
   );
 
-  const onChangeInputDeviceCallback = useCallback(() => {}, []);
+  const onChangeInputDeviceCallback = useCallback(
+    (event: React.ChangeEvent<HTMLSelectElement>) => {
+      X('stream').clearAudioDevices();
+
+      const deviceId = event.currentTarget.value;
+
+      const constraints: MediaStreamConstraints = {
+        audio: {
+          deviceId,
+          ...CONSTRAINTS.audio
+        },
+        video: false,
+        ...overrideConstraints
+      };
+
+      X('stream')
+        .setup(constraints)
+        .ready()
+        .then(() => {
+          X('stream').start();
+        })
+        .catch((error: Error) => {
+          // eslint-disable-next-line no-console
+          console.error(error);
+        });
+    },
+    [overrideConstraints]
+  );
 
   const onChangeOutputDeviceCallback = useCallback(() => {}, []);
 
@@ -311,16 +353,15 @@ export const SoundSourceFieldset: React.FC<Props> = ({ currentSoundSource }) => 
             };
           });
 
-        setInputDeviceIds(inputDeviceIds.concat(inputDevices.map((device) => device.deviceId)));
-        setInputDeviceLabels(inputDeviceLabels.concat(inputDevices.map((device) => device.label)));
-        setOutputDeviceIds(outputDeviceIds.concat(outputDevices.map((device) => device.deviceId)));
-        setOutputDeviceLabels(outputDeviceLabels.concat(outputDevices.map((device) => device.label)));
+        setInputDeviceIds(inputDevices.map((device) => device.deviceId));
+        setInputDeviceLabels(inputDevices.map((device) => device.label));
+        setOutputDeviceIds(outputDevices.map((device) => device.deviceId));
+        setOutputDeviceLabels(outputDevices.map((device) => device.label));
       })
       .catch((error: Error) => {
         // eslint-disable-next-line no-console
         console.error(error);
       });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
@@ -339,13 +380,7 @@ export const SoundSourceFieldset: React.FC<Props> = ({ currentSoundSource }) => 
         disabled={currentSoundSource !== 'stream'}
         onChange={onChangeInputDeviceCallback}
       />
-      <Select
-        label='Select Output Device'
-        values={outputDeviceIds}
-        texts={outputDeviceLabels}
-        disabled={currentSoundSource !== 'stream'}
-        onChange={onChangeOutputDeviceCallback}
-      />
+      <Select label='Select Output Device' values={outputDeviceIds} texts={outputDeviceLabels} disabled={false} onChange={onChangeOutputDeviceCallback} />
       <Modal isShow={isShowModalForMIDIError} title='Error' hasOverlay={true} asAlert={true} onClose={onCloseModalCallback}>
         {errorMessage}
       </Modal>

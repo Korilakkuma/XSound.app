@@ -3,7 +3,6 @@ import { useSelector } from 'react-redux';
 import { X } from 'xsound';
 
 import { AJAX_TIMEOUT, BASE_URL, NUMBER_OF_CHANNELS, NUMBER_OF_ONESHOTS, NUMBER_OF_TRACKS } from '/src/config';
-import { getStorage } from '/src/utils';
 import { Grid } from '/src/components/atoms/Grid';
 import { Modal } from '/src/components/atoms/Modal';
 import { VerticalBox } from '/src/components/atoms/VerticalBox';
@@ -46,17 +45,9 @@ export const App: React.FC = () => {
 
   const currentSoundSource = useSelector((state: RootState) => state.currentSoundSource);
 
-  const storage = useMemo(() => {
-    return getStorage();
-  }, []);
-
   const loadedApp = useMemo(() => {
     return rate >= 100;
   }, [rate]);
-
-  const overrideConstraints: MediaStreamConstraints = useMemo(() => {
-    return storage.constraints ?? {};
-  }, [storage]);
 
   const oneshots = useMemo(
     () => [
@@ -1378,14 +1369,6 @@ export const App: React.FC = () => {
 
     X('stream').module('pitchshifter').activate();
 
-    const constraints: MediaStreamConstraints = {
-      audio: {
-        echoCancellation: true
-      },
-      video: false,
-      ...overrideConstraints
-    };
-
     const preampParams: PreampParams = {
       type: 'marshall',
       preamp: {
@@ -1396,8 +1379,6 @@ export const App: React.FC = () => {
         cabinet: { state: true }
       }
     };
-
-    X('stream').setup(constraints);
 
     X('mixer').module('preamp').param(preampParams);
     X('mixer').module('chorus').param({ tone: 4000 });
@@ -1536,7 +1517,7 @@ export const App: React.FC = () => {
 
     window.globalXSound = X;
     window.clonedXSound = clonedX;
-  }, [overrideConstraints, oneshots, rirDescriptors, createOneshotSettingsCallback]);
+  }, [oneshots, rirDescriptors, createOneshotSettingsCallback]);
 
   return (
     <React.Fragment>
