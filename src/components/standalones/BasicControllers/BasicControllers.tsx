@@ -13,16 +13,6 @@ export const BasicControllers: React.FC = () => {
 
   const dispatch = useDispatch();
 
-  const onChangeMasterVolumeCallback = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
-    const mastervolume = event.currentTarget.valueAsNumber;
-
-    X('mixer').param({ mastervolume });
-    X('oneshot').param({ mastervolume });
-    X('audio').param({ mastervolume });
-    X('stream').param({ mastervolume });
-    X('noise').param({ mastervolume });
-  }, []);
-
   const onChangeGlideCallback = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
     const time = event.currentTarget.valueAsNumber;
 
@@ -52,7 +42,6 @@ export const BasicControllers: React.FC = () => {
 
   return (
     <div className='BasicControllers'>
-      <ParameterController label='Master Volume' autoupdate={false} defaultValue={1} min={0} max={1} step={0.05} onChange={onChangeMasterVolumeCallback} />
       <ParameterController label='Glide' autoupdate={false} defaultValue={0} min={0} max={1} step={0.05} onChange={onChangeGlideCallback} />
       <ParameterController label='Transpose' autoupdate={false} defaultValue={0} min={-6} max={6} step={1} onChange={onChangeTransposeCallback} />
       <Switch label='Analyser' checked={analyserState} labelAsText={true} controls='analyser-fieldset' onChange={onChangeAnalyserStateCallback} />

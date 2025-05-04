@@ -8,6 +8,7 @@ import { getStorage } from '/src/utils';
 import { activateMIDIKeyboards, deactivateMIDIKeyboards, changeCurrentSoundSource } from '/src/slices';
 import { Modal } from '/src/components/atoms/Modal';
 import { Select } from '/src/components/atoms/Select';
+import { ParameterController } from '/src/components/helpers/ParameterController';
 
 import type { RootState } from '/src/store';
 import type { SoundSource } from '/src/types';
@@ -74,6 +75,16 @@ export const SoundSourceFieldset: React.FC<Props> = ({ currentSoundSource }) => 
         return 0;
     }
   }, [currentSoundSource]);
+
+  const onChangeMasterVolumeCallback = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
+    const mastervolume = event.currentTarget.valueAsNumber;
+
+    X('mixer').param({ mastervolume });
+    X('oneshot').param({ mastervolume });
+    X('audio').param({ mastervolume });
+    X('stream').param({ mastervolume });
+    X('noise').param({ mastervolume });
+  }, []);
 
   const noteOn = useCallback(
     (noteNumber: number, velocity: number) => {
@@ -366,6 +377,7 @@ export const SoundSourceFieldset: React.FC<Props> = ({ currentSoundSource }) => 
 
   return (
     <div className='SoundSourceFieldset'>
+      <ParameterController label='Master Volume' autoupdate={false} defaultValue={1} min={0} max={1} step={0.05} onChange={onChangeMasterVolumeCallback} />
       <Select
         label='Select Sound Source'
         values={['oscillator', 'piano', 'guitar', 'electric-guitar', 'orgel', 'whitenoise', 'pinknoise', 'browniannoise', 'stream', 'midi']}
