@@ -181,17 +181,6 @@ export const AudioFieldset: React.FC<Props> = (props: Props) => {
     X('audio').module('vocalcanceler').param({ depth: event.currentTarget.valueAsNumber });
   }, []);
 
-  const onChangeStereoCallback = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
-    const time = event.currentTarget.valueAsNumber;
-
-    if (time === 0) {
-      X('audio').module('stereo').deactivate();
-    } else {
-      X('audio').module('stereo').activate();
-      X('audio').module('stereo').param({ time });
-    }
-  }, []);
-
   const onCloseModalCallback = useCallback(() => {
     setIsShowModalForFileUploadError(false);
     setIsShowModalForDecodingError(false);
@@ -293,7 +282,6 @@ export const AudioFieldset: React.FC<Props> = (props: Props) => {
           </>
         )}
         <ParameterController label='Vocal Canceler' autoupdate={false} defaultValue={0} min={0} max={1} step={0.05} onChange={onChangeDepthCallback} />
-        <ParameterController label='Spatial' autoupdate={false} defaultValue={0} min={0} max={1} step={0.005} onChange={onChangeStereoCallback} />
       </Fieldset>
       <Modal isShow={isShowModalForFileUploadError} title='Error' hasOverlay={true} asAlert={true} onClose={onCloseModalCallback}>
         {errorMessage}

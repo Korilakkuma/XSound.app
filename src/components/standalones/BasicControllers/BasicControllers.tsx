@@ -24,6 +24,17 @@ export const BasicControllers: React.FC = () => {
     X('oneshot').param({ transpose: event.currentTarget.valueAsNumber });
   }, []);
 
+  const onChangeStereoCallback = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
+    const time = event.currentTarget.valueAsNumber;
+
+    if (time === 0) {
+      X('audio').module('stereo').deactivate();
+    } else {
+      X('audio').module('stereo').activate();
+      X('audio').module('stereo').param({ time });
+    }
+  }, []);
+
   const onChangeAnalyserStateCallback = useCallback(
     (event: React.ChangeEvent<HTMLInputElement>) => {
       dispatch(changeAnalyserState(event.currentTarget.checked));
@@ -44,6 +55,7 @@ export const BasicControllers: React.FC = () => {
     <div className='BasicControllers'>
       <ParameterController label='Glide' autoupdate={false} defaultValue={0} min={0} max={1} step={0.05} onChange={onChangeGlideCallback} />
       <ParameterController label='Transpose' autoupdate={false} defaultValue={0} min={-6} max={6} step={1} onChange={onChangeTransposeCallback} />
+      <ParameterController label='Spatial' autoupdate={false} defaultValue={0} min={0} max={1} step={0.005} onChange={onChangeStereoCallback} />
       <Switch label='Analyser' checked={analyserState} labelAsText={true} controls='analyser-fieldset' onChange={onChangeAnalyserStateCallback} />
       <Switch label='MML' checked={mmlState} labelAsText={true} controls='mml-fieldset' onChange={onChangeMMLStateCallback} />
     </div>
