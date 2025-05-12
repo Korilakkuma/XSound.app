@@ -2,7 +2,7 @@
   "name": "xsound-app",
   "version": "2.0.0",
   "engines": {
-    "node": ">=20.0.0 <=22.14.x"
+    "node": ">=20.0.0 <=22.15.x"
   },
   "description": "Web Music Application by XSound (Web Audio API Library)",
   "main": "./assets/app.js",
