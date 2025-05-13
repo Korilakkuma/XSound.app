@@ -321,7 +321,18 @@ export const SoundSourceFieldset: React.FC<Props> = ({ currentSoundSource }) => 
     [overrideConstraints]
   );
 
-  const onChangeOutputDeviceCallback = useCallback(() => {}, []);
+  const onChangeOutputDeviceCallback = useCallback((event: React.ChangeEvent<HTMLSelectElement>) => {
+    const deviceId = event.currentTarget.value;
+
+    if (deviceId === '' || deviceId === 'default') {
+      X('stream').audioDestination();
+    } else {
+      X('stream').streamDestination();
+    }
+
+    // eslint-disable-next-line no-console
+    X('stream').setSinkId(deviceId, () => {}, console.error);
+  }, []);
 
   const onCloseModalCallback = useCallback(() => {
     setErrorMessage('');
