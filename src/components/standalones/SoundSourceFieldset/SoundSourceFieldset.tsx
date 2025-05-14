@@ -340,45 +340,59 @@ export const SoundSourceFieldset: React.FC<Props> = ({ currentSoundSource }) => 
   }, []);
 
   useEffect(() => {
+    // HACK: for Firefox
+    if (X('stream') === null) {
+      return;
+    }
+
     X('stream')
-      .devices()
-      .then((deviceInfos) => {
-        if (!deviceInfos) {
-          return;
-        }
+      .setup(CONSTRAINTS)
+      .ready()
+      .then(() => {
+        X('stream')
+          .devices()
+          .then((deviceInfos) => {
+            if (!deviceInfos) {
+              return;
+            }
 
-        const inputDevices = deviceInfos
-          .filter((deviceInfo) => {
-            return deviceInfo.kind === 'audioinput';
+            const inputDevices = deviceInfos
+              .filter((deviceInfo) => {
+                return deviceInfo.kind === 'audioinput';
+              })
+              .map((device) => {
+                const { label, groupId, deviceId } = device;
+
+                return {
+                  label,
+                  groupId,
+                  deviceId
+                };
+              });
+
+            const outputDevices = deviceInfos
+              .filter((deviceInfo) => {
+                return deviceInfo.kind === 'audiooutput';
+              })
+              .map((device) => {
+                const { label, groupId, deviceId } = device;
+
+                return {
+                  label,
+                  groupId,
+                  deviceId
+                };
+              });
+
+            setInputDeviceIds(inputDevices.map((device) => device.deviceId));
+            setInputDeviceLabels(inputDevices.map((device) => device.label));
+            setOutputDeviceIds(outputDevices.map((device) => device.deviceId));
+            setOutputDeviceLabels(outputDevices.map((device) => device.label));
           })
-          .map((device) => {
-            const { label, groupId, deviceId } = device;
-
-            return {
-              label,
-              groupId,
-              deviceId
-            };
+          .catch((error: Error) => {
+            // eslint-disable-next-line no-console
+            console.error(error);
           });
-
-        const outputDevices = deviceInfos
-          .filter((deviceInfo) => {
-            return deviceInfo.kind === 'audiooutput';
-          })
-          .map((device) => {
-            const { label, groupId, deviceId } = device;
-
-            return {
-              label,
-              groupId,
-              deviceId
-            };
-          });
-
-        setInputDeviceIds(inputDevices.map((device) => device.deviceId));
-        setInputDeviceLabels(inputDevices.map((device) => device.label));
-        setOutputDeviceIds(outputDevices.map((device) => device.deviceId));
-        setOutputDeviceLabels(outputDevices.map((device) => device.label));
       })
       .catch((error: Error) => {
         // eslint-disable-next-line no-console
