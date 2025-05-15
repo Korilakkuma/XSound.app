@@ -213,140 +213,9 @@ export const SoundSourceFieldset: React.FC<Props> = ({ currentSoundSource }) => 
     [noteOn, noteOff]
   );
 
-  const onChangeSoundSourceCallback = useCallback(
-    (event: React.ChangeEvent<HTMLSelectElement>) => {
-      X('mixer').module('analyser').stop('time').domain('time').clear();
-      X('mixer').module('analyser').stop('fft').domain('fft').clear();
-      X('oneshot').module('analyser').stop('time').domain('time').clear();
-      X('oneshot').module('analyser').stop('fft').domain('fft').clear();
-      X('audio').module('analyser').stop('time').domain('time').clear();
-      X('audio').module('analyser').stop('fft').domain('fft').clear();
-      X('stream').module('analyser').stop('time').domain('time').clear();
-      X('stream').module('analyser').stop('fft').domain('fft').clear();
-
-      const source = event.currentTarget.value;
-
-      switch (source) {
-        case 'oscillator':
-        case 'piano':
-        case 'guitar':
-        case 'electric-guitar':
-        case 'orgel':
-        case 'whitenoise':
-        case 'pinknoise':
-        case 'browniannoise':
-        case 'stream':
-        case 'midi':
-          break;
-        default:
-          return;
-      }
-
-      if (!source.endsWith('noise')) {
-        X('noise').module('analyser').stop('time').domain('time').clear();
-        X('noise').module('analyser').stop('fft').domain('fft').clear();
-      }
-
-      dispatch(changeCurrentSoundSource(source));
-
-      X('stream').clear();
-
-      switch (source) {
-        case 'stream': {
-          X('stream')
-            .setup({ ...CONSTRAINTS, ...overrideConstraints })
-            .ready()
-            .then(() => {
-              X('stream').start();
-            })
-            .catch((error: Error) => {
-              // eslint-disable-next-line no-console
-              console.error(error);
-            });
-
-          break;
-        }
-
-        case 'midi': {
-          X('midi').setup({
-            options: {
-              sysex: true
-            },
-            successCallback: (midiAccess: MIDIAccess, inputs: MIDIInput[], outputs: MIDIOutput[]) => {
-              successCallback(midiAccess, inputs, outputs);
-            },
-            errorCallback: () => {
-              setErrorMessage('Cannot use Web MIDI API.');
-              setIsShowModalForMIDIError(true);
-            }
-          });
-
-          break;
-        }
-
-        default: {
-          break;
-        }
-      }
-    },
-    [dispatch, successCallback, overrideConstraints]
-  );
-
-  const onChangeInputDeviceCallback = useCallback(
-    (event: React.ChangeEvent<HTMLSelectElement>) => {
-      X('stream').clearAudioDevices();
-
-      const deviceId = event.currentTarget.value;
-
-      const constraints: MediaStreamConstraints = {
-        audio: {
-          deviceId,
-          ...CONSTRAINTS.audio
-        },
-        video: false,
-        ...overrideConstraints
-      };
-
-      X('stream')
-        .setup(constraints)
-        .ready()
-        .then(() => {
-          X('stream').start();
-        })
-        .catch((error: Error) => {
-          // eslint-disable-next-line no-console
-          console.error(error);
-        });
-    },
-    [overrideConstraints]
-  );
-
-  const onChangeOutputDeviceCallback = useCallback((event: React.ChangeEvent<HTMLSelectElement>) => {
-    const deviceId = event.currentTarget.value;
-
-    if (deviceId === '' || deviceId === 'default') {
-      X('stream').audioDestination();
-    } else {
-      X('stream').streamDestination();
-    }
-
-    // eslint-disable-next-line no-console
-    X('stream').setSinkId(deviceId, () => {}, console.error);
-  }, []);
-
-  const onCloseModalCallback = useCallback(() => {
-    setErrorMessage('');
-    setIsShowModalForMIDIError(false);
-  }, []);
-
-  useEffect(() => {
-    // HACK: for Firefox
-    if (X('stream') === null) {
-      return;
-    }
-
+  const onSetupMediaStreamCallback = useCallback((constraints: MediaStreamConstraints) => {
     X('stream')
-      .setup(CONSTRAINTS)
+      .setup(constraints)
       .ready()
       .then(() => {
         X('stream')
@@ -399,6 +268,122 @@ export const SoundSourceFieldset: React.FC<Props> = ({ currentSoundSource }) => 
         console.error(error);
       });
   }, []);
+
+  const onChangeSoundSourceCallback = useCallback(
+    (event: React.ChangeEvent<HTMLSelectElement>) => {
+      X('mixer').module('analyser').stop('time').domain('time').clear();
+      X('mixer').module('analyser').stop('fft').domain('fft').clear();
+      X('oneshot').module('analyser').stop('time').domain('time').clear();
+      X('oneshot').module('analyser').stop('fft').domain('fft').clear();
+      X('audio').module('analyser').stop('time').domain('time').clear();
+      X('audio').module('analyser').stop('fft').domain('fft').clear();
+      X('stream').module('analyser').stop('time').domain('time').clear();
+      X('stream').module('analyser').stop('fft').domain('fft').clear();
+
+      const source = event.currentTarget.value;
+
+      switch (source) {
+        case 'oscillator':
+        case 'piano':
+        case 'guitar':
+        case 'electric-guitar':
+        case 'orgel':
+        case 'whitenoise':
+        case 'pinknoise':
+        case 'browniannoise':
+        case 'stream':
+        case 'midi':
+          break;
+        default:
+          return;
+      }
+
+      if (!source.endsWith('noise')) {
+        X('noise').module('analyser').stop('time').domain('time').clear();
+        X('noise').module('analyser').stop('fft').domain('fft').clear();
+      }
+
+      dispatch(changeCurrentSoundSource(source));
+
+      X('stream').clear();
+
+      switch (source) {
+        case 'stream': {
+          onSetupMediaStreamCallback({ ...CONSTRAINTS, ...overrideConstraints });
+          break;
+        }
+
+        case 'midi': {
+          X('midi').setup({
+            options: {
+              sysex: true
+            },
+            successCallback: (midiAccess: MIDIAccess, inputs: MIDIInput[], outputs: MIDIOutput[]) => {
+              successCallback(midiAccess, inputs, outputs);
+            },
+            errorCallback: () => {
+              setErrorMessage('Cannot use Web MIDI API.');
+              setIsShowModalForMIDIError(true);
+            }
+          });
+
+          break;
+        }
+
+        default: {
+          break;
+        }
+      }
+    },
+    [dispatch, successCallback, overrideConstraints, onSetupMediaStreamCallback]
+  );
+
+  const onChangeInputDeviceCallback = useCallback(
+    (event: React.ChangeEvent<HTMLSelectElement>) => {
+      X('stream').clearAudioDevices();
+
+      const deviceId = event.currentTarget.value;
+
+      const constraints: MediaStreamConstraints = {
+        audio: {
+          deviceId,
+          ...CONSTRAINTS.audio
+        },
+        video: false,
+        ...overrideConstraints
+      };
+
+      onSetupMediaStreamCallback(constraints);
+    },
+    [overrideConstraints, onSetupMediaStreamCallback]
+  );
+
+  const onChangeOutputDeviceCallback = useCallback((event: React.ChangeEvent<HTMLSelectElement>) => {
+    const deviceId = event.currentTarget.value;
+
+    if (deviceId === '' || deviceId === 'default') {
+      X('stream').audioDestination();
+    } else {
+      X('stream').streamDestination();
+    }
+
+    // eslint-disable-next-line no-console
+    X('stream').setSinkId(deviceId, () => {}, console.error);
+  }, []);
+
+  const onCloseModalCallback = useCallback(() => {
+    setErrorMessage('');
+    setIsShowModalForMIDIError(false);
+  }, []);
+
+  useEffect(() => {
+    // HACK: for Firefox
+    if (X('stream') === null) {
+      return;
+    }
+
+    onSetupMediaStreamCallback(CONSTRAINTS);
+  }, [onSetupMediaStreamCallback]);
 
   return (
     <div className='SoundSourceFieldset'>
