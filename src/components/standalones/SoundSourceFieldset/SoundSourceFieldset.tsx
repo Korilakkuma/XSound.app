@@ -213,61 +213,68 @@ export const SoundSourceFieldset: React.FC<Props> = ({ currentSoundSource }) => 
     [noteOn, noteOff]
   );
 
-  const onSetupMediaStreamCallback = useCallback((constraints: MediaStreamConstraints) => {
-    X('stream')
-      .setup(constraints)
-      .ready()
-      .then(() => {
-        X('stream')
-          .devices()
-          .then((deviceInfos) => {
-            if (!deviceInfos) {
-              return;
-            }
+  const onSetupMediaStreamCallback = useCallback(
+    (constraints: MediaStreamConstraints) => {
+      X('stream')
+        .setup(constraints)
+        .ready()
+        .then(() => {
+          X('stream')
+            .devices()
+            .then((deviceInfos) => {
+              if (!deviceInfos) {
+                return;
+              }
 
-            const inputDevices = deviceInfos
-              .filter((deviceInfo) => {
-                return deviceInfo.kind === 'audioinput';
-              })
-              .map((device) => {
-                const { label, groupId, deviceId } = device;
+              const inputDevices = deviceInfos
+                .filter((deviceInfo) => {
+                  return deviceInfo.kind === 'audioinput';
+                })
+                .map((device) => {
+                  const { label, groupId, deviceId } = device;
 
-                return {
-                  label,
-                  groupId,
-                  deviceId
-                };
-              });
+                  return {
+                    label,
+                    groupId,
+                    deviceId
+                  };
+                });
 
-            const outputDevices = deviceInfos
-              .filter((deviceInfo) => {
-                return deviceInfo.kind === 'audiooutput';
-              })
-              .map((device) => {
-                const { label, groupId, deviceId } = device;
+              const outputDevices = deviceInfos
+                .filter((deviceInfo) => {
+                  return deviceInfo.kind === 'audiooutput';
+                })
+                .map((device) => {
+                  const { label, groupId, deviceId } = device;
 
-                return {
-                  label,
-                  groupId,
-                  deviceId
-                };
-              });
+                  return {
+                    label,
+                    groupId,
+                    deviceId
+                  };
+                });
 
-            setInputDeviceIds(inputDevices.map((device) => device.deviceId));
-            setInputDeviceLabels(inputDevices.map((device) => device.label));
-            setOutputDeviceIds(outputDevices.map((device) => device.deviceId));
-            setOutputDeviceLabels(outputDevices.map((device) => device.label));
-          })
-          .catch((error: Error) => {
-            // eslint-disable-next-line no-console
-            console.error(error);
-          });
-      })
-      .catch((error: Error) => {
-        // eslint-disable-next-line no-console
-        console.error(error);
-      });
-  }, []);
+              setInputDeviceIds(inputDevices.map((device) => device.deviceId));
+              setInputDeviceLabels(inputDevices.map((device) => device.label));
+              setOutputDeviceIds(outputDevices.map((device) => device.deviceId));
+              setOutputDeviceLabels(outputDevices.map((device) => device.label));
+
+              if (currentSoundSource === 'stream') {
+                X('stream').start();
+              }
+            })
+            .catch((error: Error) => {
+              // eslint-disable-next-line no-console
+              console.error(error);
+            });
+        })
+        .catch((error: Error) => {
+          // eslint-disable-next-line no-console
+          console.error(error);
+        });
+    },
+    [currentSoundSource]
+  );
 
   const onChangeSoundSourceCallback = useCallback(
     (event: React.ChangeEvent<HTMLSelectElement>) => {
@@ -358,18 +365,25 @@ export const SoundSourceFieldset: React.FC<Props> = ({ currentSoundSource }) => 
     [overrideConstraints, onSetupMediaStreamCallback]
   );
 
-  const onChangeOutputDeviceCallback = useCallback((event: React.ChangeEvent<HTMLSelectElement>) => {
-    const deviceId = event.currentTarget.value;
+  const onChangeOutputDeviceCallback = useCallback(
+    (event: React.ChangeEvent<HTMLSelectElement>) => {
+      const deviceId = event.currentTarget.value;
 
-    if (deviceId === '' || deviceId === 'default') {
-      X('stream').audioDestination();
-    } else {
-      X('stream').streamDestination();
-    }
+      if (deviceId === '' || deviceId === 'default') {
+        X('stream').audioDestination();
+      } else {
+        X('stream').streamDestination();
+      }
 
-    // eslint-disable-next-line no-console
-    X('stream').setSinkId(deviceId, () => {}, console.error);
-  }, []);
+      // eslint-disable-next-line no-console
+      X('stream').setSinkId(deviceId, () => {}, console.error);
+
+      if (currentSoundSource === 'stream') {
+        X('stream').start();
+      }
+    },
+    [currentSoundSource]
+  );
 
   const onCloseModalCallback = useCallback(() => {
     setErrorMessage('');
