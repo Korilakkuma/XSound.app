@@ -346,37 +346,14 @@ export const SoundSourceFieldset: React.FC<Props> = ({ currentSoundSource }) => 
   );
 
   const onChangeInputDeviceCallback = useCallback(
-    (event: React.ChangeEvent<HTMLSelectElement>) => {
+    async (event: React.ChangeEvent<HTMLSelectElement>) => {
       X('stream').clearAudioDevices();
 
       const deviceId = event.currentTarget.value;
 
-      const constraints: MediaStreamConstraints = {
-        audio: {
-          deviceId,
-          ...CONSTRAINTS.audio
-        },
-        video: false,
-        ...overrideConstraints
-      };
+      X('stream').setInputDeviceId(deviceId);
 
-      onSetupMediaStreamCallback(constraints);
-    },
-    [overrideConstraints, onSetupMediaStreamCallback]
-  );
-
-  const onChangeOutputDeviceCallback = useCallback(
-    (event: React.ChangeEvent<HTMLSelectElement>) => {
-      const deviceId = event.currentTarget.value;
-
-      if (deviceId === '' || deviceId === 'default') {
-        X('stream').audioDestination();
-      } else {
-        X('stream').streamDestination();
-      }
-
-      // eslint-disable-next-line no-console
-      X('stream').setSinkId(deviceId, () => {}, console.error);
+      await X('stream').ready();
 
       if (currentSoundSource === 'stream') {
         X('stream').start();
@@ -384,6 +361,25 @@ export const SoundSourceFieldset: React.FC<Props> = ({ currentSoundSource }) => 
     },
     [currentSoundSource]
   );
+
+  const onChangeOutputDeviceCallback = useCallback((event: React.ChangeEvent<HTMLSelectElement>) => {
+    const deviceId = event.currentTarget.value;
+
+    if (deviceId === '' || deviceId === 'default') {
+      X('stream').audioDestination();
+    } else {
+      X('stream').streamDestination({
+        sinkId: deviceId,
+        successCallback: () => {
+          /* Noop */
+        },
+        errorCallback: (error: Error) => {
+          // eslint-disable-next-line no-console
+          console.error(error);
+        }
+      });
+    }
+  }, []);
 
   const onCloseModalCallback = useCallback(() => {
     setErrorMessage('');
