@@ -2,7 +2,7 @@ import type React from 'react';
 
 import { FileUploader } from '/src/components/atoms/FileUploader';
 
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react-vite';
 
 export default {
   component: FileUploader

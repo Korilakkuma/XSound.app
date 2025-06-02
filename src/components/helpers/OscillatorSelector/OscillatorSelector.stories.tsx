@@ -3,7 +3,7 @@ import { useCallback, useState } from 'react';
 
 import { OscillatorSelector } from '/src/components/helpers/OscillatorSelector';
 
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react-vite';
 
 export default {
   component: OscillatorSelector

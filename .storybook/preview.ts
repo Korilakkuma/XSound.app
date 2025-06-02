@@ -1,4 +1,4 @@
-import type { Preview } from '@storybook/react';
+import type { Preview } from '@storybook/react-vite';
 import '/src/main.css';
 
 export const parameters: Preview = {
@@ -6,3 +6,4 @@ export const parameters: Preview = {
     actions: { argTypesRegex: '^on[A-Z].*' }
   }
 };
+export const tags = ['autodocs'];

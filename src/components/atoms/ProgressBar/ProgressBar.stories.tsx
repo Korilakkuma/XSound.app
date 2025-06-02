@@ -2,7 +2,7 @@ import React, { useMemo, useState } from 'react';
 
 import { ProgressBar } from '/src/components/atoms/ProgressBar';
 
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react-vite';
 
 export default {
   component: ProgressBar

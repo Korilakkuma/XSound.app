@@ -2,7 +2,7 @@ import { useState } from 'react';
 
 import { Switch } from '/src/components/atoms/Switch';
 
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react-vite';
 
 export default {
   component: Switch

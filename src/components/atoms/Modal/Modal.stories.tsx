@@ -2,7 +2,7 @@ import React, { useCallback, useState } from 'react';
 
 import { Modal } from '/src/components/atoms/Modal';
 
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react-vite';
 
 export default {
   component: Modal

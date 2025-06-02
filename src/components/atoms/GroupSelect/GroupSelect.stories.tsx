@@ -2,7 +2,7 @@ import type React from 'react';
 
 import { GroupSelect } from '/src/components/atoms/GroupSelect';
 
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react-vite';
 
 export default {
   component: GroupSelect

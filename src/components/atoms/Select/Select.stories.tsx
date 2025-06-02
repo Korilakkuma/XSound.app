@@ -2,7 +2,7 @@ import type React from 'react';
 
 import { Select } from '/src/components/atoms/Select';
 
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react-vite';
 
 export default {
   component: Select

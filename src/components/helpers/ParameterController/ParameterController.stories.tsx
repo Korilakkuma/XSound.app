@@ -2,7 +2,7 @@ import type React from 'react';
 
 import { ParameterController } from '/src/components/helpers/ParameterController';
 
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react-vite';
 
 export default {
   component: ParameterController

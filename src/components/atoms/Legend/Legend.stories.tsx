@@ -1,6 +1,6 @@
 import { Legend } from '/src/components/atoms/Legend';
 
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react-vite';
 
 export default {
   component: Legend

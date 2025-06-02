@@ -1,6 +1,6 @@
 import { Flexbox } from '/src/components/atoms/Flexbox';
 
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react-vite';
 
 export default {
   component: Flexbox

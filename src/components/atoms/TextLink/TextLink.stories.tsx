@@ -1,6 +1,6 @@
 import { TextLink } from '/src/components/atoms/TextLink';
 
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react-vite';
 
 export default {
   component: TextLink
