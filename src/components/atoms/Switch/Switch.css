@@ -41,7 +41,7 @@
   overflow: hidden;
   white-space: nowrap;
   border: none;
-  clip: rect(0, 0, 0, 0);
+  clip-path: inset(50%);
 }
 
 .Switch > input[type="checkbox"]:checked + label > span {
