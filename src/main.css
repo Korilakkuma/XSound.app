@@ -24,6 +24,7 @@
 @import url("./components/helpers/SpectrumAnalyser/SpectrumAnalyser.css");
 @import url("./components/helpers/TimeAnalyser/TimeAnalyser.css");
 @import url("./components/helpers/TimeOverviewer/TimeOverviewer.css");
+@import url("./components/standalones/AmpSimulatorFieldset/AmpSimulatorFieldset.css");
 @import url("./components/standalones/Analyser/Analyser.css");
 @import url("./components/standalones/AudioFieldset/AudioFieldset.css");
 @import url("./components/standalones/AutopanFieldset/AutopanFieldset.css");
@@ -43,7 +44,6 @@
 @import url("./components/standalones/OscillatorFieldset/OscillatorFieldset.css");
 @import url("./components/standalones/PhaserFieldset/PhaserFieldset.css");
 @import url("./components/standalones/Piano/Piano.css");
-@import url("./components/standalones/PreampFieldset/PreampFieldset.css");
 @import url("./components/standalones/RecorderFieldset/RecorderFieldset.css");
 @import url("./components/standalones/ReverbFieldset/ReverbFieldset.css");
 @import url("./components/standalones/RingModulatorFieldset/RingModulatorFieldset.css");

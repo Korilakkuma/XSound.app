@@ -6,6 +6,7 @@ import { AJAX_TIMEOUT, BASE_URL, NUMBER_OF_CHANNELS, NUMBER_OF_ONESHOTS, NUMBER_
 import { Grid } from '/src/components/atoms/Grid';
 import { Modal } from '/src/components/atoms/Modal';
 import { VerticalBox } from '/src/components/atoms/VerticalBox';
+import { AmpSimulatorFieldset } from '/src/components/standalones/AmpSimulatorFieldset';
 import { Analyser } from '/src/components/standalones/Analyser';
 import { AudioFieldset } from '/src/components/standalones/AudioFieldset';
 import { AutopanFieldset } from '/src/components/standalones/AutopanFieldset';
@@ -25,7 +26,6 @@ import { NoiseSuppressorFieldset } from '/src/components/standalones/NoiseSuppre
 import { OscillatorFieldset } from '/src/components/standalones/OscillatorFieldset';
 import { PhaserFieldset } from '/src/components/standalones/PhaserFieldset';
 import { Piano } from '/src/components/standalones/Piano';
-import { PreampFieldset } from '/src/components/standalones/PreampFieldset';
 import { RecorderFieldset } from '/src/components/standalones/RecorderFieldset';
 import { ReverbFieldset } from '/src/components/standalones/ReverbFieldset';
 import { RingModulatorFieldset } from '/src/components/standalones/RingModulatorFieldset';
@@ -1566,7 +1566,7 @@ export const App: React.FC = () => {
           </VerticalBox>
           <VerticalBox>
             <BoosterFieldset />
-            <PreampFieldset />
+            <AmpSimulatorFieldset />
           </VerticalBox>
           <VerticalBox>
             <FilterFieldset />

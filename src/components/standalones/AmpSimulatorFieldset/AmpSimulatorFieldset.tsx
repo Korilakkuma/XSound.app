@@ -10,7 +10,7 @@ import { Switch } from '/src/components/atoms/Switch';
 import { Select } from '/src/components/atoms/Select';
 import { ParameterController } from '/src/components/helpers/ParameterController';
 
-export const PreampFieldset: React.FC = () => {
+export const AmpSimulatorFieldset: React.FC = () => {
   const [preamp, setPreamp] = useState<boolean>(false);
   const [preampType, setPreampType] = useState<PreampType>('marshall');
 
@@ -413,10 +413,10 @@ export const PreampFieldset: React.FC = () => {
   );
 
   return (
-    <div className='PreampFieldset'>
+    <div className='AmpSimulatorFieldset'>
       <Fieldset>
         <Legend>
-          <Switch label='Preamp' checked={preamp} labelAsText={false} onChange={onChangeStateCallback} />
+          <Switch label='Amp Simulator' checked={preamp} labelAsText={false} onChange={onChangeStateCallback} />
         </Legend>
         <Select
           label='Select Preamplifier'
