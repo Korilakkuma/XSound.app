@@ -12,6 +12,7 @@ import { ParameterController } from '/src/components/helpers/ParameterController
 
 export const AmpSimulatorFieldset: React.FC = () => {
   const [preamp, setPreamp] = useState<boolean>(false);
+  const [cabinet, setCabinet] = useState<boolean>(false);
   const [preampType, setPreampType] = useState<PreampType>('marshall');
 
   const onChangeStateCallback = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
@@ -32,6 +33,7 @@ export const AmpSimulatorFieldset: React.FC = () => {
     }
 
     setPreamp(checked);
+    setCabinet(checked);
   }, []);
 
   const onChangePreamplifier = useCallback(
@@ -49,7 +51,7 @@ export const AmpSimulatorFieldset: React.FC = () => {
               samples: 8192,
               pre: { state: true, gain: 0.5, lead: 0.5 },
               post: { state: true },
-              cabinet: { state: true }
+              cabinet: { state: cabinet }
             }
           };
 
@@ -86,7 +88,7 @@ export const AmpSimulatorFieldset: React.FC = () => {
                 fc1600: 0,
                 fc4800: 0
               },
-              cabinet: { state: true }
+              cabinet: { state: cabinet }
             }
           };
 
@@ -120,7 +122,7 @@ export const AmpSimulatorFieldset: React.FC = () => {
                 inch: 12,
                 tilt: true
               },
-              cabinet: { state: true }
+              cabinet: { state: cabinet }
             }
           };
 
@@ -135,7 +137,7 @@ export const AmpSimulatorFieldset: React.FC = () => {
         }
       }
     },
-    [preamp]
+    [preamp, cabinet]
   );
 
   const onChangeLevelCallback = useCallback(
@@ -412,6 +414,20 @@ export const AmpSimulatorFieldset: React.FC = () => {
     [preampType]
   );
 
+  const onChangeCabinet = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
+    const checked = event.currentTarget.checked;
+
+    const param = { preamp: { cabinet: { state: checked } } };
+
+    X('mixer').module('preamp').param(param);
+    X('oneshot').module('preamp').param(param);
+    X('audio').module('preamp').param(param);
+    X('stream').module('preamp').param(param);
+    X('noise').module('preamp').param(param);
+
+    setCabinet(checked);
+  }, []);
+
   return (
     <div className='AmpSimulatorFieldset'>
       <Fieldset>
@@ -452,6 +468,7 @@ export const AmpSimulatorFieldset: React.FC = () => {
             onChange={onChangeSpeakerSize}
           />
         ) : null}
+        <Switch label='Cabinet' checked={cabinet} labelAsText={true} onChange={onChangeCabinet} />
       </Fieldset>
     </div>
   );
