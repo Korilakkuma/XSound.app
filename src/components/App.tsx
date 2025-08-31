@@ -1253,9 +1253,9 @@ export const App: React.FC = () => {
       X('mixer').module('overdrive'),
       X('mixer').module('fuzz'),
       X('mixer').module('preamp'),
+      X('mixer').module('noisesuppressor'),
       X('mixer').module('filter'),
       X('mixer').module('equalizer'),
-      X('mixer').module('noisesuppressor'),
       X('mixer').module('tremolo'),
       X('mixer').module('ringmodulator'),
       X('mixer').module('phaser'),
@@ -1275,9 +1275,9 @@ export const App: React.FC = () => {
       X('audio').module('overdrive'),
       X('audio').module('fuzz'),
       X('audio').module('preamp'),
+      X('audio').module('noisesuppressor'),
       X('audio').module('filter'),
       X('audio').module('equalizer'),
-      X('audio').module('noisesuppressor'),
       X('audio').module('tremolo'),
       X('audio').module('ringmodulator'),
       X('audio').module('phaser'),
@@ -1298,9 +1298,9 @@ export const App: React.FC = () => {
       X('stream').module('overdrive'),
       X('stream').module('fuzz'),
       X('stream').module('preamp'),
+      X('stream').module('noisesuppressor'),
       X('stream').module('filter'),
       X('stream').module('equalizer'),
-      X('stream').module('noisesuppressor'),
       X('stream').module('tremolo'),
       X('stream').module('ringmodulator'),
       X('stream').module('phaser'),
@@ -1317,9 +1317,9 @@ export const App: React.FC = () => {
       X('noise').module('overdrive'),
       X('noise').module('fuzz'),
       X('noise').module('preamp'),
+      X('noise').module('noisesuppressor'),
       X('noise').module('filter'),
       X('noise').module('equalizer'),
-      X('noise').module('noisesuppressor'),
       X('noise').module('tremolo'),
       X('noise').module('ringmodulator'),
       X('noise').module('phaser'),
@@ -1337,9 +1337,9 @@ export const App: React.FC = () => {
       X('oscillator').module('overdrive'),
       X('oscillator').module('fuzz'),
       X('oscillator').module('preamp'),
+      X('oscillator').module('noisesuppressor'),
       X('oscillator').module('filter'),
       X('oscillator').module('equalizer'),
-      X('oscillator').module('noisesuppressor'),
       X('oscillator').module('tremolo'),
       X('oscillator').module('ringmodulator'),
       X('oscillator').module('phaser'),
@@ -1356,9 +1356,9 @@ export const App: React.FC = () => {
       X('oscillator').module('overdrive'),
       X('oscillator').module('fuzz'),
       X('oscillator').module('preamp'),
+      X('oscillator').module('noisesuppressor'),
       X('oscillator').module('filter'),
       X('oscillator').module('equalizer'),
-      X('oscillator').module('noisesuppressor'),
       X('oscillator').module('tremolo'),
       X('oscillator').module('ringmodulator'),
       X('oscillator').module('phaser'),
@@ -1567,11 +1567,11 @@ export const App: React.FC = () => {
           <VerticalBox>
             <BoosterFieldset />
             <AmpSimulatorFieldset />
+            <NoiseSuppressorFieldset />
           </VerticalBox>
           <VerticalBox>
             <FilterFieldset />
             <EqualizerFieldset />
-            <NoiseSuppressorFieldset />
           </VerticalBox>
           <VerticalBox>
             <TremoloFieldset />
