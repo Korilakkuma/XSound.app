@@ -10,7 +10,8 @@ import {
   downBassKeyboards,
   downMelodyKeyboards,
   upBassKeyboards,
-  upMelodyKeyboards
+  upMelodyKeyboards,
+  setMasterVolume
 } from '/src/slices';
 
 describe('activeMIDIKeyboardsReducer', () => {
@@ -92,5 +93,21 @@ describe('oscillatorStatesReducer', () => {
     const state = reducer(initialState, action);
 
     expect(state.oscillatorStates).toStrictEqual([false, true]);
+  });
+});
+
+describe('mastervolumeReducer', () => {
+  test('should return decreased mastervolume`', () => {
+    const action = setMasterVolume(0.25);
+    const state = reducer(initialState, action);
+
+    expect(state.mastervolume).toBeCloseTo(0.25, 2);
+  });
+
+  test('should return increased mastervolume', () => {
+    const action = setMasterVolume(0.95);
+    const state = reducer({ ...initialState, mastervolume: 0.1 }, action);
+
+    expect(state.mastervolume).toBeCloseTo(0.95, 2);
   });
 });

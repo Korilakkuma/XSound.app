@@ -13,6 +13,7 @@ export type State = {
   oscillatorStates: [boolean, boolean];
   upBassKeyboardIndexes: number[];
   upMelodyKeyboardIndexes: number[];
+  mastervolume: number;
 };
 
 export const initialState: State = {
@@ -24,7 +25,8 @@ export const initialState: State = {
   mmlState: false,
   oscillatorStates: [true, false],
   upBassKeyboardIndexes: [],
-  upMelodyKeyboardIndexes: []
+  upMelodyKeyboardIndexes: [],
+  mastervolume: 1
 };
 
 const slice = createSlice({
@@ -69,6 +71,9 @@ const slice = createSlice({
     },
     upMelodyKeyboards: (state: State, action: PayloadAction<number[]>) => {
       state.upMelodyKeyboardIndexes = action.payload;
+    },
+    setMasterVolume: (state: State, action: PayloadAction<number>) => {
+      state.mastervolume = action.payload;
     }
   }
 });
@@ -83,7 +88,8 @@ export const {
   downBassKeyboards,
   downMelodyKeyboards,
   upBassKeyboards,
-  upMelodyKeyboards
+  upMelodyKeyboards,
+  setMasterVolume
 } = slice.actions;
 
 export const reducer = slice.reducer;

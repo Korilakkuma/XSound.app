@@ -2,8 +2,10 @@ import type React from 'react';
 import type { PreampType, PreampParams } from 'xsound';
 
 import { useCallback, useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { X } from 'xsound';
 
+import { setMasterVolume } from '/src/slices';
 import { Fieldset } from '/src/components/atoms/Fieldset';
 import { Legend } from '/src/components/atoms/Legend';
 import { Switch } from '/src/components/atoms/Switch';
@@ -15,26 +17,51 @@ export const AmpSimulatorFieldset: React.FC = () => {
   const [cabinet, setCabinet] = useState<boolean>(false);
   const [preampType, setPreampType] = useState<PreampType>('marshall');
 
-  const onChangeStateCallback = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
-    const checked = event.currentTarget.checked;
+  const dispatch = useDispatch();
 
-    if (checked) {
-      X('mixer').module('preamp').activate();
-      X('oneshot').module('preamp').activate();
-      X('audio').module('preamp').activate();
-      X('stream').module('preamp').activate();
-      X('noise').module('preamp').activate();
-    } else {
-      X('mixer').module('preamp').deactivate();
-      X('oneshot').module('preamp').deactivate();
-      X('audio').module('preamp').deactivate();
-      X('stream').module('preamp').deactivate();
-      X('noise').module('preamp').deactivate();
-    }
+  const onChangeStateCallback = useCallback(
+    (event: React.ChangeEvent<HTMLInputElement>) => {
+      const checked = event.currentTarget.checked;
 
-    setPreamp(checked);
-    setCabinet(checked);
-  }, []);
+      if (checked) {
+        X('mixer').module('preamp').activate();
+        X('oneshot').module('preamp').activate();
+        X('audio').module('preamp').activate();
+        X('stream').module('preamp').activate();
+        X('noise').module('preamp').activate();
+
+        const mastervolume = { mastervolume: 0.2 };
+
+        X('mixer').param(mastervolume);
+        X('oneshot').param(mastervolume);
+        X('audio').param(mastervolume);
+        X('stream').param(mastervolume);
+        X('noise').param(mastervolume);
+
+        dispatch(setMasterVolume(0.2));
+      } else {
+        X('mixer').module('preamp').deactivate();
+        X('oneshot').module('preamp').deactivate();
+        X('audio').module('preamp').deactivate();
+        X('stream').module('preamp').deactivate();
+        X('noise').module('preamp').deactivate();
+
+        const mastervolume = { mastervolume: 1 };
+
+        X('mixer').param(mastervolume);
+        X('oneshot').param(mastervolume);
+        X('audio').param(mastervolume);
+        X('stream').param(mastervolume);
+        X('noise').param(mastervolume);
+
+        dispatch(setMasterVolume(1));
+      }
+
+      setPreamp(checked);
+      setCabinet(checked);
+    },
+    [dispatch]
+  );
 
   const onChangePreamplifier = useCallback(
     (event: React.ChangeEvent<HTMLSelectElement>) => {

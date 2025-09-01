@@ -32,6 +32,7 @@ export const SoundSourceFieldset: React.FC<Props> = ({ currentSoundSource }) => 
 
   const dispatch = useDispatch();
 
+  const mastervolume = useSelector((state: RootState) => state.mastervolume);
   const activeMIDIKeyboardIndexes = useSelector((state: RootState) => state.activeMIDIKeyboardIndexes);
 
   const storage = useMemo(() => {
@@ -397,7 +398,15 @@ export const SoundSourceFieldset: React.FC<Props> = ({ currentSoundSource }) => 
 
   return (
     <div className='SoundSourceFieldset'>
-      <ParameterController label='Master Volume' autoupdate={false} defaultValue={1} min={0} max={1} step={0.05} onChange={onChangeMasterVolumeCallback} />
+      <ParameterController
+        label='Master Volume'
+        autoupdate={true}
+        defaultValue={mastervolume}
+        min={0}
+        max={1}
+        step={0.05}
+        onChange={onChangeMasterVolumeCallback}
+      />
       <Select
         label='Select Sound Source'
         values={['oscillator', 'piano', 'guitar', 'electric-guitar', 'orgel', 'whitenoise', 'pinknoise', 'browniannoise', 'stream', 'midi']}
