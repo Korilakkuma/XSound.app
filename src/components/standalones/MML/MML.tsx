@@ -43,6 +43,8 @@ export const MML: React.FC<Props> = ({ loadedApp, currentSoundSource }) => {
   const [rate, setRate] = useState<number>(0);
   const [values, setValues] = useState<string[]>(['{"melody":"","bass":""}']);
   const [texts, setTexts] = useState<string[]>(['SAMPLE MML']);
+  const [title, setTitle] = useState<string>('');
+  const [artist, setArtist] = useState<string>('');
   const [errorMessage, setErrorMessage] = useState<string>('');
   const [errorMessageForMMLMelody, setErrorMessageForMMLMelody] = useState<string>('');
   const [errorMessageForMMLBass, setErrorMessageForMMLBass] = useState<string>('');
@@ -301,7 +303,7 @@ export const MML: React.FC<Props> = ({ loadedApp, currentSoundSource }) => {
       const file = X.file({
         event: event.nativeEvent,
         type: 'json',
-        successCallback: (_: ProgressEvent, mmls: ReturnType<typeof JSON.parse>) => {
+        successCallback: (_: ProgressEvent, mmls: MMLDescriptor) => {
           event.nativeEvent.target.value = '';
 
           if (melody || bass) {
@@ -315,6 +317,9 @@ export const MML: React.FC<Props> = ({ loadedApp, currentSoundSource }) => {
             setMelody(mmls.melody);
             setBass(mmls.bass);
           }
+
+          setTitle(mmls.title);
+          setArtist(mmls.artist);
 
           setShowProgress(false);
           setIsShowModalForProgress(false);
@@ -366,7 +371,7 @@ export const MML: React.FC<Props> = ({ loadedApp, currentSoundSource }) => {
       const file = X.drop({
         event: event.nativeEvent,
         type: 'json',
-        successCallback: (_: ProgressEvent, mmls: ReturnType<typeof JSON.parse>) => {
+        successCallback: (_: ProgressEvent, mmls: MMLDescriptor) => {
           if (melody || bass) {
             savedMMLs[0] = mmls.melody;
             savedMMLs[1] = mmls.bass;
@@ -378,6 +383,9 @@ export const MML: React.FC<Props> = ({ loadedApp, currentSoundSource }) => {
             setMelody(mmls.melody);
             setBass(mmls.bass);
           }
+
+          setTitle(mmls.title);
+          setArtist(mmls.artist);
 
           setShowProgress(false);
           setIsShowModalForProgress(false);
@@ -531,6 +539,11 @@ export const MML: React.FC<Props> = ({ loadedApp, currentSoundSource }) => {
 
   return (
     <div id='mml-fieldset' aria-hidden={!active} className={`MML${active ? ' -active' : ''}`}>
+      {title || artist ? (
+        <h2 className={'MML__heading'}>
+          {title} | {artist}
+        </h2>
+      ) : null}
       <div
         className={`MML__editor${drag ? ' -drag' : ''}`}
         onDragEnter={onDragEnterCallback}
