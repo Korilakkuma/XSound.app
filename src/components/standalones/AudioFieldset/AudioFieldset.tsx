@@ -250,8 +250,9 @@ export const AudioFieldset: React.FC<Props> = (props: Props) => {
       <Fieldset>
         <Legend>Audio</Legend>
         <div className='AudioFieldset__selectAudio'>
+          {/* for iOS Safari */}
           <FileUploader
-            accept='audo/wav, audio/ogg, audio/mpeg, audio/*'
+            accept='audo/wav, audio/ogg, audio/mpeg, audio/x-m4a, audio/*'
             disabled={false}
             placeholder='Audio File (wav, ogg, mp3 ... etc)'
             filename={filename}
