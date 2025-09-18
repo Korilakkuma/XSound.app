@@ -154,26 +154,28 @@ export const Analyser: React.FC<Props> = (props: Props) => {
       </div>
       <div className='Analyser__controllers'>
         <Switch label='Audio Sprite' checked={analyser} labelAsText={true} tabIndex={active ? 0 : -1} onChange={onChangeModeCallback} />
-        <ParameterController
-          label='Interval'
-          autoupdate={false}
-          defaultValue={0}
-          min={0}
-          max={1000}
-          step={10}
-          tabIndex={active ? 0 : -1}
-          onChange={onChangeIntervalCallback}
-        />
-        <ParameterController
-          label='Smoothing'
-          autoupdate={false}
-          defaultValue={0.8}
-          min={0}
-          max={1}
-          step={0.05}
-          tabIndex={active ? 0 : -1}
-          onChange={onChangeSmoothingCallback}
-        />
+        <div className='Analyser__updater'>
+          <ParameterController
+            label='Interval'
+            autoupdate={false}
+            defaultValue={0}
+            min={0}
+            max={1000}
+            step={10}
+            tabIndex={active ? 0 : -1}
+            onChange={onChangeIntervalCallback}
+          />
+          <ParameterController
+            label='Smoothing'
+            autoupdate={false}
+            defaultValue={0.8}
+            min={0}
+            max={1}
+            step={0.05}
+            tabIndex={active ? 0 : -1}
+            onChange={onChangeSmoothingCallback}
+          />
+        </div>
       </div>
     </div>
   );
