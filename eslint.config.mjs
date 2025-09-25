@@ -66,10 +66,6 @@ export default tseslint.config(
     ],
     rules: {
       'default-param-last': 'off',
-      'indent': ['error', 2, {
-        'ignoredNodes': ['TemplateLiteral'],
-        'SwitchCase': 1
-      }],
       'key-spacing': 'off',
       'no-case-declarations': 'error',
       'no-console': 'warn',
