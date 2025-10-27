@@ -104,9 +104,11 @@ export const Piano: React.FC<Props> = ({ loadedApp, currentSoundSource }) => {
           break;
       }
 
-      downKeyboards[index] = true;
+      const keyboards = downKeyboards.slice(0);
 
-      setDownKeyboards([...downKeyboards]);
+      keyboards[index] = true;
+
+      setDownKeyboards(keyboards);
       setIsDown(true);
     },
     [currentSoundSource, downKeyboards, isDown]
@@ -161,9 +163,10 @@ export const Piano: React.FC<Props> = ({ loadedApp, currentSoundSource }) => {
           break;
       }
 
+      // eslint-disable-next-line react-hooks/immutability
       downKeyboards[index] = false;
 
-      setDownKeyboards([...downKeyboards]);
+      setDownKeyboards(downKeyboards);
 
       if (event.type === 'mouseup' || event.type === 'touchend') {
         setIsDown(false);
@@ -183,7 +186,7 @@ export const Piano: React.FC<Props> = ({ loadedApp, currentSoundSource }) => {
         break;
     }
 
-    setDownKeyboards([...downKeyboards.map(() => false)]);
+    setDownKeyboards(downKeyboards.map(() => false));
     setIsDown(false);
   }, [currentSoundSource, downKeyboards]);
 

@@ -1,5 +1,5 @@
 import type React from 'react';
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 
 import type { RecordType, QuantizationBit, WaveExportType } from 'xsound';
 
@@ -15,13 +15,7 @@ import { Select } from '/src/components/atoms/Select';
 import { ParameterController } from '/src/components/helpers/ParameterController';
 import { SelectableModal } from '/src/components/helpers/SelectableModal';
 
-export type Props = {
-  loadedApp: boolean;
-};
-
-export const RecorderFieldset: React.FC<Props> = (props: Props) => {
-  const { loadedApp } = props;
-
+export const RecorderFieldset: React.FC = () => {
   const [activeTrack, setActiveTrack] = useState<number>(-1);
   const [objectURL, setObjectURL] = useState<string>('');
   const [running, setRunning] = useState<boolean>(false);
@@ -269,14 +263,6 @@ export const RecorderFieldset: React.FC<Props> = (props: Props) => {
     X('stream').module('recorder').param({ '1': event.currentTarget.valueAsNumber });
     X('noise').module('recorder').param({ '1': event.currentTarget.valueAsNumber });
   }, []);
-
-  useEffect(() => {
-    if (!loadedApp || activeTrack > -1) {
-      return;
-    }
-
-    setActiveTrack(0);
-  }, [loadedApp, activeTrack]);
 
   return (
     <div className='RecorderFieldset'>

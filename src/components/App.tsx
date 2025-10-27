@@ -1548,13 +1548,13 @@ export const App: React.FC = () => {
             <EnvelopeGeneratorFieldset />
           </VerticalBox>
           <VerticalBox>
-            <RecorderFieldset loadedApp={loadedApp} />
+            <RecorderFieldset />
           </VerticalBox>
           <VerticalBox>
-            <AudioFieldset loadedApp={loadedApp} />
+            <AudioFieldset />
           </VerticalBox>
         </Grid>
-        <Analyser loadedApp={loadedApp} />
+        <Analyser />
         <MML loadedApp={loadedApp} currentSoundSource={currentSoundSource} />
         <SoundSourceFieldset currentSoundSource={currentSoundSource} />
         <BasicControllers />

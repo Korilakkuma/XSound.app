@@ -28,7 +28,6 @@ const CLEAR_HIGHLIGHT_REGEXP = /<span class="x-highlight">(.+?)<\/span>/g;
 const savedMMLs = ['', ''];
 
 export const MML: React.FC<Props> = ({ loadedApp, currentSoundSource }) => {
-  const [loaded, setLoaded] = useState<boolean>(false);
   const [paused, setPaused] = useState<boolean>(true);
   const [highlight, setHighlight] = useState<boolean>(false);
   const [melody, setMelody] = useState<string>('');
@@ -442,7 +441,7 @@ export const MML: React.FC<Props> = ({ loadedApp, currentSoundSource }) => {
   }, []);
 
   useEffect(() => {
-    if (!loadedApp || loaded) {
+    if (!loadedApp) {
       return;
     }
 
@@ -516,14 +515,9 @@ export const MML: React.FC<Props> = ({ loadedApp, currentSoundSource }) => {
       .catch((error: Error) => {
         // eslint-disable-next-line no-console
         console.error(error);
-      })
-      .finally(() => {
-        setLoaded(true);
       });
   }, [
     loadedApp,
-    loaded,
-    melody,
     bass,
     values,
     texts,
