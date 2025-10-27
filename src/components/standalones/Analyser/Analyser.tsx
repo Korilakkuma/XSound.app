@@ -14,14 +14,7 @@ import type { RootState } from '/src/store';
 import type { CustomizedParameters, VisualizerType } from '/src/types';
 import type { AnalyserParams } from 'xsound';
 
-export type Props = {
-  loadedApp: boolean;
-};
-
-export const Analyser: React.FC<Props> = (props: Props) => {
-  const { loadedApp } = props;
-
-  const [loaded, setLoaded] = useState<boolean>(false);
+export const Analyser: React.FC = () => {
   const [analyser, setAnalyser] = useState<boolean>(false);
 
   const active = useSelector((state: RootState) => state.analyserState);
@@ -110,47 +103,37 @@ export const Analyser: React.FC<Props> = (props: Props) => {
   }, []);
 
   useEffect(() => {
-    if (!loadedApp) {
-      return;
-    }
+    const analyserParams: AnalyserParams = {
+      fftSize: 2048,
+      minDecibels: -60,
+      maxDecibels: 0,
+      smoothingTimeConstant: 0.8
+    };
 
-    if (loaded) {
-      const analyserParams: AnalyserParams = {
-        fftSize: 2048,
-        minDecibels: -60,
-        maxDecibels: 0,
-        smoothingTimeConstant: 0.8
-      };
+    X('mixer').module('analyser').param(analyserParams);
+    X('oneshot').module('analyser').param(analyserParams);
+    X('audio').module('analyser').param(analyserParams);
+    X('stream').module('analyser').param(analyserParams);
+    X('noise').module('analyser').param(analyserParams);
 
-      X('mixer').module('analyser').param(analyserParams);
-      X('oneshot').module('analyser').param(analyserParams);
-      X('audio').module('analyser').param(analyserParams);
-      X('stream').module('analyser').param(analyserParams);
-      X('noise').module('analyser').param(analyserParams);
-
-      X('mixer').module('analyser').domain('time').activate();
-      X('mixer').module('analyser').domain('fft').activate();
-      X('oneshot').module('analyser').domain('time').activate();
-      X('oneshot').module('analyser').domain('fft').activate();
-      X('audio').module('analyser').domain('time').activate();
-      X('audio').module('analyser').domain('fft').activate();
-      X('stream').module('analyser').domain('time').activate();
-      X('stream').module('analyser').domain('fft').activate();
-      X('noise').module('analyser').domain('time').activate();
-      X('noise').module('analyser').domain('fft').activate();
-
-      return;
-    }
-
-    setLoaded(true);
-  }, [loadedApp, loaded, active]);
+    X('mixer').module('analyser').domain('time').activate();
+    X('mixer').module('analyser').domain('fft').activate();
+    X('oneshot').module('analyser').domain('time').activate();
+    X('oneshot').module('analyser').domain('fft').activate();
+    X('audio').module('analyser').domain('time').activate();
+    X('audio').module('analyser').domain('fft').activate();
+    X('stream').module('analyser').domain('time').activate();
+    X('stream').module('analyser').domain('fft').activate();
+    X('noise').module('analyser').domain('time').activate();
+    X('noise').module('analyser').domain('fft').activate();
+  }, []);
 
   return (
     <div id='analyser-fieldset' aria-hidden={!active} className={`Analyser${active ? ' -active' : ''}`}>
       <div className='Analyser__viewer'>
-        <TimeOverviewer loadedApp={loadedApp} active={active} type={type} />
-        <TimeAnalyser loadedApp={loadedApp} type={type} />
-        <SpectrumAnalyser loadedApp={loadedApp} type={type} />
+        <TimeOverviewer active={active} type={type} />
+        <TimeAnalyser type={type} />
+        <SpectrumAnalyser type={type} />
       </div>
       <div className='Analyser__controllers'>
         <Switch label='Audio Sprite' checked={analyser} labelAsText={true} tabIndex={active ? 0 : -1} onChange={onChangeModeCallback} />

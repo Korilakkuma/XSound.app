@@ -18,7 +18,6 @@ import type { MMLDescriptor, SoundSource } from '/src/types';
 import type { FileEvent, FileReaderErrorText, MMLSyntaxError, Sequence } from 'xsound';
 
 export type Props = {
-  loadedApp: boolean;
   currentSoundSource: SoundSource;
 };
 
@@ -27,8 +26,7 @@ const CLEAR_HIGHLIGHT_REGEXP = /<span class="x-highlight">(.+?)<\/span>/g;
 // HACK: Prevent from updating local state on confirm
 const savedMMLs = ['', ''];
 
-export const MML: React.FC<Props> = ({ loadedApp, currentSoundSource }) => {
-  const [loaded, setLoaded] = useState<boolean>(false);
+export const MML: React.FC<Props> = ({ currentSoundSource }) => {
   const [paused, setPaused] = useState<boolean>(true);
   const [highlight, setHighlight] = useState<boolean>(false);
   const [melody, setMelody] = useState<string>('');
@@ -442,10 +440,6 @@ export const MML: React.FC<Props> = ({ loadedApp, currentSoundSource }) => {
   }, []);
 
   useEffect(() => {
-    if (!loadedApp || loaded) {
-      return;
-    }
-
     X('mml').setup({
       startCallback: startMelodyCallback,
       stopCallback: stopMelodyCallback,
@@ -516,14 +510,8 @@ export const MML: React.FC<Props> = ({ loadedApp, currentSoundSource }) => {
       .catch((error: Error) => {
         // eslint-disable-next-line no-console
         console.error(error);
-      })
-      .finally(() => {
-        setLoaded(true);
       });
   }, [
-    loadedApp,
-    loaded,
-    melody,
     bass,
     values,
     texts,

@@ -10,12 +10,11 @@ import type { VisualizerType } from '/src/types';
 import type { TimeParams } from 'xsound';
 
 export type Props = {
-  loadedApp: boolean;
   type: VisualizerType;
 };
 
 export const TimeAnalyser: React.FC<Props> = (props: Props) => {
-  const { loadedApp, type } = props;
+  const { type } = props;
 
   const timeParams: TimeParams = useMemo(() => {
     return {
@@ -38,17 +37,13 @@ export const TimeAnalyser: React.FC<Props> = (props: Props) => {
 
   const setElementCallback = useCallback(
     (element: HTMLCanvasElement | SVGSVGElement) => {
-      if (!loadedApp) {
-        return;
-      }
-
       X('mixer').module('analyser').domain('time').setup(element).param(timeParams);
       X('oneshot').module('analyser').domain('time').setup(element).param(timeParams);
       X('audio').module('analyser').domain('time').setup(element).param(timeParams);
       X('stream').module('analyser').domain('time').setup(element).param(timeParams);
       X('noise').module('analyser').domain('time').setup(element).param(timeParams);
     },
-    [loadedApp, timeParams]
+    [timeParams]
   );
 
   return (

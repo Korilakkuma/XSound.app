@@ -13,12 +13,7 @@ import { Modal } from '/src/components/atoms/Modal';
 import { ProgressBar } from '/src/components/atoms/ProgressBar';
 import { ParameterController } from '/src/components/helpers/ParameterController';
 
-export type Props = {
-  loadedApp: boolean;
-};
-
-export const AudioFieldset: React.FC<Props> = (props: Props) => {
-  const [loaded, setLoaded] = useState<boolean>(false);
+export const AudioFieldset: React.FC = () => {
   const [filename, setFilename] = useState<string>('');
   const [paused, setPaused] = useState<boolean>(true);
   const [currentTime, setCurrentTime] = useState<number>(0);
@@ -221,10 +216,6 @@ export const AudioFieldset: React.FC<Props> = (props: Props) => {
   const durationText = useMemo(() => `${formatAudioTime(convertedDuration)}`, [convertedDuration]);
 
   useEffect(() => {
-    if (!props.loadedApp || loaded) {
-      return;
-    }
-
     X('audio').setup({
       decodeCallback,
       updateCallback,
@@ -235,9 +226,7 @@ export const AudioFieldset: React.FC<Props> = (props: Props) => {
     if (vocalCancelerParams) {
       X('audio').module('vocalcanceler').param(vocalCancelerParams);
     }
-
-    setLoaded(true);
-  }, [props.loadedApp, loaded, vocalCancelerParams, decodeCallback, updateCallback, endedCallback, errorCallback]);
+  }, [decodeCallback, updateCallback, endedCallback, errorCallback, vocalCancelerParams]);
 
   return (
     <div

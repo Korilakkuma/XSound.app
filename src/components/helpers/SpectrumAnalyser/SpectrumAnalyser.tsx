@@ -10,12 +10,11 @@ import type { VisualizerType } from '/src/types';
 import type { FFTParams } from 'xsound';
 
 export type Props = {
-  loadedApp: boolean;
   type: VisualizerType;
 };
 
 export const SpectrumAnalyser: React.FC<Props> = (props: Props) => {
-  const { loadedApp, type } = props;
+  const { type } = props;
 
   const fftParams: FFTParams = useMemo(() => {
     return {
@@ -40,17 +39,13 @@ export const SpectrumAnalyser: React.FC<Props> = (props: Props) => {
 
   const setElementCallback = useCallback(
     (element: HTMLCanvasElement | SVGSVGElement) => {
-      if (!loadedApp) {
-        return;
-      }
-
       X('mixer').module('analyser').domain('fft').setup(element).param(fftParams);
       X('oneshot').module('analyser').domain('fft').setup(element).param(fftParams);
       X('audio').module('analyser').domain('fft').setup(element).param(fftParams);
       X('stream').module('analyser').domain('fft').setup(element).param(fftParams);
       X('noise').module('analyser').domain('fft').setup(element).param(fftParams);
     },
-    [loadedApp, fftParams]
+    [fftParams]
   );
 
   return (

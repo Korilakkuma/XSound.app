@@ -45,10 +45,6 @@ export const App: React.FC = () => {
 
   const currentSoundSource = useSelector((state: RootState) => state.currentSoundSource);
 
-  const loadedApp = useMemo(() => {
-    return rate >= 100;
-  }, [rate]);
-
   const oneshots = useMemo(
     () => [
       `${BASE_URL}/one-shots/piano/C.mp3`,
@@ -1548,17 +1544,17 @@ export const App: React.FC = () => {
             <EnvelopeGeneratorFieldset />
           </VerticalBox>
           <VerticalBox>
-            <RecorderFieldset loadedApp={loadedApp} />
+            <RecorderFieldset />
           </VerticalBox>
           <VerticalBox>
-            <AudioFieldset loadedApp={loadedApp} />
+            <AudioFieldset />
           </VerticalBox>
         </Grid>
-        <Analyser loadedApp={loadedApp} />
-        <MML loadedApp={loadedApp} currentSoundSource={currentSoundSource} />
+        <Analyser />
+        <MML currentSoundSource={currentSoundSource} />
         <SoundSourceFieldset currentSoundSource={currentSoundSource} />
         <BasicControllers />
-        <Piano loadedApp={loadedApp} currentSoundSource={currentSoundSource} />
+        <Piano currentSoundSource={currentSoundSource} />
         <Grid numberOfItems={6}>
           <VerticalBox>
             <CompressorFieldset />

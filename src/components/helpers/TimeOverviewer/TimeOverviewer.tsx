@@ -14,13 +14,12 @@ import type { TimeOverviewParams, DragCallbackFunction, DragMode } from 'xsound'
 type Channel = 'left' | 'right';
 
 export type Props = {
-  loadedApp: boolean;
   active: boolean;
   type: VisualizerType;
 };
 
 export const TimeOverviewer: React.FC<Props> = (props: Props) => {
-  const { loadedApp, active, type } = props;
+  const { active, type } = props;
 
   const [dragTime, setDragTime] = useState<string>('00 : 00 - 00 : 00');
   const [showDragTime, setShowDragTime] = useState<boolean>(false);
@@ -102,24 +101,16 @@ export const TimeOverviewer: React.FC<Props> = (props: Props) => {
 
   const setElementForLeftChannelCallback = useCallback(
     (element: HTMLCanvasElement | SVGSVGElement) => {
-      if (!loadedApp) {
-        return;
-      }
-
       X('audio').module('analyser').domain('timeoverview', 0).setup(element).param(timeoverviewStyle).drag(dragCallback).activate();
     },
-    [loadedApp, timeoverviewStyle, dragCallback]
+    [timeoverviewStyle, dragCallback]
   );
 
   const setElementForRightChannelCallback = useCallback(
     (element: HTMLCanvasElement | SVGSVGElement) => {
-      if (!loadedApp) {
-        return;
-      }
-
       X('audio').module('analyser').domain('timeoverview', 1).setup(element).param(timeoverviewStyle).drag(dragCallback).activate();
     },
-    [loadedApp, timeoverviewStyle, dragCallback]
+    [timeoverviewStyle, dragCallback]
   );
 
   return (

@@ -9,11 +9,10 @@ import type { RootState } from '/src/store';
 import type { SoundSource } from '/src/types';
 
 export type Props = {
-  loadedApp: boolean;
   currentSoundSource: SoundSource;
 };
 
-export const Piano: React.FC<Props> = ({ loadedApp, currentSoundSource }) => {
+export const Piano: React.FC<Props> = ({ currentSoundSource }) => {
   const [downKeyboards, setDownKeyboards] = useState<boolean[]>(new Array(NUMBER_OF_PIANO_KEYBOARDS).fill(false));
   const [isDown, setIsDown] = useState<boolean>(false); // for `mouseover` or `touchmove` event
 
@@ -104,9 +103,11 @@ export const Piano: React.FC<Props> = ({ loadedApp, currentSoundSource }) => {
           break;
       }
 
-      downKeyboards[index] = true;
+      const keyboards = downKeyboards.slice(0);
 
-      setDownKeyboards([...downKeyboards]);
+      keyboards[index] = true;
+
+      setDownKeyboards([...keyboards]);
       setIsDown(true);
     },
     [currentSoundSource, downKeyboards, isDown]
@@ -161,9 +162,11 @@ export const Piano: React.FC<Props> = ({ loadedApp, currentSoundSource }) => {
           break;
       }
 
-      downKeyboards[index] = false;
+      const keyboards = downKeyboards.slice(0);
 
-      setDownKeyboards([...downKeyboards]);
+      keyboards[index] = false;
+
+      setDownKeyboards([...keyboards]);
 
       if (event.type === 'mouseup' || event.type === 'touchend') {
         setIsDown(false);
@@ -396,10 +399,6 @@ export const Piano: React.FC<Props> = ({ loadedApp, currentSoundSource }) => {
   );
 
   useEffect(() => {
-    if (!loadedApp) {
-      return;
-    }
-
     window.addEventListener('mouseup', stopSoundOnOutsideOfKeyboardCallback, false);
     window.addEventListener('touchend', stopSoundOnOutsideOfKeyboardCallback, false);
 
@@ -407,7 +406,7 @@ export const Piano: React.FC<Props> = ({ loadedApp, currentSoundSource }) => {
       window.removeEventListener('mouseup', stopSoundOnOutsideOfKeyboardCallback, false);
       window.removeEventListener('touchend', stopSoundOnOutsideOfKeyboardCallback, false);
     };
-  }, [loadedApp, stopSoundOnOutsideOfKeyboardCallback]);
+  }, [stopSoundOnOutsideOfKeyboardCallback]);
 
   return (
     <div className='Piano'>
