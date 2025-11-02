@@ -11,6 +11,8 @@ export type SoundSource = 'oscillator' | 'piano' | 'guitar' | 'electric-guitar' 
 
 export type VisualizerType = 'bitmap' | 'vector';
 
+export type Channel = 'left' | 'right';
+
 export type CustomizedParameters = {
   analyser?: {
     visualizer: VisualizerType;

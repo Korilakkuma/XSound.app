@@ -4,6 +4,9 @@
 }
 
 .TimeAnalyser > dt {
+  display: flex;
+  gap: 8px;
+  align-items: center;
   padding: 0;
   margin: 0;
   font-size: 12px;
@@ -12,10 +15,44 @@
 }
 
 .TimeAnalyser > dd {
+  width: 420px;
   padding: 0;
-  margin: 12px 0 0;
+  margin: 8px 0 0;
+  overflow-x: auto;
   border: 2px solid rgb(255 255 255 / 5%);
   box-shadow:
     0 0 0 2px var(--black),
     0 -1px 1px 5px rgb(0 0 0 / 50%);
+}
+
+.TimeAnalyser > dt > label {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  cursor: pointer;
+}
+
+.TimeAnalyser__channelSelector {
+  display: block;
+  width: 50px;
+  height: 22px;
+  padding: 0;
+  cursor: pointer;
+  background: none;
+
+  /* CSS Sprite */
+  background-image: url("/assets/images/flip-switch-channel.png");
+  background-repeat: no-repeat;
+
+  /* for Retina Display */
+  background-size: 50px 44px;
+  border: none;
+}
+
+.TimeAnalyser__channelSelector.-left {
+  background-position: left top;
+}
+
+.TimeAnalyser__channelSelector.-right {
+  background-position: left bottom;
 }

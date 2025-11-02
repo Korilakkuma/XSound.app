@@ -132,8 +132,8 @@ export const Analyser: React.FC = () => {
     <div id='analyser-fieldset' aria-hidden={!active} className={`Analyser${active ? ' -active' : ''}`}>
       <div className='Analyser__viewer'>
         <TimeOverviewer active={active} type={type} />
-        <TimeAnalyser type={type} />
-        <SpectrumAnalyser type={type} />
+        <TimeAnalyser active={active} type={type} />
+        <SpectrumAnalyser active={active} type={type} />
       </div>
       <div className='Analyser__controllers'>
         <Switch label='Audio Sprite' checked={analyser} labelAsText={true} tabIndex={active ? 0 : -1} onChange={onChangeModeCallback} />

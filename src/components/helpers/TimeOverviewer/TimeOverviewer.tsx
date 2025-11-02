@@ -1,4 +1,6 @@
 import type React from 'react';
+import type { Channel } from 'src/types';
+
 import { useState, useMemo, useCallback } from 'react';
 
 import { Canvas } from '/src/components/atoms/Canvas';
@@ -11,16 +13,12 @@ import { formatAudioTime } from '/src/utils';
 import type { VisualizerType } from '/src/types';
 import type { TimeOverviewParams, DragCallbackFunction, DragMode } from 'xsound';
 
-type Channel = 'left' | 'right';
-
 export type Props = {
   active: boolean;
   type: VisualizerType;
 };
 
-export const TimeOverviewer: React.FC<Props> = (props: Props) => {
-  const { active, type } = props;
-
+export const TimeOverviewer: React.FC<Props> = ({ active, type }) => {
   const [dragTime, setDragTime] = useState<string>('00 : 00 - 00 : 00');
   const [showDragTime, setShowDragTime] = useState<boolean>(false);
   const [showTimeOverview, setShowTimeOverview] = useState<Channel>('left');
