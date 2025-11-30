@@ -110,11 +110,20 @@ export const Analyser: React.FC = () => {
       smoothingTimeConstant: 0.8
     };
 
+    const logarithmicFrequencies = [62.5, 125, 250, 500, 1000, 2000, 4000, 8000, 16000];
+
     X('mixer').module('analyser').param(analyserParams);
     X('oneshot').module('analyser').param(analyserParams);
     X('audio').module('analyser').param(analyserParams);
     X('stream').module('analyser').param(analyserParams);
     X('noise').module('analyser').param(analyserParams);
+
+    X('mixer').module('analyser').domain('fft').param({ logarithmicFrequencies });
+    X('oneshot').module('analyser').domain('fft').param({ logarithmicFrequencies });
+    X('audio').module('analyser').domain('fft', 0).param({ logarithmicFrequencies });
+    X('audio').module('analyser').domain('fft', 1).param({ logarithmicFrequencies });
+    X('stream').module('analyser').domain('fft').param({ logarithmicFrequencies });
+    X('noise').module('analyser').domain('fft').param({ logarithmicFrequencies });
 
     X('mixer').module('analyser').domain('time').activate();
     X('mixer').module('analyser').domain('fft').activate();
