@@ -135,6 +135,43 @@ export const Analyser: React.FC = () => {
     X('stream').module('analyser').domain('fft').activate();
     X('noise').module('analyser').domain('time').activate();
     X('noise').module('analyser').domain('fft').activate();
+
+    const font = {
+      family: 'Arial, sans-serif',
+      size: '10px',
+      style: 'normal'
+    };
+
+    const timeOverViewStyles = {
+      ...X('audio').module('analyser').domain('timeoverview', 0).param('styles'),
+      font
+    };
+
+    const timeStyles = {
+      ...X('mixer').module('analyser').domain('time').param('styles'),
+      font
+    };
+
+    const spectrumStyles = {
+      ...X('mixer').module('analyser').domain('fft').param('styles'),
+      font
+    };
+
+    X('audio').module('analyser').domain('timeoverview', 0).param({ styles: timeOverViewStyles });
+    X('audio').module('analyser').domain('timeoverview', 1).param({ styles: timeOverViewStyles });
+
+    X('mixer').module('analyser').domain('time').param({ styles: timeStyles });
+    X('mixer').module('analyser').domain('fft').param({ styles: spectrumStyles });
+    X('oneshot').module('analyser').domain('time').param({ styles: timeStyles });
+    X('oneshot').module('analyser').domain('fft').param({ styles: spectrumStyles });
+    X('audio').module('analyser').domain('time', 0).param({ styles: timeStyles });
+    X('audio').module('analyser').domain('time', 1).param({ styles: timeStyles });
+    X('audio').module('analyser').domain('fft', 0).param({ styles: spectrumStyles });
+    X('audio').module('analyser').domain('fft', 1).param({ styles: spectrumStyles });
+    X('stream').module('analyser').domain('time').param({ styles: timeStyles });
+    X('stream').module('analyser').domain('fft').param({ styles: spectrumStyles });
+    X('noise').module('analyser').domain('time').param({ styles: timeStyles });
+    X('noise').module('analyser').domain('fft').param({ styles: spectrumStyles });
   }, []);
 
   return (
