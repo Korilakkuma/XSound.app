@@ -118,23 +118,37 @@ export const Analyser: React.FC = () => {
     X('stream').module('analyser').param(analyserParams);
     X('noise').module('analyser').param(analyserParams);
 
-    X('mixer').module('analyser').domain('fft').param({ logarithmicFrequencies });
-    X('oneshot').module('analyser').domain('fft').param({ logarithmicFrequencies });
+    X('mixer').module('analyser').domain('fft', 0).param({ logarithmicFrequencies });
+    X('mixer').module('analyser').domain('fft', 1).param({ logarithmicFrequencies });
+    X('oneshot').module('analyser').domain('fft', 0).param({ logarithmicFrequencies });
+    X('oneshot').module('analyser').domain('fft', 1).param({ logarithmicFrequencies });
     X('audio').module('analyser').domain('fft', 0).param({ logarithmicFrequencies });
     X('audio').module('analyser').domain('fft', 1).param({ logarithmicFrequencies });
-    X('stream').module('analyser').domain('fft').param({ logarithmicFrequencies });
-    X('noise').module('analyser').domain('fft').param({ logarithmicFrequencies });
+    X('stream').module('analyser').domain('fft', 0).param({ logarithmicFrequencies });
+    X('stream').module('analyser').domain('fft', 1).param({ logarithmicFrequencies });
+    X('noise').module('analyser').domain('fft', 0).param({ logarithmicFrequencies });
+    X('noise').module('analyser').domain('fft', 1).param({ logarithmicFrequencies });
 
-    X('mixer').module('analyser').domain('time').activate();
-    X('mixer').module('analyser').domain('fft').activate();
-    X('oneshot').module('analyser').domain('time').activate();
-    X('oneshot').module('analyser').domain('fft').activate();
-    X('audio').module('analyser').domain('time').activate();
-    X('audio').module('analyser').domain('fft').activate();
-    X('stream').module('analyser').domain('time').activate();
-    X('stream').module('analyser').domain('fft').activate();
-    X('noise').module('analyser').domain('time').activate();
-    X('noise').module('analyser').domain('fft').activate();
+    X('mixer').module('analyser').domain('time', 0).activate();
+    X('mixer').module('analyser').domain('time', 1).activate();
+    X('mixer').module('analyser').domain('fft', 0).activate();
+    X('mixer').module('analyser').domain('fft', 1).activate();
+    X('oneshot').module('analyser').domain('time', 0).activate();
+    X('oneshot').module('analyser').domain('time', 1).activate();
+    X('oneshot').module('analyser').domain('fft', 0).activate();
+    X('oneshot').module('analyser').domain('fft', 1).activate();
+    X('audio').module('analyser').domain('time', 0).activate();
+    X('audio').module('analyser').domain('time', 1).activate();
+    X('audio').module('analyser').domain('fft', 0).activate();
+    X('audio').module('analyser').domain('fft', 1).activate();
+    X('stream').module('analyser').domain('time', 0).activate();
+    X('stream').module('analyser').domain('time', 1).activate();
+    X('stream').module('analyser').domain('fft', 0).activate();
+    X('stream').module('analyser').domain('fft', 1).activate();
+    X('noise').module('analyser').domain('time', 0).activate();
+    X('noise').module('analyser').domain('time', 1).activate();
+    X('noise').module('analyser').domain('fft', 0).activate();
+    X('noise').module('analyser').domain('fft', 1).activate();
 
     const font = {
       family: 'Arial, sans-serif',
@@ -160,18 +174,26 @@ export const Analyser: React.FC = () => {
     X('audio').module('analyser').domain('timeoverview', 0).param({ styles: timeOverViewStyles });
     X('audio').module('analyser').domain('timeoverview', 1).param({ styles: timeOverViewStyles });
 
-    X('mixer').module('analyser').domain('time').param({ styles: timeStyles });
-    X('mixer').module('analyser').domain('fft').param({ styles: spectrumStyles });
-    X('oneshot').module('analyser').domain('time').param({ styles: timeStyles });
-    X('oneshot').module('analyser').domain('fft').param({ styles: spectrumStyles });
+    X('mixer').module('analyser').domain('time', 0).param({ styles: timeStyles });
+    X('mixer').module('analyser').domain('time', 1).param({ styles: timeStyles });
+    X('mixer').module('analyser').domain('fft', 0).param({ styles: spectrumStyles });
+    X('mixer').module('analyser').domain('fft', 1).param({ styles: spectrumStyles });
+    X('oneshot').module('analyser').domain('time', 0).param({ styles: timeStyles });
+    X('oneshot').module('analyser').domain('time', 1).param({ styles: timeStyles });
+    X('oneshot').module('analyser').domain('fft', 0).param({ styles: spectrumStyles });
+    X('oneshot').module('analyser').domain('fft', 1).param({ styles: spectrumStyles });
     X('audio').module('analyser').domain('time', 0).param({ styles: timeStyles });
     X('audio').module('analyser').domain('time', 1).param({ styles: timeStyles });
     X('audio').module('analyser').domain('fft', 0).param({ styles: spectrumStyles });
     X('audio').module('analyser').domain('fft', 1).param({ styles: spectrumStyles });
-    X('stream').module('analyser').domain('time').param({ styles: timeStyles });
-    X('stream').module('analyser').domain('fft').param({ styles: spectrumStyles });
-    X('noise').module('analyser').domain('time').param({ styles: timeStyles });
-    X('noise').module('analyser').domain('fft').param({ styles: spectrumStyles });
+    X('stream').module('analyser').domain('time', 0).param({ styles: timeStyles });
+    X('stream').module('analyser').domain('time', 1).param({ styles: timeStyles });
+    X('stream').module('analyser').domain('fft', 0).param({ styles: spectrumStyles });
+    X('stream').module('analyser').domain('fft', 1).param({ styles: spectrumStyles });
+    X('noise').module('analyser').domain('time', 0).param({ styles: timeStyles });
+    X('noise').module('analyser').domain('time', 1).param({ styles: timeStyles });
+    X('noise').module('analyser').domain('fft', 0).param({ styles: spectrumStyles });
+    X('noise').module('analyser').domain('fft', 1).param({ styles: spectrumStyles });
   }, []);
 
   return (
