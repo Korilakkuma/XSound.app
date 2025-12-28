@@ -547,23 +547,6 @@ export const MML: React.FC<Props> = ({ loadedApp, currentSoundSource }) => {
       >
         <dl>
           <dt>
-            Melody
-            {errorMessageForMMLMelody ? (
-              <span className='MML__error' role='alert'>
-                {errorMessageForMMLMelody}
-              </span>
-            ) : null}
-          </dt>
-          <dd
-            contentEditable={active && paused}
-            dangerouslySetInnerHTML={{ __html: melody }}
-            aria-disabled={!active || !paused}
-            className={highlight ? '-highlight' : ''}
-            onBlur={onBlurMelodyCallback}
-          />
-        </dl>
-        <dl>
-          <dt>
             Bass
             {errorMessageForMMLBass ? (
               <span className='MML__error' role='alert'>
@@ -577,6 +560,23 @@ export const MML: React.FC<Props> = ({ loadedApp, currentSoundSource }) => {
             aria-disabled={!active || !paused}
             className={highlight ? '-highlight' : ''}
             onBlur={onBlurBassCallback}
+          />
+        </dl>
+        <dl>
+          <dt>
+            Melody
+            {errorMessageForMMLMelody ? (
+              <span className='MML__error' role='alert'>
+                {errorMessageForMMLMelody}
+              </span>
+            ) : null}
+          </dt>
+          <dd
+            contentEditable={active && paused}
+            dangerouslySetInnerHTML={{ __html: melody }}
+            aria-disabled={!active || !paused}
+            className={highlight ? '-highlight' : ''}
+            onBlur={onBlurMelodyCallback}
           />
         </dl>
       </div>
