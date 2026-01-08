@@ -465,6 +465,7 @@ export const MML: React.FC<Props> = ({ loadedApp, currentSoundSource }) => {
       mmls.push('/assets/mmls/endless-rain.json');
       mmls.push('/assets/mmls/forever-love.json');
       mmls.push('/assets/mmls/tears.json');
+      mmls.push('/assets/mmls/art-of-life.json');
       mmls.push('/assets/mmls/seifuku-no-mannequin.json');
     }
 
@@ -490,8 +491,11 @@ export const MML: React.FC<Props> = ({ loadedApp, currentSoundSource }) => {
                 case 'Tears':
                   index = 4;
                   break;
-                case '制服のマネキン':
+                case 'ART OF LIFE':
                   index = 5;
+                  break;
+                case '制服のマネキン':
+                  index = 6;
                   break;
                 default:
                   index = 1;
