@@ -100,7 +100,7 @@ export const Piano: React.FC<Props> = ({ loadedApp, currentSoundSource }) => {
           break;
         default:
           // eslint-disable-next-line no-console
-          console.assert(`Error: currentSoundSource = ${currentSoundSource}`);
+          console.error(`Error: currentSoundSource = ${currentSoundSource}`);
           break;
       }
 
