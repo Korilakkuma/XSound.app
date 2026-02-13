@@ -83,8 +83,8 @@
     "xsound": "^4.2.4"
   },
   "devDependencies": {
-    "@markuplint/jsx-parser": "^4.7.22",
-    "@markuplint/react-spec": "^4.5.22",
+    "@markuplint/jsx-parser": "^4.7.23",
+    "@markuplint/react-spec": "^4.5.23",
     "@storybook/addon-docs": "^10.2.8",
     "@storybook/addon-links": "^10.2.8",
     "@storybook/react-vite": "^10.2.8",
@@ -130,6 +130,7 @@
     "typescript": "^5.9.3",
     "typescript-eslint": "^8.55.0",
     "url-loader": "^4.1.1",
+    "uuid": "^13.0.0",
     "webpack": "^5.105.2",
     "webpack-cli": "^6.0.1",
     "webpack-dev-server": "^5.2.3"
