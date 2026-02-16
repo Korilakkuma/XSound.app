@@ -16,7 +16,7 @@ import { ParameterController } from '/src/components/helpers/ParameterController
 import { SelectableModal } from '/src/components/helpers/SelectableModal';
 
 export const RecorderFieldset: React.FC = () => {
-  const [activeTrack, setActiveTrack] = useState<number>(-1);
+  const [activeTrack, setActiveTrack] = useState<number>(0);
   const [objectURL, setObjectURL] = useState<string>('');
   const [running, setRunning] = useState<boolean>(false);
   const [creating, setCreating] = useState<boolean>(false);
