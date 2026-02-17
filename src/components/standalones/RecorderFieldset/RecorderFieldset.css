@@ -138,3 +138,8 @@ a.RecorderFieldset__downloadactive {
 .RecorderFieldset__clear:not(:disabled):active {
   background-position: -175px center;
 }
+
+.RecorderFieldset__svg {
+  margin: 36px auto 0;
+  background-color: var(--black);
+}

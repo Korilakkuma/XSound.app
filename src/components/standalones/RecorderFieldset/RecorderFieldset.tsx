@@ -1,5 +1,5 @@
 import type React from 'react';
-import { useCallback, useMemo, useState } from 'react';
+import { useCallback, useMemo, useState, useRef } from 'react';
 
 import type { RecordType, QuantizationBit, WaveExportType } from 'xsound';
 
@@ -23,6 +23,8 @@ export const RecorderFieldset: React.FC = () => {
   const [isShowModal, setIsShowModal] = useState<boolean>(false);
   const [hasRecordedData, sethasRecordedData] = useState<boolean>(false);
 
+  const svgRef = useRef<SVGSVGElement | null>(null);
+
   const storage: CustomizedParameters = useMemo(() => {
     return getStorage();
   }, []);
@@ -36,12 +38,84 @@ export const RecorderFieldset: React.FC = () => {
   }, [storage]);
 
   const type: WaveExportType = useMemo(() => {
-    return storage.recorder?.type || 'objectURL';
+    return storage.recorder?.type || 'blob';
   }, [storage]);
 
   const disabledDownload = useMemo(() => {
     return running || objectURL === '';
   }, [running, objectURL]);
+
+  const render = useCallback((data: Blob) => {
+    const svg = svgRef.current;
+
+    if (svg === null) {
+      return;
+    }
+
+    svg.innerHTML = '';
+
+    const width = Number(svg.getAttribute('width') ?? '0');
+    const height = Number(svg.getAttribute('height') ?? '0');
+
+    const reader = new FileReader();
+
+    reader.readAsArrayBuffer(data);
+
+    reader.onload = async () => {
+      const arraybuffer = reader.result;
+
+      if (!(arraybuffer instanceof ArrayBuffer)) {
+        return;
+      }
+
+      const context = X.get();
+
+      X.decode(
+        context,
+        arraybuffer,
+        (buffer: AudioBuffer) => {
+          const source = new AudioBufferSourceNode(context, { buffer });
+
+          source.connect(context.destination);
+          source.start(context.currentTime);
+
+          const data = buffer.getChannelData(0);
+
+          const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+
+          let d = '';
+
+          for (let n = 0, len = data.length; n < len; n++) {
+            if (n % 128 !== 0) {
+              continue;
+            }
+
+            const x = (n / len) * width;
+            const y = (1 - data[n]) * (height / 2);
+
+            if (d === '') {
+              d += `M${x} ${y}`;
+            } else {
+              d += ` L${x} ${y}`;
+            }
+          }
+
+          path.setAttribute('d', d);
+          path.setAttribute('stroke', 'rgba(0 0 255 / 100%');
+          path.setAttribute('fill', 'none');
+          path.setAttribute('stroke-width', '2');
+          path.setAttribute('stroke-linecap', 'round');
+          path.setAttribute('stroke-linejoin', 'miter');
+
+          svg.appendChild(path);
+        },
+        (error: Error) => {
+          // eslint-disable-next-line no-console
+          console.error(error);
+        }
+      );
+    };
+  }, []);
 
   const onClickRecordButtonCallback = useCallback(() => {
     if (
@@ -92,18 +166,11 @@ export const RecorderFieldset: React.FC = () => {
     if (X('mixer').module('recorder').has(-1, -1)) {
       setCreating(true);
 
-      const url = X('mixer').module('recorder').create(-1, channel, bit, type);
+      const blob = X('mixer').module('recorder').create(-1, channel, bit, type);
 
-      if (typeof url === 'string') {
-        const audio = new Audio(url);
-
-        audio.controls = false;
-        audio.play();
-
-        setObjectURL(url);
-        setCreating(false);
-
-        return;
+      if (blob instanceof Blob) {
+        render(blob);
+        setObjectURL(window.URL.createObjectURL(blob));
       }
 
       setCreating(false);
@@ -112,18 +179,11 @@ export const RecorderFieldset: React.FC = () => {
     if (X('oneshot').module('recorder').has(-1, -1)) {
       setCreating(true);
 
-      const url = X('oneshot').module('recorder').create(-1, channel, bit, type);
+      const blob = X('oneshot').module('recorder').create(-1, channel, bit, type);
 
-      if (typeof url === 'string') {
-        const audio = new Audio(url);
-
-        audio.controls = false;
-        audio.play();
-
-        setObjectURL(url);
-        setCreating(false);
-
-        return;
+      if (blob instanceof Blob) {
+        render(blob);
+        setObjectURL(window.URL.createObjectURL(blob));
       }
 
       setCreating(false);
@@ -132,18 +192,11 @@ export const RecorderFieldset: React.FC = () => {
     if (X('audio').module('recorder').has(-1, -1)) {
       setCreating(true);
 
-      const url = X('audio').module('recorder').create(-1, channel, bit, type);
+      const blob = X('audio').module('recorder').create(-1, channel, bit, type);
 
-      if (typeof url === 'string') {
-        const audio = new Audio(url);
-
-        audio.controls = false;
-        audio.play();
-
-        setObjectURL(url);
-        setCreating(false);
-
-        return;
+      if (blob instanceof Blob) {
+        render(blob);
+        setObjectURL(window.URL.createObjectURL(blob));
       }
 
       setCreating(false);
@@ -152,18 +205,11 @@ export const RecorderFieldset: React.FC = () => {
     if (X('stream').module('recorder').has(-1, -1)) {
       setCreating(true);
 
-      const url = X('stream').module('recorder').create(-1, channel, bit, type);
+      const blob = X('stream').module('recorder').create(-1, channel, bit, type);
 
-      if (typeof url === 'string') {
-        const audio = new Audio(url);
-
-        audio.controls = false;
-        audio.play();
-
-        setObjectURL(url);
-        setCreating(false);
-
-        return;
+      if (blob instanceof Blob) {
+        render(blob);
+        setObjectURL(window.URL.createObjectURL(blob));
       }
 
       setCreating(false);
@@ -172,23 +218,16 @@ export const RecorderFieldset: React.FC = () => {
     if (X('noise').module('recorder').has(-1, -1)) {
       setCreating(true);
 
-      const url = X('noise').module('recorder').create(-1, channel, bit, type);
+      const blob = X('noise').module('recorder').create(-1, channel, bit, type);
 
-      if (typeof url === 'string') {
-        const audio = new Audio(url);
-
-        audio.controls = false;
-        audio.play();
-
-        setObjectURL(url);
-        setCreating(false);
-
-        return;
+      if (blob instanceof Blob) {
+        render(blob);
+        setObjectURL(window.URL.createObjectURL(blob));
       }
 
       setCreating(false);
     }
-  }, [channel, bit, type]);
+  }, [channel, bit, type, render]);
 
   const onClickDownloadButtonCallback = useCallback(
     (event: React.MouseEvent<HTMLAnchorElement>) => {
@@ -310,6 +349,7 @@ export const RecorderFieldset: React.FC = () => {
           )}
           <button type='button' disabled={running} aria-label='Clear Track' className='RecorderFieldset__clear' onClick={onClickClearButtonCallback} />
         </div>
+        {hasRecordedData ? <svg className='RecorderFieldset__svg' ref={svgRef} width={240} height={100} /> : null}
       </Fieldset>
       <SelectableModal
         hasOverlay={true}
