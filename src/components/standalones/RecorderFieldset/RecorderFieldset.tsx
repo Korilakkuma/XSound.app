@@ -23,7 +23,8 @@ export const RecorderFieldset: React.FC = () => {
   const [isShowModal, setIsShowModal] = useState<boolean>(false);
   const [hasRecordedData, sethasRecordedData] = useState<boolean>(false);
 
-  const svgRef = useRef<SVGSVGElement | null>(null);
+  const svgChannel0Ref = useRef<SVGSVGElement | null>(null);
+  const svgChannel1Ref = useRef<SVGSVGElement | null>(null);
 
   const storage: CustomizedParameters = useMemo(() => {
     return getStorage();
@@ -45,13 +46,7 @@ export const RecorderFieldset: React.FC = () => {
     return running || objectURL === '';
   }, [running, objectURL]);
 
-  const render = useCallback((data: Blob) => {
-    const svg = svgRef.current;
-
-    if (svg === null) {
-      return;
-    }
-
+  const render = useCallback((svg: SVGSVGElement, data: Blob, channelNumber: 0 | 1) => {
     svg.innerHTML = '';
 
     const width = Number(svg.getAttribute('width') ?? '0');
@@ -74,12 +69,14 @@ export const RecorderFieldset: React.FC = () => {
         context,
         arraybuffer,
         (buffer: AudioBuffer) => {
-          const source = new AudioBufferSourceNode(context, { buffer });
+          if (channelNumber === 0) {
+            const source = new AudioBufferSourceNode(context, { buffer });
 
-          source.connect(context.destination);
-          source.start(context.currentTime);
+            source.connect(context.destination);
+            source.start(context.currentTime);
+          }
 
-          const data = buffer.getChannelData(0);
+          const data = buffer.getChannelData(channelNumber);
 
           const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
 
@@ -169,7 +166,14 @@ export const RecorderFieldset: React.FC = () => {
       const blob = X('mixer').module('recorder').create(-1, channel, bit, type);
 
       if (blob instanceof Blob) {
-        render(blob);
+        if (svgChannel0Ref.current) {
+          render(svgChannel0Ref.current, blob, 0);
+        }
+
+        if (svgChannel1Ref.current) {
+          render(svgChannel1Ref.current, blob, 1);
+        }
+
         setObjectURL(window.URL.createObjectURL(blob));
       }
 
@@ -182,7 +186,14 @@ export const RecorderFieldset: React.FC = () => {
       const blob = X('oneshot').module('recorder').create(-1, channel, bit, type);
 
       if (blob instanceof Blob) {
-        render(blob);
+        if (svgChannel0Ref.current) {
+          render(svgChannel0Ref.current, blob, 0);
+        }
+
+        if (svgChannel1Ref.current) {
+          render(svgChannel1Ref.current, blob, 1);
+        }
+
         setObjectURL(window.URL.createObjectURL(blob));
       }
 
@@ -195,7 +206,14 @@ export const RecorderFieldset: React.FC = () => {
       const blob = X('audio').module('recorder').create(-1, channel, bit, type);
 
       if (blob instanceof Blob) {
-        render(blob);
+        if (svgChannel0Ref.current) {
+          render(svgChannel0Ref.current, blob, 0);
+        }
+
+        if (svgChannel1Ref.current) {
+          render(svgChannel1Ref.current, blob, 1);
+        }
+
         setObjectURL(window.URL.createObjectURL(blob));
       }
 
@@ -208,7 +226,14 @@ export const RecorderFieldset: React.FC = () => {
       const blob = X('stream').module('recorder').create(-1, channel, bit, type);
 
       if (blob instanceof Blob) {
-        render(blob);
+        if (svgChannel0Ref.current) {
+          render(svgChannel0Ref.current, blob, 0);
+        }
+
+        if (svgChannel1Ref.current) {
+          render(svgChannel1Ref.current, blob, 1);
+        }
+
         setObjectURL(window.URL.createObjectURL(blob));
       }
 
@@ -221,7 +246,14 @@ export const RecorderFieldset: React.FC = () => {
       const blob = X('noise').module('recorder').create(-1, channel, bit, type);
 
       if (blob instanceof Blob) {
-        render(blob);
+        if (svgChannel0Ref.current) {
+          render(svgChannel0Ref.current, blob, 0);
+        }
+
+        if (svgChannel1Ref.current) {
+          render(svgChannel1Ref.current, blob, 1);
+        }
+
         setObjectURL(window.URL.createObjectURL(blob));
       }
 
@@ -349,7 +381,12 @@ export const RecorderFieldset: React.FC = () => {
           )}
           <button type='button' disabled={running} aria-label='Clear Track' className='RecorderFieldset__clear' onClick={onClickClearButtonCallback} />
         </div>
-        {hasRecordedData ? <svg className='RecorderFieldset__svg' ref={svgRef} width={240} height={100} /> : null}
+        {hasRecordedData ? (
+          <div className='RecorderFieldset__svg'>
+            <svg ref={svgChannel0Ref} width={240} height={50} />
+            <svg ref={svgChannel1Ref} width={240} height={50} />
+          </div>
+        ) : null}
       </Fieldset>
       <SelectableModal
         hasOverlay={true}

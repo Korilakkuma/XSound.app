@@ -141,5 +141,8 @@ a.RecorderFieldset__downloadactive {
 
 .RecorderFieldset__svg {
   margin: 36px auto 0;
+}
+
+.RecorderFieldset__svg > svg {
   background-color: var(--black);
 }
