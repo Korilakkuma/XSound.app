@@ -47,8 +47,6 @@ export const RecorderFieldset: React.FC = () => {
   }, [running, objectURL]);
 
   const render = useCallback((svg: SVGSVGElement, data: Blob, channelNumber: 0 | 1) => {
-    svg.innerHTML = '';
-
     const width = Number(svg.getAttribute('width') ?? '0');
     const height = Number(svg.getAttribute('height') ?? '0');
 
@@ -78,7 +76,13 @@ export const RecorderFieldset: React.FC = () => {
 
           const data = buffer.getChannelData(channelNumber);
 
-          const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+          const path = document.getElementById(`svg-path-recorder-channel-${channelNumber}`);
+
+          if (path === null) {
+            return;
+          }
+
+          path.setAttribute('d', '');
 
           let d = '';
 
@@ -98,13 +102,11 @@ export const RecorderFieldset: React.FC = () => {
           }
 
           path.setAttribute('d', d);
-          path.setAttribute('stroke', 'rgba(0 0 255 / 100%');
+          path.setAttribute('stroke', 'rgb(0 0 255)');
           path.setAttribute('fill', 'none');
           path.setAttribute('stroke-width', '2');
           path.setAttribute('stroke-linecap', 'round');
           path.setAttribute('stroke-linejoin', 'miter');
-
-          svg.appendChild(path);
         },
         (error: Error) => {
           // eslint-disable-next-line no-console
@@ -296,6 +298,12 @@ export const RecorderFieldset: React.FC = () => {
     );
 
     setIsShowModal(false);
+
+    const path0 = document.getElementById('svg-path-recorder-channel-0')!;
+    const path1 = document.getElementById('svg-path-recorder-channel-1')!;
+
+    path0.setAttribute('d', 'M0 24 L240 24');
+    path1.setAttribute('d', 'M0 24 L240 24');
   }, [activeTrack]);
 
   const onClickCancelClearTrackCallback = useCallback(() => {
@@ -381,12 +389,14 @@ export const RecorderFieldset: React.FC = () => {
           )}
           <button type='button' disabled={running} aria-label='Clear Track' className='RecorderFieldset__clear' onClick={onClickClearButtonCallback} />
         </div>
-        {hasRecordedData ? (
-          <div className='RecorderFieldset__svg'>
-            <svg ref={svgChannel0Ref} width={240} height={50} />
-            <svg ref={svgChannel1Ref} width={240} height={50} />
-          </div>
-        ) : null}
+        <div className='RecorderFieldset__svg'>
+          <svg ref={svgChannel0Ref} width={240} height={50}>
+            <path id='svg-path-recorder-channel-0' d='M0 24 L240 24' stroke='rgb(0 0 255)' />
+          </svg>
+          <svg ref={svgChannel1Ref} width={240} height={50}>
+            <path id='svg-path-recorder-channel-1' d='M0 24 L240 24' stroke='rgb(0 0 255)' />
+          </svg>
+        </div>
       </Fieldset>
       <SelectableModal
         hasOverlay={true}
