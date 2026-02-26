@@ -1548,7 +1548,7 @@ export const App: React.FC = () => {
             <EnvelopeGeneratorFieldset />
           </VerticalBox>
           <VerticalBox>
-            <RecorderFieldset />
+            <RecorderFieldset currentSoundSource={currentSoundSource} />
           </VerticalBox>
           <VerticalBox>
             <AudioFieldset />

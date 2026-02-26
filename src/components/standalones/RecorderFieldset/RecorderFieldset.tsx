@@ -7,7 +7,7 @@ import { X } from 'xsound';
 
 import { createFilename, getStorage } from '/src/utils';
 
-import type { CustomizedParameters } from '/src/types';
+import type { CustomizedParameters, SoundSource } from '/src/types';
 
 import { Fieldset } from '/src/components/atoms/Fieldset';
 import { Legend } from '/src/components/atoms/Legend';
@@ -15,7 +15,11 @@ import { Select } from '/src/components/atoms/Select';
 import { ParameterController } from '/src/components/helpers/ParameterController';
 import { SelectableModal } from '/src/components/helpers/SelectableModal';
 
-export const RecorderFieldset: React.FC = () => {
+export type Props = {
+  currentSoundSource: SoundSource;
+};
+
+export const RecorderFieldset: React.FC<Props> = ({ currentSoundSource }) => {
   const [activeTrack, setActiveTrack] = useState<number>(0);
   const [objectURL, setObjectURL] = useState<string>('');
   const [running, setRunning] = useState<boolean>(false);
@@ -138,16 +142,18 @@ export const RecorderFieldset: React.FC = () => {
       setRunning(true);
     }
 
-    if (X('stream').module('recorder').get() !== -1) {
-      X('stream').module('recorder').stop();
+    if (currentSoundSource === 'stream') {
+      if (X('stream').module('recorder').get() !== -1) {
+        X('stream').module('recorder').stop();
 
-      setRunning(false);
-    } else {
-      X('stream').module('recorder').ready(activeTrack);
-      X('stream').start();
-      X('stream').module('recorder').start();
+        setRunning(false);
+      } else {
+        X('stream').module('recorder').ready(activeTrack);
+        X('stream').start();
+        X('stream').module('recorder').start();
 
-      setRunning(true);
+        setRunning(true);
+      }
     }
 
     sethasRecordedData(
@@ -157,7 +163,7 @@ export const RecorderFieldset: React.FC = () => {
         X('stream').module('recorder').has(-1, -1) ||
         X('noise').module('recorder').has(-1, -1)
     );
-  }, [activeTrack]);
+  }, [currentSoundSource, activeTrack]);
 
   const onClickCreateButtonCallback = useCallback(() => {
     setRunning(false);
