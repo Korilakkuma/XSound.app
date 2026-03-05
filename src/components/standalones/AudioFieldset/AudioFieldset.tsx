@@ -243,7 +243,7 @@ export const AudioFieldset: React.FC = () => {
           <FileUploader
             accept='audo/wav, audio/ogg, audio/mpeg, audio/x-m4a, audio/*'
             disabled={false}
-            placeholder='Audio File (wav, ogg, mp3 ... etc)'
+            placeholder='Audio File'
             filename={filename}
             drag={drag}
             onChange={onChangeFileCallback}

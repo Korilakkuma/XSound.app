@@ -12,6 +12,7 @@
   text-overflow: ellipsis;
   font-size: 9px;
   color: var(--white);
+  text-transform: uppercase;
   white-space: nowrap;
   cursor: pointer;
   background-color: var(--black);
