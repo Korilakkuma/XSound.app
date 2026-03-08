@@ -11,6 +11,7 @@ describe('atoms/Select', () => {
       values: ['A', 'B', 'C'],
       texts: ['0 - 0', '0 - 1', '0 - 2'],
       disabled: false,
+      textTransform: false,
       onChange: mockOnChange
     };
 

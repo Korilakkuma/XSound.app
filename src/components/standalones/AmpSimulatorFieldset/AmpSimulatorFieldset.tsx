@@ -466,6 +466,7 @@ export const AmpSimulatorFieldset: React.FC = () => {
           values={['marshall', 'mesa/boogie', 'fender']}
           texts={['Marshall', 'Mesa/Boogie', 'Fender']}
           disabled={false}
+          textTransform={false}
           onChange={onChangePreamplifier}
         />
         <ParameterController label='Level' autoupdate={false} defaultValue={0} min={0} max={1} step={0.05} onChange={onChangeLevelCallback} />
@@ -492,6 +493,7 @@ export const AmpSimulatorFieldset: React.FC = () => {
             texts={['Not used', '10 inch', '12 inch', '15 inch']}
             defaultValue='12'
             disabled={false}
+            textTransform={false}
             onChange={onChangeSpeakerSize}
           />
         ) : null}

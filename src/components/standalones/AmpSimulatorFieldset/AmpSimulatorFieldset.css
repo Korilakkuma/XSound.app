@@ -1,12 +1,3 @@
 .AmpSimulatorFieldset {
   padding: 12px 0;
 }
-
-/* HACK: */
-.AmpSimulatorFieldset .Select > select {
-  text-transform: none;
-}
-
-.AmpSimulatorFieldset .Select > select > option {
-  text-transform: none;
-}

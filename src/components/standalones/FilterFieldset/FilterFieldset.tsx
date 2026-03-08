@@ -135,6 +135,7 @@ export const FilterFieldset: React.FC = () => {
           values={['lowpass', 'highpass', 'bandpass', 'lowshelf', 'highshelf', 'peaking', 'notch', 'allpass']}
           texts={['lowpass', 'highpass', 'bandpass', 'lowshelf', 'highshelf', 'peaking', 'notch', 'allpass']}
           disabled={false}
+          textTransform={true}
           onChange={onChangeTypeCallback}
         />
         <ParameterController label='Frequency' autoupdate={false} defaultValue={8000} min={20} max={22050} step={1} onChange={onChangeFrequencyCallback} />

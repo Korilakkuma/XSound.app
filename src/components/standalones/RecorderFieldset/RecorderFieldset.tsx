@@ -358,6 +358,7 @@ export const RecorderFieldset: React.FC<Props> = ({ currentSoundSource }) => {
           values={['0', '1', '2', '3']}
           texts={['track 1', 'track 2', 'track 3', 'track 4']}
           disabled={running}
+          textTransform={true}
           onChange={onChangeTrackCallback}
         />
         <ParameterController label='Left Channel' autoupdate={false} defaultValue={1} min={0} max={1} step={0.05} onChange={onChangeLeftChannelGainCallback} />

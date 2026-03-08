@@ -614,7 +614,15 @@ export const MML: React.FC<Props> = ({ loadedApp, currentSoundSource }) => {
             tabIndex={active ? 0 : -1}
             onChange={onChangeFileCallback}
           />
-          <Select label='Select Sample MML' values={values} texts={texts} disabled={!paused} tabIndex={active ? 0 : -1} onChange={onChangeSampleMMLCallback} />
+          <Select
+            label='Select Sample MML'
+            values={values}
+            texts={texts}
+            disabled={!paused}
+            tabIndex={active ? 0 : -1}
+            textTransform={false}
+            onChange={onChangeSampleMMLCallback}
+          />
         </div>
       </div>
       <Modal isShow={isShowModalForFileUploadError} title='Error' hasOverlay={true} asAlert={true} onClose={onCloseModalCallback}>

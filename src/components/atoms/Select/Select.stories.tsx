@@ -19,6 +19,7 @@ export const Primary = {
     values: ['A', 'B', 'C'],
     texts: ['0 - 0', '0 - 1', '0 - 2'],
     disabled: false,
+    textTransform: false,
     onChange: (event: React.ChangeEvent<HTMLSelectElement>) => {
       alert(event.currentTarget.value);
     }
@@ -32,7 +33,22 @@ export const Secondary = {
     values: ['A', 'B', 'C'],
     texts: ['0 - 0', '0 - 1', '0 - 2'],
     disabled: false,
+    textTransform: false,
     defaultValue: 'C',
+    onChange: (event: React.ChangeEvent<HTMLSelectElement>) => {
+      alert(event.currentTarget.value);
+    }
+  }
+};
+
+export const Tertiary = {
+  ...Template,
+  args: {
+    label: 'Tertiary Select',
+    values: ['a', 'b', 'c'],
+    texts: ['0 - 0', '0 - 1', '0 - 2'],
+    disabled: false,
+    textTransform: true,
     onChange: (event: React.ChangeEvent<HTMLSelectElement>) => {
       alert(event.currentTarget.value);
     }

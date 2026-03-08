@@ -412,6 +412,7 @@ export const SoundSourceFieldset: React.FC<Props> = ({ currentSoundSource }) => 
         values={['oscillator', 'piano', 'guitar', 'electric-guitar', 'orgel', 'whitenoise', 'pinknoise', 'browniannoise', 'stream', 'midi']}
         texts={['oscillator', 'piano', 'A. guitar', 'E. guitar', 'orgel (music box)', 'white noise', 'pink noise', 'brownian noise', 'microphone', 'MIDI']}
         disabled={false}
+        textTransform={true}
         onChange={onChangeSoundSourceCallback}
       />
       <Select
@@ -419,9 +420,17 @@ export const SoundSourceFieldset: React.FC<Props> = ({ currentSoundSource }) => 
         values={inputDeviceIds}
         texts={inputDeviceLabels}
         disabled={currentSoundSource !== 'stream'}
+        textTransform={false}
         onChange={onChangeInputDeviceCallback}
       />
-      <Select label='Select Output Device' values={outputDeviceIds} texts={outputDeviceLabels} disabled={false} onChange={onChangeOutputDeviceCallback} />
+      <Select
+        label='Select Output Device'
+        values={outputDeviceIds}
+        texts={outputDeviceLabels}
+        disabled={false}
+        textTransform={false}
+        onChange={onChangeOutputDeviceCallback}
+      />
       <Modal isShow={isShowModalForMIDIError} title='Error' hasOverlay={true} asAlert={true} onClose={onCloseModalCallback}>
         {errorMessage}
       </Modal>

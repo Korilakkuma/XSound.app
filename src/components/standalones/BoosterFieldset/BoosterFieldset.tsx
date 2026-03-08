@@ -242,6 +242,7 @@ export const BoosterFieldset: React.FC = () => {
           texts={['bit crusher', 'overdrive', 'fuzz']}
           defaultValue='overdrive'
           disabled={false}
+          textTransform={true}
           onChange={onChangeTypeCallback}
         />
         {boosterType === 'bitcrusher' ? (

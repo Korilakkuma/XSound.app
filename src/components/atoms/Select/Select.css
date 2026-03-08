@@ -7,7 +7,6 @@
   font-family: Arial, Helvetica, sans-serif;
   font-size: 13px;
   color: var(--white);
-  text-transform: uppercase;
   appearance: none;
   cursor: pointer;
   background-image: linear-gradient(to bottom, var(--gray), var(--black));
@@ -16,6 +15,10 @@
   box-shadow:
     0 0 0 2px var(--black) inset,
     0 -1px 1px 2px rgb(0 0 0 / 50%);
+}
+
+.Select.upper > select {
+  text-transform: uppercase;
 }
 
 .Select > select:focus {
@@ -30,6 +33,10 @@
 .Select > select > option {
   /* for Edge and Windows */
   color: var(--black-light);
+}
+
+.Select.upper > select > option {
+  /* for Edge and Windows */
   text-transform: uppercase;
 }
 
