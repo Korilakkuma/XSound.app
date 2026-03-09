@@ -52,43 +52,83 @@ export const Analyser: React.FC = () => {
 
     X('mixer')
       .module('analyser')
-      .domain('time')
+      .domain('time', 0)
       .param({ interval: value > 0 ? value : -1 });
     X('mixer')
       .module('analyser')
-      .domain('fft')
+      .domain('time', 1)
+      .param({ interval: value > 0 ? value : -1 });
+    X('mixer')
+      .module('analyser')
+      .domain('fft', 0)
+      .param({ interval: value > 0 ? value : -1 });
+    X('mixer')
+      .module('analyser')
+      .domain('fft', 1)
       .param({ interval: value > 0 ? value : -1 });
     X('oneshot')
       .module('analyser')
-      .domain('time')
+      .domain('time', 0)
       .param({ interval: value > 0 ? value : -1 });
     X('oneshot')
       .module('analyser')
-      .domain('fft')
+      .domain('time', 1)
+      .param({ interval: value > 0 ? value : -1 });
+    X('oneshot')
+      .module('analyser')
+      .domain('fft', 0)
+      .param({ interval: value > 0 ? value : -1 });
+    X('oneshot')
+      .module('analyser')
+      .domain('fft', 1)
       .param({ interval: value > 0 ? value : -1 });
     X('audio')
       .module('analyser')
-      .domain('time')
+      .domain('time', 0)
       .param({ interval: value > 0 ? value : -1 });
     X('audio')
       .module('analyser')
-      .domain('fft')
+      .domain('time', 1)
+      .param({ interval: value > 0 ? value : -1 });
+    X('audio')
+      .module('analyser')
+      .domain('fft', 0)
+      .param({ interval: value > 0 ? value : -1 });
+    X('audio')
+      .module('analyser')
+      .domain('fft', 1)
       .param({ interval: value > 0 ? value : -1 });
     X('stream')
       .module('analyser')
-      .domain('time')
+      .domain('time', 0)
       .param({ interval: value > 0 ? value : -1 });
     X('stream')
       .module('analyser')
-      .domain('fft')
+      .domain('time', 1)
+      .param({ interval: value > 0 ? value : -1 });
+    X('stream')
+      .module('analyser')
+      .domain('fft', 0)
+      .param({ interval: value > 0 ? value : -1 });
+    X('stream')
+      .module('analyser')
+      .domain('fft', 1)
       .param({ interval: value > 0 ? value : -1 });
     X('noise')
       .module('analyser')
-      .domain('time')
+      .domain('time', 0)
       .param({ interval: value > 0 ? value : -1 });
     X('noise')
       .module('analyser')
-      .domain('fft')
+      .domain('time', 1)
+      .param({ interval: value > 0 ? value : -1 });
+    X('noise')
+      .module('analyser')
+      .domain('fft', 0)
+      .param({ interval: value > 0 ? value : -1 });
+    X('noise')
+      .module('analyser')
+      .domain('fft', 1)
       .param({ interval: value > 0 ? value : -1 });
   }, []);
 
