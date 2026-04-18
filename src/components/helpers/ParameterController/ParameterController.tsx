@@ -32,7 +32,7 @@ export const ParameterController: React.FC<Props> = (props: Props) => {
 
   useEffect(() => {
     if (autoupdate) {
-      // eslint-disable-next-line react-hooks/set-state-in-effect
+      // FIXME: // eslint-disable-next-line react-hooks/set-state-in-effect
       setValue(defaultValue);
     }
   }, [autoupdate, defaultValue]);

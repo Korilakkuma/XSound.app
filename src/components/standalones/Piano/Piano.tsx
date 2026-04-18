@@ -163,7 +163,7 @@ export const Piano: React.FC<Props> = ({ loadedApp, currentSoundSource }) => {
           break;
       }
 
-      // eslint-disable-next-line react-hooks/immutability
+      // FIXME: // eslint-disable-next-line react-hooks/immutability
       downKeyboards[index] = false;
 
       setDownKeyboards(downKeyboards);

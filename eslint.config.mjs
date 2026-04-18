@@ -1,71 +1,31 @@
-// @ts-check
-
-import eslint from '@eslint/js';
-import { FlatCompat } from '@eslint/eslintrc';
-import tseslint from 'typescript-eslint';
-import tseslintPlugin from '@typescript-eslint/eslint-plugin';
-import importPlugin from 'eslint-plugin-import';
-import a11yPlugin from 'eslint-plugin-jsx-a11y';
-import reactRecommendedPlugin from 'eslint-plugin-react/configs/recommended.js';
-import reactJSXRuntimePlugin from 'eslint-plugin-react/configs/jsx-runtime.js';
-import reactHooksPlugin from 'eslint-plugin-react-hooks';
-import jestDomPlugin from 'eslint-plugin-jest-dom';
-import storybookPlugin from 'eslint-plugin-storybook';
-import prettierPlugin from 'eslint-plugin-prettier';
+import js from '@eslint/js';
 import globals from 'globals';
+import tseslint from 'typescript-eslint';
+// import pluginReact from 'eslint-plugin-react';
+import { defineConfig } from 'eslint/config';
 
-const compat = new FlatCompat();
-
-export default tseslint.config(
-  eslint.configs.recommended,
-  ...tseslint.configs.recommended,
+export default defineConfig([
   {
-    files: ['src/**/*.{ts,tsx}', 'test/**/*.ts', 'mock/**/*.ts', '.storybook/**/*.ts'],
-    ...reactRecommendedPlugin,
-    ...reactJSXRuntimePlugin,
-    ignores: ['*.snap'],
+    files: [
+      '**/*.{js,mjs,cjs,ts,mts,cts,jsx,tsx}'
+    ],
     plugins: {
-      '@typscript-eslint': tseslintPlugin,
-      'import': importPlugin,
-      'jsx-a11y': a11yPlugin,
-      'react-hooks': reactHooksPlugin,
-      'jest-dom': jestDomPlugin,
-      'storybook': storybookPlugin,
-      'prettier': prettierPlugin
-    },
-    languageOptions: {
-      'ecmaVersion': 'latest',
-      'sourceType': 'module',
-      'parser': tseslint.parser,
-      'parserOptions': {
-        'ecmaFeatures': {
-          'jsx': true
-        }
-      },
-      'globals': {
-        ...globals.browser,
-        ...globals.es2024,
-        ...globals.node,
-        ...globals.jest
-      },
-      ...reactRecommendedPlugin.languageOptions,
-      ...reactJSXRuntimePlugin.languageOptions
-    },
-    settings: {
-      'react': {
-        'version': 'detect'
-      },
-      'import/resolver': {
-        'typescript': {}
-      }
+      js
     },
     extends: [
-      ...tseslint.configs.recommended,
-      ...compat.config(a11yPlugin.configs.recommended),
-      ...compat.config(reactHooksPlugin.configs.recommended)
+      'js/recommended'
     ],
+    languageOptions: {
+      globals: globals.browser
+    },
     rules: {
       'default-param-last': 'off',
+      'dot-notation': 'error',
+      'eqeqeq': 'error',
+      'indent': ['error', 2, {
+        'ignoredNodes': ['TemplateLiteral'],
+        'SwitchCase': 1
+      }],
       'key-spacing': 'off',
       'no-case-declarations': 'error',
       'no-console': 'warn',
@@ -74,6 +34,9 @@ export default tseslint.config(
       'no-multi-spaces': 'off',
       'no-unneeded-ternary': 'off',
       'no-unused-vars': ['off', { 'vars': 'all', 'args': 'after-used' }],
+      'no-use-before-define': 'error',
+      'no-useless-assignment': 'off',
+      'no-useless-constructor': 'warn',
       'no-var': 'warn',
       'prefer-promise-reject-errors': 'off',
       'quote-props': 'off',
@@ -86,7 +49,9 @@ export default tseslint.config(
       '@typescript-eslint/consistent-type-imports': 'error',
       '@typescript-eslint/no-empty-function': 'off',
       '@typescript-eslint/no-unused-vars': ['error', { 'argsIgnorePattern': '^_' }],
-      '@typescript-eslint/no-use-before-define': 'error',
+      '@typescript-eslint/no-use-before-define': 'error'
     }
-  }
-);
+  },
+  tseslint.configs.recommended
+  // pluginReact.configs.flat.recommended,
+]);
