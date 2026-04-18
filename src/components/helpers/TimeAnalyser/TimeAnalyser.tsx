@@ -1,5 +1,5 @@
 import type React from 'react';
-import type { Channel } from 'src/types';
+import type { Channel } from '/src/types';
 
 import { useState, useMemo, useCallback } from 'react';
 
