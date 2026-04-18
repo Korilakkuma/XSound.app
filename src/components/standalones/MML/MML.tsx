@@ -158,7 +158,12 @@ export const MML: React.FC<Props> = ({ loadedApp, currentSoundSource }) => {
       case 'NOTE':
       case 'REST':
       case 'TIE':
-        setErrorMessageForMMLMelody(`${token.token.toUpperCase()} is invalid`);
+        if (token.token) {
+          setErrorMessageForMMLMelody(`${token.token.toUpperCase()} is invalid`);
+        } else {
+          setErrorMessageForMMLMelody('MML is invalid');
+        }
+
         break;
       default:
         setErrorMessageForMMLMelody('MML is invalid');
@@ -175,7 +180,12 @@ export const MML: React.FC<Props> = ({ loadedApp, currentSoundSource }) => {
       case 'NOTE':
       case 'REST':
       case 'TIE':
-        setErrorMessageForMMLBass(`${token.token.toUpperCase()} is invalid`);
+        if (token.token) {
+          setErrorMessageForMMLBass(`${token.token.toUpperCase()} is invalid`);
+        } else {
+          setErrorMessageForMMLBass('MML is invalid');
+        }
+
         break;
       default:
         setErrorMessageForMMLBass('MML is invalid');
