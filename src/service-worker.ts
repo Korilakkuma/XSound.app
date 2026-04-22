@@ -43,6 +43,11 @@ worker.addEventListener(
 worker.addEventListener(
   'fetch',
   (event: FetchEvent) => {
+    if (event.request.url.startsWith('http://')) {
+      // Not cache ...
+      return;
+    }
+
     if (
       !CACHE_FILES.some((file: string) => event.request.url.includes(file)) &&
       !event.request.url.startsWith('http') &&
