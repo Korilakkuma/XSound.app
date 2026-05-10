@@ -103,7 +103,9 @@ export const SoundSourceFieldset: React.FC<Props> = ({ currentSoundSource }) => 
       /** @see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Errors/Non_configurable_array_element */
       const newActiveIndexes = [...activeMIDIKeyboardIndexes];
 
-      newActiveIndexes.push(targetIndex);
+      if (!newActiveIndexes.includes(targetIndex)) {
+        newActiveIndexes.push(targetIndex);
+      }
 
       if (midiSource === 'noise') {
         X('noise').start();
