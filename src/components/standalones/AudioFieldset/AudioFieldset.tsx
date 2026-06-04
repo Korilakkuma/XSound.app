@@ -169,7 +169,11 @@ export const AudioFieldset: React.FC = () => {
   }, []);
 
   const onChangeHarmonizerCallback = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
-    X('audio').module('pitchshifter').param({ dry: event.currentTarget.valueAsNumber });
+    const wet = event.currentTarget.valueAsNumber;
+
+    X('audio')
+      .module('harmonizer')
+      .param({ shifts: [1100, -700], dry: 1 - wet, wets: [wet, wet] });
   }, []);
 
   const onChangePlaybackRate = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
