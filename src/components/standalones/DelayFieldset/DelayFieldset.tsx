@@ -4,6 +4,7 @@ import { X } from 'xsound';
 
 import { Fieldset } from '/src/components/atoms/Fieldset';
 import { Legend } from '/src/components/atoms/Legend';
+import { Select } from '/src/components/atoms/Select';
 import { Switch } from '/src/components/atoms/Switch';
 import { ParameterController } from '/src/components/helpers/ParameterController';
 
@@ -28,6 +29,23 @@ export const DelayFieldset: React.FC = () => {
     }
 
     setDelay(checked);
+  }, []);
+
+  const onChangeTypeCallback = useCallback((event: React.ChangeEvent<HTMLSelectElement>) => {
+    const type = event.currentTarget.value;
+
+    switch (type) {
+      case 'standard':
+      case 'pingpong': {
+        X('mixer').module('delay').param({ type });
+        X('oneshot').module('delay').param({ type });
+        X('audio').module('delay').param({ type });
+        X('stream').module('delay').param({ type });
+        X('noise').module('delay').param({ type });
+
+        break;
+      }
+    }
   }, []);
 
   const onChangeTimeCallback = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
@@ -86,6 +104,15 @@ export const DelayFieldset: React.FC = () => {
         <Legend>
           <Switch label='Delay' checked={delay} labelAsText={false} onChange={onChangeStateCallback} />
         </Legend>
+        <Select
+          label='Select Delay Type'
+          values={['standard', 'pingpong']}
+          texts={['standard', 'ping pong']}
+          disabled={false}
+          textTransform={true}
+          defaultValue='standard'
+          onChange={onChangeTypeCallback}
+        />
         <ParameterController label='Time' autoupdate={false} defaultValue={0} min={0} max={1000} step={1} onChange={onChangeTimeCallback} />
         <ParameterController label='Dry' autoupdate={false} defaultValue={1} min={0} max={1} step={0.05} onChange={onChangeDryCallback} />
         <ParameterController label='Wet' autoupdate={false} defaultValue={0} min={0} max={1} step={0.05} onChange={onChangeWetCallback} />
