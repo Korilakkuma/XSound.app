@@ -26,10 +26,7 @@ export const Piano: React.FC<Props> = ({ loadedApp, currentSoundSource }) => {
   const startSoundCallback = useCallback(
     (
       event:
-        | React.MouseEvent<HTMLButtonElement>
-        | React.TouchEvent<HTMLButtonElement>
-        | React.KeyboardEvent<HTMLButtonElement>
-        | React.FocusEvent<HTMLButtonElement>
+        React.MouseEvent<HTMLButtonElement> | React.TouchEvent<HTMLButtonElement> | React.KeyboardEvent<HTMLButtonElement> | React.FocusEvent<HTMLButtonElement>
     ) => {
       if ('code' in event.nativeEvent && event.nativeEvent.code === 'Enter') {
         return;
@@ -117,10 +114,7 @@ export const Piano: React.FC<Props> = ({ loadedApp, currentSoundSource }) => {
   const stopSoundCallback = useCallback(
     (
       event:
-        | React.MouseEvent<HTMLButtonElement>
-        | React.TouchEvent<HTMLButtonElement>
-        | React.KeyboardEvent<HTMLButtonElement>
-        | React.FocusEvent<HTMLButtonElement>
+        React.MouseEvent<HTMLButtonElement> | React.TouchEvent<HTMLButtonElement> | React.KeyboardEvent<HTMLButtonElement> | React.FocusEvent<HTMLButtonElement>
     ) => {
       if ('code' in event.nativeEvent && event.nativeEvent.code === 'Enter') {
         return;
