@@ -1,4 +1,6 @@
 import type React from 'react';
+import type { DelayType } from 'xsound';
+
 import { useCallback, useState } from 'react';
 import { X } from 'xsound';
 
@@ -10,6 +12,8 @@ import { ParameterController } from '/src/components/helpers/ParameterController
 
 export const DelayFieldset: React.FC = () => {
   const [delay, setDelay] = useState<boolean>(false);
+  const [type, setType] = useState<DelayType>('standard');
+  const [stereo, setStereo] = useState<number>(1);
 
   const onChangeStateCallback = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
     const checked = event.currentTarget.checked;
@@ -43,20 +47,40 @@ export const DelayFieldset: React.FC = () => {
         X('stream').module('delay').param({ type });
         X('noise').module('delay').param({ type });
 
+        setType(type);
+        setStereo(1);
+
+        break;
+      }
+
+      case 'stereo': {
+        X('mixer').module('delay').param({ type });
+        X('oneshot').module('delay').param({ type });
+        X('audio').module('delay').param({ type });
+        X('stream').module('delay').param({ type });
+        X('noise').module('delay').param({ type });
+
+        setType(type);
+
         break;
       }
     }
   }, []);
 
-  const onChangeTimeCallback = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
-    const time = event.currentTarget.valueAsNumber / 1000;
+  const onChangeTimeCallback = useCallback(
+    (event: React.ChangeEvent<HTMLInputElement>) => {
+      const time = event.currentTarget.valueAsNumber / 1000;
 
-    X('mixer').module('delay').param({ time });
-    X('oneshot').module('delay').param({ time });
-    X('audio').module('delay').param({ time });
-    X('stream').module('delay').param({ time });
-    X('noise').module('delay').param({ time });
-  }, []);
+      const times: [number, number] = [stereo * time, time];
+
+      X('mixer').module('delay').param({ time: times });
+      X('oneshot').module('delay').param({ time: times });
+      X('audio').module('delay').param({ time: times });
+      X('stream').module('delay').param({ time: times });
+      X('noise').module('delay').param({ time: times });
+    },
+    [stereo]
+  );
 
   const onChangeDryCallback = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
     const dry = event.currentTarget.valueAsNumber;
@@ -71,32 +95,59 @@ export const DelayFieldset: React.FC = () => {
   const onChangeWetCallback = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
     const wet = event.currentTarget.valueAsNumber;
 
-    X('mixer').module('delay').param({ wet });
-    X('oneshot').module('delay').param({ wet });
-    X('audio').module('delay').param({ wet });
-    X('stream').module('delay').param({ wet });
-    X('noise').module('delay').param({ wet });
+    const wets: [number, number] = [wet, wet];
+
+    X('mixer').module('delay').param({ wet: wets });
+    X('oneshot').module('delay').param({ wet: wets });
+    X('audio').module('delay').param({ wet: wets });
+    X('stream').module('delay').param({ wet: wets });
+    X('noise').module('delay').param({ wet: wets });
   }, []);
 
   const onChangeToneCallback = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
     const tone = event.currentTarget.valueAsNumber;
 
-    X('mixer').module('delay').param({ tone });
-    X('oneshot').module('delay').param({ tone });
-    X('audio').module('delay').param({ tone });
-    X('stream').module('delay').param({ tone });
-    X('noise').module('delay').param({ tone });
+    const tones: [number, number] = [tone, tone];
+
+    X('mixer').module('delay').param({ tone: tones });
+    X('oneshot').module('delay').param({ tone: tones });
+    X('audio').module('delay').param({ tone: tones });
+    X('stream').module('delay').param({ tone: tones });
+    X('noise').module('delay').param({ tone: tones });
   }, []);
 
   const onChangeFeedbackCallback = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
     const feedback = event.currentTarget.valueAsNumber;
 
-    X('mixer').module('delay').param({ feedback });
-    X('oneshot').module('delay').param({ feedback });
-    X('audio').module('delay').param({ feedback });
-    X('stream').module('delay').param({ feedback });
-    X('noise').module('delay').param({ feedback });
+    const feedbacks: [number, number] = [feedback, feedback];
+
+    X('mixer').module('delay').param({ feedback: feedbacks });
+    X('oneshot').module('delay').param({ feedback: feedbacks });
+    X('audio').module('delay').param({ feedback: feedbacks });
+    X('stream').module('delay').param({ feedback: feedbacks });
+    X('noise').module('delay').param({ feedback: feedbacks });
   }, []);
+
+  const onChangeStereoCallback = useCallback(
+    (event: React.ChangeEvent<HTMLInputElement>) => {
+      const stereo = event.currentTarget.valueAsNumber;
+
+      const times = X('mixer').module('delay').param('time');
+
+      if (Array.isArray(times) && times.length === 2) {
+        times[0] = stereo * times[1];
+
+        X('mixer').module('delay').param({ time: times });
+        X('oneshot').module('delay').param({ time: times });
+        X('audio').module('delay').param({ time: times });
+        X('stream').module('delay').param({ time: times });
+        X('noise').module('delay').param({ time: times });
+      }
+
+      setStereo(stereo);
+    },
+    [stereo]
+  );
 
   return (
     <div className='DelayFieldset'>
@@ -106,8 +157,8 @@ export const DelayFieldset: React.FC = () => {
         </Legend>
         <Select
           label='Select Delay Type'
-          values={['standard', 'pingpong']}
-          texts={['standard', 'ping pong']}
+          values={['standard', 'pingpong', 'stereo']}
+          texts={['standard', 'ping pong', 'stereo']}
           disabled={false}
           textTransform={true}
           defaultValue='standard'
@@ -118,6 +169,9 @@ export const DelayFieldset: React.FC = () => {
         <ParameterController label='Wet' autoupdate={false} defaultValue={0} min={0} max={1} step={0.05} onChange={onChangeWetCallback} />
         <ParameterController label='Tone' autoupdate={false} defaultValue={4000} min={20} max={8000} step={1} onChange={onChangeToneCallback} />
         <ParameterController label='Feedback' autoupdate={false} defaultValue={0} min={0} max={0.95} step={0.05} onChange={onChangeFeedbackCallback} />
+        {type === 'stereo' && (
+          <ParameterController label='Stereo' autoupdate={false} defaultValue={1} min={0} max={2} step={0.05} onChange={onChangeStereoCallback} />
+        )}
       </Fieldset>
     </div>
   );
