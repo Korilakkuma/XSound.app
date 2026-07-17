@@ -70,6 +70,9 @@ export default [
       usedExports: true
     },
     devtool: 'source-map',
+    watchOptions: {
+      poll: true
+    },
     devServer: {
       static: dirname,
       host: '0.0.0.0'
