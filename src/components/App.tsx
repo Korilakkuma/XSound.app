@@ -1278,7 +1278,6 @@ export const App: React.FC = () => {
       X('audio').module('noisesuppressor'),
       X('audio').module('filter'),
       X('audio').module('equalizer'),
-      X('audio').module('harmonizer'),
       X('audio').module('tremolo'),
       X('audio').module('ringmodulator'),
       X('audio').module('phaser'),
@@ -1374,7 +1373,6 @@ export const App: React.FC = () => {
 
     X('audio').module('wah').param({ auto: true });
     X('audio').module('pitchshifter').activate();
-    X('audio').module('harmonizer').activate().param({ type: 'detune' });
 
     X('stream').module('pitchshifter').activate();
 
