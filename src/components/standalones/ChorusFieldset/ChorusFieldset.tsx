@@ -9,7 +9,6 @@ import { ParameterController } from '/src/components/helpers/ParameterController
 
 export const ChorusFieldset: React.FC = () => {
   const [chorus, setChorus] = useState<boolean>(false);
-  const [stereo, setStereo] = useState<number>(1);
 
   const onChangeStateCallback = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
     const checked = event.currentTarget.checked;
@@ -31,20 +30,15 @@ export const ChorusFieldset: React.FC = () => {
     setChorus(checked);
   }, []);
 
-  const onChangeTimeCallback = useCallback(
-    (event: React.ChangeEvent<HTMLInputElement>) => {
-      const time = event.currentTarget.valueAsNumber / 1000;
+  const onChangeTimeCallback = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
+    const time = event.currentTarget.valueAsNumber / 1000;
 
-      const times: [number, number] = [stereo * time, time];
-
-      X('mixer').module('chorus').param({ time: times });
-      X('oneshot').module('chorus').param({ time: times });
-      X('audio').module('chorus').param({ time: times });
-      X('stream').module('chorus').param({ time: times });
-      X('noise').module('chorus').param({ time: times });
-    },
-    [stereo]
-  );
+    X('mixer').module('chorus').param({ time });
+    X('oneshot').module('chorus').param({ time });
+    X('audio').module('chorus').param({ time });
+    X('stream').module('chorus').param({ time });
+    X('noise').module('chorus').param({ time });
+  }, []);
 
   const onChangeDepthCallback = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
     const depth = event.currentTarget.valueAsNumber;
@@ -86,27 +80,6 @@ export const ChorusFieldset: React.FC = () => {
     X('noise').module('chorus').param({ tone });
   }, []);
 
-  const onChangeStereoCallback = useCallback(
-    (event: React.ChangeEvent<HTMLInputElement>) => {
-      const stereo = event.currentTarget.valueAsNumber;
-
-      const times = X('mixer').module('chorus').param('time');
-
-      if (Array.isArray(times) && times.length === 2) {
-        times[0] = stereo * times[1];
-
-        X('mixer').module('chorus').param({ time: times });
-        X('oneshot').module('chorus').param({ time: times });
-        X('audio').module('chorus').param({ time: times });
-        X('stream').module('chorus').param({ time: times });
-        X('noise').module('chorus').param({ time: times });
-      }
-
-      setStereo(stereo);
-    },
-    [stereo]
-  );
-
   return (
     <div className='ChorusFieldset'>
       <Fieldset>
@@ -118,7 +91,6 @@ export const ChorusFieldset: React.FC = () => {
         <ParameterController label='Rate' autoupdate={false} defaultValue={0} min={0} max={1} step={0.01} onChange={onChangeRateCallback} />
         <ParameterController label='Mix' autoupdate={false} defaultValue={0} min={0} max={1} step={0.05} onChange={onChangeMixCallback} />
         <ParameterController label='Tone' autoupdate={false} defaultValue={4000} min={20} max={8000} step={1} onChange={onChangeToneCallabck} />
-        <ParameterController label='Stereo' autoupdate={false} defaultValue={1} min={0} max={2} step={0.05} onChange={onChangeStereoCallback} />
       </Fieldset>
     </div>
   );

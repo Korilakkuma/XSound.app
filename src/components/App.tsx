@@ -1388,7 +1388,7 @@ export const App: React.FC = () => {
     };
 
     X('mixer').module('preamp').param(preampParams);
-    X('mixer').module('chorus').param({ type: 'stereo', tone: 4000 });
+    X('mixer').module('chorus').param({ tone: 4000 });
     X('mixer').module('flanger').param({ tone: 4000 });
     X('mixer').module('delay').param({ tone: 4000 });
     X('mixer').module('reverb').param({ tone: 4000 });
@@ -1398,7 +1398,7 @@ export const App: React.FC = () => {
     X('mixer').module('bitcrusher').param({ bits: 1 });
 
     X('oneshot').module('preamp').param(preampParams);
-    X('oneshot').module('chorus').param({ type: 'stereo', tone: 4000 });
+    X('oneshot').module('chorus').param({ tone: 4000 });
     X('oneshot').module('flanger').param({ tone: 4000 });
     X('oneshot').module('delay').param({ tone: 4000 });
     X('oneshot').module('reverb').param({ tone: 4000 });
@@ -1407,7 +1407,7 @@ export const App: React.FC = () => {
     X('oneshot').module('bitcrusher').param({ bits: 1 });
 
     X('audio').module('preamp').param(preampParams);
-    X('audio').module('chorus').param({ type: 'stereo', tone: 4000 });
+    X('audio').module('chorus').param({ tone: 4000 });
     X('audio').module('flanger').param({ tone: 4000 });
     X('audio').module('delay').param({ tone: 4000 });
     X('audio').module('reverb').param({ tone: 4000 });
@@ -1418,7 +1418,7 @@ export const App: React.FC = () => {
     X('audio').module('bitcrusher').param({ bits: 1 });
 
     X('stream').module('preamp').param(preampParams);
-    X('stream').module('chorus').param({ type: 'stereo', tone: 4000 });
+    X('stream').module('chorus').param({ tone: 4000 });
     X('stream').module('flanger').param({ tone: 4000 });
     X('stream').module('delay').param({ tone: 4000 });
     X('stream').module('reverb').param({ tone: 4000 });
@@ -1428,7 +1428,7 @@ export const App: React.FC = () => {
     X('stream').module('bitcrusher').param({ bits: 1 });
 
     X('noise').module('preamp').param(preampParams);
-    X('noise').module('chorus').param({ type: 'stereo', tone: 4000 });
+    X('noise').module('chorus').param({ tone: 4000 });
     X('noise').module('flanger').param({ tone: 4000 });
     X('noise').module('delay').param({ tone: 4000 });
     X('noise').module('reverb').param({ tone: 4000 });
@@ -1438,7 +1438,7 @@ export const App: React.FC = () => {
     X('noise').module('bitcrusher').param({ bits: 1 });
 
     X('oscillator').module('preamp').param(preampParams);
-    X('oscillator').module('chorus').param({ type: 'stereo', tone: 4000 });
+    X('oscillator').module('chorus').param({ tone: 4000 });
     X('oscillator').module('flanger').param({ tone: 4000 });
     X('oscillator').module('delay').param({ tone: 4000 });
     X('oscillator').module('reverb').param({ tone: 4000 });
@@ -1448,7 +1448,7 @@ export const App: React.FC = () => {
     X('oscillator').module('bitcrusher').param({ bits: 1 });
 
     clonedX('oscillator').module('preamp').param(preampParams);
-    clonedX('oscillator').module('chorus').param({ type: 'stereo', tone: 4000 });
+    clonedX('oscillator').module('chorus').param({ tone: 4000 });
     clonedX('oscillator').module('flanger').param({ tone: 4000 });
     clonedX('oscillator').module('delay').param({ tone: 4000 });
     clonedX('oscillator').module('reverb').param({ tone: 4000 });
