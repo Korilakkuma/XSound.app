@@ -1,5 +1,5 @@
 import type React from 'react';
-import type { PreampType, PreampParams } from 'xsound';
+import type { PreampType, AmpSimulatorParams } from 'xsound';
 
 import { useCallback, useState } from 'react';
 import { useDispatch } from 'react-redux';
@@ -13,7 +13,7 @@ import { Select } from '/src/components/atoms/Select';
 import { ParameterController } from '/src/components/helpers/ParameterController';
 
 export const AmpSimulatorFieldset: React.FC = () => {
-  const [preamp, setPreamp] = useState<boolean>(false);
+  const [ampsimulator, setAmpsimulator] = useState<boolean>(false);
   const [cabinet, setCabinet] = useState<boolean>(false);
   const [preampType, setPreampType] = useState<PreampType>('marshall');
 
@@ -24,11 +24,11 @@ export const AmpSimulatorFieldset: React.FC = () => {
       const checked = event.currentTarget.checked;
 
       if (checked) {
-        X('mixer').module('preamp').activate();
-        X('oneshot').module('preamp').activate();
-        X('audio').module('preamp').activate();
-        X('stream').module('preamp').activate();
-        X('noise').module('preamp').activate();
+        X('mixer').module('ampsimulator').activate();
+        X('oneshot').module('ampsimulator').activate();
+        X('audio').module('ampsimulator').activate();
+        X('stream').module('ampsimulator').activate();
+        X('noise').module('ampsimulator').activate();
 
         const mastervolume = { mastervolume: 0.2 };
 
@@ -40,11 +40,11 @@ export const AmpSimulatorFieldset: React.FC = () => {
 
         dispatch(setMasterVolume(0.2));
       } else {
-        X('mixer').module('preamp').deactivate();
-        X('oneshot').module('preamp').deactivate();
-        X('audio').module('preamp').deactivate();
-        X('stream').module('preamp').deactivate();
-        X('noise').module('preamp').deactivate();
+        X('mixer').module('ampsimulator').deactivate();
+        X('oneshot').module('ampsimulator').deactivate();
+        X('audio').module('ampsimulator').deactivate();
+        X('stream').module('ampsimulator').deactivate();
+        X('noise').module('ampsimulator').deactivate();
 
         const mastervolume = { mastervolume: 1 };
 
@@ -57,7 +57,7 @@ export const AmpSimulatorFieldset: React.FC = () => {
         dispatch(setMasterVolume(1));
       }
 
-      setPreamp(checked);
+      setAmpsimulator(checked);
       setCabinet(checked);
     },
     [dispatch]
@@ -69,32 +69,31 @@ export const AmpSimulatorFieldset: React.FC = () => {
 
       switch (type) {
         case 'marshall': {
-          const param: PreampParams = {
-            state: preamp,
+          const param: AmpSimulatorParams = {
+            state: ampsimulator,
             type: 'marshall',
             preamp: {
               state: true,
               level: 0,
               samples: 8192,
               pre: { state: true, gain: 0.5, lead: 0.5 },
-              post: { state: true },
-              cabinet: { state: cabinet }
+              post: { state: true }
             }
           };
 
-          X('mixer').module('preamp').param(param);
-          X('oneshot').module('preamp').param(param);
-          X('audio').module('preamp').param(param);
-          X('stream').module('preamp').param(param);
-          X('noise').module('preamp').param(param);
+          X('mixer').module('ampsimulator').param(param);
+          X('oneshot').module('ampsimulator').param(param);
+          X('audio').module('ampsimulator').param(param);
+          X('stream').module('ampsimulator').param(param);
+          X('noise').module('ampsimulator').param(param);
 
           setPreampType(type);
           break;
         }
 
         case 'mesa/boogie': {
-          const param: PreampParams = {
-            state: preamp,
+          const param: AmpSimulatorParams = {
+            state: ampsimulator,
             type: 'mesa/boogie',
             preamp: {
               state: true,
@@ -114,24 +113,23 @@ export const AmpSimulatorFieldset: React.FC = () => {
                 fc720: 0,
                 fc1600: 0,
                 fc4800: 0
-              },
-              cabinet: { state: cabinet }
+              }
             }
           };
 
-          X('mixer').module('preamp').param(param);
-          X('oneshot').module('preamp').param(param);
-          X('audio').module('preamp').param(param);
-          X('stream').module('preamp').param(param);
-          X('noise').module('preamp').param(param);
+          X('mixer').module('ampsimulator').param(param);
+          X('oneshot').module('ampsimulator').param(param);
+          X('audio').module('ampsimulator').param(param);
+          X('stream').module('ampsimulator').param(param);
+          X('noise').module('ampsimulator').param(param);
 
           setPreampType(type);
           break;
         }
 
         case 'fender': {
-          const param: PreampParams = {
-            state: preamp,
+          const param: AmpSimulatorParams = {
+            state: ampsimulator,
             type: 'fender',
             preamp: {
               state: true,
@@ -148,23 +146,22 @@ export const AmpSimulatorFieldset: React.FC = () => {
                 state: true,
                 inch: 12,
                 tilt: true
-              },
-              cabinet: { state: cabinet }
+              }
             }
           };
 
-          X('mixer').module('preamp').param(param);
-          X('oneshot').module('preamp').param(param);
-          X('audio').module('preamp').param(param);
-          X('stream').module('preamp').param(param);
-          X('noise').module('preamp').param(param);
+          X('mixer').module('ampsimulator').param(param);
+          X('oneshot').module('ampsimulator').param(param);
+          X('audio').module('ampsimulator').param(param);
+          X('stream').module('ampsimulator').param(param);
+          X('noise').module('ampsimulator').param(param);
 
           setPreampType(type);
           break;
         }
       }
     },
-    [preamp, cabinet]
+    [ampsimulator, cabinet]
   );
 
   const onChangeLevelCallback = useCallback(
@@ -175,11 +172,11 @@ export const AmpSimulatorFieldset: React.FC = () => {
         case 'marshall': {
           const param = { preamp: { level } };
 
-          X('mixer').module('preamp').param(param);
-          X('oneshot').module('preamp').param(param);
-          X('audio').module('preamp').param(param);
-          X('stream').module('preamp').param(param);
-          X('noise').module('preamp').param(param);
+          X('mixer').module('ampsimulator').param(param);
+          X('oneshot').module('ampsimulator').param(param);
+          X('audio').module('ampsimulator').param(param);
+          X('stream').module('ampsimulator').param(param);
+          X('noise').module('ampsimulator').param(param);
           break;
         }
 
@@ -187,11 +184,11 @@ export const AmpSimulatorFieldset: React.FC = () => {
         case 'fender': {
           const param = { preamp: { pre: { level } } };
 
-          X('mixer').module('preamp').param(param);
-          X('oneshot').module('preamp').param(param);
-          X('audio').module('preamp').param(param);
-          X('stream').module('preamp').param(param);
-          X('noise').module('preamp').param(param);
+          X('mixer').module('ampsimulator').param(param);
+          X('oneshot').module('ampsimulator').param(param);
+          X('audio').module('ampsimulator').param(param);
+          X('stream').module('ampsimulator').param(param);
+          X('noise').module('ampsimulator').param(param);
           break;
         }
       }
@@ -204,11 +201,11 @@ export const AmpSimulatorFieldset: React.FC = () => {
 
     const param = { preamp: { pre: { gain } } };
 
-    X('mixer').module('preamp').param(param);
-    X('oneshot').module('preamp').param(param);
-    X('audio').module('preamp').param(param);
-    X('stream').module('preamp').param(param);
-    X('noise').module('preamp').param(param);
+    X('mixer').module('ampsimulator').param(param);
+    X('oneshot').module('ampsimulator').param(param);
+    X('audio').module('ampsimulator').param(param);
+    X('stream').module('ampsimulator').param(param);
+    X('noise').module('ampsimulator').param(param);
   }, []);
 
   const onChangeLeadGainCallback = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
@@ -216,11 +213,11 @@ export const AmpSimulatorFieldset: React.FC = () => {
 
     const param = { preamp: { pre: { lead } } };
 
-    X('mixer').module('preamp').param(param);
-    X('oneshot').module('preamp').param(param);
-    X('audio').module('preamp').param(param);
-    X('stream').module('preamp').param(param);
-    X('noise').module('preamp').param(param);
+    X('mixer').module('ampsimulator').param(param);
+    X('oneshot').module('ampsimulator').param(param);
+    X('audio').module('ampsimulator').param(param);
+    X('stream').module('ampsimulator').param(param);
+    X('noise').module('ampsimulator').param(param);
   }, []);
 
   const onChangeBassCallback = useCallback(
@@ -231,11 +228,11 @@ export const AmpSimulatorFieldset: React.FC = () => {
         case 'marshall': {
           const param = { preamp: { post: { bass } } };
 
-          X('mixer').module('preamp').param(param);
-          X('oneshot').module('preamp').param(param);
-          X('audio').module('preamp').param(param);
-          X('stream').module('preamp').param(param);
-          X('noise').module('preamp').param(param);
+          X('mixer').module('ampsimulator').param(param);
+          X('oneshot').module('ampsimulator').param(param);
+          X('audio').module('ampsimulator').param(param);
+          X('stream').module('ampsimulator').param(param);
+          X('noise').module('ampsimulator').param(param);
           break;
         }
 
@@ -243,11 +240,11 @@ export const AmpSimulatorFieldset: React.FC = () => {
         case 'fender': {
           const param = { preamp: { pre: { bass } } };
 
-          X('mixer').module('preamp').param(param);
-          X('oneshot').module('preamp').param(param);
-          X('audio').module('preamp').param(param);
-          X('stream').module('preamp').param(param);
-          X('noise').module('preamp').param(param);
+          X('mixer').module('ampsimulator').param(param);
+          X('oneshot').module('ampsimulator').param(param);
+          X('audio').module('ampsimulator').param(param);
+          X('stream').module('ampsimulator').param(param);
+          X('noise').module('ampsimulator').param(param);
           break;
         }
       }
@@ -263,11 +260,11 @@ export const AmpSimulatorFieldset: React.FC = () => {
         case 'marshall': {
           const param = { preamp: { post: { middle } } };
 
-          X('mixer').module('preamp').param(param);
-          X('oneshot').module('preamp').param(param);
-          X('audio').module('preamp').param(param);
-          X('stream').module('preamp').param(param);
-          X('noise').module('preamp').param(param);
+          X('mixer').module('ampsimulator').param(param);
+          X('oneshot').module('ampsimulator').param(param);
+          X('audio').module('ampsimulator').param(param);
+          X('stream').module('ampsimulator').param(param);
+          X('noise').module('ampsimulator').param(param);
           break;
         }
 
@@ -275,11 +272,11 @@ export const AmpSimulatorFieldset: React.FC = () => {
         case 'fender': {
           const param = { preamp: { pre: { middle } } };
 
-          X('mixer').module('preamp').param(param);
-          X('oneshot').module('preamp').param(param);
-          X('audio').module('preamp').param(param);
-          X('stream').module('preamp').param(param);
-          X('noise').module('preamp').param(param);
+          X('mixer').module('ampsimulator').param(param);
+          X('oneshot').module('ampsimulator').param(param);
+          X('audio').module('ampsimulator').param(param);
+          X('stream').module('ampsimulator').param(param);
+          X('noise').module('ampsimulator').param(param);
           break;
         }
       }
@@ -295,11 +292,11 @@ export const AmpSimulatorFieldset: React.FC = () => {
         case 'marshall': {
           const param = { preamp: { post: { treble } } };
 
-          X('mixer').module('preamp').param(param);
-          X('oneshot').module('preamp').param(param);
-          X('audio').module('preamp').param(param);
-          X('stream').module('preamp').param(param);
-          X('noise').module('preamp').param(param);
+          X('mixer').module('ampsimulator').param(param);
+          X('oneshot').module('ampsimulator').param(param);
+          X('audio').module('ampsimulator').param(param);
+          X('stream').module('ampsimulator').param(param);
+          X('noise').module('ampsimulator').param(param);
           break;
         }
 
@@ -307,11 +304,11 @@ export const AmpSimulatorFieldset: React.FC = () => {
         case 'fender': {
           const param = { preamp: { pre: { treble } } };
 
-          X('mixer').module('preamp').param(param);
-          X('oneshot').module('preamp').param(param);
-          X('audio').module('preamp').param(param);
-          X('stream').module('preamp').param(param);
-          X('noise').module('preamp').param(param);
+          X('mixer').module('ampsimulator').param(param);
+          X('oneshot').module('ampsimulator').param(param);
+          X('audio').module('ampsimulator').param(param);
+          X('stream').module('ampsimulator').param(param);
+          X('noise').module('ampsimulator').param(param);
           break;
         }
       }
@@ -329,11 +326,11 @@ export const AmpSimulatorFieldset: React.FC = () => {
 
       const param = { preamp: { post: { fc100: gain } } };
 
-      X('mixer').module('preamp').param(param);
-      X('oneshot').module('preamp').param(param);
-      X('audio').module('preamp').param(param);
-      X('stream').module('preamp').param(param);
-      X('noise').module('preamp').param(param);
+      X('mixer').module('ampsimulator').param(param);
+      X('oneshot').module('ampsimulator').param(param);
+      X('audio').module('ampsimulator').param(param);
+      X('stream').module('ampsimulator').param(param);
+      X('noise').module('ampsimulator').param(param);
     },
     [preampType]
   );
@@ -348,11 +345,11 @@ export const AmpSimulatorFieldset: React.FC = () => {
 
       const param = { preamp: { post: { fc360: gain } } };
 
-      X('mixer').module('preamp').param(param);
-      X('oneshot').module('preamp').param(param);
-      X('audio').module('preamp').param(param);
-      X('stream').module('preamp').param(param);
-      X('noise').module('preamp').param(param);
+      X('mixer').module('ampsimulator').param(param);
+      X('oneshot').module('ampsimulator').param(param);
+      X('audio').module('ampsimulator').param(param);
+      X('stream').module('ampsimulator').param(param);
+      X('noise').module('ampsimulator').param(param);
     },
     [preampType]
   );
@@ -367,11 +364,11 @@ export const AmpSimulatorFieldset: React.FC = () => {
 
       const param = { preamp: { post: { fc720: gain } } };
 
-      X('mixer').module('preamp').param(param);
-      X('oneshot').module('preamp').param(param);
-      X('audio').module('preamp').param(param);
-      X('stream').module('preamp').param(param);
-      X('noise').module('preamp').param(param);
+      X('mixer').module('ampsimulator').param(param);
+      X('oneshot').module('ampsimulator').param(param);
+      X('audio').module('ampsimulator').param(param);
+      X('stream').module('ampsimulator').param(param);
+      X('noise').module('ampsimulator').param(param);
     },
     [preampType]
   );
@@ -386,11 +383,11 @@ export const AmpSimulatorFieldset: React.FC = () => {
 
       const param = { preamp: { post: { fc1600: gain } } };
 
-      X('mixer').module('preamp').param(param);
-      X('oneshot').module('preamp').param(param);
-      X('audio').module('preamp').param(param);
-      X('stream').module('preamp').param(param);
-      X('noise').module('preamp').param(param);
+      X('mixer').module('ampsimulator').param(param);
+      X('oneshot').module('ampsimulator').param(param);
+      X('audio').module('ampsimulator').param(param);
+      X('stream').module('ampsimulator').param(param);
+      X('noise').module('ampsimulator').param(param);
     },
     [preampType]
   );
@@ -405,11 +402,11 @@ export const AmpSimulatorFieldset: React.FC = () => {
 
       const param = { preamp: { post: { fc4800: gain } } };
 
-      X('mixer').module('preamp').param(param);
-      X('oneshot').module('preamp').param(param);
-      X('audio').module('preamp').param(param);
-      X('stream').module('preamp').param(param);
-      X('noise').module('preamp').param(param);
+      X('mixer').module('ampsimulator').param(param);
+      X('oneshot').module('ampsimulator').param(param);
+      X('audio').module('ampsimulator').param(param);
+      X('stream').module('ampsimulator').param(param);
+      X('noise').module('ampsimulator').param(param);
     },
     [preampType]
   );
@@ -429,11 +426,11 @@ export const AmpSimulatorFieldset: React.FC = () => {
         case 15: {
           const param = { preamp: { post: { inch } } };
 
-          X('mixer').module('preamp').param(param);
-          X('oneshot').module('preamp').param(param);
-          X('audio').module('preamp').param(param);
-          X('stream').module('preamp').param(param);
-          X('noise').module('preamp').param(param);
+          X('mixer').module('ampsimulator').param(param);
+          X('oneshot').module('ampsimulator').param(param);
+          X('audio').module('ampsimulator').param(param);
+          X('stream').module('ampsimulator').param(param);
+          X('noise').module('ampsimulator').param(param);
           break;
         }
       }
@@ -444,13 +441,13 @@ export const AmpSimulatorFieldset: React.FC = () => {
   const onChangeCabinet = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
     const checked = event.currentTarget.checked;
 
-    const param = { preamp: { cabinet: { state: checked } } };
+    const param = { cabinet: { state: checked } };
 
-    X('mixer').module('preamp').param(param);
-    X('oneshot').module('preamp').param(param);
-    X('audio').module('preamp').param(param);
-    X('stream').module('preamp').param(param);
-    X('noise').module('preamp').param(param);
+    X('mixer').module('ampsimulator').param(param);
+    X('oneshot').module('ampsimulator').param(param);
+    X('audio').module('ampsimulator').param(param);
+    X('stream').module('ampsimulator').param(param);
+    X('noise').module('ampsimulator').param(param);
 
     setCabinet(checked);
   }, []);
@@ -459,7 +456,7 @@ export const AmpSimulatorFieldset: React.FC = () => {
     <div className='AmpSimulatorFieldset'>
       <Fieldset>
         <Legend>
-          <Switch label='Amp Simulator' checked={preamp} labelAsText={false} onChange={onChangeStateCallback} />
+          <Switch label='Amp Simulator' checked={ampsimulator} labelAsText={false} onChange={onChangeStateCallback} />
         </Legend>
         <Select
           label='Select Preamplifier'

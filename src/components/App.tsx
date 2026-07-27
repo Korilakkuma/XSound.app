@@ -35,7 +35,7 @@ import { WahFieldset } from '/src/components/standalones/WahFieldset';
 
 import type { RootState } from '/src/store';
 import type { RIRDescriptor } from '/src/types';
-import type { OneshotSetting, OneshotSettings, PreampParams } from 'xsound';
+import type { OneshotSetting, OneshotSettings, AmpSimulatorParams } from 'xsound';
 
 export const App: React.FC = () => {
   const [rate, setRate] = useState<number>(0);
@@ -1232,7 +1232,7 @@ export const App: React.FC = () => {
       X('oneshot').module('bitcrusher'),
       X('oneshot').module('overdrive'),
       X('oneshot').module('fuzz'),
-      X('oneshot').module('preamp'),
+      X('oneshot').module('ampsimulator'),
       X('oneshot').module('filter'),
       X('oneshot').module('equalizer'),
       X('oneshot').module('tremolo'),
@@ -1251,7 +1251,7 @@ export const App: React.FC = () => {
       X('mixer').module('bitcrusher'),
       X('mixer').module('overdrive'),
       X('mixer').module('fuzz'),
-      X('mixer').module('preamp'),
+      X('mixer').module('ampsimulator'),
       X('mixer').module('noisesuppressor'),
       X('mixer').module('filter'),
       X('mixer').module('equalizer'),
@@ -1272,7 +1272,7 @@ export const App: React.FC = () => {
       X('audio').module('bitcrusher'),
       X('audio').module('overdrive'),
       X('audio').module('fuzz'),
-      X('audio').module('preamp'),
+      X('audio').module('ampsimulator'),
       X('audio').module('noisesuppressor'),
       X('audio').module('filter'),
       X('audio').module('equalizer'),
@@ -1294,7 +1294,7 @@ export const App: React.FC = () => {
       X('stream').module('bitcrusher'),
       X('stream').module('overdrive'),
       X('stream').module('fuzz'),
-      X('stream').module('preamp'),
+      X('stream').module('ampsimulator'),
       X('stream').module('noisesuppressor'),
       X('stream').module('filter'),
       X('stream').module('equalizer'),
@@ -1313,7 +1313,7 @@ export const App: React.FC = () => {
       X('noise').module('bitcrusher'),
       X('noise').module('overdrive'),
       X('noise').module('fuzz'),
-      X('noise').module('preamp'),
+      X('noise').module('ampsimulator'),
       X('noise').module('noisesuppressor'),
       X('noise').module('filter'),
       X('noise').module('equalizer'),
@@ -1333,7 +1333,7 @@ export const App: React.FC = () => {
       X('oscillator').module('bitcrusher'),
       X('oscillator').module('overdrive'),
       X('oscillator').module('fuzz'),
-      X('oscillator').module('preamp'),
+      X('oscillator').module('ampsimulator'),
       X('oscillator').module('noisesuppressor'),
       X('oscillator').module('filter'),
       X('oscillator').module('equalizer'),
@@ -1352,7 +1352,7 @@ export const App: React.FC = () => {
       X('oscillator').module('bitcrusher'),
       X('oscillator').module('overdrive'),
       X('oscillator').module('fuzz'),
-      X('oscillator').module('preamp'),
+      X('oscillator').module('ampsimulator'),
       X('oscillator').module('noisesuppressor'),
       X('oscillator').module('filter'),
       X('oscillator').module('equalizer'),
@@ -1373,18 +1373,18 @@ export const App: React.FC = () => {
 
     X('stream').module('pitchshifter').activate();
 
-    const preampParams: PreampParams = {
+    const ampSimulatorParams: AmpSimulatorParams = {
       type: 'marshall',
       preamp: {
         state: true,
         samples: 8192,
         pre: { state: true, gain: 0.5, lead: 0.5 },
-        post: { state: true },
-        cabinet: { state: true }
-      }
+        post: { state: true }
+      },
+      cabinet: { state: true }
     };
 
-    X('mixer').module('preamp').param(preampParams);
+    X('mixer').module('ampsimulator').param(ampSimulatorParams);
     X('mixer').module('chorus').param({ tone: 4000 });
     X('mixer').module('flanger').param({ tone: 4000 });
     X('mixer').module('delay').param({ tone: 4000 });
@@ -1394,7 +1394,7 @@ export const App: React.FC = () => {
     X('mixer').module('ringmodulator').param({ depth: 1, rate: 1000 });
     X('mixer').module('bitcrusher').param({ bits: 1 });
 
-    X('oneshot').module('preamp').param(preampParams);
+    X('oneshot').module('ampsimulator').param(ampSimulatorParams);
     X('oneshot').module('chorus').param({ tone: 4000 });
     X('oneshot').module('flanger').param({ tone: 4000 });
     X('oneshot').module('delay').param({ tone: 4000 });
@@ -1403,7 +1403,7 @@ export const App: React.FC = () => {
     X('oneshot').module('ringmodulator').param({ depth: 1, rate: 1000 });
     X('oneshot').module('bitcrusher').param({ bits: 1 });
 
-    X('audio').module('preamp').param(preampParams);
+    X('audio').module('ampsimulator').param(ampSimulatorParams);
     X('audio').module('chorus').param({ tone: 4000 });
     X('audio').module('flanger').param({ tone: 4000 });
     X('audio').module('delay').param({ tone: 4000 });
@@ -1414,7 +1414,7 @@ export const App: React.FC = () => {
     X('audio').module('vocalcanceler').param({ algorithm: 'spectrum' });
     X('audio').module('bitcrusher').param({ bits: 1 });
 
-    X('stream').module('preamp').param(preampParams);
+    X('stream').module('ampsimulator').param(ampSimulatorParams);
     X('stream').module('chorus').param({ tone: 4000 });
     X('stream').module('flanger').param({ tone: 4000 });
     X('stream').module('delay').param({ tone: 4000 });
@@ -1424,7 +1424,7 @@ export const App: React.FC = () => {
     X('stream').module('ringmodulator').param({ depth: 1, rate: 1000 });
     X('stream').module('bitcrusher').param({ bits: 1 });
 
-    X('noise').module('preamp').param(preampParams);
+    X('noise').module('ampsimulator').param(ampSimulatorParams);
     X('noise').module('chorus').param({ tone: 4000 });
     X('noise').module('flanger').param({ tone: 4000 });
     X('noise').module('delay').param({ tone: 4000 });
@@ -1434,7 +1434,7 @@ export const App: React.FC = () => {
     X('noise').module('ringmodulator').param({ depth: 1, rate: 1000 });
     X('noise').module('bitcrusher').param({ bits: 1 });
 
-    X('oscillator').module('preamp').param(preampParams);
+    X('oscillator').module('ampsimulator').param(ampSimulatorParams);
     X('oscillator').module('chorus').param({ tone: 4000 });
     X('oscillator').module('flanger').param({ tone: 4000 });
     X('oscillator').module('delay').param({ tone: 4000 });
@@ -1444,7 +1444,7 @@ export const App: React.FC = () => {
     X('oscillator').module('ringmodulator').param({ depth: 1, rate: 1000 });
     X('oscillator').module('bitcrusher').param({ bits: 1 });
 
-    clonedX('oscillator').module('preamp').param(preampParams);
+    clonedX('oscillator').module('ampsimulator').param(ampSimulatorParams);
     clonedX('oscillator').module('chorus').param({ tone: 4000 });
     clonedX('oscillator').module('flanger').param({ tone: 4000 });
     clonedX('oscillator').module('delay').param({ tone: 4000 });
