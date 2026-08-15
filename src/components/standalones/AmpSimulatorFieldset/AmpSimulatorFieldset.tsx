@@ -1,5 +1,5 @@
 import type React from 'react';
-import type { PreampType, AmpSimulatorParams } from 'xsound';
+import type { AmpSimulatorParams, PreampType } from 'xsound';
 
 import { useCallback, useState } from 'react';
 import { useDispatch } from 'react-redux';
@@ -436,6 +436,51 @@ export const AmpSimulatorFieldset: React.FC = () => {
     [preampType]
   );
 
+  const onCHangeCabinetCallback = useCallback(
+    (event: React.ChangeEvent<HTMLSelectElement>) => {
+      const cabinet = event.currentTarget.value;
+
+      switch (cabinet) {
+        case 'simple': {
+          const param: AmpSimulatorParams = { cabinetType: 'simple', cabinet: { state: true } };
+
+          X('mixer').module('ampsimulator').param(param);
+          X('oneshot').module('ampsimulator').param(param);
+          X('audio').module('ampsimulator').param(param);
+          X('stream').module('ampsimulator').param(param);
+          X('noise').module('ampsimulator').param(param);
+
+          break;
+        }
+
+        case 'filterbank': {
+          const param: AmpSimulatorParams = { cabinetType: 'filterbank', cabinet: { state: true } };
+
+          X('mixer').module('ampsimulator').param(param);
+          X('oneshot').module('ampsimulator').param(param);
+          X('audio').module('ampsimulator').param(param);
+          X('stream').module('ampsimulator').param(param);
+          X('noise').module('ampsimulator').param(param);
+
+          break;
+        }
+
+        case 'none': {
+          const param = { cabinet: { state: false } };
+
+          X('mixer').module('ampsimulator').param(param);
+          X('oneshot').module('ampsimulator').param(param);
+          X('audio').module('ampsimulator').param(param);
+          X('stream').module('ampsimulator').param(param);
+          X('noise').module('ampsimulator').param(param);
+
+          break;
+        }
+      }
+    },
+    [preampType]
+  );
+
   return (
     <div className='AmpSimulatorFieldset'>
       <Fieldset>
@@ -478,6 +523,15 @@ export const AmpSimulatorFieldset: React.FC = () => {
             onChange={onChangeSpeakerSize}
           />
         ) : null}
+        <Select
+          label='Select Cabinet'
+          values={['none', 'simple', 'filterbank']}
+          texts={['None', 'Simple', 'Filter Bank']}
+          defaultValue='simple'
+          disabled={false}
+          textTransform={false}
+          onChange={onCHangeCabinetCallback}
+        />
       </Fieldset>
     </div>
   );
