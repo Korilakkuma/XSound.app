@@ -10,7 +10,8 @@
     "esbuild": true,
     "fsevents": true,
     "husky": true,
-    "unrs-resolver": true
+    "unrs-resolver": true,
+    "@parcel/watcher": true
   },
   "scripts": {
     "clean": "rm -f register.js sw.js ./assets/app.* ./assets/vendor.*",
