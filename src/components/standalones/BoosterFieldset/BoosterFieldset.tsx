@@ -1,4 +1,6 @@
 import type React from 'react';
+import type { OverDriveType } from 'xsound';
+
 import { useCallback, useState } from 'react';
 import { X } from 'xsound';
 
@@ -8,11 +10,11 @@ import { Select } from '/src/components/atoms/Select';
 import { Switch } from '/src/components/atoms/Switch';
 import { ParameterController } from '/src/components/helpers/ParameterController';
 
-type BoosterType = 'bitcrusher' | 'overdrive' | 'fuzz';
+type BoosterType = 'bitcrusher' | OverDriveType | 'fuzz';
 
 export const BoosterFieldset: React.FC = () => {
   const [booster, setBooster] = useState<boolean>(false);
-  const [boosterType, setBoosterType] = useState<BoosterType>('overdrive');
+  const [boosterType, setBoosterType] = useState<BoosterType>('crunch');
 
   const onChangeStateCallback = useCallback(
     (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -42,7 +44,9 @@ export const BoosterFieldset: React.FC = () => {
             break;
           }
 
-          case 'overdrive': {
+          case 'crunch':
+          case 'natural':
+          case 'warm': {
             X('mixer').module('overdrive').activate();
             X('oneshot').module('overdrive').activate();
             X('audio').module('overdrive').activate();
@@ -138,12 +142,20 @@ export const BoosterFieldset: React.FC = () => {
         break;
       }
 
-      case 'overdrive': {
+      case 'crunch':
+      case 'natural':
+      case 'warm': {
         X('mixer').module('overdrive').activate();
         X('oneshot').module('overdrive').activate();
         X('audio').module('overdrive').activate();
         X('stream').module('overdrive').activate();
         X('noise').module('overdrive').activate();
+
+        X('mixer').module('overdrive').param({ type });
+        X('oneshot').module('overdrive').param({ type });
+        X('audio').module('overdrive').param({ type });
+        X('stream').module('overdrive').param({ type });
+        X('noise').module('overdrive').param({ type });
 
         X('mixer').module('bitcrusher').deactivate();
         X('oneshot').module('bitcrusher').deactivate();
@@ -205,7 +217,7 @@ export const BoosterFieldset: React.FC = () => {
   }, []);
 
   const onChangeLevelCallback = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
-    const level = event.currentTarget.valueAsNumber;
+    const level = 5 * event.currentTarget.valueAsNumber;
 
     X('mixer').module('overdrive').param({ level });
     X('oneshot').module('overdrive').param({ level });
@@ -238,9 +250,9 @@ export const BoosterFieldset: React.FC = () => {
         </Legend>
         <Select
           label='Select OD/DS'
-          values={['bitcrusher', 'overdrive', 'fuzz']}
-          texts={['bit crusher', 'overdrive', 'fuzz']}
-          defaultValue='overdrive'
+          values={['bitcrusher', 'crunch', 'natural', 'warm', 'fuzz']}
+          texts={['bit crusher', 'booster', 'natural overdrive', 'warm overdrive', 'fuzz']}
+          defaultValue='crunch'
           disabled={false}
           textTransform={true}
           onChange={onChangeTypeCallback}
