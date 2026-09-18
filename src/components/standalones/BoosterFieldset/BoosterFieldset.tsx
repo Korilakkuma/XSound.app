@@ -1,5 +1,5 @@
 import type React from 'react';
-import type { OverDriveType } from 'xsound';
+import type { OverDriveType, FuzzType } from 'xsound';
 
 import { useCallback, useState } from 'react';
 import { X } from 'xsound';
@@ -10,7 +10,7 @@ import { Select } from '/src/components/atoms/Select';
 import { Switch } from '/src/components/atoms/Switch';
 import { ParameterController } from '/src/components/helpers/ParameterController';
 
-type BoosterType = 'bitcrusher' | OverDriveType | 'fuzz';
+type BoosterType = 'bitcrusher' | OverDriveType | FuzzType;
 
 export const BoosterFieldset: React.FC = () => {
   const [booster, setBooster] = useState<boolean>(false);
@@ -68,7 +68,8 @@ export const BoosterFieldset: React.FC = () => {
             break;
           }
 
-          case 'fuzz': {
+          case 'standard':
+          case 'full-rectifier': {
             X('mixer').module('fuzz').activate();
             X('oneshot').module('fuzz').activate();
             X('audio').module('fuzz').activate();
@@ -174,12 +175,19 @@ export const BoosterFieldset: React.FC = () => {
         break;
       }
 
-      case 'fuzz': {
+      case 'standard':
+      case 'full-rectifier': {
         X('mixer').module('fuzz').activate();
         X('oneshot').module('fuzz').activate();
         X('audio').module('fuzz').activate();
         X('stream').module('fuzz').activate();
         X('noise').module('fuzz').activate();
+
+        X('mixer').module('fuzz').param({ type });
+        X('oneshot').module('fuzz').param({ type });
+        X('audio').module('fuzz').param({ type });
+        X('stream').module('fuzz').param({ type });
+        X('noise').module('fuzz').param({ type });
 
         X('mixer').module('bitcrusher').deactivate();
         X('oneshot').module('bitcrusher').deactivate();
@@ -217,13 +225,15 @@ export const BoosterFieldset: React.FC = () => {
   }, []);
 
   const onChangeLevelCallback = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
-    const level = 5 * event.currentTarget.valueAsNumber;
+    const level = event.currentTarget.valueAsNumber;
 
-    X('mixer').module('overdrive').param({ level });
-    X('oneshot').module('overdrive').param({ level });
-    X('audio').module('overdrive').param({ level });
-    X('stream').module('overdrive').param({ level });
-    X('noise').module('overdrive').param({ level });
+    const overdriveLevel = 5 * level;
+
+    X('mixer').module('overdrive').param({ level: overdriveLevel });
+    X('oneshot').module('overdrive').param({ level: overdriveLevel });
+    X('audio').module('overdrive').param({ level: overdriveLevel });
+    X('stream').module('overdrive').param({ level: overdriveLevel });
+    X('noise').module('overdrive').param({ level: overdriveLevel });
 
     X('mixer').module('fuzz').param({ level });
     X('oneshot').module('fuzz').param({ level });
@@ -250,8 +260,8 @@ export const BoosterFieldset: React.FC = () => {
         </Legend>
         <Select
           label='Select OD/DS'
-          values={['bitcrusher', 'crunch', 'natural', 'warm', 'fuzz']}
-          texts={['bit crusher', 'booster', 'natural overdrive', 'warm overdrive', 'fuzz']}
+          values={['bitcrusher', 'crunch', 'natural', 'warm', 'standard', 'full-rectifier']}
+          texts={['bit crusher', 'booster', 'natural overdrive', 'warm overdrive', 'fuzz', 'hard fuzz']}
           defaultValue='crunch'
           disabled={false}
           textTransform={true}
