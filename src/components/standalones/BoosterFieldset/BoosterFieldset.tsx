@@ -1,5 +1,5 @@
 import type React from 'react';
-import type { OverDriveType, FuzzType } from 'xsound';
+import type { OverDriveType, DistortionType, FuzzType } from 'xsound';
 
 import { useCallback, useState } from 'react';
 import { X } from 'xsound';
@@ -10,7 +10,7 @@ import { Select } from '/src/components/atoms/Select';
 import { Switch } from '/src/components/atoms/Switch';
 import { ParameterController } from '/src/components/helpers/ParameterController';
 
-type BoosterType = 'bitcrusher' | OverDriveType | FuzzType;
+type BoosterType = 'bitcrusher' | OverDriveType | DistortionType | FuzzType;
 
 export const BoosterFieldset: React.FC = () => {
   const [booster, setBooster] = useState<boolean>(false);
@@ -35,6 +35,12 @@ export const BoosterFieldset: React.FC = () => {
             X('stream').module('overdrive').deactivate();
             X('noise').module('overdrive').deactivate();
 
+            X('mixer').module('distortion').deactivate();
+            X('oneshot').module('distortion').deactivate();
+            X('audio').module('distortion').deactivate();
+            X('stream').module('distortion').deactivate();
+            X('noise').module('distortion').deactivate();
+
             X('mixer').module('fuzz').deactivate();
             X('oneshot').module('fuzz').deactivate();
             X('audio').module('fuzz').deactivate();
@@ -58,6 +64,42 @@ export const BoosterFieldset: React.FC = () => {
             X('audio').module('bitcrusher').deactivate();
             X('stream').module('bitcrusher').deactivate();
             X('noise').module('bitcrusher').deactivate();
+
+            X('mixer').module('distortion').deactivate();
+            X('oneshot').module('distortion').deactivate();
+            X('audio').module('distortion').deactivate();
+            X('stream').module('distortion').deactivate();
+            X('noise').module('distortion').deactivate();
+
+            X('mixer').module('fuzz').deactivate();
+            X('oneshot').module('fuzz').deactivate();
+            X('audio').module('fuzz').deactivate();
+            X('stream').module('fuzz').deactivate();
+            X('noise').module('fuzz').deactivate();
+
+            break;
+          }
+
+          case 'distortion':
+          case 'metal':
+          case 'core': {
+            X('mixer').module('distortion').activate();
+            X('oneshot').module('distortion').activate();
+            X('audio').module('distortion').activate();
+            X('stream').module('distortion').activate();
+            X('noise').module('distortion').activate();
+
+            X('mixer').module('bitcrusher').deactivate();
+            X('oneshot').module('bitcrusher').deactivate();
+            X('audio').module('bitcrusher').deactivate();
+            X('stream').module('bitcrusher').deactivate();
+            X('noise').module('bitcrusher').deactivate();
+
+            X('mixer').module('overdrive').deactivate();
+            X('oneshot').module('overdrive').deactivate();
+            X('audio').module('overdrive').deactivate();
+            X('stream').module('overdrive').deactivate();
+            X('noise').module('overdrive').deactivate();
 
             X('mixer').module('fuzz').deactivate();
             X('oneshot').module('fuzz').deactivate();
@@ -87,6 +129,13 @@ export const BoosterFieldset: React.FC = () => {
             X('audio').module('overdrive').deactivate();
             X('stream').module('overdrive').deactivate();
             X('noise').module('overdrive').deactivate();
+
+            X('mixer').module('distortion').deactivate();
+            X('oneshot').module('distortion').deactivate();
+            X('audio').module('distortion').deactivate();
+            X('stream').module('distortion').deactivate();
+            X('noise').module('distortion').deactivate();
+
             break;
           }
         }
@@ -102,6 +151,12 @@ export const BoosterFieldset: React.FC = () => {
         X('audio').module('overdrive').deactivate();
         X('stream').module('overdrive').deactivate();
         X('noise').module('overdrive').deactivate();
+
+        X('mixer').module('distortion').deactivate();
+        X('oneshot').module('distortion').deactivate();
+        X('audio').module('distortion').deactivate();
+        X('stream').module('distortion').deactivate();
+        X('noise').module('distortion').deactivate();
 
         X('mixer').module('fuzz').deactivate();
         X('oneshot').module('fuzz').deactivate();
@@ -131,6 +186,12 @@ export const BoosterFieldset: React.FC = () => {
         X('audio').module('overdrive').deactivate();
         X('stream').module('overdrive').deactivate();
         X('noise').module('overdrive').deactivate();
+
+        X('mixer').module('distortion').deactivate();
+        X('oneshot').module('distortion').deactivate();
+        X('audio').module('distortion').deactivate();
+        X('stream').module('distortion').deactivate();
+        X('noise').module('distortion').deactivate();
 
         X('mixer').module('fuzz').deactivate();
         X('oneshot').module('fuzz').deactivate();
@@ -164,11 +225,87 @@ export const BoosterFieldset: React.FC = () => {
         X('stream').module('bitcrusher').deactivate();
         X('noise').module('bitcrusher').deactivate();
 
+        X('mixer').module('distortion').deactivate();
+        X('oneshot').module('distortion').deactivate();
+        X('audio').module('distortion').deactivate();
+        X('stream').module('distortion').deactivate();
+        X('noise').module('distortion').deactivate();
+
         X('mixer').module('fuzz').deactivate();
         X('oneshot').module('fuzz').deactivate();
         X('audio').module('fuzz').deactivate();
         X('stream').module('fuzz').deactivate();
         X('noise').module('fuzz').deactivate();
+
+        setBoosterType(type);
+
+        break;
+      }
+
+      case 'distortion':
+      case 'metal':
+      case 'core': {
+        X('mixer').module('distortion').activate();
+        X('oneshot').module('distortion').activate();
+        X('audio').module('distortion').activate();
+        X('stream').module('distortion').activate();
+        X('noise').module('distortion').activate();
+
+        X('mixer').module('distortion').param({ type });
+        X('oneshot').module('distortion').param({ type });
+        X('audio').module('distortion').param({ type });
+        X('stream').module('distortion').param({ type });
+        X('noise').module('distortion').param({ type });
+
+        X('mixer').module('bitcrusher').deactivate();
+        X('oneshot').module('bitcrusher').deactivate();
+        X('audio').module('bitcrusher').deactivate();
+        X('stream').module('bitcrusher').deactivate();
+        X('noise').module('bitcrusher').deactivate();
+
+        X('mixer').module('overdrive').deactivate();
+        X('oneshot').module('overdrive').deactivate();
+        X('audio').module('overdrive').deactivate();
+        X('stream').module('overdrive').deactivate();
+        X('noise').module('overdrive').deactivate();
+
+        X('mixer').module('fuzz').deactivate();
+        X('oneshot').module('fuzz').deactivate();
+        X('audio').module('fuzz').deactivate();
+        X('stream').module('fuzz').deactivate();
+        X('noise').module('fuzz').deactivate();
+
+        switch (type) {
+          case 'distortion': {
+            X('mixer').module('distortion').param({ middle: 3 });
+            X('oneshot').module('distortion').param({ middle: 3 });
+            X('audio').module('distortion').param({ middle: 3 });
+            X('stream').module('distortion').param({ middle: 3 });
+            X('noise').module('distortion').param({ middle: 3 });
+
+            break;
+          }
+
+          case 'metal': {
+            X('mixer').module('distortion').param({ bass: -4, middle: 4, treble: -4 });
+            X('oneshot').module('distortion').param({ bass: -4, middle: 4, treble: -4 });
+            X('audio').module('distortion').param({ bass: -4, middle: 4, treble: -4 });
+            X('stream').module('distortion').param({ bass: -4, middle: 4, treble: -4 });
+            X('noise').module('distortion').param({ bass: -4, middle: 4, treble: -4 });
+
+            break;
+          }
+
+          case 'core': {
+            X('mixer').module('distortion').param({ bass: 8, middle: -12, treble: 4 });
+            X('oneshot').module('distortion').param({ bass: 8, middle: -12, treble: 4 });
+            X('audio').module('distortion').param({ bass: 8, middle: -12, treble: 4 });
+            X('stream').module('distortion').param({ bass: 8, middle: -12, treble: 4 });
+            X('noise').module('distortion').param({ bass: 8, middle: -12, treble: 4 });
+
+            break;
+          }
+        }
 
         setBoosterType(type);
 
@@ -201,6 +338,12 @@ export const BoosterFieldset: React.FC = () => {
         X('stream').module('overdrive').deactivate();
         X('noise').module('overdrive').deactivate();
 
+        X('mixer').module('distortion').deactivate();
+        X('oneshot').module('distortion').deactivate();
+        X('audio').module('distortion').deactivate();
+        X('stream').module('distortion').deactivate();
+        X('noise').module('distortion').deactivate();
+
         setBoosterType(type);
 
         break;
@@ -216,6 +359,12 @@ export const BoosterFieldset: React.FC = () => {
     X('audio').module('overdrive').param({ drive });
     X('stream').module('overdrive').param({ drive });
     X('noise').module('overdrive').param({ drive });
+
+    X('mixer').module('distortion').param({ drive });
+    X('oneshot').module('distortion').param({ drive });
+    X('audio').module('distortion').param({ drive });
+    X('stream').module('distortion').param({ drive });
+    X('noise').module('distortion').param({ drive });
 
     X('mixer').module('fuzz').param({ drive });
     X('oneshot').module('fuzz').param({ drive });
@@ -234,6 +383,12 @@ export const BoosterFieldset: React.FC = () => {
     X('audio').module('overdrive').param({ level: overdriveLevel });
     X('stream').module('overdrive').param({ level: overdriveLevel });
     X('noise').module('overdrive').param({ level: overdriveLevel });
+
+    X('mixer').module('distortion').param({ level });
+    X('oneshot').module('distortion').param({ level });
+    X('audio').module('distortion').param({ level });
+    X('stream').module('distortion').param({ level });
+    X('noise').module('distortion').param({ level });
 
     X('mixer').module('fuzz').param({ level });
     X('oneshot').module('fuzz').param({ level });
@@ -260,8 +415,8 @@ export const BoosterFieldset: React.FC = () => {
         </Legend>
         <Select
           label='Select OD/DS'
-          values={['bitcrusher', 'crunch', 'natural', 'warm', 'standard', 'full-rectifier']}
-          texts={['bit crusher', 'booster', 'natural overdrive', 'warm overdrive', 'fuzz', 'hard fuzz']}
+          values={['bitcrusher', 'crunch', 'natural', 'warm', 'standard', 'distortion', 'metal', 'core', 'full-rectifier']}
+          texts={['bit crusher', 'booster', 'natural overdrive', 'warm overdrive', 'distortion', 'metal', 'core', 'fuzz', 'hard fuzz']}
           defaultValue='crunch'
           disabled={false}
           textTransform={true}
