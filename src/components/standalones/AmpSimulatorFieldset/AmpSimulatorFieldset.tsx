@@ -490,7 +490,7 @@ export const AmpSimulatorFieldset: React.FC = () => {
         <Select
           label='Select Preamplifier'
           values={['marshall', 'mesa/boogie', 'fender']}
-          texts={['Marshall', 'Mesa/Boogie', 'Fender']}
+          texts={['Marshall JMP', 'Mesa/Boogie Rectifier', 'Fender Twin Reverb']}
           disabled={false}
           textTransform={false}
           onChange={onChangePreamplifier}
