@@ -82,6 +82,7 @@ export const BoosterFieldset: React.FC = () => {
 
           case 'distortion':
           case 'blues':
+          case 'guvnor':
           case 'metal':
           case 'core': {
             X('mixer').module('distortion').activate();
@@ -251,6 +252,7 @@ export const BoosterFieldset: React.FC = () => {
 
       case 'distortion':
       case 'blues':
+      case 'guvnor':
       case 'metal':
       case 'core': {
         X('mixer').module('distortion').activate();
@@ -295,6 +297,16 @@ export const BoosterFieldset: React.FC = () => {
           }
 
           case 'blues': {
+            break;
+          }
+
+          case 'guvnor': {
+            X('mixer').module('distortion').param({ middle: 3 });
+            X('oneshot').module('distortion').param({ middle: 3 });
+            X('audio').module('distortion').param({ middle: 3 });
+            X('stream').module('distortion').param({ middle: 3 });
+            X('noise').module('distortion').param({ middle: 3 });
+
             break;
           }
 
@@ -427,8 +439,9 @@ export const BoosterFieldset: React.FC = () => {
         </Legend>
         <Select
           label='Select OD/DS'
-          values={['clean', 'crunch', 'natural', 'warm', 'blues', 'distortion', 'metal', 'core', 'standard', 'full-rectifier']}
-          texts={['clean booster', 'crunch', 'natural overdrive', 'warm overdrive', 'blues', 'distortion', 'metal', 'core', 'fuzz', 'hard fuzz']}
+          values={['clean', 'crunch', 'natural', 'warm', 'blues', 'guvnor', 'distortion', 'metal', 'core', 'standard', 'full-rectifier']}
+          /* prettier-ignore */
+          texts={['clean booster', 'crunch', 'natural overdrive', 'warm overdrive', 'blues', 'guv\'nor', 'distortion', 'metal', 'core', 'fuzz', 'hard fuzz']}
           defaultValue='clean'
           disabled={false}
           textTransform={true}
