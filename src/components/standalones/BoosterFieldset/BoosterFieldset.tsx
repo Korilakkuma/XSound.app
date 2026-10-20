@@ -83,6 +83,7 @@ export const BoosterFieldset: React.FC = () => {
           case 'distortion':
           case 'blues':
           case 'guvnor':
+          case 'rat':
           case 'metal':
           case 'core': {
             X('mixer').module('distortion').activate();
@@ -253,6 +254,7 @@ export const BoosterFieldset: React.FC = () => {
       case 'distortion':
       case 'blues':
       case 'guvnor':
+      case 'rat':
       case 'metal':
       case 'core': {
         X('mixer').module('distortion').activate();
@@ -306,6 +308,16 @@ export const BoosterFieldset: React.FC = () => {
             X('audio').module('distortion').param({ middle: 3 });
             X('stream').module('distortion').param({ middle: 3 });
             X('noise').module('distortion').param({ middle: 3 });
+
+            break;
+          }
+
+          case 'rat': {
+            X('mixer').module('distortion').param({ bass: 3 });
+            X('oneshot').module('distortion').param({ bass: 3 });
+            X('audio').module('distortion').param({ bass: 3 });
+            X('stream').module('distortion').param({ bass: 3 });
+            X('noise').module('distortion').param({ bass: 3 });
 
             break;
           }
@@ -439,9 +451,9 @@ export const BoosterFieldset: React.FC = () => {
         </Legend>
         <Select
           label='Select OD/DS'
-          values={['clean', 'crunch', 'natural', 'warm', 'blues', 'guvnor', 'distortion', 'metal', 'core', 'standard', 'full-rectifier']}
+          values={['clean', 'crunch', 'natural', 'warm', 'blues', 'guvnor', 'rat', 'distortion', 'metal', 'core', 'standard', 'full-rectifier']}
           /* prettier-ignore */
-          texts={['clean booster', 'crunch', 'natural overdrive', 'warm overdrive', 'blues', 'guv\'nor', 'distortion', 'metal', 'core', 'fuzz', 'hard fuzz']}
+          texts={['clean booster', 'crunch', 'natural overdrive', 'warm overdrive', 'blues', 'guv\'nor', 'rat', 'distortion', 'metal', 'core', 'fuzz', 'hard fuzz']}
           defaultValue='clean'
           disabled={false}
           textTransform={true}
