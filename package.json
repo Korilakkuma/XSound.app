@@ -87,7 +87,7 @@
     "react": "^19.3.1",
     "react-dom": "^19.3.1",
     "react-redux": "^9.3.0",
-    "xsound": "^4.3.21"
+    "xsound": "^4.3.22"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
