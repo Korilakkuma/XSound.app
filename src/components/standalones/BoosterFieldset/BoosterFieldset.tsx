@@ -85,7 +85,8 @@ export const BoosterFieldset: React.FC = () => {
           case 'guvnor':
           case 'rat':
           case 'metal':
-          case 'core': {
+          case 'core':
+          case 'grunge': {
             X('mixer').module('distortion').activate();
             X('oneshot').module('distortion').activate();
             X('audio').module('distortion').activate();
@@ -256,7 +257,8 @@ export const BoosterFieldset: React.FC = () => {
       case 'guvnor':
       case 'rat':
       case 'metal':
-      case 'core': {
+      case 'core':
+      case 'grunge': {
         X('mixer').module('distortion').activate();
         X('oneshot').module('distortion').activate();
         X('audio').module('distortion').activate();
@@ -333,6 +335,16 @@ export const BoosterFieldset: React.FC = () => {
           }
 
           case 'core': {
+            X('mixer').module('distortion').param({ bass: 8, middle: -12, treble: 4 });
+            X('oneshot').module('distortion').param({ bass: 8, middle: -12, treble: 4 });
+            X('audio').module('distortion').param({ bass: 8, middle: -12, treble: 4 });
+            X('stream').module('distortion').param({ bass: 8, middle: -12, treble: 4 });
+            X('noise').module('distortion').param({ bass: 8, middle: -12, treble: 4 });
+
+            break;
+          }
+
+          case 'grunge': {
             X('mixer').module('distortion').param({ bass: 8, middle: -12, treble: 4 });
             X('oneshot').module('distortion').param({ bass: 8, middle: -12, treble: 4 });
             X('audio').module('distortion').param({ bass: 8, middle: -12, treble: 4 });
@@ -451,9 +463,9 @@ export const BoosterFieldset: React.FC = () => {
         </Legend>
         <Select
           label='Select OD/DS'
-          values={['clean', 'crunch', 'natural', 'warm', 'blues', 'guvnor', 'rat', 'distortion', 'metal', 'core', 'standard', 'full-rectifier']}
+          values={['clean', 'crunch', 'natural', 'warm', 'blues', 'guvnor', 'rat', 'distortion', 'metal', 'core', 'grunge', 'standard', 'full-rectifier']}
           /* prettier-ignore */
-          texts={['clean booster', 'crunch', 'natural overdrive', 'warm overdrive', 'blues', 'guv\'nor', 'rat', 'distortion', 'metal', 'core', 'fuzz', 'hard fuzz']}
+          texts={['clean booster', 'crunch', 'natural overdrive', 'warm overdrive', 'blues', 'guv\'nor', 'rat', 'distortion', 'metal', 'core', 'grunge', 'fuzz', 'hard fuzz']}
           defaultValue='clean'
           disabled={false}
           textTransform={true}
