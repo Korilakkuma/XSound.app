@@ -114,7 +114,7 @@ export const BoosterFieldset: React.FC = () => {
             break;
           }
 
-          case 'standard':
+          case 'half-rectifier':
           case 'full-rectifier': {
             X('mixer').module('fuzz').activate();
             X('oneshot').module('fuzz').activate();
@@ -360,7 +360,7 @@ export const BoosterFieldset: React.FC = () => {
         break;
       }
 
-      case 'standard':
+      case 'half-rectifier':
       case 'full-rectifier': {
         X('mixer').module('fuzz').activate();
         X('oneshot').module('fuzz').activate();
@@ -463,9 +463,23 @@ export const BoosterFieldset: React.FC = () => {
         </Legend>
         <Select
           label='Select OD/DS'
-          values={['clean', 'crunch', 'overdrive', 'warm', 'blues', 'guvnor', 'rat', 'distortion', 'metal', 'core', 'grunge', 'standard', 'full-rectifier']}
+          values={[
+            'clean',
+            'crunch',
+            'overdrive',
+            'warm',
+            'blues',
+            'guvnor',
+            'rat',
+            'distortion',
+            'metal',
+            'core',
+            'grunge',
+            'half-rectifier',
+            'full-rectifier'
+          ]}
           /* prettier-ignore */
-          texts={['clean booster', 'crunch', 'overdrive', 'warm overdrive', 'blues', 'guv\'nor', 'rat', 'distortion', 'metal', 'core', 'grunge', 'fuzz', 'hard fuzz']}
+          texts={['clean booster', 'crunch', 'overdrive', 'warm overdrive', 'blues', 'guv\'nor', 'rat', 'distortion', 'metal', 'core', 'grunge', 'fuzz', 'octave fuzz']}
           defaultValue='clean'
           disabled={false}
           textTransform={true}
