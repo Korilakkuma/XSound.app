@@ -496,7 +496,7 @@ export const BoosterFieldset: React.FC = () => {
           onChange={onChangeTypeCallback}
         />
         <ParameterController label='Drive' autoupdate={false} defaultValue={0} min={0} max={1} step={0.05} onChange={onChangeDriveCallback} />
-        <ParameterController label='Level' autoupdate={false} defaultValue={0} min={0} max={1} step={0.05} onChange={onChangeLevelCallback} />
+        <ParameterController label='Level' autoupdate={false} defaultValue={1} min={0} max={1} step={0.05} onChange={onChangeLevelCallback} />
       </Fieldset>
     </div>
   );
