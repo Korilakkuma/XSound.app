@@ -485,7 +485,7 @@ export const AmpSimulatorFieldset: React.FC = () => {
     <div className='AmpSimulatorFieldset'>
       <Fieldset>
         <Legend>
-          <Switch label='Amp Simulator' checked={ampsimulator} labelAsText={false} onChange={onChangeStateCallback} />
+          <Switch label='Amp' checked={ampsimulator} labelAsText={false} onChange={onChangeStateCallback} />
         </Legend>
         <Select
           label='Select Preamplifier'
