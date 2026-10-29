@@ -10,11 +10,11 @@ import { Select } from '/src/components/atoms/Select';
 import { Switch } from '/src/components/atoms/Switch';
 import { ParameterController } from '/src/components/helpers/ParameterController';
 
-type BoosterTypes = BoosterType | OverDriveType | DistortionType | FuzzType;
+type BoosterTypes = BoosterType | OverDriveType | DistortionType | FuzzType | '';
 
 export const BoosterFieldset: React.FC = () => {
   const [booster, setBooster] = useState<boolean>(false);
-  const [boosterType, setBoosterType] = useState<BoosterTypes>('clean');
+  const [boosterType, setBoosterType] = useState<BoosterTypes>('');
 
   const onChangeStateCallback = useCallback(
     (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -167,6 +167,8 @@ export const BoosterFieldset: React.FC = () => {
         X('audio').module('fuzz').deactivate();
         X('stream').module('fuzz').deactivate();
         X('noise').module('fuzz').deactivate();
+
+        setBoosterType('');
       }
 
       setBooster(checked);
@@ -397,6 +399,13 @@ export const BoosterFieldset: React.FC = () => {
         break;
       }
     }
+
+    if (type === '') {
+      setBooster(false);
+      setBoosterType('');
+    } else {
+      setBooster(true);
+    }
   }, []);
 
   const onChangeDriveCallback = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
@@ -464,6 +473,7 @@ export const BoosterFieldset: React.FC = () => {
         <Select
           label='Select OD/DS'
           values={[
+            '',
             'clean',
             'crunch',
             'overdrive',
@@ -479,8 +489,8 @@ export const BoosterFieldset: React.FC = () => {
             'full-rectifier'
           ]}
           /* prettier-ignore */
-          texts={['clean booster', 'crunch', 'overdrive', 'warm overdrive', 'blues', 'guv\'nor', 'rat', 'distortion', 'metal', 'core', 'grunge', 'fuzz', 'octave fuzz']}
-          defaultValue='clean'
+          texts={['none', 'clean booster', 'crunch', 'overdrive', 'warm overdrive', 'blues', 'guv\'nor', 'rat', 'distortion', 'metal', 'core', 'grunge', 'fuzz', 'octave fuzz']}
+          defaultValue=''
           disabled={false}
           textTransform={true}
           onChange={onChangeTypeCallback}
