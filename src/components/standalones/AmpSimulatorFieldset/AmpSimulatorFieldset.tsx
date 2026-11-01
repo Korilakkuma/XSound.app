@@ -66,6 +66,32 @@ export const AmpSimulatorFieldset: React.FC = () => {
       const type = event.currentTarget.value;
 
       switch (type) {
+        case 'jc-120': {
+          const param: AmpSimulatorParams = {
+            state: ampsimulator,
+            type: 'jc-120',
+            preamp: {
+              state: true,
+              volume: 0.2,
+              bright: 0,
+              bass: 8,
+              middle: -12,
+              treble: 4,
+              level: 1
+            }
+          };
+
+          X('mixer').module('ampsimulator').param(param);
+          X('oneshot').module('ampsimulator').param(param);
+          X('audio').module('ampsimulator').param(param);
+          X('stream').module('ampsimulator').param(param);
+          X('noise').module('ampsimulator').param(param);
+
+          setPreampType(type);
+
+          break;
+        }
+
         case 'marshall': {
           const param: AmpSimulatorParams = {
             state: ampsimulator,
@@ -86,6 +112,7 @@ export const AmpSimulatorFieldset: React.FC = () => {
           X('noise').module('ampsimulator').param(param);
 
           setPreampType(type);
+
           break;
         }
 
@@ -122,6 +149,7 @@ export const AmpSimulatorFieldset: React.FC = () => {
           X('noise').module('ampsimulator').param(param);
 
           setPreampType(type);
+
           break;
         }
 
@@ -155,6 +183,7 @@ export const AmpSimulatorFieldset: React.FC = () => {
           X('noise').module('ampsimulator').param(param);
 
           setPreampType(type);
+
           break;
         }
       }
@@ -167,6 +196,7 @@ export const AmpSimulatorFieldset: React.FC = () => {
       const level = event.currentTarget.valueAsNumber;
 
       switch (preampType) {
+        case 'jc-120':
         case 'marshall': {
           const param = { preamp: { level } };
 
@@ -175,6 +205,7 @@ export const AmpSimulatorFieldset: React.FC = () => {
           X('audio').module('ampsimulator').param(param);
           X('stream').module('ampsimulator').param(param);
           X('noise').module('ampsimulator').param(param);
+
           break;
         }
 
@@ -187,6 +218,7 @@ export const AmpSimulatorFieldset: React.FC = () => {
           X('audio').module('ampsimulator').param(param);
           X('stream').module('ampsimulator').param(param);
           X('noise').module('ampsimulator').param(param);
+
           break;
         }
       }
@@ -194,17 +226,38 @@ export const AmpSimulatorFieldset: React.FC = () => {
     [preampType]
   );
 
-  const onChangeGainCallback = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
-    const gain = event.currentTarget.valueAsNumber;
+  const onChangeGainCallback = useCallback(
+    (event: React.ChangeEvent<HTMLInputElement>) => {
+      const gain = event.currentTarget.valueAsNumber;
 
-    const param = { preamp: { pre: { gain } } };
+      switch (preampType) {
+        case 'jc-120': {
+          const param = { preamp: { volume: gain } };
 
-    X('mixer').module('ampsimulator').param(param);
-    X('oneshot').module('ampsimulator').param(param);
-    X('audio').module('ampsimulator').param(param);
-    X('stream').module('ampsimulator').param(param);
-    X('noise').module('ampsimulator').param(param);
-  }, []);
+          X('mixer').module('ampsimulator').param(param);
+          X('oneshot').module('ampsimulator').param(param);
+          X('audio').module('ampsimulator').param(param);
+          X('stream').module('ampsimulator').param(param);
+          X('noise').module('ampsimulator').param(param);
+
+          break;
+        }
+
+        default: {
+          const param = { preamp: { pre: { gain } } };
+
+          X('mixer').module('ampsimulator').param(param);
+          X('oneshot').module('ampsimulator').param(param);
+          X('audio').module('ampsimulator').param(param);
+          X('stream').module('ampsimulator').param(param);
+          X('noise').module('ampsimulator').param(param);
+
+          break;
+        }
+      }
+    },
+    [preampType]
+  );
 
   const onChangeLeadGainCallback = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
     const lead = event.currentTarget.valueAsNumber;
@@ -218,11 +271,42 @@ export const AmpSimulatorFieldset: React.FC = () => {
     X('noise').module('ampsimulator').param(param);
   }, []);
 
+  const onChangeBrightCallback = useCallback(
+    (event: React.ChangeEvent<HTMLInputElement>) => {
+      if (preampType !== 'jc-120') {
+        return;
+      }
+
+      const bright = event.currentTarget.valueAsNumber;
+
+      const param = { preamp: { bright } };
+
+      X('mixer').module('ampsimulator').param(param);
+      X('oneshot').module('ampsimulator').param(param);
+      X('audio').module('ampsimulator').param(param);
+      X('stream').module('ampsimulator').param(param);
+      X('noise').module('ampsimulator').param(param);
+    },
+    [preampType]
+  );
+
   const onChangeBassCallback = useCallback(
     (event: React.ChangeEvent<HTMLInputElement>) => {
       const bass = event.currentTarget.valueAsNumber;
 
       switch (preampType) {
+        case 'jc-120': {
+          const param = { preamp: { bass } };
+
+          X('mixer').module('ampsimulator').param(param);
+          X('oneshot').module('ampsimulator').param(param);
+          X('audio').module('ampsimulator').param(param);
+          X('stream').module('ampsimulator').param(param);
+          X('noise').module('ampsimulator').param(param);
+
+          break;
+        }
+
         case 'marshall': {
           const param = { preamp: { post: { bass } } };
 
@@ -231,6 +315,7 @@ export const AmpSimulatorFieldset: React.FC = () => {
           X('audio').module('ampsimulator').param(param);
           X('stream').module('ampsimulator').param(param);
           X('noise').module('ampsimulator').param(param);
+
           break;
         }
 
@@ -243,6 +328,7 @@ export const AmpSimulatorFieldset: React.FC = () => {
           X('audio').module('ampsimulator').param(param);
           X('stream').module('ampsimulator').param(param);
           X('noise').module('ampsimulator').param(param);
+
           break;
         }
       }
@@ -255,6 +341,18 @@ export const AmpSimulatorFieldset: React.FC = () => {
       const middle = event.currentTarget.valueAsNumber;
 
       switch (preampType) {
+        case 'jc-120': {
+          const param = { preamp: { middle } };
+
+          X('mixer').module('ampsimulator').param(param);
+          X('oneshot').module('ampsimulator').param(param);
+          X('audio').module('ampsimulator').param(param);
+          X('stream').module('ampsimulator').param(param);
+          X('noise').module('ampsimulator').param(param);
+
+          break;
+        }
+
         case 'marshall': {
           const param = { preamp: { post: { middle } } };
 
@@ -263,6 +361,7 @@ export const AmpSimulatorFieldset: React.FC = () => {
           X('audio').module('ampsimulator').param(param);
           X('stream').module('ampsimulator').param(param);
           X('noise').module('ampsimulator').param(param);
+
           break;
         }
 
@@ -275,6 +374,7 @@ export const AmpSimulatorFieldset: React.FC = () => {
           X('audio').module('ampsimulator').param(param);
           X('stream').module('ampsimulator').param(param);
           X('noise').module('ampsimulator').param(param);
+
           break;
         }
       }
@@ -287,6 +387,18 @@ export const AmpSimulatorFieldset: React.FC = () => {
       const treble = event.currentTarget.valueAsNumber;
 
       switch (preampType) {
+        case 'jc-120': {
+          const param = { preamp: { treble } };
+
+          X('mixer').module('ampsimulator').param(param);
+          X('oneshot').module('ampsimulator').param(param);
+          X('audio').module('ampsimulator').param(param);
+          X('stream').module('ampsimulator').param(param);
+          X('noise').module('ampsimulator').param(param);
+
+          break;
+        }
+
         case 'marshall': {
           const param = { preamp: { post: { treble } } };
 
@@ -295,6 +407,7 @@ export const AmpSimulatorFieldset: React.FC = () => {
           X('audio').module('ampsimulator').param(param);
           X('stream').module('ampsimulator').param(param);
           X('noise').module('ampsimulator').param(param);
+
           break;
         }
 
@@ -307,6 +420,7 @@ export const AmpSimulatorFieldset: React.FC = () => {
           X('audio').module('ampsimulator').param(param);
           X('stream').module('ampsimulator').param(param);
           X('noise').module('ampsimulator').param(param);
+
           break;
         }
       }
@@ -489,16 +603,28 @@ export const AmpSimulatorFieldset: React.FC = () => {
         </Legend>
         <Select
           label='Select Preamplifier'
-          values={['marshall', 'mesa/boogie', 'fender']}
-          texts={['Marshall JMP', 'Mesa/Boogie Rectifier', 'Fender Twin Reverb']}
+          values={['jc-120', 'marshall', 'mesa/boogie', 'fender']}
+          texts={['Roland JC-120', 'Marshall JMP', 'Mesa/Boogie Rectifier', 'Fender Twin Reverb']}
+          defaultValue='marshall'
           disabled={false}
           textTransform={false}
           onChange={onChangePreamplifier}
         />
         <ParameterController label='Level' autoupdate={false} defaultValue={0} min={0} max={1} step={0.05} onChange={onChangeLevelCallback} />
-        <ParameterController label='Gain' autoupdate={false} defaultValue={0.5} min={0} max={1} step={0.05} onChange={onChangeGainCallback} />
+        <ParameterController
+          label={preampType === 'jc-120' ? 'Volume' : 'Gain'}
+          autoupdate={false}
+          defaultValue={0.5}
+          min={0}
+          max={1}
+          step={0.05}
+          onChange={onChangeGainCallback}
+        />
         {preampType === 'marshall' ? (
           <ParameterController label='Lead Gain' autoupdate={false} defaultValue={0.5} min={0} max={1} step={0.05} onChange={onChangeLeadGainCallback} />
+        ) : null}
+        {preampType === 'jc-120' ? (
+          <ParameterController label='Bright' autoupdate={false} defaultValue={0} min={0} max={24} step={1} onChange={onChangeBrightCallback} />
         ) : null}
         <ParameterController label='Bass' autoupdate={false} defaultValue={0} min={-18} max={18} step={1} onChange={onChangeBassCallback} />
         <ParameterController label='Middle' autoupdate={false} defaultValue={0} min={-18} max={18} step={1} onChange={onChangeMiddleCallback} />
