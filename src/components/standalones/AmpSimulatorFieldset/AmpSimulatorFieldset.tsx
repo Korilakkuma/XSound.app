@@ -92,6 +92,28 @@ export const AmpSimulatorFieldset: React.FC = () => {
           break;
         }
 
+        case 'gsp2101': {
+          const param: AmpSimulatorParams = {
+            state: ampsimulator,
+            type: 'gsp2101',
+            preamp: {
+              state: true,
+              air: 4,
+              level: 1
+            }
+          };
+
+          X('mixer').module('ampsimulator').param(param);
+          X('oneshot').module('ampsimulator').param(param);
+          X('audio').module('ampsimulator').param(param);
+          X('stream').module('ampsimulator').param(param);
+          X('noise').module('ampsimulator').param(param);
+
+          setPreampType(type);
+
+          break;
+        }
+
         case 'marshall': {
           const param: AmpSimulatorParams = {
             state: ampsimulator,
@@ -197,6 +219,7 @@ export const AmpSimulatorFieldset: React.FC = () => {
 
       switch (preampType) {
         case 'jc-120':
+        case 'gsp2101':
         case 'marshall': {
           const param = { preamp: { level } };
 
@@ -228,6 +251,10 @@ export const AmpSimulatorFieldset: React.FC = () => {
 
   const onChangeGainCallback = useCallback(
     (event: React.ChangeEvent<HTMLInputElement>) => {
+      if (preampType === 'gsp2101') {
+        return;
+      }
+
       const gain = event.currentTarget.valueAsNumber;
 
       switch (preampType) {
@@ -273,25 +300,41 @@ export const AmpSimulatorFieldset: React.FC = () => {
 
   const onChangeBrightCallback = useCallback(
     (event: React.ChangeEvent<HTMLInputElement>) => {
-      if (preampType !== 'jc-120') {
+      if (preampType !== 'jc-120' && preampType !== 'gsp2101') {
         return;
       }
 
-      const bright = event.currentTarget.valueAsNumber;
+      if (preampType === 'jc-120') {
+        const bright = event.currentTarget.valueAsNumber;
 
-      const param = { preamp: { bright } };
+        const param = { preamp: { bright } };
 
-      X('mixer').module('ampsimulator').param(param);
-      X('oneshot').module('ampsimulator').param(param);
-      X('audio').module('ampsimulator').param(param);
-      X('stream').module('ampsimulator').param(param);
-      X('noise').module('ampsimulator').param(param);
+        X('mixer').module('ampsimulator').param(param);
+        X('oneshot').module('ampsimulator').param(param);
+        X('audio').module('ampsimulator').param(param);
+        X('stream').module('ampsimulator').param(param);
+        X('noise').module('ampsimulator').param(param);
+      } else {
+        const air = event.currentTarget.valueAsNumber;
+
+        const param = { preamp: { air } };
+
+        X('mixer').module('ampsimulator').param(param);
+        X('oneshot').module('ampsimulator').param(param);
+        X('audio').module('ampsimulator').param(param);
+        X('stream').module('ampsimulator').param(param);
+        X('noise').module('ampsimulator').param(param);
+      }
     },
     [preampType]
   );
 
   const onChangeBassCallback = useCallback(
     (event: React.ChangeEvent<HTMLInputElement>) => {
+      if (preampType === 'gsp2101') {
+        return;
+      }
+
       const bass = event.currentTarget.valueAsNumber;
 
       switch (preampType) {
@@ -338,6 +381,10 @@ export const AmpSimulatorFieldset: React.FC = () => {
 
   const onChangeMiddleCallback = useCallback(
     (event: React.ChangeEvent<HTMLInputElement>) => {
+      if (preampType === 'gsp2101') {
+        return;
+      }
+
       const middle = event.currentTarget.valueAsNumber;
 
       switch (preampType) {
@@ -384,6 +431,10 @@ export const AmpSimulatorFieldset: React.FC = () => {
 
   const onChangeTrebleCallback = useCallback(
     (event: React.ChangeEvent<HTMLInputElement>) => {
+      if (preampType === 'gsp2101') {
+        return;
+      }
+
       const treble = event.currentTarget.valueAsNumber;
 
       switch (preampType) {
@@ -603,32 +654,46 @@ export const AmpSimulatorFieldset: React.FC = () => {
         </Legend>
         <Select
           label='Select Preamplifier'
-          values={['jc-120', 'marshall', 'mesa/boogie', 'fender']}
-          texts={['Roland JC-120', 'Marshall JMP', 'Mesa/Boogie Rectifier', 'Fender Twin Reverb']}
+          values={['jc-120', 'gsp2101', 'marshall', 'mesa/boogie', 'fender']}
+          texts={['Roland JC-120', 'DigiTech GSP2101 Clean', 'Marshall JMP', 'Mesa/Boogie Rectifier', 'Fender Twin Reverb']}
           defaultValue='marshall'
           disabled={false}
           textTransform={false}
           onChange={onChangePreamplifier}
         />
         <ParameterController label='Level' autoupdate={false} defaultValue={0} min={0} max={1} step={0.05} onChange={onChangeLevelCallback} />
-        <ParameterController
-          label={preampType === 'jc-120' ? 'Volume' : 'Gain'}
-          autoupdate={false}
-          defaultValue={0.5}
-          min={0}
-          max={1}
-          step={0.05}
-          onChange={onChangeGainCallback}
-        />
+        {preampType !== 'gsp2101' ? (
+          <ParameterController
+            label={preampType === 'jc-120' ? 'Volume' : 'Gain'}
+            autoupdate={false}
+            defaultValue={0.5}
+            min={0}
+            max={1}
+            step={0.05}
+            onChange={onChangeGainCallback}
+          />
+        ) : null}
         {preampType === 'marshall' ? (
           <ParameterController label='Lead Gain' autoupdate={false} defaultValue={0.5} min={0} max={1} step={0.05} onChange={onChangeLeadGainCallback} />
         ) : null}
-        {preampType === 'jc-120' ? (
-          <ParameterController label='Bright' autoupdate={false} defaultValue={0} min={0} max={24} step={1} onChange={onChangeBrightCallback} />
+        {preampType === 'jc-120' || preampType === 'gsp2101' ? (
+          <ParameterController
+            label={preampType === 'gsp2101' ? 'Air Booster' : 'Bright'}
+            autoupdate={false}
+            defaultValue={0}
+            min={0}
+            max={24}
+            step={1}
+            onChange={onChangeBrightCallback}
+          />
         ) : null}
-        <ParameterController label='Bass' autoupdate={false} defaultValue={0} min={-18} max={18} step={1} onChange={onChangeBassCallback} />
-        <ParameterController label='Middle' autoupdate={false} defaultValue={0} min={-18} max={18} step={1} onChange={onChangeMiddleCallback} />
-        <ParameterController label='Treble' autoupdate={false} defaultValue={0} min={-18} max={18} step={1} onChange={onChangeTrebleCallback} />
+        {preampType !== 'gsp2101' ? (
+          <>
+            <ParameterController label='Bass' autoupdate={false} defaultValue={0} min={-18} max={18} step={1} onChange={onChangeBassCallback} />
+            <ParameterController label='Middle' autoupdate={false} defaultValue={0} min={-18} max={18} step={1} onChange={onChangeMiddleCallback} />
+            <ParameterController label='Treble' autoupdate={false} defaultValue={0} min={-18} max={18} step={1} onChange={onChangeTrebleCallback} />
+          </>
+        ) : null}
         {preampType === 'mesa/boogie' ? (
           <>
             <ParameterController label='100 Hz' autoupdate={false} defaultValue={0} min={-18} max={18} step={1} onChange={onChange100HzCallback} />
