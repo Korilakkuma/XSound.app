@@ -14,7 +14,7 @@ import { ParameterController } from '/src/components/helpers/ParameterController
 
 export const AmpSimulatorFieldset: React.FC = () => {
   const [ampsimulator, setAmpsimulator] = useState<boolean>(false);
-  const [preampType, setPreampType] = useState<PreampType>('marshall');
+  const [preampType, setPreampType] = useState<PreampType>('jc-120');
 
   const dispatch = useDispatch();
 
@@ -656,7 +656,7 @@ export const AmpSimulatorFieldset: React.FC = () => {
           label='Select Preamplifier'
           values={['jc-120', 'gsp2101', 'marshall', 'mesa/boogie', 'fender']}
           texts={['Roland JC-120', 'DigiTech GSP2101 Clean', 'Marshall JMP', 'Mesa/Boogie Rectifier', 'Fender Twin Reverb']}
-          defaultValue='marshall'
+          defaultValue='jc-120'
           disabled={false}
           textTransform={false}
           onChange={onChangePreamplifier}
