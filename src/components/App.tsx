@@ -1381,13 +1381,8 @@ export const App: React.FC = () => {
     X('stream').module('pitchshifter').activate();
 
     const ampSimulatorParams: AmpSimulatorParams = {
-      type: 'marshall',
-      preamp: {
-        state: true,
-        samples: 8192,
-        pre: { state: true, gain: 0.5, lead: 0.5 },
-        post: { state: true }
-      },
+      type: 'jc-120',
+      preamp: { state: true, volume: 0.5 },
       cabinet: { state: true }
     };
 
