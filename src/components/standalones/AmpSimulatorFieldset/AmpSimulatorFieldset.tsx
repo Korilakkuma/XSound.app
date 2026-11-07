@@ -661,7 +661,7 @@ export const AmpSimulatorFieldset: React.FC = () => {
           textTransform={false}
           onChange={onChangePreamplifier}
         />
-        <ParameterController label='Level' autoupdate={false} defaultValue={0} min={0} max={1} step={0.05} onChange={onChangeLevelCallback} />
+        <ParameterController label='Level' autoupdate={false} defaultValue={1} min={0} max={1} step={0.05} onChange={onChangeLevelCallback} />
         {preampType !== 'gsp2101' ? (
           <ParameterController
             label={preampType === 'jc-120' ? 'Volume' : 'Gain'}
