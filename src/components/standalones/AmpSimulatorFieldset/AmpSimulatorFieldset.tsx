@@ -186,16 +186,17 @@ export const AmpSimulatorFieldset: React.FC = () => {
           break;
         }
 
-        case 'mesa/boogie': {
+        case 'mark':
+        case 'rectifier': {
           const param: AmpSimulatorParams = {
             state: ampsimulator,
-            type: 'mesa/boogie',
+            type: type,
             preamp: {
               state: true,
               pre: {
                 state: true,
                 gain: 0.5,
-                level: 0,
+                level: 1,
                 bass: 0,
                 middle: 0,
                 treble: 0,
@@ -282,7 +283,8 @@ export const AmpSimulatorFieldset: React.FC = () => {
           break;
         }
 
-        case 'mesa/boogie':
+        case 'mark':
+        case 'rectifier':
         case 'fender': {
           const param = { preamp: { pre: { level } } };
 
@@ -414,7 +416,8 @@ export const AmpSimulatorFieldset: React.FC = () => {
           break;
         }
 
-        case 'mesa/boogie':
+        case 'mark':
+        case 'rectifier':
         case 'fender': {
           const param = { preamp: { pre: { bass } } };
 
@@ -466,7 +469,8 @@ export const AmpSimulatorFieldset: React.FC = () => {
           break;
         }
 
-        case 'mesa/boogie':
+        case 'mark':
+        case 'rectifier':
         case 'fender': {
           const param = { preamp: { pre: { middle } } };
 
@@ -518,7 +522,8 @@ export const AmpSimulatorFieldset: React.FC = () => {
           break;
         }
 
-        case 'mesa/boogie':
+        case 'mark':
+        case 'rectifier':
         case 'fender': {
           const param = { preamp: { pre: { treble } } };
 
@@ -564,7 +569,7 @@ export const AmpSimulatorFieldset: React.FC = () => {
 
   const onChange100HzCallback = useCallback(
     (event: React.ChangeEvent<HTMLInputElement>) => {
-      if (preampType !== 'mesa/boogie') {
+      if (preampType !== 'mark' && preampType !== 'rectifier') {
         return;
       }
 
@@ -583,7 +588,7 @@ export const AmpSimulatorFieldset: React.FC = () => {
 
   const onChange360HzCallback = useCallback(
     (event: React.ChangeEvent<HTMLInputElement>) => {
-      if (preampType !== 'mesa/boogie') {
+      if (preampType !== 'mark' && preampType !== 'rectifier') {
         return;
       }
 
@@ -602,7 +607,7 @@ export const AmpSimulatorFieldset: React.FC = () => {
 
   const onChange720HzCallback = useCallback(
     (event: React.ChangeEvent<HTMLInputElement>) => {
-      if (preampType !== 'mesa/boogie') {
+      if (preampType !== 'mark' && preampType !== 'rectifier') {
         return;
       }
 
@@ -621,7 +626,7 @@ export const AmpSimulatorFieldset: React.FC = () => {
 
   const onChange1600HzCallback = useCallback(
     (event: React.ChangeEvent<HTMLInputElement>) => {
-      if (preampType !== 'mesa/boogie') {
+      if (preampType !== 'mark' && preampType !== 'rectifier') {
         return;
       }
 
@@ -640,7 +645,7 @@ export const AmpSimulatorFieldset: React.FC = () => {
 
   const onChange4800HzCallback = useCallback(
     (event: React.ChangeEvent<HTMLInputElement>) => {
-      if (preampType !== 'mesa/boogie') {
+      if (preampType !== 'mark' && preampType !== 'rectifier') {
         return;
       }
 
@@ -737,13 +742,14 @@ export const AmpSimulatorFieldset: React.FC = () => {
         </Legend>
         <Select
           label='Select Preamplifier'
-          values={['jc-120', 'gsp2101', 'jtm45', 'jmp', 'jcm800', 'mesa/boogie', 'fender']}
+          values={['jc-120', 'gsp2101', 'jtm45', 'jmp', 'jcm800', 'mark', 'rectifier', 'fender']}
           texts={[
             'Roland JC-120',
             'DigiTech GSP2101 Clean',
             'Marshall JTM45',
             'Marshall 1959',
             'Marshall JCM800',
+            'Mesa/Boogie Mark Series',
             'Mesa/Boogie Rectifier',
             'Fender Twin Reverb'
           ]}
@@ -783,10 +789,12 @@ export const AmpSimulatorFieldset: React.FC = () => {
             <ParameterController label='Bass' autoupdate={false} defaultValue={0} min={-18} max={18} step={1} onChange={onChangeBassCallback} />
             <ParameterController label='Middle' autoupdate={false} defaultValue={0} min={-18} max={18} step={1} onChange={onChangeMiddleCallback} />
             <ParameterController label='Treble' autoupdate={false} defaultValue={0} min={-18} max={18} step={1} onChange={onChangeTrebleCallback} />
-            <ParameterController label='Presence' autoupdate={false} defaultValue={0} min={-18} max={18} step={1} onChange={onChangePresenceCallback} />
+            {preampType === 'jcm800' ? (
+              <ParameterController label='Presence' autoupdate={false} defaultValue={0} min={-18} max={18} step={1} onChange={onChangePresenceCallback} />
+            ) : null}
           </>
         ) : null}
-        {preampType === 'mesa/boogie' ? (
+        {preampType === 'mark' || preampType === 'rectifier' ? (
           <>
             <ParameterController label='100 Hz' autoupdate={false} defaultValue={0} min={-18} max={18} step={1} onChange={onChange100HzCallback} />
             <ParameterController label='360 Hz' autoupdate={false} defaultValue={0} min={-18} max={18} step={1} onChange={onChange360HzCallback} />
