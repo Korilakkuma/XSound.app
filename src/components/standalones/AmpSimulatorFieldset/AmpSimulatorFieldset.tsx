@@ -1,5 +1,5 @@
 import type React from 'react';
-import type { AmpSimulatorParams, PreampType } from 'xsound';
+import type { AmpSimulatorParams, PreampType, CabinetType } from 'xsound';
 
 import { useCallback, useState } from 'react';
 import { useDispatch } from 'react-redux';
@@ -15,6 +15,7 @@ import { ParameterController } from '/src/components/helpers/ParameterController
 export const AmpSimulatorFieldset: React.FC = () => {
   const [ampsimulator, setAmpsimulator] = useState<boolean>(false);
   const [preampType, setPreampType] = useState<PreampType>('jc-120');
+  const [cabinetType, setCabinetType] = useState<CabinetType | 'none'>('simple');
 
   const dispatch = useDispatch();
 
@@ -88,6 +89,7 @@ export const AmpSimulatorFieldset: React.FC = () => {
           X('noise').module('ampsimulator').param(param);
 
           setPreampType(type);
+          setCabinetType('simple');
 
           break;
         }
@@ -110,6 +112,7 @@ export const AmpSimulatorFieldset: React.FC = () => {
           X('noise').module('ampsimulator').param(param);
 
           setPreampType(type);
+          setCabinetType('none');
 
           break;
         }
@@ -145,6 +148,7 @@ export const AmpSimulatorFieldset: React.FC = () => {
           X('noise').module('ampsimulator').param(param);
 
           setPreampType(type);
+          setCabinetType('none');
 
           break;
         }
@@ -169,6 +173,7 @@ export const AmpSimulatorFieldset: React.FC = () => {
           X('noise').module('ampsimulator').param(param);
 
           setPreampType(type);
+          setCabinetType('simple');
 
           break;
         }
@@ -193,6 +198,7 @@ export const AmpSimulatorFieldset: React.FC = () => {
           X('noise').module('ampsimulator').param(param);
 
           setPreampType(type);
+          setCabinetType('simple');
 
           break;
         }
@@ -217,6 +223,7 @@ export const AmpSimulatorFieldset: React.FC = () => {
           X('noise').module('ampsimulator').param(param);
 
           setPreampType(type);
+          setCabinetType('simple');
 
           break;
         }
@@ -255,6 +262,7 @@ export const AmpSimulatorFieldset: React.FC = () => {
           X('noise').module('ampsimulator').param(param);
 
           setPreampType(type);
+          setCabinetType('none');
 
           break;
         }
@@ -708,6 +716,8 @@ export const AmpSimulatorFieldset: React.FC = () => {
           X('stream').module('ampsimulator').param(param);
           X('noise').module('ampsimulator').param(param);
 
+          setCabinetType(cabinet);
+
           break;
         }
 
@@ -720,6 +730,8 @@ export const AmpSimulatorFieldset: React.FC = () => {
           X('stream').module('ampsimulator').param(param);
           X('noise').module('ampsimulator').param(param);
 
+          setCabinetType(cabinet);
+
           break;
         }
 
@@ -731,6 +743,8 @@ export const AmpSimulatorFieldset: React.FC = () => {
           X('audio').module('ampsimulator').param(param);
           X('stream').module('ampsimulator').param(param);
           X('noise').module('ampsimulator').param(param);
+
+          setCabinetType(cabinet);
 
           break;
         }
@@ -824,7 +838,7 @@ export const AmpSimulatorFieldset: React.FC = () => {
           label='Select Cabinet'
           values={['none', 'simple', 'filterbank']}
           texts={['None', 'Simple', 'Filter Bank']}
-          defaultValue='simple'
+          defaultValue={cabinetType}
           disabled={false}
           textTransform={false}
           onChange={onChangeCabinetCallback}
