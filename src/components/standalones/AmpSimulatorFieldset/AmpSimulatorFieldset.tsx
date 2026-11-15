@@ -114,6 +114,41 @@ export const AmpSimulatorFieldset: React.FC = () => {
           break;
         }
 
+        case 'twin':
+        case 'bassman': {
+          const param: AmpSimulatorParams = {
+            state: ampsimulator,
+            type: type,
+            preamp: {
+              state: true,
+              pre: {
+                state: true,
+                gain: 0.5,
+                level: 0,
+                bass: 0,
+                middle: 0,
+                treble: 0,
+                samples: 8192
+              },
+              post: {
+                state: true,
+                inch: 12,
+                tilt: true
+              }
+            }
+          };
+
+          X('mixer').module('ampsimulator').param(param);
+          X('oneshot').module('ampsimulator').param(param);
+          X('audio').module('ampsimulator').param(param);
+          X('stream').module('ampsimulator').param(param);
+          X('noise').module('ampsimulator').param(param);
+
+          setPreampType(type);
+
+          break;
+        }
+
         case 'jtm45': {
           const param: AmpSimulatorParams = {
             state: ampsimulator,
@@ -223,40 +258,6 @@ export const AmpSimulatorFieldset: React.FC = () => {
 
           break;
         }
-
-        case 'fender': {
-          const param: AmpSimulatorParams = {
-            state: ampsimulator,
-            type: 'fender',
-            preamp: {
-              state: true,
-              pre: {
-                state: true,
-                gain: 0.5,
-                level: 0,
-                bass: 0,
-                middle: 0,
-                treble: 0,
-                samples: 8192
-              },
-              post: {
-                state: true,
-                inch: 12,
-                tilt: true
-              }
-            }
-          };
-
-          X('mixer').module('ampsimulator').param(param);
-          X('oneshot').module('ampsimulator').param(param);
-          X('audio').module('ampsimulator').param(param);
-          X('stream').module('ampsimulator').param(param);
-          X('noise').module('ampsimulator').param(param);
-
-          setPreampType(type);
-
-          break;
-        }
       }
     },
     [ampsimulator]
@@ -283,9 +284,10 @@ export const AmpSimulatorFieldset: React.FC = () => {
           break;
         }
 
+        case 'twin':
+        case 'bassman':
         case 'mark':
-        case 'rectifier':
-        case 'fender': {
+        case 'rectifier': {
           const param = { preamp: { pre: { level } } };
 
           X('mixer').module('ampsimulator').param(param);
@@ -416,9 +418,10 @@ export const AmpSimulatorFieldset: React.FC = () => {
           break;
         }
 
+        case 'twin':
+        case 'bassman':
         case 'mark':
-        case 'rectifier':
-        case 'fender': {
+        case 'rectifier': {
           const param = { preamp: { pre: { bass } } };
 
           X('mixer').module('ampsimulator').param(param);
@@ -469,9 +472,10 @@ export const AmpSimulatorFieldset: React.FC = () => {
           break;
         }
 
+        case 'twin':
+        case 'bassman':
         case 'mark':
-        case 'rectifier':
-        case 'fender': {
+        case 'rectifier': {
           const param = { preamp: { pre: { middle } } };
 
           X('mixer').module('ampsimulator').param(param);
@@ -522,9 +526,10 @@ export const AmpSimulatorFieldset: React.FC = () => {
           break;
         }
 
+        case 'twin':
+        case 'bassman':
         case 'mark':
-        case 'rectifier':
-        case 'fender': {
+        case 'rectifier': {
           const param = { preamp: { pre: { treble } } };
 
           X('mixer').module('ampsimulator').param(param);
@@ -664,7 +669,7 @@ export const AmpSimulatorFieldset: React.FC = () => {
 
   const onChangeSpeakerSize = useCallback(
     (event: React.ChangeEvent<HTMLSelectElement>) => {
-      if (preampType !== 'fender') {
+      if (preampType !== 'twin' && preampType !== 'bassman') {
         return;
       }
 
@@ -742,16 +747,17 @@ export const AmpSimulatorFieldset: React.FC = () => {
         </Legend>
         <Select
           label='Select Preamplifier'
-          values={['jc-120', 'gsp2101', 'jtm45', 'jmp', 'jcm800', 'mark', 'rectifier', 'fender']}
+          values={['jc-120', 'gsp2101', 'twin', 'bassman', 'jtm45', 'jmp', 'jcm800', 'mark', 'rectifier']}
           texts={[
             'Roland JC-120',
             'DigiTech GSP2101 Clean',
+            'Fender Twin Reverb',
+            'Fender Bassman',
             'Marshall JTM45',
             'Marshall 1959',
             'Marshall JCM800',
             'Mesa/Boogie Mark Series',
-            'Mesa/Boogie Rectifier',
-            'Fender Twin Reverb'
+            'Mesa/Boogie Rectifier'
           ]}
           defaultValue='jc-120'
           disabled={false}
@@ -803,7 +809,7 @@ export const AmpSimulatorFieldset: React.FC = () => {
             <ParameterController label='4800 Hz' autoupdate={false} defaultValue={0} min={-18} max={18} step={1} onChange={onChange4800HzCallback} />
           </>
         ) : null}
-        {preampType === 'fender' ? (
+        {preampType === 'twin' || preampType === 'bassman' ? (
           <Select
             label='Select Speaker size'
             values={['-1', '10', '12', '15']}
