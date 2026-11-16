@@ -10,6 +10,7 @@ import { ParameterController } from '/src/components/helpers/ParameterController
 
 export const FilterFieldset: React.FC = () => {
   const [filter, setFilter] = useState<boolean>(false);
+  const [filterType, setFilterType] = useState<BiquadFilterType>('lowpass');
 
   const onChangeStateCallback = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
     const checked = event.currentTarget.checked;
@@ -48,6 +49,9 @@ export const FilterFieldset: React.FC = () => {
         X('audio').module('filter').param({ type });
         X('stream').module('filter').param({ type });
         X('noise').module('filter').param({ type });
+
+        setFilterType(type);
+
         break;
       default:
         break;
@@ -132,6 +136,7 @@ export const FilterFieldset: React.FC = () => {
         </Legend>
         <Select
           label='Select Filter'
+          value={filterType}
           values={['lowpass', 'highpass', 'bandpass', 'lowshelf', 'highshelf', 'peaking', 'notch', 'allpass']}
           texts={['lowpass', 'highpass', 'bandpass', 'lowshelf', 'highshelf', 'peaking', 'notch', 'allpass']}
           disabled={false}

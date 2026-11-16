@@ -22,13 +22,17 @@ const MAX_NOTE_NUMBER = 108;
 const MAX_VELOCITY = 127;
 
 export const SoundSourceFieldset: React.FC<Props> = ({ currentSoundSource }) => {
+  const [soundSource, setSoundSource] = useState<SoundSource>(currentSoundSource);
+
   const [errorMessage, setErrorMessage] = useState<string>('');
   const [isShowModalForMIDIError, setIsShowModalForMIDIError] = useState<boolean>(false);
 
   const [inputDeviceIds, setInputDeviceIds] = useState<string[]>(['default']);
   const [inputDeviceLabels, setInputDeviceLabels] = useState<string[]>(['Input Device']);
+  const [inputDevice, setInputDevice] = useState<string>('default');
   const [outputDeviceIds, setOutputDeviceIds] = useState<string[]>(['default']);
   const [outputDeviceLabels, setOutputDeviceLabels] = useState<string[]>(['Output Device']);
+  const [outputDevice, setOutputDevice] = useState<string>('default');
 
   const dispatch = useDispatch();
 
@@ -302,10 +306,14 @@ export const SoundSourceFieldset: React.FC<Props> = ({ currentSoundSource }) => 
         case 'pinknoise':
         case 'browniannoise':
         case 'stream':
-        case 'midi':
+        case 'midi': {
+          setSoundSource(source);
           break;
-        default:
+        }
+
+        default: {
           return;
+        }
       }
 
       if (!source.endsWith('noise')) {
@@ -361,6 +369,8 @@ export const SoundSourceFieldset: React.FC<Props> = ({ currentSoundSource }) => 
       if (currentSoundSource === 'stream') {
         X('stream').start();
       }
+
+      setInputDevice(deviceId);
     },
     [currentSoundSource]
   );
@@ -382,6 +392,8 @@ export const SoundSourceFieldset: React.FC<Props> = ({ currentSoundSource }) => 
         }
       });
     }
+
+    setOutputDevice(deviceId);
   }, []);
 
   const onCloseModalCallback = useCallback(() => {
@@ -411,6 +423,7 @@ export const SoundSourceFieldset: React.FC<Props> = ({ currentSoundSource }) => 
       />
       <Select
         label='Select Sound Source'
+        value={soundSource}
         values={['oscillator', 'piano', 'guitar', 'electric-guitar', 'orgel', 'whitenoise', 'pinknoise', 'browniannoise', 'stream', 'midi']}
         texts={['oscillator', 'piano', 'A. guitar', 'E. guitar', 'orgel (music box)', 'white noise', 'pink noise', 'brownian noise', 'microphone', 'MIDI']}
         disabled={false}
@@ -419,6 +432,7 @@ export const SoundSourceFieldset: React.FC<Props> = ({ currentSoundSource }) => 
       />
       <Select
         label='Select Input Device'
+        value={inputDevice}
         values={inputDeviceIds}
         texts={inputDeviceLabels}
         disabled={currentSoundSource !== 'stream'}
@@ -427,6 +441,7 @@ export const SoundSourceFieldset: React.FC<Props> = ({ currentSoundSource }) => 
       />
       <Select
         label='Select Output Device'
+        value={outputDevice}
         values={outputDeviceIds}
         texts={outputDeviceLabels}
         disabled={false}

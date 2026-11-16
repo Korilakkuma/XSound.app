@@ -157,11 +157,11 @@ export const DelayFieldset: React.FC = () => {
         </Legend>
         <Select
           label='Select Delay Type'
+          value={type}
           values={['standard', 'pingpong', 'stereo']}
           texts={['standard', 'ping pong', 'stereo']}
           disabled={false}
           textTransform={true}
-          defaultValue='standard'
           onChange={onChangeTypeCallback}
         />
         <ParameterController label='Time' autoupdate={false} defaultValue={0} min={0} max={1000} step={1} onChange={onChangeTimeCallback} />

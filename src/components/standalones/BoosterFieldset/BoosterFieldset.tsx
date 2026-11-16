@@ -472,6 +472,7 @@ export const BoosterFieldset: React.FC = () => {
         </Legend>
         <Select
           label='Select OD/DS'
+          value={boosterType}
           values={[
             '',
             'clean',
@@ -490,7 +491,6 @@ export const BoosterFieldset: React.FC = () => {
           ]}
           /* prettier-ignore */
           texts={['none', 'clean booster', 'crunch', 'overdrive', 'warm overdrive', 'blues', 'guv\'nor', 'rat', 'distortion', 'metal', 'core', 'grunge', 'fuzz', 'octave fuzz']}
-          defaultValue=''
           disabled={false}
           textTransform={true}
           onChange={onChangeTypeCallback}

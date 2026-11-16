@@ -355,6 +355,7 @@ export const RecorderFieldset: React.FC<Props> = ({ currentSoundSource }) => {
         <Legend>Recorder</Legend>
         <Select
           label='Select Track'
+          value={activeTrack.toString(10)}
           values={['0', '1', '2', '3']}
           texts={['track 1', 'track 2', 'track 3', 'track 4']}
           disabled={running}

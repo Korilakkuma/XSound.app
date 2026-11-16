@@ -1,4 +1,6 @@
 import type React from 'react';
+import type { PhaserNumberOfStages } from 'xsound';
+
 import { useCallback, useState } from 'react';
 import { X } from 'xsound';
 
@@ -10,6 +12,7 @@ import { ParameterController } from '/src/components/helpers/ParameterController
 
 export const PhaserFieldset: React.FC = () => {
   const [phaser, setPhaser] = useState<boolean>(false);
+  const [numberOfStages, setNumberOfStages] = useState<PhaserNumberOfStages>(12);
 
   const onChangeStateCallback = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
     const checked = event.currentTarget.checked;
@@ -45,6 +48,8 @@ export const PhaserFieldset: React.FC = () => {
         X('audio').module('phaser').param({ stage });
         X('stream').module('phaser').param({ stage });
         X('noise').module('phaser').param({ stage });
+
+        setNumberOfStages(stage);
 
         break;
       default:
@@ -120,11 +125,11 @@ export const PhaserFieldset: React.FC = () => {
         </Legend>
         <Select
           label='Select Phaser Stages'
+          value={numberOfStages.toString(10)}
           values={['0', '2', '4', '8', '12', '24']}
           texts={['all-pass filter', '2 stages', '4 stages', '8 stages', '12 stages', '24 stages']}
           disabled={false}
           textTransform={true}
-          defaultValue='12'
           onChange={onChangeStageCallback}
         />
         <ParameterController label='Frequency' autoupdate={false} defaultValue={350} min={350} max={8000} step={1} onChange={onChangeFrequencyCallback} />

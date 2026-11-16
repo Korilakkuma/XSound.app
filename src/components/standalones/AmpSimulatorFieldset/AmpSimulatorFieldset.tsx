@@ -1,5 +1,5 @@
 import type React from 'react';
-import type { AmpSimulatorParams, PreampType, CabinetType } from 'xsound';
+import type { AmpSimulatorParams, PreampType, CabinetType, FenderSpeakerInches } from 'xsound';
 
 import { useCallback, useState } from 'react';
 import { useDispatch } from 'react-redux';
@@ -16,6 +16,7 @@ export const AmpSimulatorFieldset: React.FC = () => {
   const [ampsimulator, setAmpsimulator] = useState<boolean>(false);
   const [preampType, setPreampType] = useState<PreampType>('jc-120');
   const [cabinetType, setCabinetType] = useState<CabinetType | 'none'>('simple');
+  const [speakerSize, setSpeakerSize] = useState<FenderSpeakerInches>(12);
 
   const dispatch = useDispatch();
 
@@ -695,6 +696,9 @@ export const AmpSimulatorFieldset: React.FC = () => {
           X('audio').module('ampsimulator').param(param);
           X('stream').module('ampsimulator').param(param);
           X('noise').module('ampsimulator').param(param);
+
+          setSpeakerSize(inch);
+
           break;
         }
       }
@@ -761,6 +765,7 @@ export const AmpSimulatorFieldset: React.FC = () => {
         </Legend>
         <Select
           label='Select Preamplifier'
+          value={preampType}
           values={['jc-120', 'gsp2101', 'twin', 'bassman', 'jtm45', 'jmp', 'jcm800', 'mark', 'rectifier']}
           texts={[
             'Roland JC-120',
@@ -773,7 +778,6 @@ export const AmpSimulatorFieldset: React.FC = () => {
             'Mesa/Boogie Mark Series',
             'Mesa/Boogie Rectifier'
           ]}
-          defaultValue='jc-120'
           disabled={false}
           textTransform={false}
           onChange={onChangePreamplifier}
@@ -826,9 +830,9 @@ export const AmpSimulatorFieldset: React.FC = () => {
         {preampType === 'twin' || preampType === 'bassman' ? (
           <Select
             label='Select Speaker size'
+            value={speakerSize.toString(10)}
             values={['-1', '10', '12', '15']}
             texts={['Not used', '10 inch', '12 inch', '15 inch']}
-            defaultValue='12'
             disabled={false}
             textTransform={false}
             onChange={onChangeSpeakerSize}
@@ -836,9 +840,9 @@ export const AmpSimulatorFieldset: React.FC = () => {
         ) : null}
         <Select
           label='Select Cabinet'
+          value={cabinetType}
           values={['none', 'simple', 'filterbank']}
           texts={['None', 'Simple', 'Filter Bank']}
-          defaultValue={cabinetType}
           disabled={false}
           textTransform={false}
           onChange={onChangeCabinetCallback}

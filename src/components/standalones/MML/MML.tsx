@@ -41,6 +41,7 @@ export const MML: React.FC<Props> = ({ loadedApp, currentSoundSource }) => {
   const [loadedByte, setLoadedByte] = useState<number>(0);
   const [rate, setRate] = useState<number>(0);
   const [values, setValues] = useState<string[]>(['{"melody":"","bass":""}']);
+  const [value, setValue] = useState<string>('');
   const [texts, setTexts] = useState<string[]>(['SAMPLE MML']);
   const [title, setTitle] = useState<string>('');
   const [artist, setArtist] = useState<string>('');
@@ -448,6 +449,8 @@ export const MML: React.FC<Props> = ({ loadedApp, currentSoundSource }) => {
 
     setMelody(sampleMML.melody);
     setBass(sampleMML.bass);
+
+    setValue(event.currentTarget.value);
   }, []);
 
   useEffect(() => {
@@ -626,6 +629,7 @@ export const MML: React.FC<Props> = ({ loadedApp, currentSoundSource }) => {
           />
           <Select
             label='Select Sample MML'
+            value={value}
             values={values}
             texts={texts}
             disabled={!paused}

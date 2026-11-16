@@ -8,6 +8,7 @@ describe('atoms/Select', () => {
 
     const props = {
       label: 'Select',
+      value: 'A',
       values: ['A', 'B', 'C'],
       texts: ['0 - 0', '0 - 1', '0 - 2'],
       disabled: false,
