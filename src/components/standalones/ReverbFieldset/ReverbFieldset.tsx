@@ -19,6 +19,7 @@ export const ReverbFieldset: React.FC<Props> = (props: Props) => {
   const { rirDescriptors } = props;
 
   const [reverb, setReverb] = useState<boolean>(false);
+  const [reverbType, setReverbType] = useState<string>('');
 
   const groups: string[] = [];
   const values: { [group: string]: string[] } = {};
@@ -72,6 +73,8 @@ export const ReverbFieldset: React.FC<Props> = (props: Props) => {
     X('audio').module('reverb').param({ buffer });
     X('stream').module('reverb').param({ buffer });
     X('noise').module('reverb').param({ buffer });
+
+    setReverbType(event.currentTarget.value);
   }, []);
 
   const onChangeDryCallback = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
@@ -110,7 +113,7 @@ export const ReverbFieldset: React.FC<Props> = (props: Props) => {
         <Legend>
           <Switch label='Reverb' checked={reverb} labelAsText={false} onChange={onChangeStateCallback} />
         </Legend>
-        <GroupSelect label='Select Reverb' groups={groups} values={values} texts={texts} onChange={onChangeTypeCallback} />
+        <GroupSelect label='Select Reverb' value={reverbType} groups={groups} values={values} texts={texts} onChange={onChangeTypeCallback} />
         <ParameterController label='Dry' autoupdate={false} defaultValue={1} min={0} max={1} step={0.05} onChange={onChangeDryCallback} />
         <ParameterController label='Wet' autoupdate={false} defaultValue={0} min={0} max={1} step={0.05} onChange={onChangeWetCallback} />
         <ParameterController label='Tone' autoupdate={false} defaultValue={4000} min={20} max={8000} step={1} onChange={onChangeToneCallback} />

@@ -8,6 +8,7 @@ describe('atoms/GroupSelect', () => {
 
     const props = {
       label: 'Group Select',
+      value: 'A',
       values: {
         group0: ['A', 'B', 'C'],
         group1: ['D', 'E', 'F'],
