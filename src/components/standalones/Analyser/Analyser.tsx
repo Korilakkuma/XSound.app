@@ -3,6 +3,7 @@ import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { X } from 'xsound';
 
+import { IDS } from '/src/config';
 import { Switch } from '/src/components/atoms/Switch';
 import { ParameterController } from '/src/components/helpers/ParameterController';
 import { TimeOverviewer } from '/src/components/helpers/TimeOverviewer';
@@ -237,7 +238,7 @@ export const Analyser: React.FC = () => {
   }, []);
 
   return (
-    <div id='analyser-fieldset' aria-hidden={!active} className={`Analyser${active ? ' -active' : ''}`}>
+    <div id={IDS.analyser} aria-hidden={!active} className={`Analyser${active ? ' -active' : ''}`}>
       <div className='Analyser__viewer'>
         <TimeOverviewer active={active} type={type} />
         <TimeAnalyser active={active} type={type} />

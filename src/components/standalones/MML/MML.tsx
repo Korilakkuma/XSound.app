@@ -3,7 +3,7 @@ import { useCallback, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { X } from 'xsound';
 
-import { NUMBER_OF_PIANO_KEYBOARDS } from '/src/config';
+import { NUMBER_OF_PIANO_KEYBOARDS, IDS } from '/src/config';
 import { changeOscillatorStates, downBassKeyboards, downMelodyKeyboards, upBassKeyboards, upMelodyKeyboards } from '/src/slices';
 import { createFilename } from '/src/utils';
 import { FileUploader } from '/src/components/atoms/FileUploader';
@@ -549,7 +549,7 @@ export const MML: React.FC<Props> = ({ loadedApp, currentSoundSource }) => {
   ]);
 
   return (
-    <div id='mml-fieldset' aria-hidden={!active} className={`MML${active ? ' -active' : ''}`}>
+    <div id={IDS.mml} aria-hidden={!active} className={`MML${active ? ' -active' : ''}`}>
       {title || artist ? (
         <h2 className={'MML__heading'}>
           {title} | {artist}

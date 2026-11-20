@@ -5,6 +5,7 @@ import type { RecordType, QuantizationBit, WaveExportType } from 'xsound';
 
 import { X } from 'xsound';
 
+import { IDS } from '/src/config';
 import { createFilename, getStorage } from '/src/utils';
 
 import type { CustomizedParameters, SoundSource } from '/src/types';
@@ -399,10 +400,10 @@ export const RecorderFieldset: React.FC<Props> = ({ currentSoundSource }) => {
         </div>
         <div className='RecorderFieldset__svg'>
           <svg ref={svgChannel0Ref} width={240} height={50}>
-            <path id='svg-path-recorder-channel-0' d='M0 24 L240 24' stroke='rgb(0 0 255)' />
+            <path id={IDS.channel0} d='M0 24 L240 24' stroke='rgb(0 0 255)' />
           </svg>
           <svg ref={svgChannel1Ref} width={240} height={50}>
-            <path id='svg-path-recorder-channel-1' d='M0 24 L240 24' stroke='rgb(0 0 255)' />
+            <path id={IDS.channel1} d='M0 24 L240 24' stroke='rgb(0 0 255)' />
           </svg>
         </div>
       </Fieldset>

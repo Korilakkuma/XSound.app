@@ -3,6 +3,7 @@ import { useCallback, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { X } from 'xsound';
 
+import { IDS } from '/src/config';
 import { changeAnalyserState, changeMMLState } from '/src/slices';
 import { Switch } from '/src/components/atoms/Switch';
 import { ParameterController } from '/src/components/helpers/ParameterController';
@@ -44,8 +45,8 @@ export const BasicControllers: React.FC = () => {
     <div className='BasicControllers'>
       <ParameterController label='Glide' autoupdate={false} defaultValue={0} min={0} max={1} step={0.05} onChange={onChangeGlideCallback} />
       <ParameterController label='Transpose' autoupdate={false} defaultValue={0} min={-6} max={6} step={1} onChange={onChangeTransposeCallback} />
-      <Switch label='Analyser' checked={analyserState} labelAsText={true} controls='analyser-fieldset' onChange={onChangeAnalyserStateCallback} />
-      <Switch label='MML' checked={mmlState} labelAsText={true} controls='mml-fieldset' onChange={onChangeMMLStateCallback} />
+      <Switch label='Analyser' checked={analyserState} labelAsText={true} controls={IDS.analyser} onChange={onChangeAnalyserStateCallback} />
+      <Switch label='MML' checked={mmlState} labelAsText={true} controls={IDS.mml} onChange={onChangeMMLStateCallback} />
     </div>
   );
 };

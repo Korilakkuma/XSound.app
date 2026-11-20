@@ -13,3 +13,10 @@ export const CONSTRAINTS = {
   },
   video: false
 } as const;
+
+export const IDS = {
+  analyser: 'analyser-fieldset',
+  mml: 'mml-fieldset',
+  channel0: 'svg-path-recorder-channel-0',
+  channel1: 'svg-path-recorder-channel-1'
+} as const;
