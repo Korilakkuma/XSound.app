@@ -21,7 +21,7 @@
     "lint": "run-p lint:eslint lint:stylelint lint:markuplint",
     "fix:eslint:": "eslint --fix 'src/**/*.{ts,tsx}' 'mock/**/*.ts' '.storybook/*.ts' jest.config.mjs webpack.config.mjs",
     "fix:stylelint": "stylelint --fix 'src/**/*.css' && prettier --write 'src/**/*.css'",
-    "fix:markuplint": "markuplint --fix index.html",
+    "fix:markuplint": "markuplint --fix index.html 'src/**/*.tsx'",
     "fix": "run-p fix:eslint fix:stylelint fix:markuplint",
     "format:check": "prettier --check 'src/**/*.{ts,tsx,css}' 'mock/**/*.ts' '.storybook/*.ts' jest.config.mjs webpack.config.mjs stylelint.config.mjs index.html",
     "format": "prettier --write 'src/**/*.{ts,tsx,css}' 'mock/**/*.ts' '.storybook/*.ts' jest.config.mjs webpack.config.mjs stylelint.config.mjs index.html",
