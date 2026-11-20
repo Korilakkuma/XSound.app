@@ -476,6 +476,7 @@ export const BoosterFieldset: React.FC = () => {
           values={[
             '',
             'clean',
+            'drive',
             'crunch',
             'overdrive',
             'warm',
@@ -490,7 +491,7 @@ export const BoosterFieldset: React.FC = () => {
             'full-rectifier'
           ]}
           /* prettier-ignore */
-          texts={['none', 'clean booster', 'crunch', 'overdrive', 'warm overdrive', 'blues', 'guv\'nor', 'rat', 'distortion', 'metal', 'core', 'grunge', 'fuzz', 'octave fuzz']}
+          texts={['none', 'clean booster', 'transparent', 'crunch', 'overdrive', 'warm overdrive', 'blues', 'guv\'nor', 'rat', 'distortion', 'metal', 'core', 'grunge', 'fuzz', 'octave fuzz']}
           disabled={false}
           textTransform={true}
           onChange={onChangeTypeCallback}
