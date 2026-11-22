@@ -292,6 +292,31 @@ export const AmpSimulatorFieldset: React.FC = () => {
 
           break;
         }
+
+        case 'uberschall': {
+          const param: AmpSimulatorParams = {
+            state: ampsimulator,
+            type: type,
+            preamp: {
+              state: true,
+              level: 1,
+              samples: 16384,
+              pre: { state: true, gain: 0.5, lead: 0.5 },
+              post: { state: true }
+            }
+          };
+
+          X('mixer').module('ampsimulator').param(param);
+          X('oneshot').module('ampsimulator').param(param);
+          X('audio').module('ampsimulator').param(param);
+          X('stream').module('ampsimulator').param(param);
+          X('noise').module('ampsimulator').param(param);
+
+          setPreampType(type);
+          setCabinetType('simple');
+
+          break;
+        }
       }
     },
     [ampsimulator]
@@ -307,7 +332,8 @@ export const AmpSimulatorFieldset: React.FC = () => {
         case 'jtm45':
         case 'jmp':
         case 'jcm800':
-        case 'slo-100': {
+        case 'slo-100':
+        case 'uberschall': {
           const param = { preamp: { level } };
 
           X('mixer').module('ampsimulator').param(param);
@@ -442,7 +468,8 @@ export const AmpSimulatorFieldset: React.FC = () => {
         case 'jtm45':
         case 'jmp':
         case 'jcm800':
-        case 'slo-100': {
+        case 'slo-100':
+        case 'uberschall': {
           const param = { preamp: { post: { bass } } };
 
           X('mixer').module('ampsimulator').param(param);
@@ -497,7 +524,8 @@ export const AmpSimulatorFieldset: React.FC = () => {
         case 'jtm45':
         case 'jmp':
         case 'jcm800':
-        case 'slo-100': {
+        case 'slo-100':
+        case 'uberschall': {
           const param = { preamp: { post: { middle } } };
 
           X('mixer').module('ampsimulator').param(param);
@@ -552,7 +580,8 @@ export const AmpSimulatorFieldset: React.FC = () => {
         case 'jtm45':
         case 'jmp':
         case 'jcm800':
-        case 'slo-100': {
+        case 'slo-100':
+        case 'uberschall': {
           const param = { preamp: { post: { treble } } };
 
           X('mixer').module('ampsimulator').param(param);
@@ -794,7 +823,7 @@ export const AmpSimulatorFieldset: React.FC = () => {
         <Select
           label='Select Preamplifier'
           value={preampType}
-          values={['jc-120', 'gsp2101', 'twin', 'bassman', 'jtm45', 'jmp', 'jcm800', 'mark', 'rectifier', 'slo-100']}
+          values={['jc-120', 'gsp2101', 'twin', 'bassman', 'jtm45', 'jmp', 'jcm800', 'mark', 'rectifier', 'slo-100', 'uberschall']}
           texts={[
             'Roland JC-120',
             'DigiTech GSP2101 Clean',
@@ -805,7 +834,8 @@ export const AmpSimulatorFieldset: React.FC = () => {
             'Marshall JCM800',
             'Mesa/Boogie Mark Series',
             'Mesa/Boogie Rectifier',
-            'Soldano SLO-100'
+            'Soldano SLO-100',
+            'Bogner Uberschall'
           ]}
           disabled={false}
           textTransform={false}
