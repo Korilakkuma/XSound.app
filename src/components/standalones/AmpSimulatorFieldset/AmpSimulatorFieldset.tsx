@@ -154,6 +154,41 @@ export const AmpSimulatorFieldset: React.FC = () => {
           break;
         }
 
+        case 'ac30': {
+          const param: AmpSimulatorParams = {
+            state: ampsimulator,
+            type: type,
+            preamp: {
+              state: true,
+              level: 1,
+              samples: 1024,
+              pre: {
+                state: true,
+                oversample: '4x',
+                gain: 0.5
+              },
+              post: {
+                state: true,
+                oversample: '4x',
+                bass: 0,
+                treble: 0,
+                tone: 0
+              }
+            }
+          };
+
+          X('mixer').module('ampsimulator').param(param);
+          X('oneshot').module('ampsimulator').param(param);
+          X('audio').module('ampsimulator').param(param);
+          X('stream').module('ampsimulator').param(param);
+          X('noise').module('ampsimulator').param(param);
+
+          setPreampType(type);
+          setCabinetType('simple');
+
+          break;
+        }
+
         case 'jtm45': {
           const param: AmpSimulatorParams = {
             state: ampsimulator,
@@ -354,6 +389,7 @@ export const AmpSimulatorFieldset: React.FC = () => {
       switch (preampType) {
         case 'jc-120':
         case 'gsp2101':
+        case 'ac30':
         case 'jtm45':
         case 'jmp':
         case 'jcm800':
@@ -491,6 +527,7 @@ export const AmpSimulatorFieldset: React.FC = () => {
           break;
         }
 
+        case 'ac30':
         case 'jtm45':
         case 'jmp':
         case 'jcm800':
@@ -529,7 +566,7 @@ export const AmpSimulatorFieldset: React.FC = () => {
 
   const onChangeMiddleCallback = useCallback(
     (event: React.ChangeEvent<HTMLInputElement>) => {
-      if (preampType === 'gsp2101') {
+      if (preampType === 'gsp2101' || preampType === 'ac30') {
         return;
       }
 
@@ -605,6 +642,7 @@ export const AmpSimulatorFieldset: React.FC = () => {
           break;
         }
 
+        case 'ac30':
         case 'jtm45':
         case 'jmp':
         case 'jcm800':
@@ -664,6 +702,25 @@ export const AmpSimulatorFieldset: React.FC = () => {
           break;
         }
       }
+    },
+    [preampType]
+  );
+
+  const onChangeToneCallback = useCallback(
+    (event: React.ChangeEvent<HTMLInputElement>) => {
+      if (preampType !== 'ac30') {
+        return;
+      }
+
+      const tone = event.currentTarget.valueAsNumber;
+
+      const param = { preamp: { post: { tone } } };
+
+      X('mixer').module('ampsimulator').param(param);
+      X('oneshot').module('ampsimulator').param(param);
+      X('audio').module('ampsimulator').param(param);
+      X('stream').module('ampsimulator').param(param);
+      X('noise').module('ampsimulator').param(param);
     },
     [preampType]
   );
@@ -853,12 +910,13 @@ export const AmpSimulatorFieldset: React.FC = () => {
         <Select
           label='Select Preamplifier'
           value={preampType}
-          values={['jc-120', 'gsp2101', 'twin', 'bassman', 'jtm45', 'jmp', 'jcm800', 'mark', 'rectifier', 'slo-100', '5150', 'uberschall']}
+          values={['jc-120', 'gsp2101', 'twin', 'bassman', 'ac30', 'jtm45', 'jmp', 'jcm800', 'mark', 'rectifier', 'slo-100', '5150', 'uberschall']}
           texts={[
             'Roland JC-120',
             'DigiTech GSP2101 Clean',
             'Fender Twin Reverb',
             'Fender Bassman',
+            'VOX AC30',
             'Marshall JTM45',
             'Marshall 1959',
             'Marshall JCM800',
@@ -901,7 +959,9 @@ export const AmpSimulatorFieldset: React.FC = () => {
         {preampType !== 'gsp2101' ? (
           <>
             <ParameterController label='Bass' autoupdate={false} defaultValue={0} min={-18} max={18} step={1} onChange={onChangeBassCallback} />
-            <ParameterController label='Middle' autoupdate={false} defaultValue={0} min={-18} max={18} step={1} onChange={onChangeMiddleCallback} />
+            {preampType !== 'ac30' ? (
+              <ParameterController label='Middle' autoupdate={false} defaultValue={0} min={-18} max={18} step={1} onChange={onChangeMiddleCallback} />
+            ) : null}
             <ParameterController label='Treble' autoupdate={false} defaultValue={0} min={-18} max={18} step={1} onChange={onChangeTrebleCallback} />
             {preampType === 'jcm800' || preampType === 'slo-100' || preampType === '5150' ? (
               <ParameterController label='Presence' autoupdate={false} defaultValue={0} min={-18} max={18} step={1} onChange={onChangePresenceCallback} />
@@ -916,6 +976,9 @@ export const AmpSimulatorFieldset: React.FC = () => {
             <ParameterController label='1600 Hz' autoupdate={false} defaultValue={0} min={-18} max={18} step={1} onChange={onChange1600HzCallback} />
             <ParameterController label='4800 Hz' autoupdate={false} defaultValue={0} min={-18} max={18} step={1} onChange={onChange4800HzCallback} />
           </>
+        ) : null}
+        {preampType === 'ac30' ? (
+          <ParameterController label='Tone' autoupdate={false} defaultValue={0} min={0} max={10} step={1} onChange={onChangeToneCallback} />
         ) : null}
         {preampType === 'twin' || preampType === 'bassman' ? (
           <Select
