@@ -190,6 +190,41 @@ export const AmpSimulatorFieldset: React.FC = () => {
           break;
         }
 
+        case 'dr103': {
+          const param: AmpSimulatorParams = {
+            state: ampsimulator,
+            type: type,
+            preamp: {
+              state: true,
+              level: 1,
+              samples: 1024,
+              pre: {
+                state: true,
+                oversample: '4x',
+                gain: 0.5
+              },
+              post: {
+                state: true,
+                oversample: '4x',
+                bass: 0,
+                middle: 0,
+                treble: 0
+              }
+            }
+          };
+
+          X('mixer').module('ampsimulator').param(param);
+          X('oneshot').module('ampsimulator').param(param);
+          X('audio').module('ampsimulator').param(param);
+          X('stream').module('ampsimulator').param(param);
+          X('noise').module('ampsimulator').param(param);
+
+          setPreampType(type);
+          setCabinetType('simple');
+
+          break;
+        }
+
         case 'jtm45': {
           const param: AmpSimulatorParams = {
             state: ampsimulator,
@@ -391,6 +426,7 @@ export const AmpSimulatorFieldset: React.FC = () => {
         case 'jc-120':
         case 'gsp2101':
         case 'ac30':
+        case 'dr103':
         case 'jtm45':
         case 'jmp':
         case 'jcm800':
@@ -529,6 +565,7 @@ export const AmpSimulatorFieldset: React.FC = () => {
         }
 
         case 'ac30':
+        case 'dr103':
         case 'jtm45':
         case 'jmp':
         case 'jcm800':
@@ -586,6 +623,7 @@ export const AmpSimulatorFieldset: React.FC = () => {
           break;
         }
 
+        case 'dr103':
         case 'jtm45':
         case 'jmp':
         case 'jcm800':
@@ -644,6 +682,7 @@ export const AmpSimulatorFieldset: React.FC = () => {
         }
 
         case 'ac30':
+        case 'dr103':
         case 'jtm45':
         case 'jmp':
         case 'jcm800':
@@ -911,13 +950,14 @@ export const AmpSimulatorFieldset: React.FC = () => {
         <Select
           label='Select Preamplifier'
           value={preampType}
-          values={['jc-120', 'gsp2101', 'twin', 'bassman', 'ac30', 'jtm45', 'jmp', 'jcm800', 'mark', 'rectifier', 'slo-100', '5150', 'uberschall']}
+          values={['jc-120', 'gsp2101', 'twin', 'bassman', 'ac30', 'dr103', 'jtm45', 'jmp', 'jcm800', 'mark', 'rectifier', 'slo-100', '5150', 'uberschall']}
           texts={[
             'Roland JC-120',
             'DigiTech GSP2101 Clean',
             'Fender Twin Reverb',
             'Fender Bassman',
             'VOX AC30',
+            'Hiwatt DR103',
             'Marshall JTM45',
             'Marshall 1959',
             'Marshall JCM800',
