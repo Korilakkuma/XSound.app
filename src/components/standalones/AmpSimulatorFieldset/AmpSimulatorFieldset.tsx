@@ -128,15 +128,16 @@ export const AmpSimulatorFieldset: React.FC = () => {
               pre: {
                 state: true,
                 gain: 0.5,
-                level: 0,
                 bass: 0,
                 middle: 0,
                 treble: 0,
-                samples: 8192
+                level: 1,
+                samples: 1024,
+                oversample: '4x'
               },
               post: {
                 state: true,
-                inch: 12,
+                inch: -1,
                 tilt: true
               }
             }
