@@ -12,7 +12,7 @@ export type Props = {
   step: number;
   defaultValue: number;
   tabIndex?: number | undefined;
-  onChange(event: React.SyntheticEvent): void;
+  onChange(event: React.ChangeEvent<HTMLInputElement>): void;
 };
 
 export const ParameterController: React.FC<Props> = (props: Props) => {
